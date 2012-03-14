@@ -8,6 +8,7 @@
 
 class DbMigration extends CDbMigration
 {
+    const MYSQL_TYPE_INT = 'int UNSIGNED NOT NULL';
 
     protected $options = 'engine=InnoDB;';
 
@@ -18,8 +19,8 @@ class DbMigration extends CDbMigration
         }
 
         $columns = CMap::mergeArray(array(
-                                         'id' => 'pk',
-                                    ), $columns);
+            'id' => 'int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
+        ), $columns);
 
         parent::createTable($table, $columns, $this->options);
 
