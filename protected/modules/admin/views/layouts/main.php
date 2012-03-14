@@ -36,6 +36,7 @@
             array('label' => 'Справочники', 'url' => '#', 'items' => array(
                 array('label' => 'Города', 'url' => array('/admin/city'), 'visible' => Yii::app()->user->isGuest),
                 array('label' => 'Районы', 'url' => array('/admin/area'), 'visible' => Yii::app()->user->isGuest),
+                array('label' => 'Метро', 'url' => array('/admin/metroStation'), 'visible' => Yii::app()->user->isGuest),
             )),
             array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
             array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
