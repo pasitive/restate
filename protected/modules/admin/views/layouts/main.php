@@ -39,6 +39,8 @@
                 array('label' => 'Метро', 'url' => array('/admin/metroStation'), 'visible' => Yii::app()->user->isGuest),
                 array('label' => 'Типы объектов', 'url' => array('/admin/apartmentType'), 'visible' => Yii::app()->user->isGuest),
             )),
+            array('label' => 'Параметры объектов', 'url' => array('/admin/attribute'), 'visible' => Yii::app()->user->isGuest),
+
             array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
             array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
         ),

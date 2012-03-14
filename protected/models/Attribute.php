@@ -42,6 +42,7 @@ class Attribute extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
+            array('name', 'required'),
             array('apartment_type_id', 'required'),
             array('disabled', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 255),
@@ -73,11 +74,11 @@ class Attribute extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'name' => 'Name',
-            'apartment_type_id' => 'Apartment Type',
-            'disabled' => 'Disabled',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'name' => 'Параметр объекта',
+            'apartment_type_id' => 'Тип объекта',
+            'disabled' => 'НЕ активно',
+            'created_at' => 'Создано',
+            'updated_at' => 'Обновлено',
         );
     }
 
