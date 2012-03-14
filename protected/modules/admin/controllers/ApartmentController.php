@@ -1,8 +1,7 @@
 <?php
 
-class CityController extends Controller
+class ApartmentController extends Controller
 {
-
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
@@ -18,21 +17,39 @@ class CityController extends Controller
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate()
+    public function actionCreate($type)
     {
-        $model = new City;
+        $model = new Apartment();
+        $model->type_id = $type;
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+        $attributes = Attribute::model()->findAllByAttributes(array(
+            'apartment_type_id' => $type,
+        ), array('index' => 'id'));
 
-        if (isset($_POST['City'])) {
-            $model->attributes = $_POST['City'];
-            if ($model->save())
+        $apartmentAttributes = array();
+        foreach ($attributes as $attribute) {
+            $apartmentAttributes[$attribute->id] = new ApartmentAttribute();
+        }
+        $model->apartmentAttributes = $apartmentAttributes;
+
+        if (isset($_POST['Apartment'])) {
+            $model->attributes = $_POST['Apartment'];
+
+            if (!empty($_POST['ApartmentAttribute'])) {
+                foreach ($apartmentAttributes as $id => $apartmentAttribute) {
+                    $apartmentAttribute->attributes = $_POST['ApartmentAttribute'][$id];
+                }
+                $model->apartmentAttributes = $apartmentAttributes;
+            }
+
+            if ($model->save()) {
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(
             'model' => $model,
+            'attributes' => $attributes,
         ));
     }
 
@@ -45,17 +62,39 @@ class CityController extends Controller
     {
         $model = $this->loadModel($id);
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+        $attributes = Attribute::model()->findAllByAttributes(array(
+            'apartment_type_id' => $model->type_id
+        ), array('index' => 'id'));
 
-        if (isset($_POST['City'])) {
-            $model->attributes = $_POST['City'];
-            if ($model->save())
+        $apartmentAttributes = $model->getRelated('apartmentAttributes', false, array(
+            'index' => 'attribute_id',
+        ));
+        $attributesDiff = array_diff_key($attributes, $apartmentAttributes);
+
+        foreach ($attributesDiff as $id => $attribute) {
+            $apartmentAttributes[$id] = new ApartmentAttribute();
+        }
+        $model->apartmentAttributes = $apartmentAttributes;
+
+        if (isset($_POST['Apartment'])) {
+            $model->attributes = $_POST['Apartment'];
+
+            if (!empty($_POST['ApartmentAttribute'])) {
+                foreach ($apartmentAttributes as $id => $apartmentAttribute) {
+                    $apartmentAttribute->attributes = $_POST['ApartmentAttribute'][$id];
+                }
+                $model->apartmentAttributes = $apartmentAttributes;
+            }
+
+            if ($model->save()) {
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(
             'model' => $model,
+            'attributes' => $attributes,
+            'apartmentAttributes' => $apartmentAttributes,
         ));
     }
 
@@ -83,10 +122,10 @@ class CityController extends Controller
      */
     public function actionIndex()
     {
-        $model = new City('search');
+        $model = new Apartment('search');
         $model->unsetAttributes(); // clear any default values
-        if (isset($_GET['City']))
-            $model->attributes = $_GET['City'];
+        if (isset($_GET['Apartment']))
+            $model->attributes = $_GET['Apartment'];
 
         $this->render('index', array(
             'model' => $model,
@@ -97,10 +136,11 @@ class CityController extends Controller
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer the ID of the model to be loaded
+     * @return Apartment
      */
     public function loadModel($id)
     {
-        $model = City::model()->findByPk($id);
+        $model = Apartment::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -112,25 +152,9 @@ class CityController extends Controller
      */
     protected function performAjaxValidation($model)
     {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'city-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'apartment-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
-    }
-
-    public function actionAjaxAreaList()
-    {
-        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM area');
-        $cityId = Yii::app()->request->getPost('city_id');
-        $model = City::model()->with('areas')->cache(3600, $cacheDependency)->findByPk($cityId);
-        $options = CHtml::tag('option', array('value' => 0), CHtml::encode('Нужно выбрать город'), true);
-        if ($model && ($data = CHtml::listData($model->areas, 'id', 'name')) !== null) {
-            $options = '';
-            foreach ($data as $id => $value) {
-                $options .= CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
-            }
-        }
-
-        echo CJSON::encode($options);
     }
 }

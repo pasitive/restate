@@ -110,4 +110,16 @@ class ApartmentType extends CActiveRecord
             'criteria' => $criteria,
         ));
     }
+
+
+    public static function getAdminCMenuItems()
+    {
+        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
+        $model = self::model()->cache(3600, $cacheDependency)->findAll();
+        $items = array();
+        foreach ($model as $index => $type) {
+            $items[] = array('label' => $type->name, 'url' => array('/admin/apartment/create', 'type' => $type->id));
+        }
+        return $items;
+    }
 }
