@@ -10,6 +10,7 @@
  * @property integer $disabled
  * @property string $created_at
  * @property string $updated_at
+ * @property string $type
  *
  * The followings are the available model relations:
  * @property ApartmentAttribute[] $apartmentAttributes
@@ -17,6 +18,7 @@
  */
 class Attribute extends CActiveRecord
 {
+
     /**
      * Returns the static model of the specified AR class.
      * @return Attribute the static model class
@@ -77,6 +79,7 @@ class Attribute extends CActiveRecord
             'name' => 'Параметр объекта',
             'apartment_type_id' => 'Тип объекта',
             'disabled' => 'НЕ активно',
+            'type' => 'Тип',
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
         );

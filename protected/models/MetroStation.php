@@ -59,6 +59,7 @@ class MetroStation extends CActiveRecord
         // class name for the relations automatically generated below.
         return array(
             'city' => array(self::BELONGS_TO, 'City', 'city_id'),
+            'apartments' => array(self::HAS_MANY, 'Apartment', 'metro_id'),
         );
     }
 

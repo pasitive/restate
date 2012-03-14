@@ -47,7 +47,7 @@ class Apartment extends CActiveRecord
         return array(
             array('name, city_id, area_id, type_id', 'required'),
             array('name', 'length', 'max' => 255),
-            array('city_id, area_id, type_id', 'length', 'max' => 10),
+            array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
@@ -66,6 +66,7 @@ class Apartment extends CActiveRecord
             'type' => array(self::BELONGS_TO, 'ApartmentType', 'type_id'),
             'area' => array(self::BELONGS_TO, 'Area', 'area_id'),
             'city' => array(self::BELONGS_TO, 'City', 'city_id'),
+            'metro' => array(self::BELONGS_TO, 'MetroStation', 'metro_id'),
             'apartmentAttributes' => array(self::HAS_MANY, 'ApartmentAttribute', 'apartment_id'),
         );
     }
@@ -80,6 +81,7 @@ class Apartment extends CActiveRecord
             'name' => 'Объект',
             'city_id' => 'Город',
             'area_id' => 'Район',
+            'metro_id' => 'Станция метро',
             'type_id' => 'Тип объекта',
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',

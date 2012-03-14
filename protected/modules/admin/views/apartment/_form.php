@@ -22,10 +22,11 @@
         'ajax' => array(
             'type' => 'POST',
             'dataType' => 'json',
-            'url' => Yii::app()->createAbsoluteUrl('/admin/city/ajaxAreaList'),
+            'url' => Yii::app()->createAbsoluteUrl('/admin/city/ajaxDependsOfCity'),
             'data' => array('city_id' => 'js:$(this).val()'),
             'success' => 'function(data) {
-                $("#Apartment_area_id").html(data);
+                $("#Apartment_area_id").html(data.areas);
+                $("#Apartment_metro_id").html(data.metroStations);
             }',
         )
     )); ?>
@@ -40,6 +41,16 @@
         <?php echo $form->dropDownList($model, 'area_id', CHtml::listData($model->city->areas, 'id', 'name'), array('empty' => 'Нужно выбрать город')); ?>
         <?php endif; ?>
         <?php echo $form->error($model, 'area_id'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'metro_id'); ?>
+        <?php if ($model->isNewRecord) : ?>
+        <?php echo $form->dropDownList($model, 'metro_id', array(), array('empty' => 'Нужно выбрать город')); ?>
+        <?php else : ?>
+        <?php echo $form->dropDownList($model, 'metro_id', CHtml::listData($model->city->metroStations, 'id', 'name'), array('empty' => 'Нужно выбрать город')); ?>
+        <?php endif; ?>
+        <?php echo $form->error($model, 'metro_id'); ?>
     </div>
 
     <?php

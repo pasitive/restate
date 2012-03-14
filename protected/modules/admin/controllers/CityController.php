@@ -118,19 +118,40 @@ class CityController extends Controller
         }
     }
 
-    public function actionAjaxAreaList()
+    public function actionAjaxDependsOfCity()
     {
-        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM area');
+        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM area, metro_station');
         $cityId = Yii::app()->request->getPost('city_id');
-        $model = City::model()->with('areas')->cache(3600, $cacheDependency)->findByPk($cityId);
-        $options = CHtml::tag('option', array('value' => 0), CHtml::encode('Нужно выбрать город'), true);
+        $model = City::model()->with(array('areas', 'metroStations'))->cache(3600, $cacheDependency)->findByPk($cityId);
+
+        if(count($model->areas)) {
+        $areaOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Нужно выбрать город'), true);
         if ($model && ($data = CHtml::listData($model->areas, 'id', 'name')) !== null) {
-            $options = '';
+            //$areaOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Выберите район'), true);
+            $areaOptions = '';
             foreach ($data as $id => $value) {
-                $options .= CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
+                $areaOptions .= CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
             }
         }
+        } else {
+            $areaOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Нет данных для этого города'), true);
+        }
 
-        echo CJSON::encode($options);
+        if (count($model->metroStations) != 0) {
+            $metroOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Нужно выбрать город'), true);
+            if ($model && ($data = CHtml::listData($model->metroStations, 'id', 'name')) !== null) {
+                $metroOptions = '';
+                foreach ($data as $id => $value) {
+                    $metroOptions .= CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
+                }
+            }
+        } else {
+            $metroOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Нет данных для этого города'), true);
+        }
+
+        echo CJSON::encode(array(
+            'areas' => $areaOptions,
+            'metroStations' => $metroOptions,
+        ));
     }
 }

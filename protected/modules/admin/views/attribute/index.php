@@ -35,6 +35,7 @@ $('.search-form form').submit(function(){
     'id' => 'attribute-grid',
     'dataProvider' => $model->search(),
     'filter' => null,
+    'rowCssClassExpression' => '($data->disabled) ? "disabled" : ""',
     'columns' => array(
         'id',
         'name',

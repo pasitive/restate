@@ -69,11 +69,13 @@ class ApartmentController extends Controller
         $apartmentAttributes = $model->getRelated('apartmentAttributes', false, array(
             'index' => 'attribute_id',
         ));
+
         $attributesDiff = array_diff_key($attributes, $apartmentAttributes);
 
         foreach ($attributesDiff as $id => $attribute) {
             $apartmentAttributes[$id] = new ApartmentAttribute();
         }
+
         $model->apartmentAttributes = $apartmentAttributes;
 
         if (isset($_POST['Apartment'])) {
