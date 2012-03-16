@@ -11,8 +11,11 @@
  * @property string $type_id
  * @property string $created_at
  * @property string $updated_at
+ * @property string $lng
+ * @property string $lat
+ * @property int $rating
  *
- * The followings are the available model relations:
+ * The followings are the available model rel   ations:
  * @property ApartmentType $type
  * @property Area $area
  * @property City $city
@@ -48,7 +51,7 @@ class Apartment extends CActiveRecord
             array('name, city_id, area_id, type_id', 'required'),
             array('name', 'length', 'max' => 255),
             array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
-            array('created_at, updated_at', 'safe'),
+            array('created_at, updated_at, lng, lat, rating, address', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, name, city_id, area_id, type_id, created_at, updated_at', 'safe', 'on' => 'search'),
@@ -83,6 +86,9 @@ class Apartment extends CActiveRecord
             'area_id' => 'Район',
             'metro_id' => 'Станция метро',
             'type_id' => 'Тип объекта',
+            'address' => 'Адрес',
+            'lng' => 'Долгота',
+            'lat' => 'Широта',
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
         );

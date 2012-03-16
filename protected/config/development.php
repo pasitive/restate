@@ -49,6 +49,7 @@ return CMap::mergeArray(
             'secret' => 'c0018634f1e7cb8788e4bec64f469e52',
             'adminEmail' => 'denis.a.boldinov@gmail.com',
             'uploadDir' => Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR . 'upload',
+            'YMapKey' => 'AH-kYU8BAAAAHHVDZwIAgjeGX90IsfvNffbv5ZHKpiWzEpkAAAAAAAAAAACzQB8dghP1sGJYKHZpU26RAa1CBg==',
         ),
     )
 );

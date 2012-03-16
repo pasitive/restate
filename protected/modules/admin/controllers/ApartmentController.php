@@ -159,4 +159,15 @@ class ApartmentController extends Controller
             Yii::app()->end();
         }
     }
+
+    public function actionGeocode()
+    {
+        $address = Yii::app()->request->getPost('address');
+
+        Yii::import('ext.EGMap.*');
+        $mapClient = new EGMapClient();
+        $result = $mapClient->getGeocodingInfo($address);
+
+        echo $result;
+    }
 }

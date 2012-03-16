@@ -23,6 +23,7 @@ return array(
 
     'modules' => array(
         'admin',
+        'yamap',
     ),
 
     // application components

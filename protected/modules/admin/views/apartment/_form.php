@@ -1,5 +1,4 @@
 <div class="form">
-
     <?php $form = $this->beginWidget('CActiveForm', array(
     'id' => 'apartment-form',
     'enableAjaxValidation' => false,
@@ -8,12 +7,6 @@
     <p class="note">Поля отмеченные звездочкой <span class="required">*</span> обязательны для заполнения.</p>
 
     <?php echo $form->errorSummary($model); ?>
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'name'); ?>
-        <?php echo $form->textField($model, 'name', array('size' => 60, 'maxlength' => 255)); ?>
-        <?php echo $form->error($model, 'name'); ?>
-    </div>
 
     <div class="row">
         <?php echo $form->labelEx($model, 'city_id'); ?>
@@ -25,9 +18,9 @@
             'url' => Yii::app()->createAbsoluteUrl('/admin/city/ajaxDependsOfCity'),
             'data' => array('city_id' => 'js:$(this).val()'),
             'success' => 'function(data) {
-                $("#Apartment_area_id").html(data.areas);
-                $("#Apartment_metro_id").html(data.metroStations);
-            }',
+                    $("#Apartment_area_id").html(data.areas);
+                    $("#Apartment_metro_id").html(data.metroStations);
+                }',
         )
     )); ?>
         <?php echo $form->error($model, 'city_id'); ?>
@@ -41,6 +34,22 @@
         <?php echo $form->dropDownList($model, 'area_id', CHtml::listData($model->city->areas, 'id', 'name'), array('empty' => 'Нужно выбрать город')); ?>
         <?php endif; ?>
         <?php echo $form->error($model, 'area_id'); ?>
+    </div>
+
+    <div class="row">
+        <?php $this->widget('application.components.MapWidget') ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'address'); ?>
+        <?php echo $form->textField($model, 'address', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->error($model, 'address'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'name'); ?>
+        <?php echo $form->textField($model, 'name', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->error($model, 'name'); ?>
     </div>
 
     <div class="row">
@@ -62,6 +71,8 @@
     ?>
 
     <?php echo $form->hiddenField($model, 'type_id'); ?>
+    <?php echo $form->hiddenField($model, 'lng'); ?>
+    <?php echo $form->hiddenField($model, 'lat'); ?>
 
     <div class="row buttons">
         <?php echo CHtml::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить'); ?>

@@ -18,6 +18,12 @@
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css"/>
 
+    <?php echo CGoogleApi::init(); ?>
+
+    <?php echo CHtml::script(
+        CGoogleApi::load('maps', '3', array('other_params' => 'sensor=false&language='.Yii::app()->language)) . "\n"
+    ); ?>
+
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
@@ -66,9 +72,9 @@
         <?php echo Yii::powered(); ?>
         <br/>
         <?php if (YII_DEBUG) {
-            list($queryCount, $queryTime) = Yii::app()->db->getStats();
-            echo "Query count: $queryCount, Total query time: " . sprintf('%0.5f', $queryTime) . "s";
-        }
+        list($queryCount, $queryTime) = Yii::app()->db->getStats();
+        echo "Query count: $queryCount, Total query time: " . sprintf('%0.5f', $queryTime) . "s";
+    }
         ?>
         <?php if (YII_DEBUG) : ?>
         <div>
