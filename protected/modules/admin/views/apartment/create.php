@@ -9,7 +9,7 @@ $this->menu = array(
 );
 ?>
 
-<h1>Добавить объект</h1>
+<h1>Добавить объект <?php echo $model->type->name ?></h1>
 
 <?php echo $this->renderPartial('_form', array(
     'model' => $model,

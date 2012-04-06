@@ -6,7 +6,7 @@ class UrlManager extends CUrlManager
     {
         $oldRules = $this->rules;
         $this->rules = array();
-        $dependency = new CDbCacheDependency('SELECT MAX(update_time) FROM route');
+        $dependency = new CDbCacheDependency('SELECT MAX(created_at) FROM route');
         $routes = Route::model()->cache(3600, $dependency)->findAll();
         foreach ($routes as $route) {
             $rule = array($route->routeable_controller . '/' . $route->routeable_action);

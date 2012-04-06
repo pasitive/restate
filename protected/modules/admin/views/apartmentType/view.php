@@ -13,12 +13,12 @@ $this->menu = array(
 ?>
 
 <h1>Просмотр типа объекта</h1>
-
 <?php $this->widget('zii.widgets.CDetailView', array(
     'data' => $model,
     'attributes' => array(
         'id',
         'name',
+        'container:boolean',
         'created_at',
         'updated_at',
     ),

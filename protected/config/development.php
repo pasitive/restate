@@ -18,6 +18,14 @@ return CMap::mergeArray(
             ),
         ),
         'components' => array(
+            'search' => array(
+                'class' => 'ext.DGSphinxSearch.DGSphinxSearch',
+                'server' => '127.0.0.1',
+                'port' => 9312,
+                'maxQueryTime' => 3000,
+                'enableProfiling' => 1,
+                'enableResultTrace' => 1,
+            ),
             'cache' => array(
                 'class' => 'CDummyCache',
             ),
@@ -29,7 +37,7 @@ return CMap::mergeArray(
                 'charset' => 'utf8',
                 'enableProfiling' => true,
                 'enableParamLogging' => true,
-                //'schemaCachingDuration' => 3600,
+//                'schemaCachingDuration' => 3600,
             ),
             'log' => array(
                 'class' => 'CLogRouter',

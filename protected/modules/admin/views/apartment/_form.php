@@ -18,9 +18,9 @@
             'url' => Yii::app()->createAbsoluteUrl('/admin/city/ajaxDependsOfCity'),
             'data' => array('city_id' => 'js:$(this).val()'),
             'success' => 'function(data) {
-                    $("#Apartment_area_id").html(data.areas);
-                    $("#Apartment_metro_id").html(data.metroStations);
-                }',
+                $("#Apartment_area_id").html(data.areas);
+                $("#Apartment_metro_id").html(data.metroStations);
+            }',
         )
     )); ?>
         <?php echo $form->error($model, 'city_id'); ?>
@@ -28,7 +28,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'area_id'); ?>
-        <?php if ($model->isNewRecord) : ?>
+        <?php if ($model->isNewRecord && empty($model->area_id)) : ?>
         <?php echo $form->dropDownList($model, 'area_id', array(), array('empty' => 'Нужно выбрать город')); ?>
         <?php else : ?>
         <?php echo $form->dropDownList($model, 'area_id', CHtml::listData($model->city->areas, 'id', 'name'), array('empty' => 'Нужно выбрать город')); ?>
@@ -54,10 +54,10 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'metro_id'); ?>
-        <?php if ($model->isNewRecord) : ?>
+        <?php if ($model->isNewRecord && empty($model->metro_id)) : ?>
         <?php echo $form->dropDownList($model, 'metro_id', array(), array('empty' => 'Нужно выбрать город')); ?>
         <?php else : ?>
-        <?php echo $form->dropDownList($model, 'metro_id', CHtml::listData($model->city->metroStations, 'id', 'name'), array('empty' => 'Нужно выбрать город')); ?>
+        <?php echo $form->dropDownList($model, 'metro_id', CHtml::listData($model->city->metroStations, 'id', 'name'), array('empty' => 'В этом городе нет метро')); ?>
         <?php endif; ?>
         <?php echo $form->error($model, 'metro_id'); ?>
     </div>
@@ -70,6 +70,21 @@
     ));
     ?>
 
+    <?php if (intval($model->type->container) === 0): ?>
+    <div class="row">
+        <?php echo $form->labelEx($model, 'parent_id'); ?>
+        <?php echo $form->dropDownList($model, 'parent_id', $model->typedApartmentList, array('empty' => 'Автономный')); ?>
+        <?php echo $form->error($model, 'parent_id'); ?>
+        <p class="hint">В качестве родительского объекта можно выбрать Жилой комплекс</p>
+    </div>
+    <?php endif; ?>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'is_special'); ?>
+        <?php echo $form->checkbox($model, 'is_special'); ?>
+        <?php echo $form->error($model, 'is_special'); ?>
+    </div>
+
     <?php echo $form->hiddenField($model, 'type_id'); ?>
     <?php echo $form->hiddenField($model, 'lng'); ?>
     <?php echo $form->hiddenField($model, 'lat'); ?>
@@ -81,3 +96,5 @@
     <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<?php $this->renderPartial('_js'); ?>

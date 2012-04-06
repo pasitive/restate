@@ -85,6 +85,8 @@ class AttributeController extends Controller
     public function actionIndex()
     {
         $model = new Attribute('search');
+//        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
+//        $model->with('apartmentType')->cache(3600, $cacheDependency);
         $model->unsetAttributes(); // clear any default values
         if (isset($_GET['Attribute']))
             $model->attributes = $_GET['Attribute'];

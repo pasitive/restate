@@ -23,11 +23,13 @@ return array(
 
     'modules' => array(
         'admin',
-        'yamap',
     ),
 
     // application components
     'components' => array(
+        'format' => array(
+            'booleanFormat' => array('Нет', 'Да'),
+        ),
         'urlManager' => array(
             'class' => 'UrlManager',
             'urlFormat' => 'path',
@@ -56,6 +58,8 @@ return array(
             'loginUrl' => array('/session/create'),
         ),
         'urlManager' => array(
+            'class' => 'UrlManager',
+            'urlSuffix' => '.html',
             'urlFormat' => 'path',
             'showScriptName' => false,
             'rules' => array(

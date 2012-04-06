@@ -32,13 +32,7 @@ class MapWidget extends CWidget
 
     public $width = '100%';
 
-    public $height = '300px';
-
-    public function init()
-    {
-        $basePath = Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.modules.admin.assets'), false, -1, YII_DEBUG);
-        Yii::app()->clientScript->registerScriptFile($basePath . '/googleMapLib.js', CClientScript::POS_HEAD);
-    }
+    public $height = '150px';
 
     public function run()
     {

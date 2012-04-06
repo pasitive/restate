@@ -14,6 +14,9 @@
  * @property string $lng
  * @property string $lat
  * @property int $rating
+ * @property int $parent_id
+ * @property int $is_special
+ * @property int $metro_id
  *
  * The followings are the available model rel   ations:
  * @property ApartmentType $type
@@ -23,6 +26,17 @@
  */
 class Apartment extends CActiveRecord
 {
+    public function getTypedApartmentList()
+    {
+        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');
+        $types = ApartmentType::model()->container()->with('apartments')->cache(3600, $cacheDependency)->findAll();
+        $result = array();
+        foreach ($types as $type) {
+            $result[$type->name] = CHtml::listData($type->apartments, 'id', 'name');
+        }
+        return $result;
+    }
+
     /**
      * Returns the static model of the specified AR class.
      * @return Apartment the static model class
@@ -51,7 +65,7 @@ class Apartment extends CActiveRecord
             array('name, city_id, area_id, type_id', 'required'),
             array('name', 'length', 'max' => 255),
             array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
-            array('created_at, updated_at, lng, lat, rating, address', 'safe'),
+            array('created_at, updated_at, lng, lat, rating, address, parent_id, is_special', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, name, city_id, area_id, type_id, created_at, updated_at', 'safe', 'on' => 'search'),
@@ -89,6 +103,8 @@ class Apartment extends CActiveRecord
             'address' => 'Адрес',
             'lng' => 'Долгота',
             'lat' => 'Широта',
+            'is_special' => 'Специальное предложение?',
+            'parent_id' => 'Родительский объект',
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
         );
@@ -113,6 +129,11 @@ class Apartment extends CActiveRecord
     {
         $valid = false;
         if (parent::beforeValidate()) {
+
+            if(empty($this->metro_id)) {
+                $this->metro_id = NULL;
+            }
+
             $valid = true;
             foreach ($this->apartmentAttributes as $apartmentAttribute) {
                 $valid = $apartmentAttribute->validate(array('value')) && $valid;
@@ -120,6 +141,7 @@ class Apartment extends CActiveRecord
         }
         return $valid;
     }
+
 
     protected function afterSave()
     {

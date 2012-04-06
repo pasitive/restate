@@ -8,6 +8,7 @@
  * @property string $name
  * @property string $created_at
  * @property string $updated_at
+ * @property int $container
  *
  * The followings are the available model relations:
  * @property Apartment[] $apartments
@@ -15,6 +16,16 @@
  */
 class ApartmentType extends CActiveRecord
 {
+
+    public function scopes()
+    {
+        return array(
+            'container' => array(
+                'condition' => 'container=1',
+            ),
+        );
+    }
+
     /**
      * Returns the static model of the specified AR class.
      * @return ApartmentType the static model class
@@ -42,6 +53,7 @@ class ApartmentType extends CActiveRecord
         return array(
             array('name', 'required'),
             array('name', 'length', 'max' => 255),
+            array('container', 'numerical', 'integerOnly' => true),
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
@@ -57,7 +69,7 @@ class ApartmentType extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            //'apartments' => array(self::HAS_MANY, 'Apartment', 'type_id'),
+            'apartments' => array(self::HAS_MANY, 'Apartment', 'type_id'),
             //'attributes' => array(self::HAS_MANY, 'Attribute', 'apartment_type_id'),
         );
     }
@@ -72,6 +84,7 @@ class ApartmentType extends CActiveRecord
             'name' => 'Тип объекта',
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
+            'container' => 'Контейнер',
         );
     }
 

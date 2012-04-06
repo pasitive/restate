@@ -24,6 +24,9 @@
 <div id="map" style="height:<?php echo $height; ?>;width:<?php echo $width; ?>"></div>
 
 <script type="text/javascript">
+
+    map = null;
+
     function initMap() {
         var mapOptions = {
             zoom:<?php echo $zoom; ?>,

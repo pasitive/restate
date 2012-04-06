@@ -124,15 +124,14 @@ class CityController extends Controller
         $cityId = Yii::app()->request->getPost('city_id');
         $model = City::model()->with(array('areas', 'metroStations'))->cache(3600, $cacheDependency)->findByPk($cityId);
 
-        if(count($model->areas)) {
-        $areaOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Нужно выбрать город'), true);
-        if ($model && ($data = CHtml::listData($model->areas, 'id', 'name')) !== null) {
-            //$areaOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Выберите район'), true);
-            $areaOptions = '';
-            foreach ($data as $id => $value) {
-                $areaOptions .= CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
+        if (count($model->areas)) {
+            $areaOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Нужно выбрать город'), true);
+            if ($model && ($data = CHtml::listData($model->areas, 'id', 'name')) !== null) {
+                $areaOptions = '';
+                foreach ($data as $id => $value) {
+                    $areaOptions .= CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
+                }
             }
-        }
         } else {
             $areaOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Нет данных для этого города'), true);
         }
