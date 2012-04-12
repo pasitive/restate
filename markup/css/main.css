@@ -250,4 +250,6 @@ hr.splitter.croped {
 .copyright {
     text-align: center;
     font-size: 12px;
+    height: 39px;
+    line-height: 39px;
 }
