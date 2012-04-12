@@ -40,6 +40,7 @@ $('.search-form form').submit(function(){
         'id',
         'name',
         'apartmentType.name',
+        'disabled:boolean',
         'created_at',
         'updated_at',
         array(

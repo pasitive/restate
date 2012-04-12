@@ -22,6 +22,8 @@ $this->menu = array(
         'city.name',
         'area.name',
         'type.name',
+        'metro.name',
+        'is_special:boolean',
         'created_at',
         'updated_at',
     ),

@@ -38,6 +38,7 @@ $('.search-form form').submit(function(){
     'columns' => array(
         'id',
         'name',
+        'container:boolean',
         'created_at',
         'updated_at',
         array(
