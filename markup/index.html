@@ -1,15 +1,15 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Агентство элитной недвижимости Запад</title>
 
-    <link rel="stylesheet" href="./css/src/reset.css" type="text/css" media="screen, projection">
-    <!-- Framework CSS -->
-    <link rel="stylesheet" href="./css/screen.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print">
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="./css/ie.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="css/960.css" type="text/css" media="screen, projection">
+
+    <!--[if IE 6]>
+    <script src="http://ie-note.googlecode.com/hg/ie-note.js"></script>
     <![endif]-->
 
     <link rel="stylesheet" href="./css/main.css" type="text/css" media="screen, projection">
@@ -17,161 +17,213 @@
 </head>
 <body>
 
-<div class="container" id="container">
+<div id="container" class="container_12">
 
-    <div id="header" class="span-24">
-        <a id="logo" href="#"></a>
+<div id="header" class="grid_12">
+    <div id="logo"></div>
+</div>
+
+<div id="menu_block" class="grid_12">
+    <ul id="main_navigation">
+        <li class=""><a href="#"><span>Городская недвижимость</span></a></li>
+        <li class="active"><a href="#"><span>Загородняя недвижимость</span></a></li>
+        <li class=""><a href="#"><span>Квартиры в аренду</span></a></li>
+        <li class=""><a href="#"><span>Все объекты</span></a></li>
+        <li class=""><a href="#"><span>Поиск по параметрам</span></a></li>
+    </ul>
+</div>
+
+<div id="map" class="grid_12">
+    <div class="map_shadow_top grid_12"></div>
+    <div class="map_content">
+
     </div>
-
-    <div id="menu_block" class="span-24">
-        <ul id="main_navigation">
-            <li><span><a href="#">Городская недвижимость</a></span></li>
-            <li class="active"><span><a href="#">Загородняя недвижимость</a></span></li>
-            <li><span><a href="#">Квартиры в аренду</a></span></li>
-            <li><span><a href="#">Все объекты</a></span></li>
-            <li><span><a href="#">Поиск по параметрам</a></span></li>
-        </ul>
+    <div id="map_toggler">
+        <a class="arrow_down" href="#" onclick="return false;">Откруть/Закрыть карту</a>
     </div>
+</div>
 
-    <div id="map" class="span-24">
-        <div class="map_shadow_top span-24"></div>
-        <div class="map_content">
 
-        </div>
-        <div id="map_toggler">
-            <a href="javascript:;"><img src="images/map_toggler.png" alt=""></a>
-        </div>
-    </div>
+<div id="content" class="grid_12">
 
-    <div class="span-24 prepend-1" id="content">
+    <div class="grid_8 alpha colborder">
 
-        <div class="span-16 colborder">
-
+        <div id="main_content" class="prepend_left v_splitter">
             <h1>Элитная недвижимость на западе Москвы</h1>
 
-            <div class="offers_block">
+            <div class="offers">
 
                 <div class="offer clearfix">
-                    <div class="image_block span-5">
-                        <img src="images/image_sample.png" alt="">
+                    <div class="image_block grid_2 alpha">
+                        <div class="box_shadow"><img src="images/image_sample.png" alt=""></div>
                     </div>
 
-                    <div class="description_block span-10 last">
-                        <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77</h3>
-                        <address class="quiet small">м. Водный Стадион</address>
-                        <a href="#" class="span-6 apartment_type key_grey"><span>Элитный жилой комплекс</span></a>
-                        <a href="#" class="span-4 last more_link">Подробнее</a>
+                    <div class="description_block grid_5 omega">
+                        <div class="description clearfix">
+                            <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77, корпус 2 стр.1</h3>
+                            <address>м. Выхино</address>
+
+                            <div class="grid_3 alpha">
+                                <a href="#" class="apartment_type key_gold"><span>Квартира в аренду</span></a>
+                            </div>
+
+                            <div class="grid_1 omega">
+                                <a href="#" class="more_link">Подробнее</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <hr class="splitter croped">
 
                 <div class="offer clearfix">
-                    <div class="image_block span-5">
-                        <img src="images/image_sample.png" alt="">
+                    <div class="image_block grid_2 alpha">
+                        <div class="box_shadow"><img src="images/image_sample.png" alt=""></div>
                     </div>
-                    <div class="description_block span-10 last">
-                        <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77</h3>
-                        <address class="quiet small">м. Водный Стадион</address>
-                        <a href="#" class="span-6 apartment_type key_gold"><span>Элитный жилой комплекс</span></a>
-                        <a href="#" class="span-4 last more_link">Подробнее</a>
-                    </div>
-                </div>
 
-                <hr class="splitter">
+                    <div class="description_block grid_5 omega">
+                        <div class="description clearfix">
+                            <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77, корпус 2 стр.1</h3>
+                            <address>м. Выхино</address>
 
-                <div class="offer clearfix">
-                    <div class="image_block span-5">
-                        <img src="images/image_sample.png" alt="">
-                    </div>
-                    <div class="description_block span-10 last">
-                        <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77</h3>
-                        <address class="quiet small">м. Водный Стадион</address>
-                        <a href="#" class="span-6 apartment_type key_gold"><span>Элитный жилой комплекс</span></a>
-                        <a href="#" class="span-4 last more_link">Подробнее</a>
+                            <div class="grid_3 alpha">
+                                <a href="#" class="apartment_type key_grey"><span>Элитный жилой комплекс</span></a>
+                            </div>
+
+                            <div class="grid_1 omega">
+                                <a href="#" class="more_link">Подробнее</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <hr class="splitter croped">
 
                 <div class="offer clearfix">
-                    <div class="image_block span-5">
-                        <img src="images/image_sample.png" alt="">
+                    <div class="image_block grid_2 alpha">
+                        <div class="box_shadow"><img src="images/image_sample.png" alt=""></div>
                     </div>
-                    <div class="description_block span-10 last">
-                        <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77</h3>
-                        <address class="quiet small">м. Водный Стадион</address>
-                        <a href="#" class="span-6 apartment_type key_gold"><span>Элитный жилой комплекс</span></a>
-                        <a href="#" class="span-4 last more_link">Подробнее</a>
+
+                    <div class="description_block grid_5 omega">
+                        <div class="description clearfix">
+                            <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77, корпус 2 стр.1</h3>
+                            <address>м. Выхино</address>
+
+                            <div class="grid_3 alpha">
+                                <a href="#" class="apartment_type key_gold"><span>Квартира в аренду</span></a>
+                            </div>
+
+                            <div class="grid_1 omega">
+                                <a href="#" class="more_link">Подробнее</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <hr class="splitter croped">
 
+                <div class="offer clearfix">
+                    <div class="image_block grid_2 alpha">
+                        <div class="box_shadow"><img src="images/image_sample.png" alt=""></div>
+                    </div>
+
+                    <div class="description_block grid_5 omega">
+                        <div class="description clearfix">
+                            <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77, корпус 2 стр.1</h3>
+                            <address>м. Выхино</address>
+
+                            <div class="grid_3 alpha">
+                                <a href="#" class="apartment_type key_grey"><span>Элитный жилой комплекс</span></a>
+                            </div>
+
+                            <div class="grid_1 omega">
+                                <a href="#" class="more_link">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="splitter croped">
+
+                <div class="offer clearfix">
+                    <div class="image_block grid_2 alpha">
+                        <div class="box_shadow"><img src="images/image_sample.png" alt=""></div>
+                    </div>
+
+                    <div class="description_block grid_5 omega">
+                        <div class="description clearfix">
+                            <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77, корпус 2 стр.1</h3>
+                            <address>м. Выхино</address>
+
+                            <div class="grid_3 alpha">
+                                <a href="#" class="apartment_type key_gold"><span>Квартира в аренду</span></a>
+                            </div>
+
+                            <div class="grid_1 omega">
+                                <a href="#" class="more_link">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="splitter croped">
+
+                <div class="offer clearfix">
+                    <div class="image_block grid_2 alpha">
+                        <div class="box_shadow"><img src="images/image_sample.png" alt=""></div>
+                    </div>
+
+                    <div class="description_block grid_5 omega">
+                        <div class="description clearfix">
+                            <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77, корпус 2 стр.1</h3>
+                            <address>м. Выхино</address>
+
+                            <div class="grid_3 alpha">
+                                <a href="#" class="apartment_type key_grey"><span>Элитный жилой комплекс</span></a>
+                            </div>
+
+                            <div class="grid_1 omega">
+                                <a href="#" class="more_link">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-
         </div>
-
-        <div class="span-7 last">
-            <h2>Специальные предложения</h2>
-
-            <div class="special_offers">
-                <div class="offer clearfix">
-                    <div class="image_block">
-                        <img src="images/image_sample.png" alt="">
-                    </div>
-
-                    <div class="description_block">
-                        <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77</h3>
-                        <address class="quiet small">м. Водный Стадион</address>
-                    </div>
-                </div>
-                <div class="offer clearfix">
-                    <div class="image_block">
-                        <img src="images/image_sample.png" alt="">
-                    </div>
-
-                    <div class="description_block">
-                        <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77</h3>
-                        <address class="quiet small">м. Водный Стадион</address>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
 
-    <div class="footer_shadow span-23 prepend-1"></div>
-    <div id="footer" class="span-23 prepend-1">
-        <h2 class="prepend-top">Главная</h2>
+    <div class="grid_4 omega">
+        <div id="sidebar">
+            <h2>Специальные предложения</h2>
 
+            <div class="offers">
 
-        <hr class="span-22 splitter">
+                <div class="offer clearfix">
+                    <div class="image_block">
+                        <div class="box_shadow"><img src="images/image_sample.png" alt=""></div>
+                    </div>
 
-        <ul id="footer_navigation">
-            <li><span><a href="#">Городская недвижимость</a></span></li>
-            <li class="active"><span><a href="#">Загородняя недвижимость</a></span></li>
-            <li><span><a href="#">Квартиры в аренду</a></span></li>
-            <li><span><a href="#">Все объекты</a></span></li>
-            <li><span><a href="#">Поиск по параметрам</a></span></li>
-            <li><span><a href="#">Поиск по параметрам</a></span></li>
-            <li><span><a href="#">Поиск по параметрам</a></span></li>
-        </ul>
+                    <div class="description_block">
+                        <div class="description clearfix">
+                            <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77</h3>
+                            <address>м. Выхино</address>
+                        </div>
+                    </div>
+                </div>
 
-        <hr class="space">
-        <hr class="span-22 splitter">
+                <div class="offer clearfix">
+                    <div class="image_block">
+                        <div class="box_shadow"><img src="images/image_sample.png" alt=""></div>
+                    </div>
 
-        <div class="span-23">
-
-            <div class="span-10 prepend-6 copyright">
-                <p>&copy; Агенство Элитной недвижимости &laquo;Запад&raquo;</p>
-            </div>
-
-            <div class="span-4 prepend-2 small_logo">
-                <img src="images/logo_white_small.png">
+                    <div class="description_block">
+                        <div class="description clearfix">
+                            <h3><strong>Город Яхт</strong>, Ленинградское шоссе, 77</h3>
+                            <address>м. Выхино</address>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -179,16 +231,70 @@
 
 </div>
 
+<div class="grid_12">
+    <div class="shadow"></div>
+    <div id="footer">
+
+        <div class="footer_wrapper prepend_left">
+
+            <h2>Главная</h2>
+
+            <hr class="splitter">
+
+
+            <ul>
+                <li><span><a href="">Ссылка</a></span></li>
+                <li><span><a href="">Ссылка</a></span></li>
+                <li><span><a href="">Ссылка</a></span></li>
+                <li><span><a href="">Ссылка</a></span></li>
+                <li><span><a href="">Ссылка</a></span></li>
+                <li><span><a href="">Ссылка</a></span></li>
+                <li><span><a href="">Ссылка</a></span></li>
+                <li><span><a href="">Ссылка</a></span></li>
+                <li><span><a href="">Ссылка</a></span></li>
+                <li><span><a href="">Ссылка</a></span></li>
+            </ul>
+
+
+            <div class="clear"></div>
+
+            <hr class="splitter">
+
+            <div class="grid_12 alpha omega">
+                <div class="grid_7 alpha">
+                    <p class="copyright">&copy; Агенство Элитной недвижимости &laquo;Запад&raquo;</p>
+                </div>
+
+                <div class="grid_3 prefix_2 omega">
+                    <img src="images/logo_white_small.png">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
 <script type="text/javascript">
     $(function () {
-        $('#map_toggler a').toggle(function () {
+        $('#map_toggler').toggle(function () {
             $('#map div.map_content').animate({
-                height:265
+                height:263
             });
+            $('#map_toggler a').removeClass('arrow_down').addClass('arrow_up');
         }, function () {
             $('#map div.map_content').animate({
                 height:100
             });
+            $('#map_toggler a').removeClass('arrow_up').addClass('arrow_down');
+        });
+
+        $('#main_navigation li').hover(function () {
+            $(this).addClass('active');
+        }, function () {
+            $(this).removeClass('active');
         });
     })
 </script>
