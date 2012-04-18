@@ -32,7 +32,27 @@ class MapWidget extends CWidget
 
     public $width = '100%';
 
-    public $height = '150px';
+    public $height = '100px';
+
+    public $loadAllObjects = true;
+
+    private $_dataProvider = null;
+
+    public function init()
+    {
+        parent::init();
+
+        if ($this->loadAllObjects) {
+            Yii::app()->clientScript->registerScriptFile('http://www.google.com/jsapi');
+            Yii::app()->clientScript->registerScriptFile('/js/markercluster.js');
+            $this->_dataProvider = new CActiveDataProvider('Apartment', array(
+                'pagination' => array(
+                    'pageSize' => 999
+                ),
+            ));
+
+        }
+    }
 
     public function run()
     {
@@ -42,6 +62,8 @@ class MapWidget extends CWidget
             'lat' => $this->lat,
             'lng' => $this->lng,
             'zoom' => $this->zoom,
+            'loadAllObjects' => $this->loadAllObjects,
+            'dataProvider' => $this->_dataProvider,
         ));
     }
 }

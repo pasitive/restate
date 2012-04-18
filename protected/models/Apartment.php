@@ -23,9 +23,15 @@
  * @property Area $area
  * @property City $city
  * @property ApartmentAttribute[] $apartmentAttributes
+ * @property ApartmentFile[] $apartmentFiles
  */
 class Apartment extends CActiveRecord
 {
+
+    public $files;
+    public $fileType = array('jpg', 'jpeg', 'gif', 'png');
+    public $fileSize = array(100, 150, 450);
+
     public function getTypedApartmentList()
     {
         $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');
@@ -85,6 +91,8 @@ class Apartment extends CActiveRecord
             'city' => array(self::BELONGS_TO, 'City', 'city_id'),
             'metro' => array(self::BELONGS_TO, 'MetroStation', 'metro_id'),
             'apartmentAttributes' => array(self::HAS_MANY, 'ApartmentAttribute', 'apartment_id'),
+            'apartmentFiles' => array(self::HAS_MANY, 'ApartmentFile', 'apartment_id'),
+            'parent' => array(self::BELONGS_TO, 'Apartment', 'parent_id'),
         );
     }
 
@@ -121,7 +129,11 @@ class Apartment extends CActiveRecord
                 'createAttribute' => 'created_at',
                 'updateAttribute' => 'updated_at',
                 'setUpdateOnCreate' => true
-            )
+            ),
+            'ResourcesBehavior' => array(
+                'class' => 'ext.resourcesBehavior.ResourcesBehavior',
+                'resourcePath' => Yii::app()->params['uploadDir'],
+            ),
         );
     }
 
@@ -130,7 +142,7 @@ class Apartment extends CActiveRecord
         $valid = false;
         if (parent::beforeValidate()) {
 
-            if(empty($this->metro_id)) {
+            if (empty($this->metro_id)) {
                 $this->metro_id = NULL;
             }
 
@@ -152,6 +164,30 @@ class Apartment extends CActiveRecord
             );
             $apartmentAttribute->save();
         }
+
+
+        // Uploads
+        $files = CUploadedFile::getInstances($this, 'files');
+        $hash = $this->generatePathHash();
+        if (!empty($files)) {
+            foreach ($files as $file) {
+                $attachment = new ApartmentFile();
+                $meta = Common::processImage($attachment, $file, false, $hash);
+
+                foreach ($this->fileSize as $size) {
+                    Common::processImage($attachment, $file, $size, $hash);
+                }
+
+                $attributes = array(
+                    'apartment_id' => $this->id,
+                    'file' => $meta['fileName'],
+                );
+                $attachment->attributes = $attributes;
+                $attachment->save();
+            }
+        }
+
+        parent::afterSave();
     }
 
     /**

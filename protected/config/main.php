@@ -13,7 +13,7 @@ return array(
 
     'language' => 'ru',
 
-    'defaultController' => 'page',
+    'defaultController' => 'apartment',
 
     'import' => array(
         'application.models.*',

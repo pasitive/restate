@@ -47,37 +47,51 @@ body
 	font-size: 200%;
 }
 
-#mainmenu
-{
-	background:white url(bg.gif) repeat-x left top;
+#mainmenu {
+    background: white url(bg.gif) repeat-x left top;
 }
 
-#mainmenu ul
-{
-	padding:6px 20px 5px 20px;
-	margin:0px;
+#mainmenu ul {
+    padding: 6px 20px 5px 20px;
+    margin: 0px;
 }
 
-#mainmenu ul li
-{
-	display: inline;
+#mainmenu ul li {
+    display: inline;
+    position: relative;
 }
 
-#mainmenu ul li a
-{
-	color:#ffffff;
-	background-color:transparent;
-	font-size:12px;
-	font-weight:bold;
-	text-decoration:none;
-	padding:5px 8px;
+#mainmenu ul li a {
+    color: #ffffff;
+    background-color: transparent;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 5px 8px;
 }
 
-#mainmenu ul li a:hover, #mainmenu ul li.active a
-{
-	color: #6399cd;
-	background-color:#EFF4FA;
-	text-decoration:none;
+#mainmenu ul li a:hover, #mainmenu ul li.active a {
+    color: #6399cd;
+    background-color: #EFF4FA;
+    text-decoration: none;
+}
+
+#mainmenu ul li:hover ul {
+    display: block;
+    position: absolute;
+    top: 20px;
+    background: #EFFDFF;
+}
+
+#mainmenu ul li:hover ul a {
+    color: #0066A4;
+    display: block;
+    line-height: 15px;
+    text-decoration: none;
+}
+
+#mainmenu ul li ul {
+    display: none;
 }
 
 div.flash-error, div.flash-notice, div.flash-success
@@ -225,5 +239,5 @@ div.search-form
 
 .operations li a:hover
 {
-	background: #80CFFF;
+	background: #80CFFF !important;
 }

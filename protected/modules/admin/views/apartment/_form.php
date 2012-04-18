@@ -2,6 +2,7 @@
     <?php $form = $this->beginWidget('CActiveForm', array(
     'id' => 'apartment-form',
     'enableAjaxValidation' => false,
+    'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 
     <p class="note">Поля отмеченные звездочкой <span class="required">*</span> обязательны для заполнения.</p>
@@ -83,6 +84,17 @@
         <?php echo $form->labelEx($model, 'is_special'); ?>
         <?php echo $form->checkbox($model, 'is_special'); ?>
         <?php echo $form->error($model, 'is_special'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo CHtml::label('Изображения', 'files'); ?>
+        <?php
+        $this->widget('CMultiFileUpload', array(
+            'model' => $model,
+            'attribute' => 'files',
+            'accept' => join('|', $model->fileType),
+        ));
+        ?>
     </div>
 
     <?php echo $form->hiddenField($model, 'type_id'); ?>
