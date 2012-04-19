@@ -596,6 +596,10 @@ dl.dots dd {
     padding-right: 20px;
 }
 
+.list-view.list-view-loading {
+    background-position: center top;
+}
+
 ul.yiiPager {
     font-size: 18px;
     border: 0;

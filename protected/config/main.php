@@ -27,6 +27,11 @@ return array(
 
     // application components
     'components' => array(
+        'clientScript' => array(
+            'scriptMap' => array(
+//                'jquery.js' => false,
+            ),
+        ),
         'format' => array(
             'booleanFormat' => array('Нет', 'Да'),
         ),
