@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="zapad" basedir="." default="help">
+
+    <target name="sshtest">
+        <ssh username="positive" password="rfhfdfytls" host=" 213.239.212.146" port="2112" command="pwd" property="mypwd"
+             display="false"/>
+        <echo>The present working directory is ${mypwd}</echo>
+    </target>
+
+    <target name="help">
+        <echo>
+            Help
+        </echo>
+    </target>
+
+</project>
