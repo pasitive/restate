@@ -20,46 +20,4 @@
  *
  */
 
-
-class MapWidget extends CWidget
-{
-
-    public $zoom = 10;
-
-    public $lat = 55.755768;
-
-    public $lng = 37.617671;
-
-    public $width = '100%';
-
-    public $height = '100px';
-
-    public $loadAllObjects = true;
-
-    private $_dataProvider = null;
-
-    public function init()
-    {
-
-
-
-        if ($this->loadAllObjects) {
-
-
-        }
-        parent::init();
-    }
-
-    public function run()
-    {
-        $this->render('map', array(
-            'width' => $this->width,
-            'height' => $this->height,
-            'lat' => $this->lat,
-            'lng' => $this->lng,
-            'zoom' => $this->zoom,
-            'loadAllObjects' => $this->loadAllObjects,
-            'dataProvider' => $this->_dataProvider,
-        ));
-    }
-}
+$this->widget('MapWidget');

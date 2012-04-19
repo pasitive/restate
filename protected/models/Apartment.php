@@ -32,6 +32,41 @@ class Apartment extends CActiveRecord
     public $fileType = array('jpg', 'jpeg', 'gif', 'png');
     public $fileSize = array(100, 150, 450);
 
+    public function toArray()
+    {
+        $result = array(
+            'id' => $this->id,
+            'name' => $this->name,
+            'address' => $this->address,
+            'city' => $this->city->name,
+            'area' => $this->area->name,
+            'type' => $this->type->name,
+            'metro' => $this->metro->name,
+            'coord' => array(floatval($this->lat), floatval($this->lng)),
+            'lat' => floatval($this->lat),
+            'lng' => floatval($this->lng),
+            'is_special' => $this->is_special,
+            'images' => array(),
+            'attributes' => array(),
+            'link' => Yii::app()->createUrl('apartment/view', array('id' => $this->id)),
+        );
+
+        foreach ($this->apartmentFiles as $file) {
+            $result['images'][150][] = $file->getFile(150);
+            $result['images'][450][] = $file->getFile(450);
+        }
+
+        foreach ($this->apartmentAttributes as $apartmentAttribute) {
+            $attribute = array(
+                'name' => $apartmentAttribute->attribute->name,
+                'value' => $apartmentAttribute->value,
+            );
+            $result['attributes'][] = $attribute;
+        }
+
+        return $result;
+    }
+
     public function getTypedApartmentList()
     {
         $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');

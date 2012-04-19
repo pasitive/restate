@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen, projection">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://api-maps.yandex.ru/2.0/?load=package.full&mode=debug&lang=ru-RU"></script>
 </head>
 <body>
 
@@ -27,8 +28,7 @@
         <?php $this->widget('zii.widgets.CMenu', array(
         'id' => 'main_navigation',
         'items' => array(
-            array('label' => 'Квартиры в аренду', 'url' => array('/site/page', 'view' => 'about')),
-            array('label' => 'Жилые комплексы', 'url' => array('/site/contact')),
+            array('label' => 'Объекты на карте', 'url' => array('/map/index')),
         ),
     )); ?>
     </div>

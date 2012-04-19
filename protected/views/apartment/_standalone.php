@@ -32,74 +32,12 @@
 
                 <dl class="dots clearfix">
 
-                    <dt>Количество комнат</dt>
-                    <dd>2</dd>
-
-                    <dt>Класс</dt>
-                    <dd>А</dd>
-
-                    <dt>Ванна/санузел</dt>
-                    <dd>3</dd>
-
-                    <dt>Этаж/этажность</dt>
-                    <dd>3/5</dd>
-
-                    <dt>Высота потолков</dt>
-                    <dd>20</dd>
-
-                    <dt>Балкон</dt>
-                    <dd>есть</dd>
-
-                    <dt>Ванна/санузел</dt>
-                    <dd>3</dd>
-
-                    <dt>Этаж/этажность</dt>
-                    <dd>3/5</dd>
-
-                    <dt>Высота потолков</dt>
-                    <dd>20</dd>
-
-                    <dt>Балкон</dt>
-                    <dd>есть</dd>
-
-                    <dt>Ванна/санузел</dt>
-                    <dd>3</dd>
-
-                    <dt>Высота потолков</dt>
-                    <dd>20</dd>
-
-                    <dt>Балкон</dt>
-                    <dd>есть</dd>
-
-                    <dt>Ванна/санузел</dt>
-                    <dd>3</dd>
-
-                    <dt>Высота потолков</dt>
-                    <dd>20</dd>
-
-                    <dt>Балкон</dt>
-                    <dd>есть</dd>
-
-                    <dt>Ванна/санузел</dt>
-                    <dd>3</dd>
-
-                    <dt>Высота потолков</dt>
-                    <dd>20</dd>
-
-                    <dt>Балкон</dt>
-                    <dd>есть</dd>
-
-                    <dt>Ванна/санузел</dt>
-                    <dd>3</dd>
-
-                    <dt>Этаж/этажность</dt>
-                    <dd>3/5</dd>
-
-                    <dt>Высота потолков</dt>
-                    <dd>20</dd>
-
-                    <dt>Балкон</dt>
-                    <dd>есть</dd>
+                    <?php foreach ($model->apartmentAttributes as $apartmentAttribute): ?>
+                    <?php if (!empty($apartmentAttribute->value)): ?>
+                        <dt><?php echo $apartmentAttribute->attribute->name ?></dt>
+                        <dd><?php echo $apartmentAttribute->value ?></dd>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
 
                 </dl>
 
@@ -143,7 +81,7 @@
                 <script type='text/javascript' src='http://api.mysitecalls.me/static/vb_widget.js'></script>
 
             </div>
-            
+
             <p>Введите Ваш номер телефона и укажите удобное для Вас время звонка.</p>
         </div>
 

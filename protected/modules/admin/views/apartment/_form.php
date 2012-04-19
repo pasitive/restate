@@ -10,6 +10,10 @@
     <?php echo $form->errorSummary($model); ?>
 
     <div class="row">
+        <div id="map" style="height: 200px;"></div>
+    </div>
+
+    <div class="row">
         <?php echo $form->labelEx($model, 'city_id'); ?>
         <?php echo $form->dropDownList($model, 'city_id', CHtml::listData(City::model()->findAll(), 'id', 'name'), array(
         'empty' => 'Выбрать город',
@@ -35,10 +39,6 @@
         <?php echo $form->dropDownList($model, 'area_id', CHtml::listData($model->city->areas, 'id', 'name'), array('empty' => 'Нужно выбрать город')); ?>
         <?php endif; ?>
         <?php echo $form->error($model, 'area_id'); ?>
-    </div>
-
-    <div class="row">
-        <?php $this->widget('application.components.MapWidget') ?>
     </div>
 
     <div class="row">
@@ -110,59 +110,86 @@
 </div><!-- form -->
 
 <script type="text/javascript">
-    var geocoder = new google.maps.Geocoder();
-    var marker = new google.maps.Marker();
-
-    function geocode(obj) {
-        var options = {
-            partialmatch:true
-        };
-        var address = obj.val();
-        if ($.trim(address) == '') return false;
-
-        $.extend(options, {'address':address});
-
-        var selectedCity = $('#Apartment_city_id option:selected').text();
-        if ($.trim(selectedCity) != '') {
-            $.extend(options, {'region':selectedCity});
-        }
-        geocoder.geocode(options, geocodeResult);
-        return false;
-    }
-
-    function geocodeResult(results, status) {
-
-        if (status == google.maps.GeocoderStatus.OK) {
-            map.fitBounds(results[0].geometry.viewport);
-
-            marker.setMap(map);
-            marker.setPosition(results[0].geometry.location);
-            marker.setAnimation(google.maps.Animation.DROP);
-            marker.setDraggable(true);
-
-            map.setZoom(15);
-            map.setCenter(marker.getPosition());
-
-            $('#Apartment_address').val(results[0].formatted_address);
-            setLatLng(marker);
-
-            google.maps.event.addListener(marker, "dragend", function (e) {
-                setLatLng(marker);
-            });
-        }
-
-        //        console.log(status);
-        //        console.log(results);
-    }
-
-    function setLatLng(marker) {
-        $('#Apartment_lng').val(marker.getPosition().lng());
-        $('#Apartment_lat').val(marker.getPosition().lat());
-    }
 
     $(function () {
-        $('#Apartment_address').change(function () {
-            geocode($(this));
-        });
+
+        var map = null;
+
+        ymaps.ready(init);
+
+        function init() {
+
+            var map,
+                mapOptions = {center:[55.76, 37.64], zoom:8, type:"yandex#map"},
+                city = 'Москва',
+                placemark = null;
+
+            function initMap() {
+
+                if ($('#Apartment_city_id option:selected').val().length != 0) {
+                    city = $('#Apartment_city_id option:selected').text();
+                }
+
+                console.log('Init map: ' + city);
+
+                if (map) {
+                    map.destroy();
+                }
+
+                ymaps.geocode(city, {results:1}).then(function (result) {
+                    var obj = result.geoObjects.get(0);
+                    map = new ymaps.Map('map', mapOptions);
+                    map.setCenter(obj.geometry.getCoordinates());
+                    map.behaviors.enable('scrollZoom');
+                });
+            }
+
+            function geocode(obj) {
+                var address = obj.val();
+
+                ymaps.geocode(address, {results:1, boudedBy:map.getBounds()}).then(function (result) {
+
+                    if (placemark != null) {
+                        map.geoObjects.remove(placemark);
+                    }
+
+                    var obj = result.geoObjects.get(0);
+
+                    placemark = new ymaps.Placemark(obj.geometry.getCoordinates(), {
+                        balloonContentHeader:'<?php echo $model->type->name ?>',
+                        balloonContentBody:address
+                    });
+
+                    placemark.events.add('mouseenter', function () {
+                        placemark.balloon.open();
+                    });
+
+                    setHiddenCoords(placemark.geometry.getCoordinates());
+
+                    map.setCenter(placemark.geometry.getCoordinates());
+                    map.setZoom(16);
+                    map.geoObjects.add(placemark);
+                });
+            }
+
+            function setHiddenCoords(coords) {
+                $('#Apartment_lat').val(coords[0]);
+                $('#Apartment_lng').val(coords[1]);
+            }
+
+            initMap();
+            $('#Apartment_city_id').bind('change', function () {
+                initMap();
+            });
+
+            if ($('#Apartment_address').val().length != 0) {
+                geocode($('#Apartment_address'));
+            }
+
+            $('#Apartment_address').change(function () {
+                geocode($(this));
+            });
+
+        }
     });
 </script>

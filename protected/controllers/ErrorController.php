@@ -2,6 +2,8 @@
 
 class ErrorController extends Controller
 {
+
+    public $layout = '//layouts/static';
     /**
      * @return array action filters
      */

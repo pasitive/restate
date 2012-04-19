@@ -19,47 +19,24 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-
-
-class MapWidget extends CWidget
+class MapController extends Controller
 {
 
-    public $zoom = 10;
+    public $layout = '//layouts/column1';
 
-    public $lat = 55.755768;
-
-    public $lng = 37.617671;
-
-    public $width = '100%';
-
-    public $height = '100px';
-
-    public $loadAllObjects = true;
-
-    private $_dataProvider = null;
-
-    public function init()
+    public function actionIndex()
     {
 
+        $model = Apartment::model()->with(array('apartmentFiles', 'apartmentAttributes'))->findAll(array('index' => 'id'));
 
-
-        if ($this->loadAllObjects) {
-
-
+        $data = array();
+        foreach ($model as $apartment_id => $apartment) {
+            $data[] = $apartment->toArray();
         }
-        parent::init();
-    }
 
-    public function run()
-    {
-        $this->render('map', array(
-            'width' => $this->width,
-            'height' => $this->height,
-            'lat' => $this->lat,
-            'lng' => $this->lng,
-            'zoom' => $this->zoom,
-            'loadAllObjects' => $this->loadAllObjects,
-            'dataProvider' => $this->_dataProvider,
+        $this->render('index', array(
+            'data' => $data,
         ));
     }
+
 }

@@ -23,8 +23,6 @@
  */
 ?>
 
-<?php //$this->widget('MapWidget'); ?>
-
 <div id="content" class="grid_12 prepend_top">
 
     <div class="shadow revert"></div>

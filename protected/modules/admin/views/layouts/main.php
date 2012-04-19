@@ -18,11 +18,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/main.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/form.css"/>
 
-    <?php echo CGoogleApi::init(); ?>
-
-    <?php echo CHtml::script(
-        CGoogleApi::load('maps', '3', array('other_params' => 'sensor=false&language='.Yii::app()->language)) . "\n"
-    ); ?>
+    <script type="text/javascript"
+            src="http://api-maps.yandex.ru/2.0/?load=package.full&mode=debug&lang=ru-RU"></script>
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>

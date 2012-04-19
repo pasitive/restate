@@ -33,7 +33,7 @@
                         <div class="item_wrapper">
                             <div class="image_wrapper"><img src="/images/image_sample.png" alt=""></div>
                             <span><?php echo CHtml::encode($data->address) ?></span>
-                            <address>м. Водный стадион</address>
+                            <address>м. <?php echo CHtml::encode($data->metro->name) ?></address>
                         </div>
                     </a>
                 </li>

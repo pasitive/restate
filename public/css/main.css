@@ -206,7 +206,7 @@ address {
 #map #map_content {
     margin: 0;
     padding: 0;
-    height: 50px;
+    height: 450px;
     /*background: url(../images/map_sample.jpg) no-repeat;*/
 }
 
@@ -736,4 +736,11 @@ ul.yiiPager .last {
 
 #footer .breadcrumbs a[href='/'] {
     font-size: 18px;
+}
+
+.apartmentPlacemark {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
