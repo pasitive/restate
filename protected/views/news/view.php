@@ -20,4 +20,19 @@
  *
  */
 
-$this->renderPartial('_map', array('data' => $data));
+$this->pageTitle = Yii::app()->name . ' - ' . 'Новости компании' . ' - ' . $model->title;
+$this->breadcrumbs = array(
+    'Новости' => array('/news/'),
+    $model->title
+);
+?>
+
+<h1><?php echo CHtml::encode($model->title) ?></h1>
+
+
+<?php echo $model->content; ?>
+
+
+<div class="space"></div>
+
+<?php echo CHtml::link('Назад к списку новостей', array('/news/')) ?>

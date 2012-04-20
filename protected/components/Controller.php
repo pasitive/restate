@@ -23,7 +23,9 @@ class Controller extends CController
 
     public function init()
     {
-        Yii::app()->clientScript->registerScriptFile('/js/scripts.js', CClientScript::POS_END);
+        Yii::app()->clientScript
+            ->registerCoreScript('jquery')
+            ->registerScriptFile('/js/scripts.js', CClientScript::POS_END);
         parent::init();
     }
 }

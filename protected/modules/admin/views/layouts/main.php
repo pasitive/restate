@@ -36,19 +36,27 @@
     <div id="mainmenu">
         <?php $this->widget('zii.widgets.CMenu', array(
         'items' => array(
+            array('label' => 'Система', 'url' => '#', 'items' => array(
+                array('label' => 'Роутинг', 'url' => array('/admin/route'), 'visible' => !Yii::app()->user->isGuest),
+            ), 'visible' => !Yii::app()->user->isGuest),
             array('label' => 'Справочники', 'url' => '#', 'items' => array(
-                array('label' => 'Города', 'url' => array('/admin/city'), 'visible' => Yii::app()->user->isGuest),
-                array('label' => 'Районы', 'url' => array('/admin/area'), 'visible' => Yii::app()->user->isGuest),
-                array('label' => 'Метро', 'url' => array('/admin/metroStation'), 'visible' => Yii::app()->user->isGuest),
-                array('label' => 'Типы объектов', 'url' => array('/admin/apartmentType'), 'visible' => Yii::app()->user->isGuest),
-            )),
-            array('label' => 'Параметры объектов', 'url' => array('/admin/attribute'), 'visible' => Yii::app()->user->isGuest),
+                array('label' => 'Города', 'url' => array('/admin/city'), 'visible' => !Yii::app()->user->isGuest),
+                array('label' => 'Районы', 'url' => array('/admin/area'), 'visible' => !Yii::app()->user->isGuest),
+                array('label' => 'Метро', 'url' => array('/admin/metroStation'), 'visible' => !Yii::app()->user->isGuest),
+                array('label' => 'Типы объектов', 'url' => array('/admin/apartmentType'), 'visible' => !Yii::app()->user->isGuest),
+            ), 'visible' => !Yii::app()->user->isGuest),
+            array('label' => 'Информационные системы', 'url' => '#', 'items' => array(
+                array('label' => 'Новости', 'url' => array('/admin/news'), 'visible' => !Yii::app()->user->isGuest),
+            ), 'visible' => !Yii::app()->user->isGuest),
 
-            array('label' => 'Объекты', 'url' => array('/admin/apartment'), 'visible' => Yii::app()->user->isGuest),
-            array('label' => 'Создать объект', 'url' => '#', 'visible' => Yii::app()->user->isGuest, 'items' => ApartmentType::getAdminCMenuItems()),
+            array('label' => 'Параметры объектов', 'url' => array('/admin/attribute'), 'visible' => !Yii::app()->user->isGuest),
 
-            array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-            array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
+            array('label' => 'Объекты', 'url' => array('/admin/apartment'), 'visible' => !Yii::app()->user->isGuest),
+            array('label' => 'Создать объект', 'url' => '#', 'visible' => !Yii::app()->user->isGuest, 'items' => ApartmentType::getAdminCMenuItems()),
+
+
+            array('label' => 'Вход', 'url' => array('/admin/default/login'), 'visible' => Yii::app()->user->isGuest),
+            array('label' => 'Выход (' . Yii::app()->user->name . ')', 'url' => array('/admin/default/logout'), 'visible' => !Yii::app()->user->isGuest)
         ),
     )); ?>
     </div>

@@ -53,7 +53,7 @@ p {
     padding-left: 23px;
 }
 
-.map_link {
+#map_link {
     font-size: 14px;
     text-decoration: none;
     border-bottom: 1px dotted #663300;
@@ -121,7 +121,6 @@ address {
     text-shadow: 1px 1px 0px #666;
     filter: dropshadow(color = #666666, offx = 1, offy = 1);
 }
-
 
 #main_navigation li a:hover {
     text-decoration: none;
@@ -724,7 +723,7 @@ ul.yiiPager .last {
     color: #333;
 }
 
-#footer .breadcrumbs {    
+#footer .breadcrumbs {
     line-height: 22px;
     font-size: 14px;
 }
@@ -747,4 +746,23 @@ ul.yiiPager .last {
     padding-bottom: 15px;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.news_list {
+}
+
+.news_list .news_item {
+    padding-bottom: 15px;
+}
+
+.news_list .news_item .date {
+    display: block;
+    margin: 0.3em 0;
+    font-size: 70%;
+    color: #555;
+    line-height: 100%;
+}
+
+.news_list .news_item a {
+    font-size: 100%;
 }

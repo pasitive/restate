@@ -32,6 +32,11 @@ class Apartment extends CActiveRecord
     public $fileType = array('jpg', 'jpeg', 'gif', 'png');
     public $fileSize = array(100, 150, 450);
 
+    public $routeable_pattern;
+    public $routeable_keywords;
+    public $routeable_description;
+    public $routeable_title;
+
     public function toArray()
     {
         $result = array(
@@ -103,6 +108,8 @@ class Apartment extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
+            array('routeable_pattern', 'required'),
+            array('routeable_keywords, routeable_description, routeable_title', 'safe'),
             array('name, city_id, area_id, type_id', 'required'),
             array('name', 'length', 'max' => 255),
             array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
@@ -150,6 +157,10 @@ class Apartment extends CActiveRecord
             'parent_id' => 'Родительский объект',
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
+
+            'routeable_title' => 'SEO Описание',
+            'routeable_keywords' => 'SEO Ключевые слова',
+            'routeable_description' => 'SEO Описание',
         );
     }
 
@@ -169,6 +180,10 @@ class Apartment extends CActiveRecord
                 'class' => 'ext.resourcesBehavior.ResourcesBehavior',
                 'resourcePath' => Yii::app()->params['uploadDir'],
             ),
+            'RoutableBehavior' => array(
+                'class' => 'application.components.RouteableBehavior',
+                'controller' => 'apartment',
+            ),
         );
     }
 
@@ -176,6 +191,15 @@ class Apartment extends CActiveRecord
     {
         $valid = false;
         if (parent::beforeValidate()) {
+
+            // Routes
+            if (empty($this->routeable_pattern)) {
+                $this->routeable_pattern = '/apartment/' . TextBox::transliteUrl($this->type->name . '_' . $this->name . '_' . $this->address);
+            }
+
+            if (empty($this->routeable_title)) {
+                $this->routeable_title = $this->type->name . ' - ' . $this->name . ' - ' . $this->address;
+            }
 
             if (empty($this->metro_id)) {
                 $this->metro_id = NULL;

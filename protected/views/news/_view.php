@@ -19,5 +19,11 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
+?>
 
-$this->renderPartial('_map', array('data' => $data));
+<div class="news_item">
+    <span class="date"><?php echo date('d.m.Y', strtotime($data->created_at)) ?></span>
+    <?php echo CHtml::encode($data->teaser) ?>
+    <br />
+    <?php echo CHtml::link('Читать полностью', array('/news/view', 'id' => $data->id)) ?>
+</div>

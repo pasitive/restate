@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'Агентство "Запад"',
+    'name' => 'Агентство элитной недвижимости "Запад"',
 
     'preload' => array('log'),
 
@@ -21,10 +21,6 @@ return array(
         'application.helpers.*',
     ),
 
-    'modules' => array(
-        'admin',
-    ),
-
     // application components
     'components' => array(
         'clientScript' => array(
@@ -34,18 +30,6 @@ return array(
         ),
         'format' => array(
             'booleanFormat' => array('Нет', 'Да'),
-        ),
-        'urlManager' => array(
-            'class' => 'UrlManager',
-            'urlFormat' => 'path',
-            'showScriptName' => false,
-            'rules' => array(
-                'login' => 'session/create',
-                'logout' => 'session/delete',
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<id:\d+>/<action:\w+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-            ),
         ),
         'image' => array(
             'class' => 'application.extensions.image.CImageComponent',

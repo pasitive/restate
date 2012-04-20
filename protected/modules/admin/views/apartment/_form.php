@@ -81,6 +81,25 @@
     <?php endif; ?>
 
     <div class="row">
+        <?php echo $form->labelEx($model, 'routeable_title'); ?>
+        <?php echo $form->textField($model, 'routeable_title', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->error($model, 'routeable_title'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'routeable_keywords'); ?>
+        <?php echo $form->textField($model, 'routeable_keywords', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->error($model, 'routeable_keywords'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'routeable_description'); ?>
+        <?php echo $form->textField($model, 'routeable_description', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->error($model, 'routeable_description'); ?>
+    </div>
+
+
+    <div class="row">
         <?php echo $form->labelEx($model, 'is_special'); ?>
         <?php echo $form->checkbox($model, 'is_special'); ?>
         <?php echo $form->error($model, 'is_special'); ?>
@@ -119,10 +138,27 @@
 
         function init() {
 
-            var map,
-                mapOptions = {center:[55.76, 37.64], zoom:8, type:"yandex#map"},
+            var mapOptions = {center:[55.76, 37.64], zoom:8, type:"yandex#map"},
                 city = 'Москва',
                 placemark = null;
+
+            initMap();
+
+            /*$('#Apartment_city_id').bind('change', function () {
+                initMap();
+            });
+
+            if ($('#Apartment_address').val().length != 0) {
+                geocode(map, $('#Apartment_address'));
+            }
+
+            $('#Apartment_address').change(function () {
+                geocode(map, $(this));
+            });
+
+            if ($('#Apartment_city_id option:selected').val().length != 0) {
+                city = $('#Apartment_city_id option:selected').text();
+            }*/
 
             function initMap() {
 
@@ -130,24 +166,26 @@
                     city = $('#Apartment_city_id option:selected').text();
                 }
 
-                console.log('Init map: ' + city);
-
                 if (map) {
                     map.destroy();
                 }
 
                 ymaps.geocode(city, {results:1}).then(function (result) {
-                    var obj = result.geoObjects.get(0);
+                    var c = result.geoObjects.get(0);
                     map = new ymaps.Map('map', mapOptions);
-                    map.setCenter(obj.geometry.getCoordinates());
+                    map.setCenter(c.geometry.getCoordinates());
                     map.behaviors.enable('scrollZoom');
+
+                    if ($('#Apartment_address').val().length != 0) {
+                        geocode($('#Apartment_address'));
+                    }
                 });
             }
 
             function geocode(obj) {
                 var address = obj.val();
 
-                ymaps.geocode(address, {results:1, boudedBy:map.getBounds()}).then(function (result) {
+                ymaps.geocode(address, {results:1, boundedBy:map.getBounds()}).then(function (result) {
 
                     if (placemark != null) {
                         map.geoObjects.remove(placemark);
@@ -156,12 +194,9 @@
                     var obj = result.geoObjects.get(0);
 
                     placemark = new ymaps.Placemark(obj.geometry.getCoordinates(), {
-                        balloonContentHeader:'<?php echo $model->type->name ?>',
-                        balloonContentBody:address
-                    });
-
-                    placemark.events.add('mouseenter', function () {
-                        placemark.balloon.open();
+                        hintContent:address
+                    }, {
+                        preset:'twirl#houseIcon'
                     });
 
                     setHiddenCoords(placemark.geometry.getCoordinates());
@@ -177,15 +212,7 @@
                 $('#Apartment_lng').val(coords[1]);
             }
 
-            initMap();
-            $('#Apartment_city_id').bind('change', function () {
-                initMap();
-            });
-
-            if ($('#Apartment_address').val().length != 0) {
-                geocode($('#Apartment_address'));
-            }
-
+            $('#Apartment_city_id').bind('change', initMap);
             $('#Apartment_address').change(function () {
                 geocode($(this));
             });

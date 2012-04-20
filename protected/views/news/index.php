@@ -19,5 +19,25 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
+$this->pageTitle = Yii::app()->name . ' - ' . 'Новости компании';
+?>
 
-$this->renderPartial('_map', array('data' => $data));
+<h2>Новости компании</h2>
+
+<div class="news_list prepend_top">
+    <?php
+    $this->widget('zii.widgets.CListView', array(
+        'dataProvider' => $dataProvider,
+        'itemView' => '_view',
+        'template' => "{pager}<div class='clear'></div>{items}",
+        'pager' => array(
+            'class' => 'CLinkPager',
+            'cssFile' => false,
+            'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
+            'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
+            'header' => 'Страницы:',
+            'maxButtonCount' => 4
+        ),
+    ));
+    ?>
+</div>

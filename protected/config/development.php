@@ -16,6 +16,9 @@ return CMap::mergeArray(
                 'password' => 'qqq',
                 'ipFilters' => array('*'),
             ),
+            'admin' => array(
+                'password' => 'qqq'
+            ),
         ),
         'components' => array(
             'search' => array(

@@ -13,8 +13,8 @@
     <![endif]-->
 
     <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen, projection">
-<!--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>-->
-    <script type="text/javascript" src="http://api-maps.yandex.ru/2.0/?load=package.full&mode=debug&lang=ru-RU"></script>
+    <script type="text/javascript"
+            src="http://api-maps.yandex.ru/2.0/?load=package.full&mode=debug&lang=ru-RU"></script>
 </head>
 <body>
 
@@ -27,7 +27,9 @@
     <div id="menu_block" class="grid_12">
         <?php $this->widget('zii.widgets.CMenu', array(
         'id' => 'main_navigation',
+        'activateParents' => true,
         'items' => array(
+            array('label' => 'Новости компании', 'url' => array('/news/'), 'active' => Yii::app()->controller->id == 'news'),
             array('label' => 'Объекты на карте', 'url' => array('/map/index')),
         ),
     )); ?>
@@ -43,7 +45,7 @@
                 <div class="space small"></div>
 
                 <?php if (isset($this->breadcrumbs)): ?>
-                    <?php $this->widget('zii.widgets.CBreadcrumbs', array(
+                    <?php $this->widget('application.components.Breadcrumbs', array(
                     'links' => $this->breadcrumbs,
                     'separator' => CHtml::image('/images/breadcrumb_delimeter.png'),
                 )); ?><!-- breadcrumbs -->

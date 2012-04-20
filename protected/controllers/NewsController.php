@@ -19,22 +19,14 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-class ApartmentController extends Controller
+class NewsController extends Controller
 {
 
-    public $layout = '//layouts/column2';
+    public $layout = '//layouts/static';
 
     public function actionIndex()
     {
-
-        $model = Apartment::model()->with(array('apartmentFiles', 'apartmentAttributes'))->findAll(array('index' => 'id'));
-
-        $data = array();
-        foreach ($model as $apartment_id => $apartment) {
-            $data[] = $apartment->toArray();
-        }
-
-        $dataProvider = new CActiveDataProvider('Apartment', array(
+        $dataProvider = new CActiveDataProvider('News', array(
             'criteria' => array(
                 'order' => 'created_at DESC'
             ),
@@ -42,31 +34,24 @@ class ApartmentController extends Controller
 
         $this->render('index', array(
             'dataProvider' => $dataProvider,
-            'data' => $data,
         ));
     }
 
     public function actionView($id)
     {
-        $this->layout = '//layouts/column1';
-
-        $model = Apartment::model()->findByPk($id);
-        if (!$model) {
-            throw new CHttpException(404, 'Страница не найдена');
-        }
-
-        $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array(
-            'parent_id' => $id
-        ));
-
-        $apartmentDataProvider = new CActiveDataProvider('Apartment', array(
-            'criteria' => $criteria,
-        ));
+        $model = $this->loadModel($id);
 
         $this->render('view', array(
-            'model' => $model,
-            'apartmentDataProvider' => $apartmentDataProvider,
+            'model' => $model
         ));
     }
+
+    public function loadModel($id)
+    {
+        $model = News::model()->findByPk($id);
+        if ($model === null)
+            throw new CHttpException(404, 'Страница не найдена');
+        return $model;
+    }
+
 }

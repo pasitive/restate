@@ -75,15 +75,15 @@ class Route extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'routeable_controller' => 'Routeable Controller',
-            'routeable_action' => 'Routeable Action',
-            'routeable_id' => 'Routeable',
-            'pattern' => 'Pattern',
-            'keywords' => 'Keywords',
-            'description' => 'Description',
-            'title' => 'Title',
+            'created_at' => 'Время создания',
+            'updated_at' => 'Время обновления',
+            'routeable_controller' => 'Контроллер',
+            'routeable_action' => 'Действие',
+            'routeable_id' => 'Код',
+            'pattern' => 'Шаблон',
+            'keywords' => 'META-keywords',
+            'description' => 'META-description',
+            'title' => 'Название',
         );
     }
 

@@ -19,6 +19,10 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
+$this->pageTitle = Yii::app()->name . ' - ' . 'Главная';
+$this->breadcrumbs = array(
+
+);
 ?>
 
 <h1>Агенство элитной недвижимости</h1>
