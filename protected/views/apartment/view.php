@@ -38,15 +38,15 @@ Yii::app()->clientScript->registerMetaTag(($model->routeable_keywords ? $model->
     </h1>
 
     <div class="grid_3 alpha">
-        <h4 class="label"><?php echo CHtml::encode($model->type->name) ?></h4>
+        <h4 class="label"><?php echo CHtml::encode($model->typeName) ?></h4>
     </div>
 
     <div class="grid_3">
-        <h4 class="metro"><span><?php echo CHtml::encode($model->metro->name) ?></span></h4>
+        <h4 class="metro"><span><?php echo CHtml::encode($model->metroName) ?></span></h4>
     </div>
 
     <div class="grid_3">
-        <h4><span class="label">Район: </span><?php echo CHtml::encode($model->area->name) ?></h4>
+        <h4><span class="label">Район: </span><?php echo CHtml::encode($model->areaName) ?></h4>
     </div>
 
     <div class="grid_2 omega">
@@ -93,7 +93,7 @@ Yii::app()->clientScript->registerMetaTag(($model->routeable_keywords ? $model->
         function init() {
 
             var mapOptions = {center:[55.76, 37.64], zoom:8, type:"yandex#map"},
-                city = '<?php echo $model->city->name ?>',
+                city = '<?php echo $model->cityName ?>',
                 placemark = null;
 
             ymaps.geocode(city, {results:1}).then(function (result) {

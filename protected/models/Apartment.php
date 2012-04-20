@@ -17,6 +17,12 @@
  * @property int $parent_id
  * @property int $is_special
  * @property int $metro_id
+ * @property string $metro_name
+ * @property string $area_name
+ * @property string $city_name
+ * @property string $type_name
+ * @property string $default_image
+ * @property int $container
  *
  * The followings are the available model rel   ations:
  * @property ApartmentType $type
@@ -37,16 +43,41 @@ class Apartment extends CActiveRecord
     public $routeable_description;
     public $routeable_title;
 
+    public function getAreaName()
+    {
+        return (empty($this->area_name) ? $this->area->name : $this->area_name);
+    }
+
+    public function getMetroName()
+    {
+        return (empty($this->metro_name) ? $this->metro->name : $this->metro_name);
+    }
+
+    public function getTypeName()
+    {
+        return (empty($this->type_name) ? $this->type->name : $this->type_name);
+    }
+
+    public function getTypeIcon()
+    {
+        return $this->container ? 'key_gold' : 'key_grey';
+    }
+
+    public function getCityName()
+    {
+        return (empty($this->city_name) ? $this->city->name : $this->city_name);
+    }
+
     public function toArray()
     {
         $result = array(
             'id' => $this->id,
             'name' => $this->name,
             'address' => $this->address,
-            'city' => $this->city->name,
-            'area' => $this->area->name,
-            'type' => $this->type->name,
-            'metro' => $this->metro->name,
+            'city' => $this->cityName,
+            'area' => $this->areaName,
+            'type' => $this->typeName,
+            'metro' => $this->metroName,
             'coord' => array(floatval($this->lat), floatval($this->lng)),
             'lat' => floatval($this->lat),
             'lng' => floatval($this->lng),
@@ -55,19 +86,6 @@ class Apartment extends CActiveRecord
             'attributes' => array(),
             'link' => Yii::app()->createUrl('apartment/view', array('id' => $this->id)),
         );
-
-        foreach ($this->apartmentFiles as $file) {
-            $result['images'][150][] = $file->getFile(150);
-            $result['images'][450][] = $file->getFile(450);
-        }
-
-        foreach ($this->apartmentAttributes as $apartmentAttribute) {
-            $attribute = array(
-                'name' => $apartmentAttribute->attribute->name,
-                'value' => $apartmentAttribute->value,
-            );
-            $result['attributes'][] = $attribute;
-        }
 
         return $result;
     }
@@ -109,7 +127,7 @@ class Apartment extends CActiveRecord
         // will receive user inputs.
         return array(
             array('routeable_pattern', 'required'),
-            array('routeable_keywords, routeable_description, routeable_title', 'safe'),
+            array('routeable_keywords, routeable_description, routeable_title, metro_name, city_name, area_name, type_name, default_image, container', 'safe'),
             array('name, city_id, area_id, type_id', 'required'),
             array('name', 'length', 'max' => 255),
             array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
@@ -158,7 +176,7 @@ class Apartment extends CActiveRecord
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
 
-            'routeable_title' => 'SEO Описание',
+            'routeable_title' => 'SEO Заголовок',
             'routeable_keywords' => 'SEO Ключевые слова',
             'routeable_description' => 'SEO Описание',
         );
@@ -185,6 +203,15 @@ class Apartment extends CActiveRecord
                 'controller' => 'apartment',
             ),
         );
+    }
+
+    protected function beforeSave()
+    {
+        if (parent::beforeSave()) {
+            return true;
+        }
+
+        return false;
     }
 
     protected function beforeValidate()
@@ -241,8 +268,15 @@ class Apartment extends CActiveRecord
                     'apartment_id' => $this->id,
                     'file' => $meta['fileName'],
                 );
+
                 $attachment->attributes = $attributes;
                 $attachment->save();
+            }
+
+            if ($meta) {
+                Apartment::model()->updateByPk($this->id, array(
+                    'default_image' => $attachment->getFile(150),
+                ));
             }
         }
 

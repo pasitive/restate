@@ -26,9 +26,7 @@
     <a href="<?php echo Yii::app()->createUrl('apartment/view', array('id' => $data->id)) ?>">
         <div class="image_block">
             <div class="box_shadow">
-                <?php if (isset($data->apartmentFiles) && count($data->apartmentFiles)): ?>
-                <?php echo CHtml::image($data->apartmentFiles[0]->getFile(), $data->name, array('width' => 146)) ?>
-                <?php endif; ?>
+                <?php echo CHtml::image($data->default_image, $data->name, array('width' => 146)) ?>
             </div>
         </div>
 
@@ -37,8 +35,8 @@
                 <h3>
                     <strong><?php echo CHtml::encode($data->name) ?></strong>, <?php echo CHtml::encode($data->address) ?>
                 </h3>
-                <?php if (!empty($data->metro->name)): ?>
-                <address class="label">м. <?php echo CHtml::encode($data->metro->name) ?></address>
+                <?php if (!empty($data->metroName)): ?>
+                <address class="label">м. <?php echo CHtml::encode($data->metroName) ?></address>
                 <?php else : ?>
                 <address>&nbsp;</address>
                 <?php endif; ?>

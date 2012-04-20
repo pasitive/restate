@@ -26,8 +26,19 @@ class MapController extends Controller
 
     public function actionIndex()
     {
+        Yii::app()->clientScript->registerScriptFile('http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU');
 
-        $model = Apartment::model()->with(array('apartmentFiles', 'apartmentAttributes'))->findAll(array('index' => 'id'));
+        $cacheDependency = new CDbCacheDependency('SELECT MAX(created_at) FROM apartment');
+        $model = Apartment::model()->cache(86400, $cacheDependency)->findAll(array('index' => 'id'));
+
+        /*$files = ApartmentFile::model()->findAllByAttributes(array(
+            'apartment_id' => $this->id,
+        ));
+
+        foreach ($files as $file) {
+            $result['images'][150][] = $file->getFile(150);
+            $result['images'][450][] = $file->getFile(450);
+        }*/
 
         $data = array();
         foreach ($model as $apartment_id => $apartment) {

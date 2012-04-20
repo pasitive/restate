@@ -120,6 +120,12 @@
     <?php echo $form->hiddenField($model, 'lng'); ?>
     <?php echo $form->hiddenField($model, 'lat'); ?>
 
+    <?php echo $form->hiddenField($model, 'city_name'); ?>
+    <?php echo $form->hiddenField($model, 'metro_name'); ?>
+    <?php echo $form->hiddenField($model, 'area_name'); ?>
+    <?php echo $form->hiddenField($model, 'container', array('value' => $model->type->container)); ?>
+    <?php echo $form->hiddenField($model, 'type_name', array('value' => $model->type->name)); ?>
+
     <div class="row buttons">
         <?php echo CHtml::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить'); ?>
     </div>
@@ -131,6 +137,19 @@
 <script type="text/javascript">
 
     $(function () {
+
+        $('#Apartment_city_id').change(function () {
+            $('#Apartment_city_name').val($('#Apartment_city_id option:selected').text());
+        });
+
+        $('#Apartment_area_id').change(function () {
+            $('#Apartment_area_name').val($('#Apartment_area_id option:selected').text());
+        });
+
+        $('#Apartment_metro_id').change(function () {
+            $('#Apartment_metro_name').val($('#Apartment_metro_id option:selected').text());
+        });
+
 
         var map = null;
 

@@ -13,8 +13,6 @@
     <![endif]-->
 
     <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen, projection">
-    <script type="text/javascript"
-            src="http://api-maps.yandex.ru/2.0/?load=package.full&mode=debug&lang=ru-RU"></script>
 </head>
 <body>
 
@@ -82,6 +80,18 @@
                 </div>
 
             </div>
+
+            <?php if (YII_DEBUG) {
+                list($queryCount, $queryTime) = Yii::app()->db->getStats();
+                echo "Query count: $queryCount, Total query time: " . sprintf('%0.5f', $queryTime) . "s";
+            }
+            ?>
+            <?php if (YII_DEBUG) : ?>
+            <div>
+                Execution Time: <?php echo round(CLogger::getExecutionTime(), 3);?> sec<br/>
+                Memory Usage: <?php echo round(CLogger::getMemoryUsage() / 1048576, 2);?> mb
+            </div>
+                <?php endif; ?>
         </div>
 
     </div>

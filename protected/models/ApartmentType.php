@@ -17,7 +17,8 @@
 class ApartmentType extends CActiveRecord
 {
 
-    public function getIcon() {
+    public function getIcon()
+    {
         return $this->container ? 'key_gold' : 'key_grey';
     }
 
@@ -25,7 +26,7 @@ class ApartmentType extends CActiveRecord
     {
         return array(
             'container' => array(
-                'condition' => 'container=1',
+                'condition' => 't.container=1',
             ),
         );
     }

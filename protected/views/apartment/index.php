@@ -21,7 +21,6 @@
  */
 $this->pageTitle = Yii::app()->name . ' - ' . 'Главная';
 $this->breadcrumbs = array(
-
 );
 ?>
 
@@ -43,7 +42,6 @@ $this->breadcrumbs = array(
         ),
         'sortableAttributes' => array(
             'created_at' => 'Новые',
-//            'type_id' => 'Тип'
         ),
     ));
     ?>

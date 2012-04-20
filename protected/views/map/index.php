@@ -19,5 +19,6 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
+$this->pageTitle = Yii::app()->name . ' - ' . 'Объекты на карте';
 
 $this->renderPartial('_map', array('data' => $data));

@@ -24,9 +24,7 @@
 <div class="offer clearfix">
     <div class="image_block grid_2 alpha">
         <div class="box_shadow">
-            <?php if (isset($data->apartmentFiles) && count($data->apartmentFiles)): ?>
-            <?php echo CHtml::image($data->apartmentFiles[0]->getFile(), $data->name, array('width' => 146)) ?>
-            <?php endif; ?>
+            <?php echo CHtml::image($data->default_image, $data->name, array('width' => 146)) ?>
         </div>
     </div>
 
@@ -34,14 +32,14 @@
         <div class="description clearfix">
             <h3><strong><?php echo CHtml::encode($data->name) ?></strong>, <?php echo CHtml::encode($data->address) ?>
             </h3>
-            <?php if (!empty($data->metro->name)): ?>
-            <address class="label">м. <?php echo CHtml::encode($data->metro->name) ?></address>
+            <?php if (!empty($data->metroName)): ?>
+            <address class="label">м. <?php echo $data->metroName ?></address>
             <?php else : ?>
             <address>&nbsp;</address>
             <?php endif; ?>
 
             <div class="grid_3 alpha">
-                <?php echo CHtml::link(CHtml::tag('span', array(), $data->type->name), array('/apartment/view', 'id' => $data->id), array('class' => 'apartment_type ' . $data->type->icon)); ?>
+                <?php echo CHtml::link(CHtml::tag('span', array(), $data->typeName), array('/apartment/view', 'id' => $data->id), array('class' => 'apartment_type ' . $data->typeIcon)); ?>
             </div>
 
             <div class="grid_1 omega">

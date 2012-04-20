@@ -26,28 +26,22 @@ class ApartmentController extends Controller
 
     public function actionIndex()
     {
-
-        $model = Apartment::model()->with(array('apartmentFiles', 'apartmentAttributes'))->findAll(array('index' => 'id'));
-
-        $data = array();
-        foreach ($model as $apartment_id => $apartment) {
-            $data[] = $apartment->toArray();
-        }
-
         $dataProvider = new CActiveDataProvider('Apartment', array(
             'criteria' => array(
-                'order' => 'created_at DESC'
+                'order' => 't.created_at DESC',
             ),
         ));
 
         $this->render('index', array(
-            'dataProvider' => $dataProvider,
-            'data' => $data,
+            'dataProvider' => $dataProvider
         ));
     }
 
     public function actionView($id)
     {
+
+        Yii::app()->clientScript->registerScriptFile('http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU');
+
         $this->layout = '//layouts/column1';
 
         $model = Apartment::model()->findByPk($id);

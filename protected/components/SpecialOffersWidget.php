@@ -41,7 +41,7 @@ class SpecialOffersWidget extends CWidget
         $this->_options = CMap::mergeArray($this->_options, $this->options);
 
         $criteria = new CDbCriteria();
-        $criteria->order = 'created_at DESC';
+        $criteria->order = 't.created_at DESC';
         $criteria->addColumnCondition(array(
             'is_special' => 1
         ));
@@ -52,7 +52,7 @@ class SpecialOffersWidget extends CWidget
             ));
         }
 
-        $this->_dataProvider = new CActiveDataProvider('Apartment', array(
+        $this->_dataProvider = new CActiveDataProvider(Apartment::model()->cache(86400), array(
             'criteria' => $criteria,
             'pagination' => array(
                 'pageSize' => $this->_options['max'],

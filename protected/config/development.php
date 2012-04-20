@@ -30,7 +30,7 @@ return CMap::mergeArray(
                 'enableResultTrace' => 1,
             ),
             'cache' => array(
-                'class' => 'CDummyCache',
+                'class' => 'CFileCache',
             ),
             'db' => array(
                 'class' => 'application.components.DbConnection'
@@ -42,9 +42,9 @@ return CMap::mergeArray(
                         'class' => 'CFileLogRoute',
                         'levels' => 'error, warning',
                     ),
-                    /*array(
+                    array(
                         'class' => 'CWebLogRoute',
-                    ),*/
+                    ),
                 ),
             ),
         ),

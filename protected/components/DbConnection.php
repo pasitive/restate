@@ -30,11 +30,11 @@ class DbConnection extends CDbConnection
     public $emulatePrepare = true;
 
     // Caching
-    public $schemaCachingDuration = 0;
-    public $queryCachingDuration = 0;
+    public $schemaCachingDuration = 2592000; // 3 дня
+    public $queryCachingDuration = 86400; // 1 день
 
     // Logging
-    public $enableParamLogging = true;
+    public $enableParamLogging = false;
     public $enableProfiling = true;
 
     public function __construct()

@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/form.css"/>
 
     <script type="text/javascript"
-            src="http://api-maps.yandex.ru/2.0/?load=package.full&mode=debug&lang=ru-RU"></script>
+            src="http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU"></script>
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
