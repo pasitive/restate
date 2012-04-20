@@ -33,14 +33,7 @@ return CMap::mergeArray(
                 'class' => 'CDummyCache',
             ),
             'db' => array(
-                'connectionString' => 'mysql:host=localhost;dbname=zapad',
-                'emulatePrepare' => true,
-                'username' => 'root',
-                'password' => '',
-                'charset' => 'utf8',
-                'enableProfiling' => true,
-                'enableParamLogging' => true,
-//                'schemaCachingDuration' => 3600,
+                'class' => 'application.components.DbConnection'
             ),
             'log' => array(
                 'class' => 'CLogRouter',
