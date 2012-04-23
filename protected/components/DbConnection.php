@@ -24,8 +24,10 @@ class DbConnection extends CDbConnection
 {
     // Connection
     public $connectionString = 'mysql:host=127.0.0.1;dbname=zapad';
-    public $username = 'zapad';
-    public $password = 'des9she6ghel2aid';
+//    public $username = 'zapad';
+//    public $password = 'des9she6ghel2aid';
+    public $username = 'root';
+    public $password = '';
     public $charset = 'UTF8';
     public $emulatePrepare = true;
 
