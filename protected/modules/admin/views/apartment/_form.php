@@ -54,6 +54,18 @@
     </div>
 
     <div class="row">
+        <?php echo $form->labelEx($model, 'description'); ?>
+        <?php $this->widget('application.extensions.tinymce.TinyMce',
+        array(
+            'htmlOptions' => array('cols' => 50, 'rows' => 6),
+            'model' => $model,
+            'attribute' => 'description',
+        ));
+        ?>
+        <?php echo $form->error($model, 'description'); ?>
+    </div>
+
+    <div class="row">
         <?php echo $form->labelEx($model, 'metro_id'); ?>
         <?php if ($model->isNewRecord && empty($model->metro_id)) : ?>
         <?php echo $form->dropDownList($model, 'metro_id', array(), array('empty' => 'Нужно выбрать город')); ?>

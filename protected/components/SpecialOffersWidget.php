@@ -52,7 +52,9 @@ class SpecialOffersWidget extends CWidget
             ));
         }
 
-        $this->_dataProvider = new CActiveDataProvider(Apartment::model()->cache(86400), array(
+        $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');
+
+        $this->_dataProvider = new CActiveDataProvider(Apartment::model()->cache(86400, $dependency), array(
             'criteria' => $criteria,
             'pagination' => array(
                 'pageSize' => $this->_options['max'],

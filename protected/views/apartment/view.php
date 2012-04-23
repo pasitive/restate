@@ -23,7 +23,7 @@
 
 <?php
 $this->breadcrumbs = array(
-    $model->type->name => array('/apartment/view', 'id' => $model->id),
+    $model->typeName => array('/apartment/view', 'id' => $model->id),
     $model->address
 );
 $this->pageTitle = Yii::app()->name . ' - ' . ($model->routeable_title ? $model->routeable_title : ($model->name . ' - ' . $model->address));
@@ -64,7 +64,7 @@ Yii::app()->clientScript->registerMetaTag(($model->routeable_keywords ? $model->
 
             <div class="items">
                 <ul>
-                    <?php foreach ($model->apartmentFiles as $apartmentFile) : ?>
+                    <?php foreach ($apartmentFiles as $apartmentFile) : ?>
                     <li><img src="<?php echo $apartmentFile->getFile(450) ?>" alt=""></li>
                     <?php endforeach; ?>
                 </ul>
@@ -76,10 +76,17 @@ Yii::app()->clientScript->registerMetaTag(($model->routeable_keywords ? $model->
 
 </div>
 
-<?php if ($model->type->container == 1) : ?>
-<?php $this->renderPartial('_container', array('model' => $model, 'apartmentDataProvider' => $apartmentDataProvider)) ?>
+<?php if ($model->container == 1) : ?>
+<?php $this->renderPartial('_container', array(
+        'model' => $model,
+        'apartmentDataProvider' => $apartmentDataProvider,
+        'apartmentAttributes' => $apartmentAttributes,
+    )) ?>
 <?php else: ?>
-<?php $this->renderPartial('_standalone', array('model' => $model)) ?>
+<?php $this->renderPartial('_standalone', array(
+        'model' => $model,
+        'apartmentAttributes' => $apartmentAttributes,
+    )) ?>
 <?php endif; ?>
 
 <script type="text/javascript">
@@ -116,7 +123,7 @@ Yii::app()->clientScript->registerMetaTag(($model->routeable_keywords ? $model->
                 $('#map').show();
                 $('#map_link').text('Фотогалерея');
                 map.container.fitToViewport();
-            }, function(){
+            }, function () {
                 $('#map').hide();
                 $('#full_gallery').show();
                 $('#map_link').text('Показать на карте');

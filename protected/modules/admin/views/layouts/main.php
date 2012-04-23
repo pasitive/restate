@@ -36,7 +36,7 @@
     <div id="mainmenu">
         <?php $this->widget('zii.widgets.CMenu', array(
         'items' => array(
-            array('label' => 'Система', 'url' => '#', 'items' => array(
+            array('label' => 'Система', 'url' => array('/admin/system'), 'items' => array(
                 array('label' => 'Роутинг', 'url' => array('/admin/route'), 'visible' => !Yii::app()->user->isGuest),
             ), 'visible' => !Yii::app()->user->isGuest),
             array('label' => 'Справочники', 'url' => '#', 'items' => array(

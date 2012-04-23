@@ -81,17 +81,17 @@
 
             </div>
 
-            <?php if (YII_DEBUG) {
+            <?php if (YII_DEBUG) : ?>
+            <?php
                 list($queryCount, $queryTime) = Yii::app()->db->getStats();
                 echo "Query count: $queryCount, Total query time: " . sprintf('%0.5f', $queryTime) . "s";
-            }
             ?>
-            <?php if (YII_DEBUG) : ?>
+
             <div>
                 Execution Time: <?php echo round(CLogger::getExecutionTime(), 3);?> sec<br/>
                 Memory Usage: <?php echo round(CLogger::getMemoryUsage() / 1048576, 2);?> mb
             </div>
-                <?php endif; ?>
+            <?php endif; ?>
         </div>
 
     </div>

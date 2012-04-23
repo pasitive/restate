@@ -8,7 +8,7 @@ $this->menu = array(
     array('label' => 'Добавить', 'url' => array('create')),
     array('label' => 'Обновить', 'url' => array('update', 'id' => $model->id)),
     array('label' => 'Список', 'url' => array('index')),
-    array('label' => 'Удалить', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Вы действительно хотите удалить эту запись?')),
+    array('label' => 'Удалить', 'url' => '#', 'linkOptions' => array('submit' => array('remove', 'id' => $model->id), 'confirm' => 'Вы действительно хотите удалить эту запись?')),
 );
 ?>
 
@@ -20,7 +20,7 @@ $this->menu = array(
         'id',
         'name',
         'apartmentType.name',
-        'disabled',
+        'disabled:boolean',
         'created_at',
         'updated_at',
     ),

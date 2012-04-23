@@ -21,24 +21,21 @@ $(function () {
     });
 
     $('.image_block').each(function () {
-
-        /*$block = $(this);
-
+        var $block = $(this);
         var height = $block.outerHeight();
-
         var overlay_css = {
             display:'none',
             height:height,
-            'z-index':1999
+            'z-index':1999,
+            cursor:'pointer'
         };
-        $overlay = $('<div></div>').addClass('overlay').css(overlay_css);
-        $overlay.prependTo($(this));
-
+        $overlay = $('<div/>').addClass('overlay').css(overlay_css);
+        $overlay.prependTo($block);
         $(this).hover(function () {
             $(this).find('.overlay').show();
         }, function () {
             $(this).find('.overlay').hide();
-        });*/
+        });
 
     });
 
@@ -66,7 +63,7 @@ $(function () {
                 $dt = $(this).find('dt');
                 $dt.append(':');
                 var a = [];
-                while (a.length < 100) {
+                while (a.length < 150) {
                     a.push('.');
                 }
                 $span = $('<span>').css(options.css);

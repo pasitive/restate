@@ -49,18 +49,33 @@ class ApartmentController extends Controller
             throw new CHttpException(404, 'Страница не найдена');
         }
 
-        $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array(
-            'parent_id' => $id
+        $apartmentDataProvider = null;
+        if ($model->container == 1) {
+            $criteria = new CDbCriteria();
+            $criteria->addColumnCondition(array(
+                'parent_id' => $id
+            ));
+
+            $apartmentDataProvider = new CActiveDataProvider('Apartment', array(
+                'criteria' => $criteria,
+            ));
+        }
+
+        $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_attribute WHERE apartment_id = ' . intval($model->id));
+        $apartmentAttributes = ApartmentAttribute::model()->with('attribute')->cache(84600, $dependency)->findAllByAttributes(array(
+            'apartment_id' => $model->id
         ));
 
-        $apartmentDataProvider = new CActiveDataProvider('Apartment', array(
-            'criteria' => $criteria,
+        $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_file WHERE apartment_id = ' . intval($model->id));
+        $apartmentFiles = ApartmentFile::model()->cache(86400, $dependency)->findAllByAttributes(array(
+            'apartment_id' => $model->id
         ));
 
         $this->render('view', array(
             'model' => $model,
             'apartmentDataProvider' => $apartmentDataProvider,
+            'apartmentAttributes' => $apartmentAttributes,
+            'apartmentFiles' => $apartmentFiles,
         ));
     }
 }

@@ -24,13 +24,13 @@
 <div class="offer clearfix">
     <div class="image_block grid_2 alpha">
         <div class="box_shadow">
-            <?php echo CHtml::image($data->default_image, $data->name, array('width' => 146)) ?>
+            <?php echo CHtml::image($data->default_image, $data->name, array('width' => '146px')) ?>
         </div>
     </div>
 
     <div class="description_block grid_5 omega">
         <div class="description clearfix">
-            <h3><strong><?php echo CHtml::encode($data->name) ?></strong>, <?php echo CHtml::encode($data->address) ?>
+            <h3><strong><?php echo CHtml::encode(empty($data->name) ? $data->typeName : $data->name) ?></strong>, <?php echo CHtml::encode($data->address) ?>
             </h3>
             <?php if (!empty($data->metroName)): ?>
             <address class="label">м. <?php echo $data->metroName ?></address>

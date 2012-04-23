@@ -113,7 +113,7 @@ class Page extends CActiveRecord
         $criteria->compare('body', $this->body, true);
 
         return new CActiveDataProvider($this, array(
-                                                   'criteria' => $criteria,
-                                              ));
+            'criteria' => $criteria,
+        ));
     }
 }

@@ -558,9 +558,10 @@ dl.dots dt {
 }
 
 dl.dots dd {
+    color: #666666;
+    font-weight: bold;
     float: left;
-    width: 70px;
-    overflow: hidden;
+    width: 185px;
     margin: 2px 0;
     padding-left: 5px;
 }

@@ -79,14 +79,21 @@ class AttributeController extends Controller
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
+
+    public function actionRemove($id)
+    {
+        $this->loadModel($id)->delete();
+        $this->redirect(array('index'));
+    }
+
     /**
      * Manages all models.
      */
     public function actionIndex()
     {
         $model = new Attribute('search');
-//        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
-//        $model->with('apartmentType')->cache(3600, $cacheDependency);
+        //        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
+        //        $model->with('apartmentType')->cache(3600, $cacheDependency);
         $model->unsetAttributes(); // clear any default values
         if (isset($_GET['Attribute']))
             $model->attributes = $_GET['Attribute'];

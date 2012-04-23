@@ -23,6 +23,7 @@
  * @property string $type_name
  * @property string $default_image
  * @property int $container
+ * @property string $description
  *
  * The followings are the available model rel   ations:
  * @property ApartmentType $type
@@ -85,6 +86,8 @@ class Apartment extends CActiveRecord
             'images' => array(),
             'attributes' => array(),
             'link' => Yii::app()->createUrl('apartment/view', array('id' => $this->id)),
+            'default_image' => $this->default_image,
+            'type' => $this->typeName,
         );
 
         return $result;
@@ -128,10 +131,10 @@ class Apartment extends CActiveRecord
         return array(
             array('routeable_pattern', 'required'),
             array('routeable_keywords, routeable_description, routeable_title, metro_name, city_name, area_name, type_name, default_image, container', 'safe'),
-            array('name, city_id, area_id, type_id', 'required'),
+            array('city_id, area_id, type_id', 'required'),
             array('name', 'length', 'max' => 255),
             array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
-            array('created_at, updated_at, lng, lat, rating, address, parent_id, is_special', 'safe'),
+            array('created_at, updated_at, lng, lat, rating, address, parent_id, is_special, description', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, name, city_id, area_id, type_id, created_at, updated_at', 'safe', 'on' => 'search'),
@@ -175,6 +178,7 @@ class Apartment extends CActiveRecord
             'parent_id' => 'Родительский объект',
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
+            'description' => 'Описание',
 
             'routeable_title' => 'SEO Заголовок',
             'routeable_keywords' => 'SEO Ключевые слова',
@@ -221,11 +225,11 @@ class Apartment extends CActiveRecord
 
             // Routes
             if (empty($this->routeable_pattern)) {
-                $this->routeable_pattern = '/apartment/' . TextBox::transliteUrl($this->type->name . '_' . $this->name . '_' . $this->address);
+                $this->routeable_pattern = '/apartment/' . TextBox::transliteUrl($this->type->name . '_' . $this->address);
             }
 
             if (empty($this->routeable_title)) {
-                $this->routeable_title = $this->type->name . ' - ' . $this->name . ' - ' . $this->address;
+                $this->routeable_title = $this->type->name . ' - ' . $this->address;
             }
 
             if (empty($this->metro_id)) {

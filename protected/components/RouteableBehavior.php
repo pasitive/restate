@@ -31,7 +31,7 @@ class RouteableBehavior extends CActiveRecordBehavior
 
     public function afterFind()
     {
-        $key = 'route_' . $this->controller . 'view' . $this->getOwner()->id;
+        $key = 'route_' . $this->controller . '_view_' . $this->getOwner()->id;
 
         $route = Yii::app()->cache->get($key);
 
