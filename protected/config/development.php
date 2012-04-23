@@ -11,11 +11,11 @@ return CMap::mergeArray(
     require_once(__DIR__ . '/main.php'),
     array(
         'modules' => array(
-            'gii' => array(
+            /*'gii' => array(
                 'class' => 'system.gii.GiiModule',
                 'password' => 'qqq',
                 'ipFilters' => array('*'),
-            ),
+            ),*/
             'admin' => array(
                 'password' => 'qazwsx',
                 'ipFilters' => array('*'),
@@ -31,12 +31,18 @@ return CMap::mergeArray(
                 'enableResultTrace' => 1,
             ),
             'cache' => array(
-                'class' => 'CFileCache',
+                'class' => 'CMemCache',
+                'servers' => array(
+                    array(
+                        'host' => '127.0.0.1',
+                        'port' => 11211,
+                    ),
+                ),
             ),
             'db' => array(
                 'class' => 'application.components.DbConnection'
             ),
-            'log' => array(
+            /*'log' => array(
                 'class' => 'CLogRouter',
                 'routes' => array(
                     array(
@@ -47,7 +53,7 @@ return CMap::mergeArray(
 //                        'class' => 'CWebLogRoute',
 //                    ),
                 ),
-            ),
+            ),*/
         ),
         'params' => array(
             'secret' => 'c0018634f1e7cb8788e4bec64f469e52',
