@@ -49,11 +49,11 @@
                 array('label' => 'Новости', 'url' => array('/admin/news'), 'visible' => !Yii::app()->user->isGuest),
             ), 'visible' => !Yii::app()->user->isGuest),
 
-            array('label' => 'Параметры объектов', 'url' => array('/admin/attribute'), 'visible' => !Yii::app()->user->isGuest),
-
-            array('label' => 'Объекты', 'url' => array('/admin/apartment'), 'visible' => !Yii::app()->user->isGuest),
+            array('label' => 'Объекты', 'url' => array('/admin/apartment'), 'visible' => !Yii::app()->user->isGuest, 'items' => array(
+                array('label' => 'Параметры объектов', 'url' => array('/admin/attribute'), 'visible' => !Yii::app()->user->isGuest),
+            )),
             array('label' => 'Создать объект', 'url' => '#', 'visible' => !Yii::app()->user->isGuest, 'items' => ApartmentType::getAdminCMenuItems()),
-
+            array('label' => 'Страницы', 'url' => array('/admin/page'), 'visible' => !Yii::app()->user->isGuest),
 
             array('label' => 'Вход', 'url' => array('/admin/default/login'), 'visible' => Yii::app()->user->isGuest),
             array('label' => 'Выход (' . Yii::app()->user->name . ')', 'url' => array('/admin/default/logout'), 'visible' => !Yii::app()->user->isGuest)

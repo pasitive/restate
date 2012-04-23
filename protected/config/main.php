@@ -23,19 +23,12 @@ return array(
 
     // application components
     'components' => array(
-        'clientScript' => array(
-            'scriptMap' => array(
-//                'jquery.js' => false,
-            ),
-        ),
         'format' => array(
             'booleanFormat' => array('Нет', 'Да'),
         ),
         'image' => array(
             'class' => 'application.extensions.image.CImageComponent',
-            // GD or ImageMagick
             'driver' => 'GD',
-            // ImageMagick setup path
             'params' => array('directory' => '/opt/local/bin'),
         ),
         'authManager' => array(
@@ -63,15 +56,6 @@ return array(
         ),
         'errorHandler' => array(
             'errorAction' => 'error/error',
-        ),
-        'log' => array(
-            'class' => 'CLogRouter',
-            'routes' => array(
-                array(
-                    'class' => 'CFileLogRoute',
-                    'levels' => 'error, warning',
-                ),
-            ),
         ),
     ),
 

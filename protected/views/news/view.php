@@ -35,4 +35,4 @@ $this->breadcrumbs = array(
 
 <div class="space"></div>
 
-<?php echo CHtml::link('Назад к списку новостей', array('/news/')) ?>
+<?php echo CHtml::link('Назад к списку новостей', array('/news/'), array('class' => 'more_link')) ?>

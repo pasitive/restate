@@ -17,6 +17,16 @@ class Page extends CActiveRecord
     public $routeable_description;
     public $routeable_title;
 
+    public function beforeValidate()
+    {
+        if (parent::beforeValidate()) {
+            $this->routeable_pattern = '/page/' . TextBox::transliteUrl($this->name);
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Returns the static model of the specified AR class.
      * @return Page the static model class
@@ -69,10 +79,13 @@ class Page extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'name' => 'Name',
-            'body' => 'Body',
+            'created_at' => 'Создано',
+            'updated_at' => 'Обновлено',
+            'name' => 'Название',
+            'body' => 'Содержание',
+            'routeable_title' => 'SEO Заголовок',
+            'routeable_keywords' => 'SEO Ключевые слова',
+            'routeable_description' => 'SEO Описание',
         );
     }
 

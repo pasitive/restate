@@ -110,7 +110,6 @@
         <?php echo $form->error($model, 'routeable_description'); ?>
     </div>
 
-
     <div class="row">
         <?php echo $form->labelEx($model, 'is_special'); ?>
         <?php echo $form->checkbox($model, 'is_special'); ?>

@@ -27,8 +27,11 @@
         'id' => 'main_navigation',
         'activateParents' => true,
         'items' => array(
-            array('label' => 'Новости компании', 'url' => array('/news/'), 'active' => Yii::app()->controller->id == 'news'),
+            array('label' => 'Наши объекты', 'url' => Yii::app()->homeUrl, 'active' => Yii::app()->controller->id == 'apartment'),
             array('label' => 'Объекты на карте', 'url' => array('/map/index')),
+            array('label' => 'Новости компании', 'url' => array('/news/'), 'active' => Yii::app()->controller->id == 'news'),
+            array('label' => 'Полезная информация', 'url' => array('/page/view', 'id' => 2)),
+//            array('label' => 'Как нас найти?', 'url' => array('/page/view', 'id' => 3)),
         ),
     )); ?>
     </div>
@@ -52,16 +55,9 @@
                 <hr class="splitter">
 
                 <ul>
-                    <li><span><a href="">Ссылка</a></span></li>
-                    <li><span><a href="">Ссылка</a></span></li>
-                    <li><span><a href="">Ссылка</a></span></li>
-                    <li><span><a href="">Ссылка</a></span></li>
-                    <li><span><a href="">Ссылка</a></span></li>
-                    <li><span><a href="">Ссылка</a></span></li>
-                    <li><span><a href="">Ссылка</a></span></li>
-                    <li><span><a href="">Ссылка</a></span></li>
-                    <li><span><a href="">Ссылка</a></span></li>
-                    <li><span><a href="">Ссылка</a></span></li>
+                    <?php foreach(Page::model()->cache(3600)->findAll() as $page) : ?>
+                    <?php echo CHtml::link($page->name, array('/page/view', 'id' => $page->id)) ?>
+                    <?php endforeach; ?>
                 </ul>
 
 
@@ -70,7 +66,11 @@
                 <hr class="splitter">
 
                 <div class="prefix_3 grid_4 alpha">
-                    <p class="copyright">&copy; Агенство Элитной недвижимости &laquo;Запад&raquo;</p>
+                    <p class="copyright">
+                        &copy; Агенство недвижимости &laquo;Запад&raquo;, ул. Шаболовка 34
+                    </p>
+
+                    <?php //Еmail: suhih@zapadrealty.ru, ttoropina@zapadrealty.ru ?>
                 </div>
 
                 <div class="grid_4 omega">
@@ -83,8 +83,8 @@
 
             <?php if (YII_DEBUG) : ?>
             <?php
-                list($queryCount, $queryTime) = Yii::app()->db->getStats();
-                echo "Query count: $queryCount, Total query time: " . sprintf('%0.5f', $queryTime) . "s";
+            list($queryCount, $queryTime) = Yii::app()->db->getStats();
+            echo "Query count: $queryCount, Total query time: " . sprintf('%0.5f', $queryTime) . "s";
             ?>
 
             <div>

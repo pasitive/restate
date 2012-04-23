@@ -17,7 +17,7 @@ return CMap::mergeArray(
                 'ipFilters' => array('*'),
             ),
             'admin' => array(
-                'password' => 'qqq'
+                'password' => 'qazwsx'
             ),
         ),
         'components' => array(
@@ -35,20 +35,19 @@ return CMap::mergeArray(
             'db' => array(
                 'class' => 'application.components.DbConnection'
             ),
-            'log' => array(
+            /*'log' => array(
                 'class' => 'CLogRouter',
                 'routes' => array(
                     array(
                         'class' => 'CFileLogRoute',
                         'levels' => 'error, warning',
                     ),
-                    /*array(
+                    array(
                         'class' => 'CWebLogRoute',
-                    ),*/
+                    ),
                 ),
-            ),
+            ),*/
         ),
-
         'params' => array(
             'secret' => 'c0018634f1e7cb8788e4bec64f469e52',
             'adminEmail' => 'denis.a.boldinov@gmail.com',

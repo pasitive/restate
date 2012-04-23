@@ -20,11 +20,14 @@
  *
  */
 $this->pageTitle = Yii::app()->name . ' - ' . 'Новости компании';
+$this->breadcrumbs = array(
+    'Новости',
+);
 ?>
 
-<h2>Новости компании</h2>
+<h1>Новости компании</h1>
 
-<div class="news_list prepend_top">
+<div class="news_list">
     <?php
     $this->widget('zii.widgets.CListView', array(
         'dataProvider' => $dataProvider,

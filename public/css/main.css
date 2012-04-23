@@ -316,17 +316,17 @@ div.shadow.revert {
     text-decoration: none;
 }
 
-.description_block a.more_link {
+a.more_link {
     line-height: 26px;
     color: #666633;
     text-decoration: none;
 }
 
-.description_block a.apartment_type, .description_block a.more_link {
+.description_block a.apartment_type, a.more_link {
     font-size: 12px;
 }
 
-.description_block a.apartment_type:hover, .description_block a.more_link:hover {
+.description_block a.apartment_type:hover, a.more_link:hover {
     text-decoration: underline;
 }
 

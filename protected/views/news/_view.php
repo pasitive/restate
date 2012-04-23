@@ -25,5 +25,5 @@
     <span class="date"><?php echo date('d.m.Y', strtotime($data->created_at)) ?></span>
     <?php echo CHtml::encode($data->teaser) ?>
     <br />
-    <?php echo CHtml::link('Читать полностью', array('/news/view', 'id' => $data->id)) ?>
+    <?php echo CHtml::link('Читать полностью', array('/news/view', 'id' => $data->id), array('class' => 'more_link')) ?>
 </div>
