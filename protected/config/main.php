@@ -15,6 +15,8 @@ return array(
 
     'defaultController' => 'apartment',
 
+    'timeZone' => 'Europe/Moscow',
+
     'import' => array(
         'application.models.*',
         'application.components.*',
