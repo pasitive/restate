@@ -36,18 +36,18 @@ return CMap::mergeArray(
             'db' => array(
                 'class' => 'application.components.DbConnection'
             ),
-            /*'log' => array(
+            'log' => array(
                 'class' => 'CLogRouter',
                 'routes' => array(
                     array(
                         'class' => 'CFileLogRoute',
                         'levels' => 'error, warning',
                     ),
-                    array(
-                        'class' => 'CWebLogRoute',
-                    ),
+//                    array(
+//                        'class' => 'CWebLogRoute',
+//                    ),
                 ),
-            ),*/
+            ),
         ),
         'params' => array(
             'secret' => 'c0018634f1e7cb8788e4bec64f469e52',
