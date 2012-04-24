@@ -51,10 +51,11 @@ namespace :deploy do
     puts "Nothing to restart"
   end
   task :finalize_update, :except => { :no_release => true } do 
-    run "#{latest_release}/protected/yiic migrate up --interactive=0"
     run "ln -s #{shared_path}/runtime #{latest_release}/protected/runtime"
     run "ln -s #{shared_path}/assets #{latest_release}/public/assets"
     run "ln -s #{shared_path}/upload #{latest_release}/public/upload"
     run "ln -s #{shared_path}/components/DbConnection.php #{latest_release}/protected/components/DbConnection.php"
+    
+    run "#{latest_release}/protected/yiic migrate up --interactive=0"
   end
 end
