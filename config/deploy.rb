@@ -27,8 +27,7 @@ set :branch do
 end unless exists?(:branch)      
 
 namespace :app do
-  task :setup do        
-    
+  task :setup do
     run "rm -rf #{shared_path}/runtime"
     run "rm -rf #{shared_path}/assets"
     run "rm -rf #{shared_path}/upload"
@@ -56,5 +55,6 @@ namespace :deploy do
     run "ln -s #{shared_path}/runtime #{latest_release}/protected/runtime"
     run "ln -s #{shared_path}/assets #{latest_release}/public/assets"
     run "ln -s #{shared_path}/upload #{latest_release}/public/upload"
+    run "ln -s #{shared_path}/components/DbConnection.php #{latest_release}/protected/components/DbConnection.php"
   end
 end
