@@ -19,12 +19,14 @@ role :web, '176.9.18.107'
 role :app, '176.9.18.107'
 role :db, '176.9.18.107', :primary => true
 
-set :branch do
-  default_tag = `git describe --abbrev=0 --tags`.split("\n").last
-  tag = Capistrano::CLI.ui.ask "Tag to deploy (make sure to push the tag first): [#{default_tag}] "
-  tag = default_tag if tag.empty?
-  tag
-end unless exists?(:branch)      
+# set :branch do
+#   default_tag = `git describe --abbrev=0 --tags`.split("\n").last
+#   tag = Capistrano::CLI.ui.ask "Tag to deploy (make sure to push the tag first): [#{default_tag}] "
+#   tag = default_tag if tag.empty?
+#   tag
+# end unless exists?(:branch)
+
+set :branch, "master"
 
 namespace :app do
   task :setup do
@@ -50,7 +52,10 @@ namespace :deploy do
   task :restart do
     puts "Nothing to restart"
   end
-  task :finalize_update, :except => { :no_release => true } do 
+  task :finalize_update, :except => { :no_release => true } do   
+    
+    run "rm -rf #{latest_release}/components/DbConnection.php"
+    
     run "ln -s #{shared_path}/runtime #{latest_release}/protected/runtime"
     run "ln -s #{shared_path}/assets #{latest_release}/public/assets"
     run "ln -s #{shared_path}/upload #{latest_release}/public/upload"
