@@ -96,7 +96,7 @@ class Apartment extends CActiveRecord
     public function getTypedApartmentList()
     {
         $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');
-        $types = ApartmentType::model()->container()->with('apartments')->cache(3600, $cacheDependency)->findAll();
+        $types = ApartmentType::model()->container()->with('apartments')->cache(DAY_1, $cacheDependency)->findAll();
         $result = array();
         foreach ($types as $type) {
             $result[$type->name] = CHtml::listData($type->apartments, 'id', 'name');

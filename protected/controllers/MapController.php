@@ -28,21 +28,12 @@ class MapController extends Controller
     {
         Yii::app()->clientScript->registerScriptFile('http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU');
 
-        $cacheDependency = new CDbCacheDependency('SELECT MAX(created_at) FROM apartment');
-        $model = Apartment::model()->cache(86400, $cacheDependency)->findAll(array('index' => 'id'));
-
-        /*$files = ApartmentFile::model()->findAllByAttributes(array(
-            'apartment_id' => $this->id,
-        ));
-
-        foreach ($files as $file) {
-            $result['images'][150][] = $file->getFile(150);
-            $result['images'][450][] = $file->getFile(450);
-        }*/
+        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');
+        $model = Apartment::model()->cache(DAY_1, $cacheDependency)->findAll(array('index' => 'id'));
 
         $data = array();
         foreach ($model as $apartment_id => $apartment) {
-            $data[] = $apartment->toArray();
+            $data[$apartment_id] = $apartment->toArray();
         }
 
         $this->render('index', array(

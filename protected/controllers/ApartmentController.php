@@ -62,12 +62,12 @@ class ApartmentController extends Controller
         }
 
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_attribute WHERE apartment_id = ' . intval($model->id));
-        $apartmentAttributes = ApartmentAttribute::model()->with('attribute')->cache(84600, $dependency)->findAllByAttributes(array(
+        $apartmentAttributes = ApartmentAttribute::model()->with('attribute')->cache(DAY_1, $dependency)->findAllByAttributes(array(
             'apartment_id' => $model->id
         ));
 
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_file WHERE apartment_id = ' . intval($model->id));
-        $apartmentFiles = ApartmentFile::model()->cache(86400, $dependency)->findAllByAttributes(array(
+        $apartmentFiles = ApartmentFile::model()->cache(DAY_1, $dependency)->findAllByAttributes(array(
             'apartment_id' => $model->id
         ));
 
