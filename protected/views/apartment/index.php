@@ -22,6 +22,15 @@
 $this->pageTitle = Yii::app()->name . ' - ' . 'Главная';
 $this->breadcrumbs = array(
 );
+
+Yii::app()->clientScript->registerScript('search', "
+    $('.search-form form').bind('keyup, change', function(){
+        $.fn.yiiListView.update('offers_list', {
+            data: $(this).serialize()
+        });
+        return false;
+    });
+");
 ?>
 
 <h1>Агенство элитной недвижимости</h1>
@@ -29,7 +38,8 @@ $this->breadcrumbs = array(
 <div class="offers">
     <?php
     $this->widget('zii.widgets.CListView', array(
-        'dataProvider' => $dataProvider,
+        'id' => 'offers_list',
+        'dataProvider' => $model->search(),
         'itemView' => '_view',
         'template' => "{sorter}\n{pager}<div class='clear'></div>{items}\n{pager}",
         'pager' => array(

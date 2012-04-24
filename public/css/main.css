@@ -767,3 +767,7 @@ ul.yiiPager .last {
 .news_list .news_item a {
     font-size: 100%;
 }
+
+.search-form {
+    background: #dbdbdb;
+}

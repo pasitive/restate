@@ -21,19 +21,19 @@
  */
 class ApartmentController extends Controller
 {
-
-    public $layout = '//layouts/column2';
-
     public function actionIndex()
     {
-        $dataProvider = new CActiveDataProvider('Apartment', array(
-            'criteria' => array(
-                'order' => 't.created_at DESC',
-            ),
-        ));
+        $this->layout = '//layouts/index';
+
+        $model = new Apartment('search');
+        $model->unsetAttributes();
+
+        if (isset($_GET['Apartment'])) {
+            $model->attributes = $_GET['Apartment'];
+        }
 
         $this->render('index', array(
-            'dataProvider' => $dataProvider
+            'model' => $model
         ));
     }
 

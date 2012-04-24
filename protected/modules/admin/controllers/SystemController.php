@@ -31,6 +31,25 @@ class SystemController extends Controller
         $this->redirect(array('/admin'));
     }
 
+    public function actionUpdateDbCache()
+    {
+        //metro
+        $model = MetroStation::model()->findAll();
+        foreach($model as $metro) {
+
+            $count = Apartment::model()->countByAttributes(array(
+                'metro_id' => $metro->id
+            ));
+
+            MetroStation::model()->updateByPk($metro->id, array(
+                'apartment_count' => $count
+            ));
+        }
+
+        Yii::app()->user->setFlash('success', 'Кеш метро обновлен');
+        $this->redirect(array('/admin'));
+    }
+
     public function actionIndex()
     {
         $this->render('index');

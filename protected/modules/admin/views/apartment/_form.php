@@ -116,6 +116,14 @@
         <?php echo $form->error($model, 'is_special'); ?>
     </div>
 
+    <?php if (intval($model->type->container) === 0): ?>
+    <div class="row">
+        <?php echo $form->labelEx($model, 'is_rent'); ?>
+        <?php echo $form->checkbox($model, 'is_rent'); ?>
+        <?php echo $form->error($model, 'is_rent'); ?>
+    </div>
+    <?php endif; ?>
+
     <div class="row">
         <?php echo CHtml::label('Изображения', 'files'); ?>
         <?php

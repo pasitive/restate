@@ -9,12 +9,23 @@
  * @property string $city_id
  * @property string $created_at
  * @property string $updated_at
+ * @property string $apartment_count
  *
  * The followings are the available model relations:
  * @property City $city
  */
 class MetroStation extends CActiveRecord
 {
+
+    public function scopes()
+    {
+        return array(
+            'hasApartments' => array(
+                'condition' => 'apartment_count>0'
+            ),
+        );
+    }
+
     /**
      * Returns the static model of the specified AR class.
      * @return MetroStation the static model class
@@ -43,7 +54,7 @@ class MetroStation extends CActiveRecord
             array('name, city_id', 'required'),
             array('name', 'length', 'max' => 255),
             array('city_id', 'length', 'max' => 10),
-            array('created_at, updated_at', 'safe'),
+            array('created_at, updated_at, apartment_count', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, name, city_id, created_at, updated_at', 'safe', 'on' => 'search'),

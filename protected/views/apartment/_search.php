@@ -21,26 +21,22 @@
  */
 ?>
 
-<div class="offer clearfix">
+<div class="wide form">
 
-    <a href="<?php echo Yii::app()->createUrl('apartment/view', array('id' => $data->id)) ?>">
-        <div class="image_block">
-            <div class="box_shadow">
-                <?php echo CHtml::image($data->default_image, $data->name, array('width' => 146)) ?>
-            </div>
-        </div>
+    <?php $form = $this->beginWidget('CActiveForm', array(
+        'method' => 'get',
+    )); ?>
 
-        <div class="description_block">
-            <div class="description clearfix">
-                <h3>
-                    <strong><?php echo CHtml::encode(empty($data->name) ? $data->typeName : $data->name) ?></strong>, <?php echo CHtml::encode($data->address) ?>
-                </h3>
-                <?php if (!empty($data->metroName)): ?>
-                <address class="label">м. <?php echo CHtml::encode($data->metroName) ?></address>
-                <?php else : ?>
-                <address>&nbsp;</address>
-                <?php endif; ?>
-            </div>
-        </div>
-    </a>
-</div>
+    <div class="row">
+        <?php echo $form->label($model, 'type_id'); ?>
+        <?php echo $form->dropDownList($model, 'type_id', CHtml::listData(ApartmentType::model()->cache(DAY_1)->findAll(), 'id', 'name')); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->label($model, 'metro_id'); ?>
+        <?php echo $form->dropDownList($model, 'metro_id', CHtml::listData(MetroStation::model()->hasApartments()->cache(DAY_1)->findAll(), 'id', 'name')); ?>
+    </div>
+
+    <?php $this->endWidget(); ?>
+
+</div><!-- search-form -->

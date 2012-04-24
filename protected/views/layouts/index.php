@@ -1,3 +1,5 @@
+<?php $this->beginContent('//layouts/main'); ?>
+
 <?php
 /**
  * @author Denis A Boldinov
@@ -21,26 +23,36 @@
  */
 ?>
 
-<div class="offer clearfix">
+<div id="content" class="grid_12">
 
-    <a href="<?php echo Yii::app()->createUrl('apartment/view', array('id' => $data->id)) ?>">
-        <div class="image_block">
-            <div class="box_shadow">
-                <?php echo CHtml::image($data->default_image, $data->name, array('width' => 146)) ?>
-            </div>
+    <div class="grid_12 alpha omega">
+        <div class="search-form">
+            qwe
+        </div>
+    </div>
+
+    <div class="shadow revert"></div>
+
+    <div class="grid_8 alpha colborder">
+
+        <div id="main_content" class="prepend_left v_splitter">
+
+            <?php echo $content; ?>
+
         </div>
 
-        <div class="description_block">
-            <div class="description clearfix">
-                <h3>
-                    <strong><?php echo CHtml::encode(empty($data->name) ? $data->typeName : $data->name) ?></strong>, <?php echo CHtml::encode($data->address) ?>
-                </h3>
-                <?php if (!empty($data->metroName)): ?>
-                <address class="label">м. <?php echo CHtml::encode($data->metroName) ?></address>
-                <?php else : ?>
-                <address>&nbsp;</address>
-                <?php endif; ?>
-            </div>
+    </div>
+
+    <div class="grid_4 omega">
+        <div id="sidebar">
+
+            <?php $this->widget('SpecialOffersWidget'); ?>
+
         </div>
-    </a>
+    </div>
+
+    <div class="space"></div>
+    <div class="shadow"></div>
+
 </div>
+<?php $this->endContent(); ?>

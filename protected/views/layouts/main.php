@@ -12,6 +12,7 @@
     <script src="http://ie-note.googlecode.com/hg/ie-note.js"></script>
     <![endif]-->
 
+    <link rel="stylesheet" href="/css/form.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen, projection">
 </head>
 <body>
@@ -55,7 +56,7 @@
                 <hr class="splitter">
 
                 <ul>
-                    <?php foreach(Page::model()->cache(3600)->findAll() as $page) : ?>
+                    <?php foreach (Page::model()->cache(3600)->findAll() as $page) : ?>
                     <?php echo CHtml::link($page->name, array('/page/view', 'id' => $page->id)) ?>
                     <?php endforeach; ?>
                 </ul>

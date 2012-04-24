@@ -24,6 +24,7 @@
  * @property string $default_image
  * @property int $container
  * @property string $description
+ * @property int $is_rent
  *
  * The followings are the available model rel   ations:
  * @property ApartmentType $type
@@ -134,7 +135,7 @@ class Apartment extends CActiveRecord
             array('city_id, area_id, type_id', 'required'),
             array('name', 'length', 'max' => 255),
             array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
-            array('created_at, updated_at, lng, lat, rating, address, parent_id, is_special, description', 'safe'),
+            array('created_at, updated_at, lng, lat, rating, address, parent_id, is_special, description, is_rent', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, name, city_id, area_id, type_id, created_at, updated_at', 'safe', 'on' => 'search'),
@@ -179,6 +180,7 @@ class Apartment extends CActiveRecord
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
             'description' => 'Описание',
+            'is_rent' => 'Аренда',
 
             'routeable_title' => 'SEO Заголовок',
             'routeable_keywords' => 'SEO Ключевые слова',
@@ -244,9 +246,21 @@ class Apartment extends CActiveRecord
         return $valid;
     }
 
+    protected function afterDelete()
+    {
+        MetroStation::model()->updateCounters(array(
+            'apartment_count' => -1
+        ));
+    }
 
     protected function afterSave()
     {
+        if ($this->isNewRecord) {
+            MetroStation::model()->updateCounters(array(
+                'apartment_count' => 1
+            ));
+        }
+
         foreach ($this->apartmentAttributes as $id => $apartmentAttribute) {
             $apartmentAttribute->attributes = array(
                 'apartment_id' => $this->id,
@@ -254,7 +268,6 @@ class Apartment extends CActiveRecord
             );
             $apartmentAttribute->save();
         }
-
 
         // Uploads
         $files = CUploadedFile::getInstances($this, 'files');
@@ -303,6 +316,8 @@ class Apartment extends CActiveRecord
         $criteria->compare('city_id', $this->city_id, true);
         $criteria->compare('area_id', $this->area_id, true);
         $criteria->compare('type_id', $this->type_id, true);
+        $criteria->compare('metro_id', $this->metro_id, true);
+        $criteria->compare('is_rent', $this->is_rent, true);
         $criteria->compare('created_at', $this->created_at, true);
         $criteria->compare('updated_at', $this->updated_at, true);
 
