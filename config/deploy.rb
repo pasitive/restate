@@ -3,7 +3,7 @@ set :deploy_to, "/srv/www/#{application}"
 
 default_run_options[:pty] = true
 set :scm, :git
-set :repository, "git://github.com/pasitive/zapad.git"
+set :repository, "git://github.com/pasitive/zapad_new.git"
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
                          
@@ -42,9 +42,7 @@ namespace :app do
     
     run "chmod 0777 #{shared_path}/runtime"
     run "chmod 0777 #{shared_path}/assets"
-    run "chmod 0777 #{shared_path}/upload"  
-    
-    run "cp -R #{current_release}/protected/config #{shared_path}/"
+    run "chmod 0777 #{shared_path}/upload"
   end
 end
 
@@ -52,14 +50,12 @@ namespace :deploy do
   task :restart do
     puts "Nothing to restart"
   end
-  task :finalize_update, :except => { :no_release => true } do   
+  task :finalize_update, :except => { :no_release => true } do
     
-    run "rm -rf #{latest_release}/components/DbConnection.php"
-    
-    run "ln -s #{shared_path}/runtime #{latest_release}/protected/runtime"
-    run "ln -s #{shared_path}/assets #{latest_release}/public/assets"
-    run "ln -s #{shared_path}/upload #{latest_release}/public/upload"
-    run "ln -s #{shared_path}/components/DbConnection.php #{latest_release}/protected/components/DbConnection.php"
+    run "ln -sf #{shared_path}/runtime #{latest_release}/protected/runtime"
+    run "ln -sf #{shared_path}/assets #{latest_release}/public/assets"
+    run "ln -sf #{shared_path}/upload #{latest_release}/public/upload"
+    run "ln -sf #{shared_path}/components/DbConnection.php #{latest_release}/protected/components/DbConnection.php"
     
     run "#{latest_release}/protected/yiic migrate up --interactive=0"
   end

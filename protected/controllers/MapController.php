@@ -33,7 +33,7 @@ class MapController extends Controller
 
         $data = array();
         foreach ($model as $apartment_id => $apartment) {
-            $data[$apartment_id] = $apartment->toArray();
+            $data[] = $apartment->toArray();
         }
 
         $this->render('index', array(
