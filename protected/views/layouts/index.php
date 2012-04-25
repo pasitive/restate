@@ -27,6 +27,9 @@
 
     <?php echo $content; ?>
 
+    <div class="space"></div>
+    <div class="shadow"></div>
+
 </div>
 
 <?php $this->endContent(); ?>

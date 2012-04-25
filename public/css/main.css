@@ -321,6 +321,7 @@ div.shadow.revert {
 }
 
 a.more_link {
+    font-size: 12px;
     line-height: 26px;
     color: #666633;
     text-decoration: none;
@@ -701,7 +702,7 @@ ul.yiiPager .last {
 }*/
 .list-view .sorter ul li a {
     text-decoration: none;
-    border-bottom: 1px dotted #000;
+    border-bottom: 1px dashed #000;
     color: #333;
 }
 
@@ -769,7 +770,7 @@ ul.yiiPager .last {
 }
 
 .news_list .news_item a {
-    font-size: 100%;
+    /*font-size: 100%;*/
 }
 
 .search-form {
