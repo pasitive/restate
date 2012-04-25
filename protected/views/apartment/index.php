@@ -33,27 +33,58 @@ Yii::app()->clientScript->registerScript('search', "
 ");
 ?>
 
-<h1>Агенство элитной недвижимости</h1>
+<div class="shadow revert"></div>
 
-<div class="offers">
-    <?php
-    $this->widget('zii.widgets.CListView', array(
-        'id' => 'offers_list',
-        'dataProvider' => $model->search(),
-        'itemView' => '_view',
-        'template' => "{sorter}\n{pager}<div class='clear'></div>{items}\n{pager}",
-        'pager' => array(
-            'class' => 'CLinkPager',
-            'cssFile' => false,
-            'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
-            'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
-            'header' => 'Страницы:',
-            'maxButtonCount' => 4
-        ),
-        'sortableAttributes' => array(
-            'created_at' => 'Новые',
-        ),
-    ));
-    ?>
-
+<div class="grid_12 alpha omega">
+    <div class="search-form prepend_top clearfix">
+        <?php $this->renderPartial('_search', array('model' => $model, 'apartmentTypes' => $apartmentTypes)) ?>
+        <div class="space small"></div>
+    </div>
 </div>
+
+<div class="grid_12 alpha omega prepend_top">
+
+    <div class="shadow revert"></div>
+
+    <div class="grid_8 alpha colborder">
+
+        <div id="main_content" class="prepend_left v_splitter">
+
+            <h1>Агенство элитной недвижимости</h1>
+
+            <div class="offers">
+                <?php
+                $this->widget('zii.widgets.CListView', array(
+                    'id' => 'offers_list',
+                    'dataProvider' => $model->search(),
+                    'itemView' => '_view',
+                    'template' => "{sorter}\n{pager}<div class='clear'></div>{items}\n{pager}",
+                    'pager' => array(
+                        'class' => 'CLinkPager',
+                        'cssFile' => false,
+                        'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
+                        'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
+                        'header' => 'Страницы:',
+                        'maxButtonCount' => 4
+                    ),
+                    'sortableAttributes' => array(
+                        'created_at' => 'Новые',
+                    ),
+                ));
+                ?>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="grid_4 omega">
+        <div id="sidebar">
+
+            <?php $this->widget('SpecialOffersWidget'); ?>
+
+        </div>
+    </div>
+</div>
+

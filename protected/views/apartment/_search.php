@@ -21,22 +21,61 @@
  */
 ?>
 
-<div class="wide form">
+<?php $form = $this->beginWidget('CActiveForm', array(
+    'method' => 'get',
+)); ?>
 
-    <?php $form = $this->beginWidget('CActiveForm', array(
-        'method' => 'get',
-    )); ?>
+<div class="grid_2 alpha">
+    <div class="search_label prepend_left small delimiter right"><span>Поиск</span></div>
+</div>
 
-    <div class="row">
-        <?php echo $form->label($model, 'type_id'); ?>
-        <?php echo $form->dropDownList($model, 'type_id', CHtml::listData(ApartmentType::model()->cache(DAY_1)->findAll(), 'id', 'name')); ?>
+<div class="grid_4">
+    <div class="apartment_type_select delimiter right">
+
+        <div id="type">
+            <?php echo CHtml::radioButton('Apartment[type_id]', true, array('id' => 'type0', 'value' => '')) ?>
+            <?php echo CHtml::label('Все', 'type0') ?>
+            <?php foreach ($apartmentTypes as $type): ?>
+            <?php echo CHtml::radioButton('Apartment[type_id]', false, array('id' => 'type' . $type->id, 'value' => $type->id)) ?>
+            <?php echo CHtml::label($type->name, 'type' . $type->id) ?>
+            <?php endforeach; ?>
+        </div>
+
+        <?php $this->widget('application.components.JuiButton', array(
+        'name' => 'type',
+        'buttonType' => 'buttonset',
+    ));?>
     </div>
+</div>
 
-    <div class="row">
-        <?php echo $form->label($model, 'metro_id'); ?>
-        <?php echo $form->dropDownList($model, 'metro_id', CHtml::listData(MetroStation::model()->hasApartments()->cache(DAY_1)->findAll(), 'id', 'name')); ?>
+<div class="grid_3">
+    <div class="rent_toggler delimiter right">
+
+
+        <div id="rent">
+            <?php echo CHtml::radioButton('Apartment[is_rent]', true, array('id' => 'rent0', 'value' => '')) ?>
+            <?php echo CHtml::label('Все', 'rent0') ?>
+
+            <?php echo CHtml::radioButton('Apartment[is_rent]', false, array('id' => 'rent1', 'value' => 1)) ?>
+            <?php echo CHtml::label('Снять', 'rent1') ?>
+
+            <?php echo CHtml::radioButton('Apartment[is_rent]', false, array('id' => 'rent2', 'value' => 0)) ?>
+            <?php echo CHtml::label('Купить', 'rent2') ?>
+        </div>
+
+        <?php $this->widget('application.components.JuiButton', array(
+        'name' => 'rent',
+        'buttonType' => 'buttonset',
+    ));?>
     </div>
+</div>
 
-    <?php $this->endWidget(); ?>
+<div class="grid_3 omega">
+    <div class="subway_select">
+        <label for="Apartment_metro_id">Метро</label>
+        <?php echo $form->dropDownList($model, 'metro_id', CHtml::listData(MetroStation::model()->hasApartments()->cache(DAY_1)->findAll(), 'id', 'name'), array('prompt' => 'Не важно')) ?>
+    </div>
+</div>
 
-</div><!-- search-form -->
+
+<?php $this->endWidget(); ?>

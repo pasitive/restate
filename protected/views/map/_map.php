@@ -59,7 +59,8 @@ $this->breadcrumbs = array(
             // Задаем наш шаблон для балунов геобъектов коллекции.
             collection.options.set({
                 hintContentLayout:'my#apartmentLayout',
-                hintPane:'floats'
+                hintPane:'floats',
+                hintHideTimeout: 20000
             });
 
             map.behaviors.enable('scrollZoom');

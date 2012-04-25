@@ -28,12 +28,16 @@ class ApartmentController extends Controller
         $model = new Apartment('search');
         $model->unsetAttributes();
 
+        $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
+        $apartmentTypes = ApartmentType::model()->is_filter()->cache(DAY_1, $dependency)->findAll();
+
         if (isset($_GET['Apartment'])) {
             $model->attributes = $_GET['Apartment'];
         }
 
         $this->render('index', array(
-            'model' => $model
+            'model' => $model,
+            'apartmentTypes' => $apartmentTypes,
         ));
     }
 

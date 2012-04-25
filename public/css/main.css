@@ -252,6 +252,10 @@ div.shadow.revert {
     padding-left: 50px;
 }
 
+.prepend_left.small {
+    padding-left: 20px;
+}
+
 .prepend_top {
     padding-top: 30px;
 }
@@ -770,4 +774,34 @@ ul.yiiPager .last {
 
 .search-form {
     background: #dbdbdb;
+}
+
+.search-form select, .search-form select option {
+    font-size: 16px;
+}
+
+.delimiter {
+    background-image: url(../images/breadcrumb_delimeter.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.delimiter.left {
+    background-position: left center;
+}
+
+.delimiter.right {
+    background-position: right center;
+}
+
+.rent_toggler, .apartment_type_select, .subway_select {
+    /*text-align: center;*/
+    padding-left: 10px;
+}
+
+.search_label {
+    line-height: 22px;
+    font-size: 18px;
+    color: #333;
+    text-align: center;
 }

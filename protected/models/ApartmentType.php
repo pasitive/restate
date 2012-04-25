@@ -9,6 +9,7 @@
  * @property string $created_at
  * @property string $updated_at
  * @property int $container
+ * @property int $is_filter
  *
  * The followings are the available model relations:
  * @property Apartment[] $apartments
@@ -28,6 +29,10 @@ class ApartmentType extends CActiveRecord
             'container' => array(
                 'condition' => 't.container=1',
             ),
+            'is_filter' => array(
+                'condition' => 't.is_filter=1',
+            ),
+
         );
     }
 
@@ -58,7 +63,7 @@ class ApartmentType extends CActiveRecord
         return array(
             array('name', 'required'),
             array('name', 'length', 'max' => 255),
-            array('container', 'numerical', 'integerOnly' => true),
+            array('container, is_filter', 'numerical', 'integerOnly' => true),
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
@@ -90,6 +95,7 @@ class ApartmentType extends CActiveRecord
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
             'container' => 'Контейнер',
+            'is_filter' => 'Фильтр',
         );
     }
 
@@ -134,10 +140,18 @@ class ApartmentType extends CActiveRecord
     {
         $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
         $model = self::model()->cache(3600, $cacheDependency)->findAll();
+
         $items = array();
         foreach ($model as $index => $type) {
             $items[] = array('label' => $type->name, 'url' => array('/admin/apartment/create', 'type' => $type->id));
         }
         return $items;
+    }
+
+    public function loadAll()
+    {
+        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
+        $model = ApartmentType::model()->cache(3600, $cacheDependency)->findAll();
+        return $model;
     }
 }

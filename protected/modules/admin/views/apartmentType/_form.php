@@ -21,6 +21,14 @@
         <?php echo $form->error($model, 'container'); ?>
     </div>
 
+    <div class="row">
+        <?php echo $form->labelEx($model, 'is_filter'); ?>
+        <?php echo $form->checkbox($model, 'is_filter'); ?>
+        <?php echo $form->error($model, 'is_filter'); ?>
+    </div>
+
+
+
     <div class="row buttons">
         <?php echo CHtml::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить'); ?>
     </div>

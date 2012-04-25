@@ -238,6 +238,11 @@ class Apartment extends CActiveRecord
                 $this->metro_id = NULL;
             }
 
+            // Контейнер (ЖК итд) нельзя купить полностью
+            if($this->container == 1) {
+                $this->is_rent = 2;
+            }
+
             $valid = true;
             foreach ($this->apartmentAttributes as $apartmentAttribute) {
                 $valid = $apartmentAttribute->validate(array('value')) && $valid;
