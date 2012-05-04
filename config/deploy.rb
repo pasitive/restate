@@ -1,7 +1,9 @@
-set :application, "vebel.ru"
+default_run_options[:pty] = true
+ssh_options[:forward_agent] = true
+
+set :application, "zapad.vebel.ru"
 set :deploy_to, "/srv/www/#{application}"
 
-default_run_options[:pty] = true
 set :scm, :git
 set :repository, "git://github.com/pasitive/zapad_new.git"
 set :deploy_via, :remote_cache
@@ -12,8 +14,6 @@ set :user, "deployer"
 set :group, "users"
 set :port, 2112
 set :use_sudo, false
-
-ssh_options[:forward_agent] = true
 
 role :web, '176.9.18.107'
 role :app, '176.9.18.107'
@@ -47,16 +47,18 @@ namespace :app do
 end
 
 namespace :deploy do
+  
   task :restart do
-    puts "Nothing to restart"
   end
+  
+  task :migrate, :roles => :db, :only => { :primary => true } do
+    run "#{latest_release}/protected/yiic migrate up --interactive=0"
+  end
+  
   task :finalize_update, :except => { :no_release => true } do
-    
     run "ln -sf #{shared_path}/runtime #{latest_release}/protected/runtime"
     run "ln -sf #{shared_path}/assets #{latest_release}/public/assets"
     run "ln -sf #{shared_path}/upload #{latest_release}/public/upload"
     run "ln -sf #{shared_path}/components/DbConnection.php #{latest_release}/protected/components/DbConnection.php"
-    
-    run "#{latest_release}/protected/yiic migrate up --interactive=0"
   end
 end
