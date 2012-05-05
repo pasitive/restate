@@ -57,7 +57,7 @@ namespace :deploy do
   
   task :finalize_update, :except => { :no_release => true } do
     run "ln -sf #{shared_path}/runtime #{latest_release}/protected/runtime"
-    run "ln -sf #{shared_path}/config #{latest_release}/protected/config"
+    run "ln -sf #{shared_path}/config #{latest_release}/protected"
     run "ln -sf #{shared_path}/assets #{latest_release}/public/assets"
     run "ln -sf #{shared_path}/upload #{latest_release}/public/upload"
     run "ln -sf #{shared_path}/components/DbConnection.php #{latest_release}/protected/components/DbConnection.php"
