@@ -20,25 +20,6 @@ $(function () {
         $('#map_toggler a').removeClass('arrow_up').addClass('arrow_down');
     });
 
-    $('.image_block').each(function () {
-        var $block = $(this);
-        var height = $block.outerHeight();
-        var overlay_css = {
-            display:'none',
-            height:height,
-            'z-index':1999,
-            cursor:'pointer'
-        };
-        $overlay = $('<div/>').addClass('overlay').css(overlay_css);
-        $overlay.prependTo($block);
-        $(this).hover(function () {
-            $(this).find('.overlay').show();
-        }, function () {
-            $(this).find('.overlay').hide();
-        });
-
-    });
-
     $('.gallery').gallery();
     $('dl.dots').dots();
 });

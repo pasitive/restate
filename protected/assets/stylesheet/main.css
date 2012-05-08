@@ -45,7 +45,7 @@ p {
 }
 
 .metro {
-    background: url(../images/icon_metro.png) left no-repeat;
+    background: url(/images/icon_metro.png) left no-repeat;
     color: #333;
 }
 
@@ -76,14 +76,14 @@ address {
 }
 
 #header {
-    background: url(../images/header_bg.jpg);
+    background: url(/images/header_bg.jpg);
     height: 100px;
 }
 
 #logo {
     display: block;
     position: relative;
-    background: url(../images/logo.png) left center no-repeat;
+    background: url(/images/logo.png) left center no-repeat;
     width: 196px;
     height: 67px;
     left: 20px;
@@ -94,7 +94,7 @@ address {
 #menu_block {
     position: relative;
     font-size: 16px;
-    background: url(../images/menu_bg.png) repeat-x;
+    background: url(/images/menu_bg.png) repeat-x;
     height: 35px;
     text-align: center;
 }
@@ -136,7 +136,7 @@ address {
 
 #main_navigation li.active {
     position: relative;
-    background: url('../images/menu_active.png') repeat-x;
+    background: url('/images/menu_active.png') repeat-x;
     background-position: 50% -18px;
     z-index: 9999;
 }
@@ -162,7 +162,7 @@ address {
 
 #menu_block .menu_bottom_shadow {
     position: absolute;
-    background: url(../images/menu_bottom_shadow.png) no-repeat;
+    background: url(/images/menu_bottom_shadow.png) no-repeat;
     height: 31px;
     top: 0;
 }
@@ -173,13 +173,13 @@ address {
 
 .map_shadow_top {
     position: absolute;
-    background: url(../images/menu_bottom_shadow.png) top center no-repeat;
+    background: url(/images/menu_bottom_shadow.png) top center no-repeat;
     height: 35px;
 }
 
 #map #map_toggler {
     position: relative;
-    background: url(../images/map_toggler_bg.png) center no-repeat;
+    background: url(/images/map_toggler_bg.png) center no-repeat;
     height: 43px;
     margin-top: 1px;
     vertical-align: middle;
@@ -195,11 +195,11 @@ address {
 }
 
 #map #map_toggler a.arrow_down {
-    background: url(../images/map_toggle_arrow_down.png) center no-repeat;
+    background: url(/images/map_toggle_arrow_down.png) center no-repeat;
 }
 
 #map #map_toggler a.arrow_up {
-    background: url(../images/map_toggle_arrow_up.png) center no-repeat;
+    background: url(/images/map_toggle_arrow_up.png) center no-repeat;
 }
 
 #map #map_content {
@@ -211,7 +211,7 @@ address {
 
 div.shadow {
     position: absolute;
-    background: transparent url(../images/footer_shadow.png) no-repeat;
+    background: transparent url(/images/footer_shadow.png) no-repeat;
     height: 28px;
     bottom: 0;
     width: 100%;
@@ -219,7 +219,7 @@ div.shadow {
 }
 
 div.shadow.revert {
-    background: transparent url(../images/menu_bottom_shadow.png) no-repeat;
+    background: transparent url(/images/menu_bottom_shadow.png) no-repeat;
     height: 35px;
     top: 0;
 }
@@ -241,7 +241,7 @@ div.shadow.revert {
 }
 
 .v_splitter {
-    background: url(../images/split_v.png) right repeat-y;
+    background: url(/images/split_v.png) right repeat-y;
 }
 
 #main_content, #footer {
@@ -336,11 +336,11 @@ a.more_link {
 }
 
 .key_grey {
-    background: url(../images/key_grey.png) left no-repeat;
+    background: url(/images/key_grey.png) left no-repeat;
 }
 
 .key_gold {
-    background: url(../images/key_gold.png) left no-repeat;
+    background: url(/images/key_gold.png) left no-repeat;
 }
 
 .key_grey span, .key_gold span {
@@ -350,7 +350,7 @@ a.more_link {
 hr.splitter {
     width: 922px;
     height: 1px;
-    background: url(../images/split_h.png) repeat-x;
+    background: url(/images/split_h.png) repeat-x;
     margin: 20px 0;
 }
 
@@ -415,7 +415,7 @@ hr.splitter.croped {
 
 .gallery .items_wrapper a.prev {
     left: 0;
-    background: #e5e0d6 url(../images/slider_arrow_left.png) no-repeat center center;
+    background: #e5e0d6 url(/images/slider_arrow_left.png) no-repeat center center;
 }
 
 .gallery .items {
@@ -425,7 +425,7 @@ hr.splitter.croped {
 
 .gallery .items_wrapper a.next {
     right: 0;
-    background: #e5e0d6 url(../images/slider_arrow_right.png) no-repeat center center;
+    background: #e5e0d6 url(/images/slider_arrow_right.png) no-repeat center center;
 }
 
 .gallery .items ul {
@@ -540,12 +540,12 @@ hr.splitter.croped {
 
 .gallery.small .items_wrapper a.prev {
     left: 0;
-    background: transparent url(../images/slider_arrow_left_small.png) no-repeat center center;
+    background: transparent url(/images/slider_arrow_left_small.png) no-repeat center center;
 }
 
 .gallery.small .items_wrapper a.next {
     right: 0;
-    background: transparent url(../images/slider_arrow_right_small.png) no-repeat center center;
+    background: transparent url(/images/slider_arrow_right_small.png) no-repeat center center;
 }
 
 dl.dots {
@@ -574,7 +574,7 @@ dl.dots dd {
 #special_offers {
     height: 250px;
     /*line-height: 233px;*/
-    background: url('../images/special_bg.png') bottom repeat-x;
+    background: url('/images/special_bg.png') bottom repeat-x;
     text-align: center;
 }
 
@@ -624,7 +624,7 @@ ul.yiiPager li {
 }
 
 ul.yiiPager li.selected, ul.yiiPager li.selected a:hover {
-    background: transparent url(../images/pager_active_bg.png) no-repeat center;
+    background: transparent url(/images/pager_active_bg.png) no-repeat center;
 }
 
 ul.yiiPager li.previous a, ul.yiiPager li.next a {
@@ -750,7 +750,7 @@ ul.yiiPager .last {
 .apartmentPlacemark {
     padding-top: 15px;
     padding-bottom: 15px;
-    padding-left: 10px;
+    padding-left: 15px;
     padding-right: 10px;
 }
 
@@ -782,7 +782,7 @@ ul.yiiPager .last {
 }
 
 .delimiter {
-    background-image: url(../images/breadcrumb_delimeter.png);
+    background-image: url(/images/breadcrumb_delimeter.png);
     background-color: transparent;
     background-repeat: no-repeat;
 }

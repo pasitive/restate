@@ -21,11 +21,30 @@ class Controller extends CController
      */
     public $breadcrumbs = array();
 
+    private $_assetsUrl;
+
     public function init()
     {
-        Yii::app()->clientScript
-            ->registerCoreScript('jquery')
-            ->registerScriptFile('/js/scripts.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerCoreScript('jquery')
+            ->registerScriptFile($this->assetsUrl . '/javascript/scripts.js', CClientScript::POS_END);
         parent::init();
+    }
+
+    /**
+     * @return string the base URL that contains all published asset files of gii.
+     */
+    public function getAssetsUrl()
+    {
+        if ($this->_assetsUrl === null)
+            $this->_assetsUrl = Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.assets'), false, -1, YII_DEBUG);
+        return $this->_assetsUrl;
+    }
+
+    /**
+     * @param string $value the base URL that contains all published asset files of gii.
+     */
+    public function setAssetsUrl($value)
+    {
+        $this->_assetsUrl = $value;
     }
 }

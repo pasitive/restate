@@ -68,7 +68,7 @@
 
     <div class="prepend_top prepend_left">
         <div class="offers grid_7 alpha">
-            <h5>Доступные объекты</h5>
+            <h5>Доступные предложения</h5>
             <?php
             $this->widget('zii.widgets.CListView', array(
                 'dataProvider' => $apartmentDataProvider,

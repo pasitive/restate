@@ -5,15 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
-    <link rel="stylesheet" href="/css/reset.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="/css/960.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="<?php echo $this->assetsUrl; ?>/stylesheet/reset.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="<?php echo $this->assetsUrl; ?>/stylesheet/960.css" type="text/css" media="screen, projection">
 
     <!--[if IE 6]>
     <script src="http://ie-note.googlecode.com/hg/ie-note.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="/css/form.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="<?php echo $this->assetsUrl; ?>/stylesheet/form.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="<?php echo $this->assetsUrl; ?>/stylesheet/main.css" type="text/css" media="screen, projection">
 </head>
 <body>
 
@@ -26,13 +26,11 @@
     <div id="menu_block" class="grid_12">
         <?php $this->widget('zii.widgets.CMenu', array(
         'id' => 'main_navigation',
-        'activateParents' => true,
         'items' => array(
             array('label' => 'Наши объекты', 'url' => Yii::app()->homeUrl, 'active' => Yii::app()->controller->id == 'apartment'),
             array('label' => 'Объекты на карте', 'url' => array('/map/index')),
             array('label' => 'Новости компании', 'url' => array('/news/'), 'active' => Yii::app()->controller->id == 'news'),
             array('label' => 'Полезная информация', 'url' => array('/page/view', 'id' => 2)),
-//            array('label' => 'Как нас найти?', 'url' => array('/page/view', 'id' => 3)),
         ),
     )); ?>
     </div>

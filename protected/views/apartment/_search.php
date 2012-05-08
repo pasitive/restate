@@ -76,6 +76,4 @@
         <?php echo $form->dropDownList($model, 'metro_id', CHtml::listData(MetroStation::model()->hasApartments()->cache(DAY_1)->findAll(), 'id', 'name'), array('prompt' => 'Не важно')) ?>
     </div>
 </div>
-
-
 <?php $this->endWidget(); ?>

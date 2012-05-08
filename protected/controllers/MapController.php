@@ -21,7 +21,6 @@
  */
 class MapController extends Controller
 {
-
     public $layout = '//layouts/column1';
 
     public function actionIndex()
@@ -29,7 +28,7 @@ class MapController extends Controller
         Yii::app()->clientScript->registerScriptFile('http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU');
 
         $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');
-        $model = Apartment::model()->cache(DAY_1, $cacheDependency)->findAll(array('index' => 'id'));
+        $model = Apartment::model()->container()->cache(DAY_1, $cacheDependency)->findAll(array('index' => 'id'));
 
         $data = array();
         foreach ($model as $apartment_id => $apartment) {
@@ -40,5 +39,4 @@ class MapController extends Controller
             'data' => $data,
         ));
     }
-
 }

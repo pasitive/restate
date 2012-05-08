@@ -6,17 +6,17 @@
     <meta name="language" content="en"/>
 
     <!-- blueprint CSS framework -->
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/screen.css"
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->assetsUrl; ?>/stylesheet/screen.css"
           media="screen, projection"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/print.css"
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->assetsUrl; ?>/stylesheet/print.css"
           media="print"/>
     <!--[if lt IE 8]>
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/ie.css"
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->assetsUrl; ?>/stylesheet/ie.css"
           media="screen, projection"/>
     <![endif]-->
 
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/main.css"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/admin/form.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->assetsUrl; ?>/stylesheet/main.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->assetsUrl; ?>/stylesheet/form.css"/>
 
     <script type="text/javascript"
             src="http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU"></script>

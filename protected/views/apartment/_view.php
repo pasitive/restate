@@ -21,6 +21,7 @@
  */
 ?>
 
+<a href="<?php echo Yii::app()->createUrl('apartment/view', array('id' => $data->id)) ?>">
 <div class="offer clearfix">
     <div class="image_block grid_2 alpha">
         <div class="box_shadow">
@@ -30,7 +31,8 @@
 
     <div class="description_block grid_5 omega">
         <div class="description clearfix">
-            <h3><strong><?php echo CHtml::encode(empty($data->name) ? $data->typeName : $data->name) ?></strong>, <?php echo CHtml::encode($data->address) ?>
+            <h3>
+                <strong><?php echo CHtml::encode(empty($data->name) ? $data->typeName : $data->name) ?></strong>, <?php echo CHtml::encode($data->address) ?>
             </h3>
             <?php if (!empty($data->metroName)): ?>
             <address class="label">м. <?php echo $data->metroName ?></address>
@@ -49,5 +51,6 @@
         </div>
     </div>
 </div>
+</a>
 
 <hr class="splitter croped">

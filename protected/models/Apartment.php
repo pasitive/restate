@@ -24,7 +24,14 @@
  * @property string $default_image
  * @property int $container
  * @property string $description
+ * @property string $address
  * @property int $is_rent
+ * @property int $apartment_count
+ *
+ * @property string $typeName
+ * @property string $cityName
+ * @property string $areaName
+ * @property string $metroName
  *
  * The followings are the available model rel   ations:
  * @property ApartmentType $type
@@ -44,6 +51,15 @@ class Apartment extends CActiveRecord
     public $routeable_keywords;
     public $routeable_description;
     public $routeable_title;
+
+    public function scopes()
+    {
+        return array(
+            'container' => array(
+                'condition' => 'container=1'
+            ),
+        );
+    }
 
     public function getAreaName()
     {
@@ -88,7 +104,7 @@ class Apartment extends CActiveRecord
             'attributes' => array(),
             'link' => Yii::app()->createUrl('apartment/view', array('id' => $this->id)),
             'default_image' => $this->default_image,
-            'type' => $this->typeName,
+            'apartment_count' => $this->apartment_count,
         );
 
         return $result;
@@ -131,7 +147,7 @@ class Apartment extends CActiveRecord
         // will receive user inputs.
         return array(
             array('routeable_pattern', 'required'),
-            array('routeable_keywords, routeable_description, routeable_title, metro_name, city_name, area_name, type_name, default_image, container', 'safe'),
+            array('routeable_keywords, routeable_description, routeable_title, metro_name, city_name, area_name, type_name, default_image, container, apartment_count', 'safe'),
             array('city_id, area_id, type_id', 'required'),
             array('name', 'length', 'max' => 255),
             array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
@@ -157,6 +173,7 @@ class Apartment extends CActiveRecord
             'apartmentAttributes' => array(self::HAS_MANY, 'ApartmentAttribute', 'apartment_id'),
             'apartmentFiles' => array(self::HAS_MANY, 'ApartmentFile', 'apartment_id'),
             'parent' => array(self::BELONGS_TO, 'Apartment', 'parent_id'),
+            'apartmentCount' => array(self::STAT, 'Apartment', 'parent_id'),
         );
     }
 
@@ -214,6 +231,7 @@ class Apartment extends CActiveRecord
     protected function beforeSave()
     {
         if (parent::beforeSave()) {
+            $this->apartment_count = $this->apartmentCount;
             return true;
         }
 
@@ -239,7 +257,7 @@ class Apartment extends CActiveRecord
             }
 
             // Контейнер (ЖК итд) нельзя купить полностью
-            if($this->container == 1) {
+            if ($this->container == 1) {
                 $this->is_rent = 2;
             }
 

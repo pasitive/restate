@@ -1,3 +1,5 @@
+require 'rake'
+
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
@@ -26,7 +28,7 @@ role :db, '176.9.18.107', :primary => true
 #   tag
 # end unless exists?(:branch)
 
-set :branch, "master"
+set :branch, "master" 
 
 namespace :app do
   task :setup do
@@ -46,7 +48,20 @@ namespace :app do
   end
 end
 
-namespace :deploy do
+namespace :deploy do 
+    
+  # def minify(files)
+  #   files.each do |file|
+  #     cmd = "yuicompressor #{file} -o #{file}"
+  #     puts cmd
+  #     ret = system(cmd)
+  #     raise "Minification failed for #{file}" if !ret
+  #   end
+  # end
+  # 
+  # task :minify_css do
+  #   minify(FileList['sss/**/*.css'])
+  # end                               
   
   task :restart do
   end
@@ -57,7 +72,7 @@ namespace :deploy do
   
   task :finalize_update, :except => { :no_release => true } do
     run "ln -sf #{shared_path}/runtime #{latest_release}/protected/runtime"
-    run "ln -sf #{shared_path}/config #{latest_release}/protected"
+    run "ln -sf #{shared_path}/config #{latest_release}/protected/config"
     run "ln -sf #{shared_path}/assets #{latest_release}/public/assets"
     run "ln -sf #{shared_path}/upload #{latest_release}/public/upload"
     run "ln -sf #{shared_path}/components/DbConnection.php #{latest_release}/protected/components/DbConnection.php"

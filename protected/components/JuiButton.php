@@ -42,8 +42,14 @@ class JuiButton extends CJuiButton
 
     public $themeUrl = '/css';
 
+    public function init()
+    {
+        $this->themeUrl = Yii::app()->controller->assetsUrl . '/stylesheet';
+        parent::init();
+    }
+
     public function getThemeUrl()
     {
-        return Yii::app()->createAbsoluteUrl(Yii::app()->homeUrl) . '/css';
+        //return Yii::app()->createAbsoluteUrl() . '/stylesheet';
     }
 }
