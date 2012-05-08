@@ -44,13 +44,13 @@ $this->breadcrumbs = array(
 
         function init() {
             var map_options = {
-                // Центр карты
-                center:[55.76, 37.64],
-                // Коэффициент масштабирования
-                zoom:10,
-                // Тип карты
-                type:"yandex#map"
-            },
+                    // Центр карты
+                    center:[55.76, 37.64],
+                    // Коэффициент масштабирования
+                    zoom:10,
+                    // Тип карты
+                    type:"yandex#map"
+                },
                 map = new ymaps.Map('map_content', map_options),
                 collection = new ymaps.GeoObjectCollection();
 
@@ -60,7 +60,7 @@ $this->breadcrumbs = array(
             collection.options.set({
                 hintContentLayout:'my#apartmentLayout',
                 hintPane:'floats',
-                hintHideTimeout: 20000
+                hintHideTimeout:20000
             });
 
             map.behaviors.enable('scrollZoom');
@@ -83,7 +83,8 @@ $this->breadcrumbs = array(
                         name:(data[i].name.length == 0 ? data[i].type : data[i].name),
                         address:data[i].address,
                         moreLink:data[i].link,
-                        apartmentCount:data[i].apartment_count
+                        apartmentCount:data[i].apartment_count,
+                        moreLinkSuffix:(data[i].apartment_count > 0 ? '(' + data[i].apartment_count + ')' : '')
                     }, {
                         preset:'twirl#houseIcon'
                     });
@@ -96,21 +97,21 @@ $this->breadcrumbs = array(
 
             function getHintLayout() {
                 var layout = ymaps.templateLayoutFactory.createClass(
-                    '<div class="apartmentPlacemark grid_5 alpha omega"> ' +
-                        '<div class="image_block grid_2 alpha">' +
-                        '<div class="box_shadow">' +
-                        '<img width="146" src="$[properties.imageUrl]" alt="">' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="description_block grid_3 omega">' +
-                        '<div class="description clearfix">' +
-                        '<h2>$[properties.name]</h2>' +
-                        '<address>$[properties.address]</address>' +
-                        '<a class="more_link" href="$[properties.moreLink]">Посмотреть $[properties.apartmentCount] предложений</a>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>'
-                )
+                        '<div class="apartmentPlacemark grid_5 alpha omega"> ' +
+                            '<div class="image_block grid_2 alpha">' +
+                            '<div class="box_shadow">' +
+                            '<img width="146" src="$[properties.imageUrl]" alt="">' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="description_block grid_3 omega">' +
+                            '<div class="description clearfix">' +
+                            '<h2>$[properties.name]</h2>' +
+                            '<address>$[properties.address]</address>' +
+                            '<a class="more_link" href="$[properties.moreLink]">Посмотреть предложения $[properties.moreLinkSuffix]</a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>'
+                    )
                     ;
                 return layout;
             }

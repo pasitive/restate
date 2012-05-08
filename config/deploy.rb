@@ -67,14 +67,16 @@ namespace :deploy do
   end
   
   task :migrate, :roles => :db, :only => { :primary => true } do
-    run "#{latest_release}/protected/yiic migrate up --interactive=0"
   end
   
-  task :finalize_update, :except => { :no_release => true } do
+  task :finalize_update, :except => { :no_release => true } do                                                     
     run "ln -sf #{shared_path}/runtime #{latest_release}/protected/runtime"
     run "ln -sf #{shared_path}/config #{latest_release}/protected/config"
     run "ln -sf #{shared_path}/assets #{latest_release}/public/assets"
     run "ln -sf #{shared_path}/upload #{latest_release}/public/upload"
     run "ln -sf #{shared_path}/components/DbConnection.php #{latest_release}/protected/components/DbConnection.php"
+    run "#{latest_release}/protected/yiic migrate up --interactive=0"
   end
-end
+end  
+
+after 'deploy:update_code', 'deploy:migrate'
