@@ -694,6 +694,14 @@ ul.yiiPager .last {
     zoom: 1;
 }
 
+#main_content .description ul {
+    margin: 10px 30px;
+}
+
+#main_content .description ul li {
+    padding: 3px;
+}
+
 /*
 .list-view .sorter ul li {
     background: transparent url(../images/sorter_active_bg.png) no-repeat center;
