@@ -75,7 +75,8 @@ namespace :deploy do
     run "ln -sf #{shared_path}/assets #{latest_release}/public/assets"
     run "ln -sf #{shared_path}/upload #{latest_release}/public/upload"
     run "ln -sf #{shared_path}/components/DbConnection.php #{latest_release}/protected/components/DbConnection.php"
-    run "#{latest_release}/protected/yiic migrate up --interactive=0"
+    run "#{latest_release}/protected/yiic migrate up --interactive=0"   
+    run "rm -rf #{latest_release}/protected/runtime/cache"
   end
 end  
 
