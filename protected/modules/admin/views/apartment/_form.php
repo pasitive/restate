@@ -75,6 +75,32 @@
         <?php echo $form->error($model, 'metro_id'); ?>
     </div>
 
+    <?php if (intval($model->type->container) === 0): ?>
+    <div class="row">
+        <?php echo $form->labelEx($model, 'price'); ?>
+        <?php echo $form->textField($model, 'price', array('size' => 60, 'maxlength' => 20)); ?>
+        <?php echo $form->error($model, 'price'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'room_number'); ?>
+        <?php echo $form->textField($model, 'room_number', array('size' => 60, 'maxlength' => 20)); ?>
+        <?php echo $form->error($model, 'room_number'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'square'); ?>
+        <?php echo $form->textField($model, 'square', array('size' => 60, 'maxlength' => 20)); ?>
+        <?php echo $form->error($model, 'square'); ?>
+    </div>
+    <?php endif; ?>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'ytvideo_code'); ?>
+        <?php echo $form->textField($model, 'ytvideo_code', array('size' => 60, 'maxlength' => 20)); ?>
+        <?php echo $form->error($model, 'ytvideo_code'); ?>
+    </div>
+
     <?php
     $this->renderPartial('/apartmentAttribute/_form', array(
         'model' => $model,

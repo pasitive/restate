@@ -94,6 +94,7 @@ Yii::app()->clientScript->registerMetaTag(($model->routeable_keywords ? $model->
     $(function () {
 
         var map = null;
+        var player = null;
 
         ymaps.ready(init);
 

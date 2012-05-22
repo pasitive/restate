@@ -2,6 +2,9 @@
 
 class UrlManager extends CUrlManager
 {
+
+    public $languages = array('ru', 'en');
+
     public function init()
     {
         $oldRules = $this->rules;
@@ -18,7 +21,47 @@ class UrlManager extends CUrlManager
             }
             $this->rules[$route->pattern] = $rule;
         }
+
         $this->rules += $oldRules;
+
+        // Multilanguage
+        $langPattern = implode('|', $this->languages);
+        $rules = array();
+        foreach ($this->rules as $pattern => $rule) {
+
+            if (($char = mb_substr($pattern, 0, 1)) === '/') {
+                $pattern = mb_substr($pattern, 1);
+            }
+
+            $rules['<language:' . $langPattern . '>/' . $pattern] = $rule;
+        }
+
+        $rules['<language:' . $langPattern . '>'] = Yii::app()->defaultController;
+
+        $this->rules = $rules;
+
         parent::init();
+    }
+
+    public function createUrl($route, $params = array(), $ampersand = '&')
+    {
+        if (!isset($params['language'])) {
+            if (Yii::app()->user->hasState('language'))
+                Yii::app()->language = Yii::app()->user->getState('language');
+            else if (isset(Yii::app()->request->cookies['language']))
+                Yii::app()->language = Yii::app()->request->cookies['language']->value;
+            $params['language'] = Yii::app()->language;
+        }
+
+        return parent::createUrl($route, $params, $ampersand);
+    }
+
+    public function parseUrl($request)
+    {
+        $result = parent::parseUrl($request);
+        if (isset($_GET['language']) && in_array($_GET['language'], $this->languages)) {
+            Yii::app()->language = $_GET['language'];
+        }
+        return $result;
     }
 }

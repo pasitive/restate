@@ -28,7 +28,7 @@ class SystemController extends Controller
         } else {
             Yii::app()->user->setFlash('error', 'Ошибка очистки кеша');
         }
-        $this->redirect(array('/admin'));
+        $this->redirect(array('/admin/system/index'));
     }
 
     public function actionUpdateDbCache()
@@ -47,7 +47,7 @@ class SystemController extends Controller
         }
 
         Yii::app()->user->setFlash('success', 'Кеш метро обновлен');
-        $this->redirect(array('/admin'));
+        $this->redirect(array('/admin/system/index'));
     }
 
     public function actionIndex()

@@ -46,8 +46,6 @@
 
     <div class="grid_4 omega">
 
-        <?php $this->widget('MscmWidget'); ?>
-
         <div class="space"></div>
 
     </div>
@@ -60,6 +58,12 @@
         <h5>Описание</h5>
 
         <?php echo $model->description; ?>
+
+        <?php if (!empty($model->ytvideo_code)): ?>
+        <div class="space small"></div>
+        <h5>Видео</h5>
+        <?php $this->widget('ext.yiitube.Yiitube', array('v' => $model->ytvideo_code, 'size' => 'small')); ?>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -79,11 +83,10 @@
         </div>
 
         <div class="grid_4">
-            <!--            <h5>Дополнительная информация</h5>-->
 
             <div class="offer_info">
 
-                <?php //$this->widget('MscmWidget'); ?>
+            <?php //$this->widget('MscmWidget'); ?>
 
             </div>
         </div>
@@ -104,8 +107,8 @@
         <h2>Специальные предложения</h2>
 
         <?php $this->widget('SpecialOffersWidget', array('options' => array(
-        'vertical' => false,
-    ))); ?>
+            'vertical' => false,
+        ))); ?>
 
     </div>
 

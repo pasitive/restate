@@ -67,8 +67,11 @@ Yii::app()->clientScript->registerScript('search', "
                         'header' => 'Страницы:',
                         'maxButtonCount' => 4
                     ),
+                    'sorterHeader' => 'Сортировать по:',
                     'sortableAttributes' => array(
-                        'created_at' => 'Новые',
+                        'created_at' => 'дате',
+                        'price' => 'цене',
+                        'square' => 'площади',
                     ),
                 ));
                 ?>

@@ -23,6 +23,7 @@ class Controller extends CController
 
     private $_assetsUrl;
 
+
     /**
      * @return string the base URL that contains all published asset files of gii.
      */

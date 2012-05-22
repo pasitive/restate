@@ -51,6 +51,10 @@ class Common
 
         $image = Yii::app()->image->load($photo->getTempName());
 
+        $stamp = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'logo.png';
+
+//        $image->watermark($stamp, array());
+
         $uploadPath = $model->generatePath($hashString);
 
         if ($wh) {

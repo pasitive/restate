@@ -27,3 +27,30 @@ $this->menu = array(
         'updated_at',
     ),
 )); ?>
+
+
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+    'id' => 'apartment-files-grid',
+    'dataProvider' => new CArrayDataProvider($model->apartmentFiles),
+    'filter' => null,
+    'columns' => array(
+        array(
+            'header' => 'Изображение',
+            'type' => 'image',
+            'value' => '$data->getFile()',
+        ),
+        'created_at:Время создания',
+        /*
+          'updated_at',
+          */
+        array(
+            'class' => 'CButtonColumn',
+            'template' => '{delete}',
+            'buttons' => array(
+                'delete' => array(
+                    'url' => 'Yii::app()->createUrl("admin/apartmentFile/delete", array("id" => $data->id))'
+                ),
+            ),
+        ),
+    ),
+)); ?>

@@ -202,4 +202,16 @@ class Image_ImageMagick_Driver extends Image_Driver
         return array_slice(getimagesize($this->tmp_image), 0, 2, FALSE);
     }
 
+    /**
+     * @param $wmImage
+     * @param $properties
+     * @return mixed
+     */
+    public function watermark($wmImage, $properties)
+    {
+        // TODO: Implement watermark() method.
+        return TRUE;
+    }
+
+
 } // End Image ImageMagick Driver

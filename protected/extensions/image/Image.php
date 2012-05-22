@@ -142,8 +142,7 @@ class Image
         if (isset($this->image[$property])) {
             return $this->image[$property];
         }
-        else
-        {
+        else {
             throw new CException('invalid property');
         }
     }
@@ -239,8 +238,7 @@ class Image
         $degrees = (int)$degrees;
 
         if ($degrees > 180) {
-            do
-            {
+            do {
                 // Keep subtracting full circles until the degrees have normalized
                 $degrees -= 360;
             }
@@ -248,8 +246,7 @@ class Image
         }
 
         if ($degrees < -180) {
-            do
-            {
+            do {
                 // Keep adding full circles until the degrees have normalized
                 $degrees += 360;
             }
@@ -384,8 +381,7 @@ class Image
         if (!is_scalar($value))
             return FALSE;
 
-        switch ($type)
-        {
+        switch ($type) {
             case 'width':
             case 'height':
                 if (is_string($value) AND !ctype_digit($value)) {
@@ -393,8 +389,7 @@ class Image
                     if (!preg_match('/^[0-9]++%$/D', $value))
                         return FALSE;
                 }
-                else
-                {
+                else {
                     $value = (int)$value;
                 }
                 break;
@@ -403,8 +398,7 @@ class Image
                     if (!in_array($value, array('top', 'bottom', 'center')))
                         return FALSE;
                 }
-                else
-                {
+                else {
                     $value = (int)$value;
                 }
                 break;
@@ -413,16 +407,15 @@ class Image
                     if (!in_array($value, array('left', 'right', 'center')))
                         return FALSE;
                 }
-                else
-                {
+                else {
                     $value = (int)$value;
                 }
                 break;
             case 'master':
                 if ($value !== Image::NONE AND
                     $value !== Image::AUTO AND
-                    $value !== Image::WIDTH AND
-                    $value !== Image::HEIGHT
+                        $value !== Image::WIDTH AND
+                            $value !== Image::HEIGHT
                 )
                     return FALSE;
                 break;

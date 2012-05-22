@@ -49,8 +49,6 @@
 
         <div class="grid_3 omega">
 
-            <?php $this->widget('MscmWidget'); ?>
-
             <p>Введите Ваш номер телефона и укажите удобное для Вас время звонка.</p>
         </div>
 

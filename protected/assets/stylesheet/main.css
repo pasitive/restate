@@ -249,11 +249,11 @@ div.shadow.revert {
 }
 
 .prepend_left {
-    padding-left: 50px;
+    padding-left: 50px !important;
 }
 
 .prepend_left.small {
-    padding-left: 20px;
+    padding-left: 20px !important;
 }
 
 .prepend_top {
@@ -681,7 +681,7 @@ ul.yiiPager .last {
 }
 
 .list-view .sorter {
-    width: 220px;
+    width: 280px;
     float: left;
     line-height: 29px;
     margin: 0;
@@ -810,7 +810,13 @@ ul.yiiPager .last {
 
 .search_label {
     line-height: 22px;
-    font-size: 18px;
+    font-size: 14px;
     color: #333;
+    text-align: center;
+    font-weight: normal;
+    display: inline-block;
+}
+
+.centered {
     text-align: center;
 }

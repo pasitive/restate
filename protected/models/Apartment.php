@@ -33,7 +33,16 @@
  * @property string $areaName
  * @property string $metroName
  *
- * The followings are the available model rel   ations:
+ * @property float $price
+ * @property int $room_number
+ * @property int $square
+ * @property string $ytvideo_code
+ *
+ *
+ *
+ *
+ *
+ * The followings are the available model relations:
  * @property ApartmentType $type
  * @property Area $area
  * @property City $city
@@ -46,6 +55,9 @@ class Apartment extends CActiveRecord
     public $files;
     public $fileType = array('jpg', 'jpeg', 'gif', 'png');
     public $fileSize = array(100, 150, 450);
+
+    public $docs;
+    public $docTypes = array('pdf', 'doc', 'docx', 'rtf');
 
     public $routeable_pattern;
     public $routeable_keywords;
@@ -147,7 +159,9 @@ class Apartment extends CActiveRecord
         // will receive user inputs.
         return array(
             array('routeable_pattern', 'required'),
-            array('routeable_keywords, routeable_description, routeable_title, metro_name, city_name, area_name, type_name, default_image, container, apartment_count', 'safe'),
+            array('routeable_keywords, routeable_description, routeable_title, metro_name, city_name, area_name, type_name, default_image, container, apartment_count, ytvideo_code', 'safe'),
+            array('price', 'numerical'),
+            array('room_number, square', 'numerical', 'integerOnly' => true),
             array('city_id, area_id, type_id', 'required'),
             array('name', 'length', 'max' => 255),
             array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
@@ -197,11 +211,17 @@ class Apartment extends CActiveRecord
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
             'description' => 'Описание',
-            'is_rent' => 'Аренда',
+            'is_rent' => 'Сдается в аренду',
 
             'routeable_title' => 'SEO Заголовок',
             'routeable_keywords' => 'SEO Ключевые слова',
             'routeable_description' => 'SEO Описание',
+
+            'price' => 'Цена',
+            'room_number' => 'Кол-во комнат',
+            'square' => 'Общая площадь',
+
+            'ytvideo_code' => 'Код видео на YouTube',
         );
     }
 
@@ -341,6 +361,19 @@ class Apartment extends CActiveRecord
         $criteria->compare('type_id', $this->type_id, true);
         $criteria->compare('metro_id', $this->metro_id, true);
         $criteria->compare('is_rent', $this->is_rent, true);
+
+        if ($this->room_number != null) {
+            if (in_array(5, $this->room_number)) {
+                $criteria->addCondition('room_number >= 5');
+            } else {
+                $criteria->addInCondition('room_number', $this->room_number);
+            }
+        }
+
+        if ($this->price != null && is_array($this->price)) {
+            $criteria->addBetweenCondition('price', $this->price[0], $this->price[1]);
+        }
+
         $criteria->compare('created_at', $this->created_at, true);
         $criteria->compare('updated_at', $this->updated_at, true);
 
