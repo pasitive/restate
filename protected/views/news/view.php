@@ -22,7 +22,7 @@
 
 $this->pageTitle = Yii::app()->name . ' - ' . 'Новости компании' . ' - ' . $model->title;
 $this->breadcrumbs = array(
-    'Новости' => array('/news/'),
+    'Новости' => array('/news/index'),
     $model->title
 );
 ?>
@@ -35,4 +35,4 @@ $this->breadcrumbs = array(
 
 <div class="space"></div>
 
-<?php echo CHtml::link('Назад к списку новостей', array('/news/'), array('class' => 'more_link')) ?>
+<?php echo CHtml::link('Назад к списку новостей', array('/news/index'), array('class' => 'more_link')) ?>

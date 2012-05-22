@@ -26,6 +26,7 @@ $this->breadcrumbs = array(
     $model->typeName => array('/apartment/view', 'id' => $model->id),
     $model->address
 );
+
 $this->pageTitle = Yii::app()->name . ' - ' . ($model->routeable_title ? $model->routeable_title : ($model->name . ' - ' . $model->address));
 Yii::app()->clientScript->registerMetaTag(($model->routeable_description ? $model->routeable_description : ($model->name . ' - ' . $model->address)), 'description');
 Yii::app()->clientScript->registerMetaTag(($model->routeable_keywords ? $model->routeable_keywords : $model->name), 'keywords');
@@ -94,7 +95,6 @@ Yii::app()->clientScript->registerMetaTag(($model->routeable_keywords ? $model->
     $(function () {
 
         var map = null;
-        var player = null;
 
         ymaps.ready(init);
 
