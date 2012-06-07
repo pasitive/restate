@@ -10,7 +10,7 @@ class UrlManager extends CUrlManager
         $oldRules = $this->rules;
         $this->rules = array();
         $dependency = new CDbCacheDependency('SELECT MAX(created_at) FROM route');
-        $routes = Route::model()->cache(3600, $dependency)->findAll();
+        $routes = Route::model()->cache(DAY_1, $dependency)->findAll();
 
         Yii::app()->cache->set('routes', $routes, 3600, $dependency);
 

@@ -53,8 +53,7 @@ class SpecialOffersWidget extends CWidget
         }
 
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');
-
-        $this->_dataProvider = new CActiveDataProvider(Apartment::model()->cache(86400, $dependency), array(
+        $this->_dataProvider = new CActiveDataProvider(Apartment::model()->cache(DAY_1, $dependency), array(
             'criteria' => $criteria,
             'pagination' => array(
                 'pageSize' => $this->_options['max'],
@@ -69,9 +68,9 @@ class SpecialOffersWidget extends CWidget
         );
 
         if (($vertical = $this->_options['vertical']) === true) {
-            $this->render('special/vertical/list', $viewData);
+            $this->render('specialOffersWidget/vertical/list', $viewData);
         } else {
-            $this->render('special/horizontal/list', $viewData);
+            $this->render('specialOffersWidget/horizontal/list', $viewData);
         }
     }
 }

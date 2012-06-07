@@ -19,12 +19,17 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-class MscmWidget extends CWidget
-{
+?>
 
-    public function run()
-    {
-        $this->render('mscm');
-    }
+<h2>Специальные предложения</h2>
 
-}
+<div class="offers">
+    <?php
+    $this->widget('zii.widgets.CListView', array(
+        'dataProvider' => $dataProvider,
+        'itemView' => 'specialOffersWidget/vertical/_view',
+        'template' => "{items}",
+    ));
+    ?>
+
+</div>

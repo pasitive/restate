@@ -23,7 +23,8 @@
 
 <?php
 $this->breadcrumbs = array(
-    $model->typeName => array('/apartment/view', 'id' => $model->id),
+//    $model->typeName => array('/apartment/view', 'id' => $model->id),
+    (!empty($model->parent_id) ? $model->parentName : ''),
     $model->address
 );
 
@@ -32,63 +33,43 @@ Yii::app()->clientScript->registerMetaTag(($model->routeable_description ? $mode
 Yii::app()->clientScript->registerMetaTag(($model->routeable_keywords ? $model->routeable_keywords : $model->name), 'keywords');
 ?>
 
-<div id="main_content" class="prepend_top prepend_left">
+<div id="detail_view" class="detail_view_wrapper prepend_top prepend_left">
 
-    <h1>
-        <?php echo CHtml::encode($model->address) ?>
-    </h1>
+    <div class="detail_view_header">
 
-    <div class="grid_3 alpha">
-        <h4 class="label"><?php echo CHtml::encode($model->typeName) ?></h4>
-    </div>
+        <h1>
+            <?php echo CHtml::encode($model->address) ?>
+        </h1>
 
-    <div class="grid_3">
-        <h4 class="metro"><span><?php echo CHtml::encode($model->metroName) ?></span></h4>
-    </div>
-
-    <div class="grid_3">
-        <h4><span class="label">Район: </span><?php echo CHtml::encode($model->areaName) ?></h4>
-    </div>
-
-    <div class="grid_2 omega">
-        <a href="#" id="map_link">Показать на карте</a>
-    </div>
-
-</div>
-
-<div class="grid_12 alpha omega">
-
-    <div class="gallery" id="full_gallery">
-        <div class="items_wrapper">
-            <a href="#" class="prev">Prev</a>
-            <a href="#" class="next">Next</a>
-
-            <div class="items">
-                <ul>
-                    <?php foreach ($apartmentFiles as $apartmentFile) : ?>
-                    <li><img src="<?php echo $apartmentFile->getFile(450) ?>" alt=""></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
+        <div class="grid_3 alpha">
+            <h4 class="label"><?php echo (!empty($model->parent_id) ? $model->parentName : '') ?></h4>
         </div>
+
+        <div class="grid_3">
+            <h4 class="metro"><span><?php echo CHtml::encode($model->metroName) ?></span></h4>
+        </div>
+
+        <div class="grid_3">
+            <h4><span class="label">Район: </span><?php echo CHtml::encode($model->areaName) ?></h4>
+        </div>
+
+        <div class="grid_2 omega">
+            <a href="#" id="map_link">Показать на карте</a>
+        </div>
+
     </div>
 
-    <div id="map" style="position:relative;margin:25px 0;width:100%;height:279px;display: none;"></div>
+
+
+    <?php $this->renderPartial('_standalone', array(
+    'model' => $model,
+    'apartmentAttributes' => $apartmentAttributes,
+)) ?>
+
+    <div class="space"></div>
+    <div class="shadow"></div>
 
 </div>
-
-<?php if ($model->container == 1) : ?>
-<?php $this->renderPartial('_container', array(
-        'model' => $model,
-        'apartmentDataProvider' => $apartmentDataProvider,
-        'apartmentAttributes' => $apartmentAttributes,
-    )) ?>
-<?php else: ?>
-<?php $this->renderPartial('_standalone', array(
-        'model' => $model,
-        'apartmentAttributes' => $apartmentAttributes,
-    )) ?>
-<?php endif; ?>
 
 <script type="text/javascript">
 

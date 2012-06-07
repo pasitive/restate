@@ -21,6 +21,19 @@
  */
 ?>
 
+<div class="full_description">
+
+    <div class="grid_12 alpha omega">
+
+
+
+    </div>
+
+</div>
+
+
+<!--
+
 <div class="grid_12 alpha omega">
 
     <div class="grid_12 alpha omega">
@@ -57,7 +70,6 @@
 
     </div>
 
-    <!--    <div class="space"></div>-->
 
     <div class="grid_12 alpha omega">
 
@@ -66,13 +78,14 @@
             <h2>Специальные предложения</h2>
 
             <?php $this->widget('SpecialOffersWidget', array('options' => array(
-            'vertical' => false,
-        ))); ?>
+    'vertical' => false,
+))); ?>
 
         </div>
 
     </div>
 
-    <!--    <div class="space"></div>-->
     <div class="shadow"></div>
 </div>
+
+-->

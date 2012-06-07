@@ -22,35 +22,49 @@
 ?>
 
 <a href="<?php echo Yii::app()->createUrl('apartment/view', array('id' => $data->id)) ?>">
-<div class="offer clearfix">
-    <div class="image_block grid_2 alpha">
-        <div class="box_shadow">
-            <?php echo CHtml::image($data->default_image, $data->name, array('width' => '146px')) ?>
-        </div>
-    </div>
 
-    <div class="description_block grid_5 omega">
-        <div class="description clearfix">
-            <h3>
-                <strong><?php echo CHtml::encode(empty($data->name) ? $data->typeName : $data->name) ?></strong>, <?php echo CHtml::encode($data->address) ?>
-            </h3>
-            <?php if (!empty($data->metroName)): ?>
-            <address class="label">м. <?php echo $data->metroName ?></address>
-            <?php else : ?>
-            <address>&nbsp;</address>
-            <?php endif; ?>
-
-            <div class="grid_3 alpha">
-                <?php echo CHtml::link(CHtml::tag('span', array(), $data->typeName), array('/apartment/view', 'id' => $data->id), array('class' => 'apartment_type ' . $data->typeIcon)); ?>
-            </div>
-
-            <div class="grid_1 omega">
-                <!--                <a href="#" class="more_link">Подробнее</a>-->
-                <?php echo CHtml::link('Подробнее', array('/apartment/view', 'id' => $data->id), array('class' => 'more_link')) ?>
+    <div class="offer clearfix">
+        <div class="image_block grid_2 alpha">
+            <div class="box_shadow">
+                <?php echo CHtml::image($data->default_image, $data->name, array('width' => '146px')) ?>
             </div>
         </div>
+
+        <div class="description_block grid_5 omega">
+            <div class="description clearfix">
+
+
+                    <?php if (!empty($data->parent)): ?>
+                    <h5><?php echo CHtml::encode($data->parentName) ?></h5>
+                    <address><?php echo CHtml::encode($data->address) ?></address>
+                    <?php else: ?>
+                    <h5><?php echo CHtml::encode(empty($data->name) ? $data->typeName : $data->name) ?></h5>
+                    <address><?php echo CHtml::encode($data->address) ?></address>
+                    <?php endif; ?>
+
+
+                <dl>
+                    <dt>Метро:</dt>
+                    <dd><?php echo (empty($data->metroName) ? '&mdash;' : $data->metroName) ?></dd>
+
+                    <?php if ($data->container == 1): ?>
+
+                    <?php else: ?>
+
+                    <dt>Общая площадь:</dt>
+                    <dd><?php echo (empty($data->square) ? '&mdash;' : $data->square . ' м<sup>2</sup>') ?></dd>
+
+                    <dt>Комнат:</dt>
+                    <dd><?php echo (empty($data->room_number) ? '&mdash;' : $data->room_number) ?></dd>
+                    <?php endif; ?>
+                </dl>
+
+                <?php if ($data->container != 1): ?>
+                <div class="price"><?php echo (($data->is_rent == 1) ? 'Стоимость за месяц: ' : 'Цена: ') ?><?php echo (($data->price == 0 ? 'Уточняйте у менеджера' : Yii::app()->numberFormatter->formatCurrency($data->price, 'RUB'))) ?></div>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
-</div>
 </a>
 
 <hr class="splitter croped">

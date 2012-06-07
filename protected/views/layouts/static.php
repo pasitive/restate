@@ -34,19 +34,4 @@
     <div class="shadow"></div>
 
 </div>
-
-<div class="grid_12">
-
-    <div id="special_offers">
-
-        <h2>Специальные предложения</h2>
-
-        <?php $this->widget('SpecialOffersWidget', array('options' => array(
-            'vertical' => false,
-        ))); ?>
-
-    </div>
-
-    <div class="shadow"></div>
-</div>
 <?php $this->endContent(); ?>

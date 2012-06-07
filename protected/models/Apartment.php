@@ -21,6 +21,7 @@
  * @property string $area_name
  * @property string $city_name
  * @property string $type_name
+ * @property string $parent_name
  * @property string $default_image
  * @property int $container
  * @property string $description
@@ -32,10 +33,15 @@
  * @property string $cityName
  * @property string $areaName
  * @property string $metroName
+ * @property string $parentName
  *
  * @property float $price
  * @property int $room_number
  * @property int $square
+ * @property int $square_live
+ * @property int $square_kitchen
+ * @property int $wc_number
+ * @property int $floor
  * @property string $ytvideo_code
  *
  *
@@ -90,13 +96,19 @@ class Apartment extends CActiveRecord
 
     public function getTypeIcon()
     {
-        return $this->container ? 'key_gold' : 'key_grey';
+        return $this->container ? 'icon-key_gold' : 'icon-key_grey';
     }
 
     public function getCityName()
     {
         return (empty($this->city_name) ? $this->city->name : $this->city_name);
     }
+
+    public function getParentName()
+    {
+        return (empty($this->parent_name) ? $this->parent->name : $this->parent_name);
+    }
+
 
     public function toArray()
     {
@@ -159,9 +171,9 @@ class Apartment extends CActiveRecord
         // will receive user inputs.
         return array(
             array('routeable_pattern', 'required'),
-            array('routeable_keywords, routeable_description, routeable_title, metro_name, city_name, area_name, type_name, default_image, container, apartment_count, ytvideo_code', 'safe'),
+            array('routeable_keywords, routeable_description, routeable_title, metro_name, city_name, area_name, type_name, default_image, container, apartment_count, ytvideo_code, parent_name', 'safe'),
             array('price', 'numerical'),
-            array('room_number, square', 'numerical', 'integerOnly' => true),
+            array('room_number, square, square_live, square_kitchen, wc_number, floor', 'numerical', 'integerOnly' => true),
             array('city_id, area_id, type_id', 'required'),
             array('name', 'length', 'max' => 255),
             array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
@@ -220,6 +232,10 @@ class Apartment extends CActiveRecord
             'price' => 'Цена',
             'room_number' => 'Кол-во комнат',
             'square' => 'Общая площадь',
+            'square_live' => 'Жилая площадь',
+            'square_kitchen' => 'Площадь кухни',
+            'floor' => 'Этаж',
+            'wc_number' => 'Кол-во санузлов',
 
             'ytvideo_code' => 'Код видео на YouTube',
         );

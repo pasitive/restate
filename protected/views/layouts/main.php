@@ -10,21 +10,20 @@
     <link rel="stylesheet" href="<?php echo $this->assetsUrl; ?>/stylesheet/960.css" type="text/css"
           media="screen, projection">
 
-    <!--[if IE 6]>
-    <script src="http://ie-note.googlecode.com/hg/ie-note.js"></script>
-    <![endif]-->
-
     <link rel="stylesheet" href="<?php echo $this->assetsUrl; ?>/stylesheet/form.css" type="text/css"
           media="screen, projection">
-    <link rel="stylesheet" href="<?php echo $this->assetsUrl; ?>/stylesheet/main.css" type="text/css"
+
+    <link rel="stylesheet/less" href="<?php echo $this->assetsUrl; ?>/stylesheet/main.less" type="text/css"
           media="screen, projection">
+
+    <script type="text/javascript" src="<?php echo $this->assetsUrl; ?>/javascript/less-1.3.0.min.js"></script>
 </head>
 <body>
 
 <div id="container" class="container_12">
 
     <div id="header" class="grid_12">
-        <a href="<?php echo Yii::app()->homeUrl ?>" id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></a>
+       <!-- <a href="<?php echo Yii::app()->homeUrl ?>" id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></a>-->
     </div>
 
     <div id="menu_block" class="grid_12">
@@ -49,7 +48,7 @@
                 <div class="space small"></div>
 
                 <?php if (isset($this->breadcrumbs)): ?>
-                    <?php $this->widget('application.components.Breadcrumbs', array(
+                    <?php $this->widget('Breadcrumbs', array(
                     'links' => $this->breadcrumbs,
                     'separator' => CHtml::image('/images/breadcrumb_delimeter.png'),
                 )); ?><!-- breadcrumbs -->

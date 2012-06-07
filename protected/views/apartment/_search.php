@@ -25,7 +25,31 @@
     'method' => 'get',
 )); ?>
 
-<div class="grid_3 alpha">
+<div class="space small"></div>
+
+<div class="grid_3">
+
+    <div id="rent">
+        <?php echo CHtml::radioButton('Apartment[is_rent]', true, array('id' => 'rent0', 'value' => '')) ?>
+        <?php echo CHtml::label('Все', 'rent0') ?>
+
+        <?php echo CHtml::radioButton('Apartment[is_rent]', false, array('id' => 'rent1', 'value' => 1)) ?>
+        <?php echo CHtml::label('Снять', 'rent1') ?>
+
+        <?php echo CHtml::radioButton('Apartment[is_rent]', false, array('id' => 'rent2', 'value' => 0)) ?>
+        <?php echo CHtml::label('Купить', 'rent2') ?>
+    </div>
+
+    <?php $this->widget('application.components.JuiButton', array(
+        'name' => 'rent',
+        'buttonType' => 'buttonset',
+    ));?>
+
+</div>
+
+<!--
+
+<div>
     <div class="rent_toggler centered delimiter right">
         <div id="rent">
             <?php echo CHtml::radioButton('Apartment[is_rent]', true, array('id' => 'rent0', 'value' => '')) ?>
@@ -39,13 +63,13 @@
         </div>
 
         <?php $this->widget('application.components.JuiButton', array(
-        'name' => 'rent',
-        'buttonType' => 'buttonset',
-    ));?>
+    'name' => 'rent',
+    'buttonType' => 'buttonset',
+));?>
     </div>
 </div>
 
-<div class="grid_4 delimiter right">
+<div>
     <div class="apartment_type_select">
         <div id="type">
             <?php echo CHtml::radioButton('Apartment[type_id]', true, array('id' => 'type0', 'value' => '')) ?>
@@ -57,13 +81,13 @@
         </div>
 
         <?php $this->widget('application.components.JuiButton', array(
-        'name' => 'type',
-        'buttonType' => 'buttonset',
-    ));?>
+    'name' => 'type',
+    'buttonType' => 'buttonset',
+));?>
     </div>
 </div>
 
-<div class="grid_3">
+<div>
     <div class="price_range small">
         <span class="search_label">&nbsp;Цена от</span>
         <?php echo CHtml::textField('Apartment[price][]', '', array('size' => 5)) ?>
@@ -72,17 +96,11 @@
     </div>
 </div>
 
-<div class="grid_2 omega">
-    <div class="advanced_search">
-
-    </div>
-</div>
-
 <div class="advanced_search_form">
 
     <div class="space small"></div>
 
-    <div class="grid_4 alpha delimiter right">
+    <div>
         <div class="square_range prepend_left small">
             <span class="search_label">Общая площадь</span>
             <?php echo CHtml::textField('Apartment[price][]', '', array('size' => 7)) ?>
@@ -92,7 +110,7 @@
         </div>
     </div>
 
-    <div class="grid_4 delimiter right">
+    <div>
         <div class="apartment_type_select">
             <div id="rooms">
                 <span class="search_label">Кол-во комнат: </span>
@@ -114,19 +132,19 @@
             </div>
 
             <?php $this->widget('application.components.JuiButton', array(
-            'name' => 'rooms',
-            'buttonType' => 'buttonset',
-        ));?>
+    'name' => 'rooms',
+    'buttonType' => 'buttonset',
+));?>
         </div>
     </div>
 
-    <div class="grid_3 omega">
+    <div>
         <div class="subway_select">
-<!--            <span class="search_label">Метро</span>-->
             <?php echo $form->dropDownList($model, 'metro_id', CHtml::listData(MetroStation::model()->hasApartments()->cache(DAY_1)->findAll(), 'id', 'name'), array('prompt' => 'Все станции метро')) ?>
         </div>
     </div>
 
 </div>
+-->
 
 <?php $this->endWidget(); ?>

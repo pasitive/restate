@@ -35,10 +35,17 @@ Yii::app()->clientScript->registerScript('search', "
 
 <div class="shadow revert"></div>
 
-<div class="grid_12 alpha omega">
-    <div class="search-form prepend_top clearfix">
-        <?php $this->renderPartial('_search', array('model' => $model, 'apartmentTypes' => $apartmentTypes)) ?>
-        <div class="space small"></div>
+<div class="search-form grid_12 alpha omega">
+
+    <div class="grid_2 alpha">
+        <a href="<?php echo Yii::app()->homeUrl ?>" id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></a>
+    </div>
+
+    <div class="grid_10 omega">
+        <div>
+            <?php $this->renderPartial('_search', array('model' => $model, 'apartmentTypes' => $apartmentTypes)) ?>
+            <div class="space small"></div>
+        </div>
     </div>
 </div>
 
@@ -50,7 +57,7 @@ Yii::app()->clientScript->registerScript('search', "
 
         <div id="main_content" class="prepend_left v_splitter">
 
-            <h1>Агенство элитной недвижимости</h1>
+            <h1><?php echo CHtml::encode(Yii::app()->name) ?></h1>
 
             <div class="offers">
                 <?php
@@ -84,9 +91,7 @@ Yii::app()->clientScript->registerScript('search', "
 
     <div class="grid_4 omega">
         <div id="sidebar">
-
             <?php $this->widget('SpecialOffersWidget'); ?>
-
         </div>
     </div>
 </div>

@@ -27,6 +27,12 @@ class ApartmentController extends Controller
 
         $model = new Apartment('search');
         $model->unsetAttributes();
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array(
+            'container' => 0,
+        ));
+        $criteria->order = 'created_at DESC';
+        $model->setDbCriteria($criteria);
 
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
         $apartmentTypes = ApartmentType::model()->is_filter()->cache(DAY_1, $dependency)->findAll();
@@ -43,10 +49,9 @@ class ApartmentController extends Controller
 
     public function actionView($id)
     {
+        $this->layout = '//layouts/column1';
 
         Yii::app()->clientScript->registerScriptFile('http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU');
-
-        $this->layout = '//layouts/column1';
 
         $model = Apartment::model()->findByPk($id);
         if (!$model) {
