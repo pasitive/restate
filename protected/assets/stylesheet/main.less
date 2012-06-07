@@ -119,6 +119,12 @@ a {
 
     background: url(/images/header_bg.png);
     height: 100px;
+
+    .slogan {
+        text-align: right;
+        padding: 2px 2px 0 0;
+        font-size: 120%;
+    }
 }
 
 #logo {
@@ -141,7 +147,7 @@ a {
     list-style-image: none;
     list-style-type: none;
 
-    height: 50px;
+    height: 15px;
     cursor: pointer;
 
     li {
@@ -149,7 +155,7 @@ a {
         padding-left: 15px;
         padding-right: 15px;
         line-height: 15px;
-        height: 50px;
+        height: 15px;
 
         a {
             color: @color-white;
@@ -159,7 +165,7 @@ a {
 
         &.active {
             position: relative;
-            background: url('/images/menu_active.png') repeat-x;
+            background: #CFCABB;
             background-position: 50% -38px;
             z-index: 9999;
 
@@ -361,6 +367,7 @@ div.shadow.revert {
     }
     h3 {
         margin-bottom: 5px;
+        margin-top: 10px;
     }
     address {
         margin-bottom: 15px;

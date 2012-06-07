@@ -394,6 +394,18 @@ class Apartment extends CActiveRecord
             $criteria->addBetweenCondition('price', $this->price[0], $this->price[1]);
         }
 
+        if ($this->square != null && is_array($this->square)) {
+            $criteria->addBetweenCondition('square', $this->square[0], $this->square[1]);
+        }
+
+        if ($this->square_live != null && is_array($this->square_live)) {
+            $criteria->addBetweenCondition('square_live', $this->square_live[0], $this->square_live[1]);
+        }
+
+        if ($this->square_kitchen != null && is_array($this->square_kitchen)) {
+            $criteria->addBetweenCondition('square_kitchen', $this->square_kitchen[0], $this->square_kitchen[1]);
+        }
+
         $criteria->compare('created_at', $this->created_at, true);
         $criteria->compare('updated_at', $this->updated_at, true);
 

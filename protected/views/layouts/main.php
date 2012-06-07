@@ -23,7 +23,7 @@
 <div id="container" class="container_12">
 
     <div id="header" class="grid_12">
-       <!-- <a href="<?php echo Yii::app()->homeUrl ?>" id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></a>-->
+        <div class="slogan">Агентство элитной недвижимости &laquo;Запад&raquo;</div>
     </div>
 
     <div id="menu_block" class="grid_12">

@@ -31,6 +31,11 @@
 )); ?>
 
     <div class="row">
+        <span class="search_label">Метро</span>
+        <?php echo $form->dropDownList($model, 'metro_id', CHtml::listData(MetroStation::model()->hasApartments()->cache(DAY_1)->findAll(), 'id', 'name'), array('prompt' => 'Все станции метро')) ?>
+    </div>
+
+    <div class="row">
         <span class="search_label">Цена от</span>
         <?php echo CHtml::textField('Apartment[price][]', '', array('size' => 5)) ?>
         <span class="search_label">&mdash;</span>
@@ -52,8 +57,34 @@
     </div>
 
     <div class="row">
-        <?php echo $form->dropDownList($model, 'metro_id', CHtml::listData(MetroStation::model()->hasApartments()->cache(DAY_1)->findAll(), 'id', 'name'), array('prompt' => 'Все станции метро')) ?>
+        <span class="search_label">Общая площадь</span>
+        <?php echo CHtml::textField('Apartment[square][]', '', array('size' => 5)) ?>
+        <span class="search_label">&mdash;</span>
+        <?php echo CHtml::textField('Apartment[square][]', '', array('size' => 5)) ?>
     </div>
+
+    <div class="row">
+        <span class="search_label">Жилая площадь</span>
+        <?php echo CHtml::textField('Apartment[square_live][]', '', array('size' => 5)) ?>
+        <span class="search_label">&mdash;</span>
+        <?php echo CHtml::textField('Apartment[square_live][]', '', array('size' => 5)) ?>
+    </div>
+
+    <div class="row">
+        <span class="search_label">Площадь кухни</span>
+        <?php echo CHtml::textField('Apartment[square_kitchen][]', '', array('size' => 5)) ?>
+        <span class="search_label">&mdash;</span>
+        <?php echo CHtml::textField('Apartment[square_kitchen][]', '', array('size' => 5)) ?>
+    </div>
+
+    <div class="row">
+        <span class="search_label">Кол-во санузлов</span>
+        <?php echo CHtml::textField('Apartment[wc_number][]', '', array('size' => 5)) ?>
+        <span class="search_label">&mdash;</span>
+        <?php echo CHtml::textField('Apartment[wc_number][]', '', array('size' => 5)) ?>
+    </div>
+
+
 
 
     <?php $this->endWidget(); ?>

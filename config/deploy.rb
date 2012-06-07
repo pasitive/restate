@@ -48,20 +48,7 @@ namespace :app do
   end
 end
 
-namespace :deploy do 
-    
-  # def minify(files)
-  #   files.each do |file|
-  #     cmd = "yuicompressor #{file} -o #{file}"
-  #     puts cmd
-  #     ret = system(cmd)
-  #     raise "Minification failed for #{file}" if !ret
-  #   end
-  # end
-  # 
-  # task :minify_css do
-  #   minify(FileList['sss/**/*.css'])
-  # end                               
+namespace :deploy do                              
   
   task :restart do
   end
