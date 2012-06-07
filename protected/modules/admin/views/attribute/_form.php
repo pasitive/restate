@@ -22,6 +22,12 @@
     </div>
 
     <div class="row">
+        <?php echo $form->labelEx($model, 'sort'); ?>
+        <?php echo $form->textField($model, 'sort', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->error($model, 'sort'); ?>
+    </div>
+
+    <div class="row">
         <?php echo $form->labelEx($model, 'disabled'); ?>
         <?php echo $form->checkbox($model, 'disabled'); ?>
         <?php echo $form->error($model, 'disabled'); ?>

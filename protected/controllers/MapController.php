@@ -51,9 +51,13 @@ class MapController extends Controller
             }
         }
 
+        $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
+        $apartmentTypes = ApartmentType::model()->is_filter()->cache(DAY_1, $dependency)->findAll();
+
         $this->render('index', array(
             'data' => $data,
             'model' => $model,
+            'apartmentTypes' => $apartmentTypes,
         ));
     }
 }

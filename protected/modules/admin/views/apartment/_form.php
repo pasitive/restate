@@ -77,8 +77,6 @@
 
 <?php if (intval($model->type->container) === 0): // Если тип объекта не является контейнером ?>
 
-
-
 <div class="row">
     <?php echo $form->labelEx($model, 'price'); ?>
     <?php echo $form->textField($model, 'price', array('size' => 60, 'maxlength' => 20)); ?>

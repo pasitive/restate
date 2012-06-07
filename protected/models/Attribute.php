@@ -11,6 +11,7 @@
  * @property string $created_at
  * @property string $updated_at
  * @property string $type
+ * @property int $sort
  *
  * The followings are the available model relations:
  * @property ApartmentAttribute[] $apartmentAttributes
@@ -19,6 +20,13 @@
 class Attribute extends CActiveRecord
 {
 
+
+    public function defaultScope()
+    {
+        return array(
+            'order' => 'sort'
+        );
+    }
     /**
      * Returns the static model of the specified AR class.
      * @return Attribute the static model class
@@ -46,7 +54,7 @@ class Attribute extends CActiveRecord
         return array(
             array('name', 'required'),
             array('apartment_type_id', 'required'),
-            array('disabled', 'numerical', 'integerOnly' => true),
+            array('disabled, sort', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 255),
             array('apartment_type_id', 'length', 'max' => 10),
             array('created_at, updated_at', 'safe'),
@@ -80,6 +88,7 @@ class Attribute extends CActiveRecord
             'apartment_type_id' => 'Тип объекта',
             'disabled' => 'НЕ активно',
             'type' => 'Тип',
+            'sort' => 'Порядок сортировки',
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
         );

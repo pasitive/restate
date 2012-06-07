@@ -20,22 +20,36 @@
  *
  */
 $this->pageTitle = Yii::app()->name . ' - ' . 'Объекты на карте';
+
+Yii::app()->clientScript->registerScript('search', "
+    $('.advanced-search-form').bind('keyup, change', function(){
+        $.fn.yiiListView.update('offers_list', {
+            data: $(this).serialize()
+        });
+        return false;
+    });
+");
 ?>
 
 <div class="space small"></div>
 <h1>Объекты на карте</h1>
 
-
 <div class="shadow revert"></div>
 <div class="space small"></div>
+
 <div class="grid_12 alpha omega">
     <div class="grid_7 alpha">
         <?php $this->renderPartial('_map', array('data' => $data)); ?>
     </div>
-
     <div class="grid_5 omega">
-        <div>
-            search form
+        <div class="prepend_left">
+            <h2>Поиск объектов</h2>
+
+            <div class="space small"></div>
+            <?php $this->renderPartial('/apartment/_advanced_search', array(
+                'model' => $model,
+                'apartmentTypes' => $apartmentTypes,
+            )) ?>
         </div>
     </div>
 </div>
@@ -45,7 +59,6 @@ $this->pageTitle = Yii::app()->name . ' - ' . 'Объекты на карте';
 <div class="grid_12 alpha omega">
     <div class="grid_7 alpha">
         <h2>Список объектов</h2>
-
         <div class="offers">
             <?php
             $this->widget('zii.widgets.CListView', array(
@@ -72,18 +85,24 @@ $this->pageTitle = Yii::app()->name . ' - ' . 'Объекты на карте';
         </div>
     </div>
     <div class="grid_5 omega">
-        <h2>Все жилые комлексы</h2>
 
-        <?php
-        $this->widget('zii.widgets.CListView', array(
-            'id' => 'containers_list',
-            'dataProvider' => $model->resetScope()->container()->search(),
-            'itemView' => '/apartment/_view_container_item',
-            'template' => "{items}",
-        ));
-        ?>
+        <div class="prepend_left">
+
+            <h2>Все жилые комлексы</h2>
+
+            <?php
+            $this->widget('zii.widgets.CListView', array(
+                'id' => 'containers_list',
+                'dataProvider' => $model->resetScope()->container()->search(),
+                'itemView' => '/apartment/_view_container_item',
+                'template' => "{items}",
+            ));
+            ?>
+
+        </div>
 
     </div>
 </div>
 
+<div class="space"></div>
 <div class="shadow"></div>
