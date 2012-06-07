@@ -19,16 +19,84 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
+
 ?>
 
-<div class="full_description">
+<div class="space small"></div>
 
-    <div class="grid_12 alpha omega">
+<div class="grid_12 alpha omega">
 
+    <div class="grid_8 alpha">
+        <h2>Фотогалерея</h2>
 
+        <div class="gallery" style="height: 400px;">
+            <?php foreach ($apartmentFiles as $apartmentFile) : ?>
+            <a href="<?php echo $apartmentFile->getFile(450) ?>">
+                <img data-title="<?php echo $model->name ?>" src="<?php echo $apartmentFile->getFile(450) ?>">
+            </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <div class="grid_4 omega">
+
+        <div class="prepend_left small">
+
+            <h2>Параметры объекта</h2>
+
+            <div class="attributes">
+
+                <ul class="attributes_list">
+                    <li class="icon-metro"><span>Метро: </span><?php echo $model->metroName ?></li>
+                    <li><span>Кол-во комнат: </span><?php echo $model->room_number ?></li>
+                    <li><span>Этаж: </span><?php echo $model->floor ?></li>
+                    <li><span>Общая площадь: </span><?php echo $model->square ?></li>
+                    <li><span>Жилая площадь: </span><?php echo $model->square_live ?></li>
+                    <li><span>Площадь кухни: </span><?php echo $model->square_kitchen ?></li>
+                    <li><span>Кол-во санузлов: </span><?php echo $model->wc_number ?></li>
+                    <li>
+                        <span>Цена: </span><?php echo Yii::app()->numberFormatter->formatCurrency($model->price, 'RUB') ?>
+                    </li>
+
+                    <?php foreach ($apartmentAttributes as $apartmentAttribute): ?>
+                    <?php if (!empty($apartmentAttribute->value)): ?>
+                        <li>
+                            <span><?php echo $apartmentAttribute->attribute->name ?></span>: <?php echo $apartmentAttribute->value ?>
+                        </li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid_12 alpha omega">
+
+    <div class="grid_6 alpha">
+        <h2>Связаться с нами</h2>
+
+        <?php $this->renderPartial('/site/contact', array('model' => $contactForm)) ?>
 
     </div>
 
+    <div class="grid_6 omega">
+
+        <h2>Описание</h2>
+
+        <div class="description">
+
+            <?php echo $model->description ?>
+
+            <br/>
+
+            <h2><?php echo (!empty($model->parent_id) ? $model->parentName . ', ' : '') ?><?php echo CHtml::encode($model->address) ?>
+                на карте</h2>
+
+            <div id="map" style="position:relative;margin:25px 0;width:100%;height:279px;"></div>
+
+        </div>
+
+    </div>
 </div>
 
 

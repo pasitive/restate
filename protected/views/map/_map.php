@@ -25,11 +25,10 @@ $this->breadcrumbs = array(
 ?>
 
 <div id="map">
-    <div class="shadow revert"></div>
+
     <div id="map_content">
     </div>
 
-    <div class="shadow"></div>
 </div>
 
 <script type="text/javascript">

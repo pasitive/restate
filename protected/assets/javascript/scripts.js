@@ -20,7 +20,6 @@ $(function () {
         $('#map_toggler a').removeClass('arrow_up').addClass('arrow_down');
     });
 
-    $('.gallery').gallery();
     $('dl.dots').dots();
 });
 

@@ -80,11 +80,24 @@ class ApartmentController extends Controller
             'apartment_id' => $model->id
         ));
 
+
+        $contactForm = new ContactForm;
+        if (isset($_POST['ContactForm'])) {
+            $contactForm->attributes = $_POST['ContactForm'];
+            if ($contactForm->validate()) {
+                $headers = "From: {$contactForm->email}\r\nReply-To: {$contactForm->email}";
+                mail(Yii::app()->params['adminEmail'], $contactForm->subject, $contactForm->body, $headers);
+                Yii::app()->user->setFlash('contact', 'Спасибо за запрос. Мы обязательно свяжемся с Вами в ближайшее время');
+                $this->refresh();
+            }
+        }
+
         $this->render('view', array(
             'model' => $model,
             'apartmentDataProvider' => $apartmentDataProvider,
             'apartmentAttributes' => $apartmentAttributes,
             'apartmentFiles' => $apartmentFiles,
+            'contactForm' => $contactForm,
         ));
     }
 }

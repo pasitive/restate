@@ -76,6 +76,10 @@ class Apartment extends CActiveRecord
             'container' => array(
                 'condition' => 'container=1'
             ),
+
+            'standalone' => array(
+                'condition' => 'container=0'
+            ),
         );
     }
 

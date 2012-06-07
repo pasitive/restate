@@ -23,7 +23,6 @@
 
 <?php
 $this->breadcrumbs = array(
-//    $model->typeName => array('/apartment/view', 'id' => $model->id),
     (!empty($model->parent_id) ? $model->parentName : ''),
     $model->address
 );
@@ -31,49 +30,40 @@ $this->breadcrumbs = array(
 $this->pageTitle = Yii::app()->name . ' - ' . ($model->routeable_title ? $model->routeable_title : ($model->name . ' - ' . $model->address));
 Yii::app()->clientScript->registerMetaTag(($model->routeable_description ? $model->routeable_description : ($model->name . ' - ' . $model->address)), 'description');
 Yii::app()->clientScript->registerMetaTag(($model->routeable_keywords ? $model->routeable_keywords : $model->name), 'keywords');
+
+Yii::app()->clientScript->registerCssFile($this->assetsUrl . '/stylesheet/galleria.classic.css');
+Yii::app()->clientScript->registerScriptFile($this->assetsUrl . '/javascript/galleria-1.2.7.min.js');
 ?>
 
 <div id="detail_view" class="detail_view_wrapper prepend_top prepend_left">
-
     <div class="detail_view_header">
-
         <h1>
-            <?php echo CHtml::encode($model->address) ?>
+            <?php echo (!empty($model->parent_id) ? $model->parentName . ', ' : '') ?><?php echo (empty($model->name) ? CHtml::encode($model->address) : CHtml::encode($model->name) . CHtml::encode(', ' . $model->address)) ?>
         </h1>
-
-        <div class="grid_3 alpha">
-            <h4 class="label"><?php echo (!empty($model->parent_id) ? $model->parentName : '') ?></h4>
-        </div>
-
-        <div class="grid_3">
-            <h4 class="metro"><span><?php echo CHtml::encode($model->metroName) ?></span></h4>
-        </div>
-
-        <div class="grid_3">
-            <h4><span class="label">Район: </span><?php echo CHtml::encode($model->areaName) ?></h4>
-        </div>
-
-        <div class="grid_2 omega">
-            <a href="#" id="map_link">Показать на карте</a>
-        </div>
-
     </div>
 
+</div>
 
-
-    <?php $this->renderPartial('_standalone', array(
+<?php
+$view = ($model->container == 1) ? '_container' : '_standalone';
+$this->renderPartial($view, array(
     'model' => $model,
     'apartmentAttributes' => $apartmentAttributes,
+    'apartmentFiles' => $apartmentFiles,
+    'contactForm' => $contactForm,
 )) ?>
 
-    <div class="space"></div>
-    <div class="shadow"></div>
-
-</div>
+<div class="space"></div>
+<div class="shadow"></div>
 
 <script type="text/javascript">
 
     $(function () {
+
+        // Load the classic theme
+        Galleria.loadTheme('<?php echo $this->assetsUrl . '/javascript' ?>/galleria.classic.min.js');
+        // Initialize Galleria
+        Galleria.run('.gallery');
 
         var map = null;
 

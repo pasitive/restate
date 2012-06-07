@@ -20,5 +20,70 @@
  *
  */
 $this->pageTitle = Yii::app()->name . ' - ' . 'Объекты на карте';
+?>
 
-$this->renderPartial('_map', array('data' => $data));
+<div class="space small"></div>
+<h1>Объекты на карте</h1>
+
+
+<div class="shadow revert"></div>
+<div class="space small"></div>
+<div class="grid_12 alpha omega">
+    <div class="grid_7 alpha">
+        <?php $this->renderPartial('_map', array('data' => $data)); ?>
+    </div>
+
+    <div class="grid_5 omega">
+        <div>
+            search form
+        </div>
+    </div>
+</div>
+
+<div class="space small"></div>
+
+<div class="grid_12 alpha omega">
+    <div class="grid_7 alpha">
+        <h2>Список объектов</h2>
+
+        <div class="offers">
+            <?php
+            $this->widget('zii.widgets.CListView', array(
+                'id' => 'offers_list',
+                'dataProvider' => $model->standalone()->search(),
+                'itemView' => '/apartment/_view',
+                'template' => "{sorter}\n{pager}<div class='clear'></div>{items}\n{pager}",
+                'pager' => array(
+                    'class' => 'CLinkPager',
+                    'cssFile' => false,
+                    'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
+                    'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
+                    'header' => 'Страницы:',
+                    'maxButtonCount' => 4
+                ),
+                'sorterHeader' => 'Сортировать по:',
+                'sortableAttributes' => array(
+                    'created_at' => 'дате',
+                    'price' => 'цене',
+                    'square' => 'площади',
+                ),
+            ));
+            ?>
+        </div>
+    </div>
+    <div class="grid_5 omega">
+        <h2>Все жилые комлексы</h2>
+
+        <?php
+        $this->widget('zii.widgets.CListView', array(
+            'id' => 'containers_list',
+            'dataProvider' => $model->resetScope()->container()->search(),
+            'itemView' => '/apartment/_view_container_item',
+            'template' => "{items}",
+        ));
+        ?>
+
+    </div>
+</div>
+
+<div class="shadow"></div>

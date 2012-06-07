@@ -28,15 +28,32 @@ class MapController extends Controller
         Yii::app()->clientScript->registerScriptFile('http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU');
 
         $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');
-        $model = Apartment::model()->container()->cache(DAY_1, $cacheDependency)->findAll(array('index' => 'id'));
 
+        $model = new Apartment('search');
+        $model->unsetAttributes();
+        $criteria = new CDbCriteria();
+        $criteria->order = 'created_at DESC';
+        $model->setDbCriteria($criteria);
+
+        if (isset($_GET['Apartment'])) {
+            $model->attributes = $_GET['Apartment'];
+        }
+
+        //Map data
         $data = array();
-        foreach ($model as $apartment_id => $apartment) {
-            $data[] = $apartment->toArray();
+        foreach (Apartment::model()->cache(DAY_1, $cacheDependency)->container()->findAll() as $apartment_id => $apartment) {
+            $key = 'apartment_map_data_' . $apartment->id;
+            if (($cached = Yii::app()->cache->get($key)) && CJSON::decode($cached)) {
+                $data[] = $cached;
+            } else {
+                $data[] = $apartment->toArray();
+                Yii::app()->cache->set($key, CJSON::encode($apartment->toArray()));
+            }
         }
 
         $this->render('index', array(
             'data' => $data,
+            'model' => $model,
         ));
     }
 }
