@@ -58,14 +58,17 @@ class ApartmentController extends Controller
             throw new CHttpException(404, 'Страница не найдена');
         }
 
+
         $apartmentDataProvider = null;
         if ($model->container == 1) {
+            // Load all objects in container
             $criteria = new CDbCriteria();
             $criteria->addColumnCondition(array(
                 'parent_id' => $id
             ));
 
-            $apartmentDataProvider = new CActiveDataProvider('Apartment', array(
+            $dependency = new CDbCacheDependency('SELEC MAX(updated_at) FROM apartment');
+            $apartmentDataProvider = new CActiveDataProvider(Apartment::model()->cache(Yii::app()->params['cache_expire_time'], $dependency), array(
                 'criteria' => $criteria,
             ));
         }

@@ -50,9 +50,9 @@
                     <li class="icon-metro"><span>Метро: </span><?php echo $model->metroName ?></li>
                     <li><span>Кол-во комнат: </span><?php echo $model->room_number ?></li>
                     <li><span>Этаж: </span><?php echo $model->floor ?></li>
-                    <li><span>Общая площадь: </span><?php echo $model->square ?></li>
-                    <li><span>Жилая площадь: </span><?php echo $model->square_live ?></li>
-                    <li><span>Площадь кухни: </span><?php echo $model->square_kitchen ?></li>
+                    <li><span>Общая площадь: </span><?php echo $model->square ?> м<sup>2</sup></li>
+                    <li><span>Жилая площадь: </span><?php echo $model->square_live ?> м<sup>2</sup></li>
+                    <li><span>Площадь кухни: </span><?php echo $model->square_kitchen ?> м<sup>2</sup></li>
                     <li><span>Кол-во санузлов: </span><?php echo $model->wc_number ?></li>
                     <li>
                         <span>Цена: </span><?php echo Yii::app()->numberFormatter->formatCurrency($model->price, 'RUB') ?>

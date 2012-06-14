@@ -80,7 +80,10 @@ $this->renderPartial($view, array(
                 var c = result.geoObjects.get(0);
                 map = new ymaps.Map('map', mapOptions);
                 map.setCenter(c.geometry.getCoordinates());
-                map.behaviors.enable('scrollZoom');
+                map.controls.add('zoomControl');
+                    // Список типов карты
+
+//                map.behaviors.enable('scrollZoom');
                 var placemark = new ymaps.Placemark([<?php echo $model->lat ?>, <?php echo $model->lng ?>], {
 
                 }, {
@@ -89,17 +92,6 @@ $this->renderPartial($view, array(
                 map.geoObjects.add(placemark);
                 map.setCenter(placemark.geometry.getCoordinates());
                 map.setZoom(16);
-            });
-
-            $('#map_link').toggle(function () {
-                $('#full_gallery').hide();
-                $('#map').show();
-                $('#map_link').text('Фотогалерея');
-                map.container.fitToViewport();
-            }, function () {
-                $('#map').hide();
-                $('#full_gallery').show();
-                $('#map_link').text('Показать на карте');
             });
         }
     });

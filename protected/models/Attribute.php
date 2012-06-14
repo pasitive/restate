@@ -24,9 +24,10 @@ class Attribute extends CActiveRecord
     public function defaultScope()
     {
         return array(
-            'order' => 'sort'
+            'order' => '`attribute`.sort'
         );
     }
+
     /**
      * Returns the static model of the specified AR class.
      * @return Attribute the static model class

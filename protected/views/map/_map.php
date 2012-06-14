@@ -63,6 +63,12 @@ $this->breadcrumbs = array(
             });
 
             map.behaviors.enable('scrollZoom');
+            map.controls
+                // Кнопка изменения масштаба
+                .add('zoomControl')
+                // Список типов карты
+                .add('typeSelector');
+
 
             function addMarkers() {
                 for (i = 0; i < data.length; i++) {

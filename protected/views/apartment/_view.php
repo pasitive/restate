@@ -34,7 +34,7 @@
             <div class="description clearfix">
 
 
-                    <?php if (!empty($data->parent)): ?>
+                    <?php if (intval($data->parent_id) !== 0): ?>
                     <h5><?php echo CHtml::encode($data->parentName) ?></h5>
                     <address><?php echo CHtml::encode($data->address) ?></address>
                     <?php else: ?>
@@ -48,7 +48,7 @@
                     <dd><?php echo (empty($data->metroName) ? '&mdash;' : $data->metroName) ?></dd>
 
                     <?php if ($data->container == 1): ?>
-
+                           <!--NOTHING-->
                     <?php else: ?>
 
                     <dt>Общая площадь:</dt>
