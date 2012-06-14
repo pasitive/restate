@@ -63,5 +63,9 @@ return array(
     ),
 
     'params' => array(
+        'cache_expire_time' => 86400,
+        'secret' => 'c0018634f1e7cb8788e4bec64f469e52',
+        'adminEmail' => 'positivejob@yandex.ru',
+        'uploadDir' => Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR . 'upload',
     ),
 );
