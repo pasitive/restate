@@ -42,7 +42,7 @@ class MapController extends Controller
         //Map data
         $data = array();
         foreach (Apartment::model()->cache(86400, $cacheDependency)->container()->findAll() as $apartment_id => $apartment) {
-            $key = 'apartment_map_data_' . $apartment_id;
+            $key = 'apartment_map_data_' . $apartment->id;
             if (($cached = Yii::app()->cache->get($key)) && ($cached = CJSON::decode($cached))) {
                 $data[] = $cached;
             } else {
