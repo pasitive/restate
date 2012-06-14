@@ -24,12 +24,14 @@
 
 <div class="space small"></div>
 
+<div class="space small"></div>
+
 <div class="grid_12 alpha omega">
 
-    <div class="grid_8 alpha">
-        <h2>Фотогалерея</h2>
+    <div class="grid_5 alpha">
+        <!--        <h2>Фотогалерея</h2>-->
 
-        <div class="gallery" style="height: 400px;">
+        <div class="gallery" style="height: 350px;">
             <?php foreach ($apartmentFiles as $apartmentFile) : ?>
             <a href="<?php echo $apartmentFile->getFile(450) ?>">
                 <img data-title="<?php echo $model->name ?>" src="<?php echo $apartmentFile->getFile(450) ?>">
@@ -37,11 +39,10 @@
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="grid_4 omega">
-
+    <div class="grid_3">
         <div class="prepend_left small">
 
-            <h2>Параметры объекта</h2>
+            <!--            <h2>Параметры объекта</h2>-->
 
             <div class="attributes">
 
@@ -68,34 +69,35 @@
             </div>
         </div>
     </div>
+
+    <div class="grid_4 omega">
+        <div class="description">
+            <?php echo $model->description ?>
+        </div>
+
+        <br>
+        <?php echo CHtml::link("Посмотреть доступные предложения", array('/apartment/view', 'id' => $model->parent_id, '#' => 'apartment_list'), array('class' => 'strong')) ?>
+    </div>
 </div>
+
+<div class="space small"></div>
 
 <div class="grid_12 alpha omega">
 
-    <div class="grid_6 alpha">
+    <div class="grid_4 alpha">
         <h2>Связаться с нами</h2>
 
         <?php $this->renderPartial('/site/contact', array('model' => $contactForm)) ?>
 
     </div>
 
-    <div class="grid_6 omega">
+    <div class="grid_1">&nbsp;</div>
 
-        <h2>Описание</h2>
+    <div class="grid_7 omega">
+        <h2><?php echo (!empty($model->parent_id) ? $model->parentName . ', ' : '') ?><?php echo CHtml::encode($model->address) ?>
+            на карте</h2>
 
-        <div class="description">
-
-            <?php echo $model->description ?>
-
-            <br/>
-
-            <h2><?php echo (!empty($model->parent_id) ? $model->parentName . ', ' : '') ?><?php echo CHtml::encode($model->address) ?>
-                на карте</h2>
-
-            <div id="map" style="position:relative;margin:25px 0;width:100%;height:279px;"></div>
-
-        </div>
-
+        <div id="map" style="position:relative;margin:25px 0;width:100%;height:279px;background-color: #f0f0f0"></div>
     </div>
 </div>
 

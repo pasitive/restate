@@ -25,9 +25,9 @@
     'method' => 'get',
 )); ?>
 
-<div class="space small"></div>
+<div class="space tiny">&nbsp;</div>
 
-<div class="grid_3">
+<div class="grid_2 alpha">
 
     <div id="rent">
         <?php echo CHtml::radioButton('Apartment[is_rent]', true, array('id' => 'rent0', 'value' => '')) ?>
@@ -41,10 +41,88 @@
     </div>
 
     <?php $this->widget('application.components.JuiButton', array(
-        'name' => 'rent',
+    'name' => 'rent',
+    'buttonType' => 'buttonset',
+));?>
+</div>
+
+<div class="grid_3">
+
+    <div class="apartment_type_select">
+        <div id="type">
+            <?php echo CHtml::radioButton('Apartment[type_id]', true, array('id' => 'type0', 'value' => '')) ?>
+            <?php echo CHtml::label('Все', 'type0') ?>
+            <?php foreach ($apartmentTypes as $type): ?>
+            <?php echo CHtml::radioButton('Apartment[type_id]', false, array('id' => 'type' . $type->id, 'value' => $type->id)) ?>
+            <?php echo CHtml::label($type->name, 'type' . $type->id) ?>
+            <?php endforeach; ?>
+        </div>
+
+        <?php $this->widget('application.components.JuiButton', array(
+        'name' => 'type',
         'buttonType' => 'buttonset',
     ));?>
+    </div>
 
+</div>
+
+<div class="grid_3">
+    <div class="subway_select">
+        <?php echo $form->dropDownList($model, 'metro_id', CHtml::listData(MetroStation::model()->hasApartments()->cache(DAY_1)->findAll(), 'id', 'name'), array('prompt' => 'Все станции метро')) ?>
+    </div>
+</div>
+
+<div class="grid_2 omega">&nbsp;</div>
+
+<div class="space tiny"></div>
+
+<div class="grid_10 alpha omega">
+    <div class="grid_3 alpha">
+        <div class="apartment_type_select">
+            <div id="rooms">
+                <span class="search_label">Кол-во комнат: </span>
+                <?php echo CHtml::checkBox('Apartment[room_number][]', false, array('id' => 'rooms1', 'value' => 1)) ?>
+                <?php echo CHtml::label('1', 'rooms1') ?>
+
+                <?php echo CHtml::checkBox('Apartment[room_number][]', false, array('id' => 'rooms2', 'value' => 2)) ?>
+                <?php echo CHtml::label('2', 'rooms2') ?>
+
+                <?php echo CHtml::checkBox('Apartment[room_number][]', false, array('id' => 'rooms3', 'value' => 3)) ?>
+                <?php echo CHtml::label('3', 'rooms3') ?>
+
+                <?php echo CHtml::checkBox('Apartment[room_number][]', false, array('id' => 'rooms4', 'value' => 4)) ?>
+                <?php echo CHtml::label('4', 'rooms4') ?>
+
+                <?php echo CHtml::checkBox('Apartment[room_number][]', false, array('id' => 'rooms5', 'value' => 5)) ?>
+                <?php echo CHtml::label('5+', 'rooms5') ?>
+
+            </div>
+
+            <?php $this->widget('application.components.JuiButton', array(
+            'name' => 'rooms',
+            'buttonType' => 'buttonset',
+        ));?>
+        </div>
+    </div>
+
+    <div class="grid_3">
+        <div class="price_range small">
+            <span class="search_label">&nbsp;Цена от</span>
+            <?php echo CHtml::textField('Apartment[price][]', '', array('size' => 5)) ?>
+            <span class="search_label">&mdash;</span>
+            <?php echo CHtml::textField('Apartment[price][]', '', array('size' => 5)) ?>
+        </div>
+    </div>
+
+    <div class="grid_3 omega">
+        <div class="square_range">
+            <span class="search_label">Общая площадь</span>
+            <?php echo CHtml::textField('Apartment[square][]', '', array('size' => 5)) ?>
+            <span class="search_label">&mdash;</span>
+            <?php echo CHtml::textField('Apartment[square][]', '', array('size' => 5)) ?>
+            <span class="search_label">м<sup>2</sup></span>
+        </div>
+    </div>
 </div>
 
 <!--

@@ -34,7 +34,6 @@ Yii::app()->clientScript->registerScript('search', "
 <div class="space small"></div>
 <h1>Объекты на карте</h1>
 
-<div class="shadow revert"></div>
 <div class="space small"></div>
 
 <div class="grid_12 alpha omega">
@@ -94,7 +93,7 @@ Yii::app()->clientScript->registerScript('search', "
             $this->widget('zii.widgets.CListView', array(
                 'id' => 'containers_list',
                 'dataProvider' => $model->resetScope()->container()->search(),
-                'itemView' => '/apartment/_view_container_item',
+                'itemView' => '/apartment/_list_container_item',
                 'template' => "{items}",
             ));
             ?>

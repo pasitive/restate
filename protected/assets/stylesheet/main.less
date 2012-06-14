@@ -32,7 +32,7 @@
 
 body {
     font-family: Tahoma, "Geneva CY", sans-serif;
-    font-size: @font-normal;
+    font-size: @font-normal; //    background: #DBDBDB;
 }
 
 #footer, h1, h2, h3, h4, h5 {
@@ -69,14 +69,11 @@ h5 {
     color: #663300;
 }
 
-p {
-    margin-top: 10px;
-}
-
 a {
     text-decoration: none;
+    color: #663300;
 
-    .more_link {
+    &.more_link {
         line-height: 26px;
         color: #666633;
 
@@ -84,6 +81,14 @@ a {
             text-decoration: underline;
         }
     }
+
+    &.strong {
+        font-size: 140% !important;
+    }
+}
+
+p {
+    padding-bottom: 10px;
 }
 
 // Icons
@@ -305,6 +310,10 @@ div.shadow.revert {
     &.small {
         height: 20px;
     }
+
+    &.tiny {
+        height: 8px;
+    }
 }
 
 .box_shadow {
@@ -389,7 +398,6 @@ div.shadow.revert {
 .gallery {
     position: relative;
     clear: both;
-    margin: 25px 0;
     .items_wrapper {
         width: 979px;
         overflow: hidden;
@@ -581,14 +589,14 @@ ul.yiiPager {
 
 .search-form {
     background: #dbdbdb;
+    select, option {
+//        font-size: 16px;
+    }
 }
 
-.search-form select, .search-form select option {
-    font-size: 16px;
-}
 
 .rent_toggler, .apartment_type_select, .subway_select {
-    padding-left: 10px;
+
 }
 
 .search_label {
@@ -599,9 +607,7 @@ ul.yiiPager {
 }
 
 .attributes_list {
-    font-size: 110%;
-
-    padding: 20px 0;
+    font-size: 100%; //    padding: 20px 0;
 
     li {
         padding-left: 23px;

@@ -33,8 +33,6 @@ Yii::app()->clientScript->registerScript('search', "
 ");
 ?>
 
-<div class="shadow revert"></div>
-
 <div class="search-form grid_12 alpha omega">
 
     <div class="grid_2 alpha">
@@ -44,7 +42,6 @@ Yii::app()->clientScript->registerScript('search', "
     <div class="grid_10 omega">
         <div>
             <?php $this->renderPartial('_search', array('model' => $model, 'apartmentTypes' => $apartmentTypes)) ?>
-            <div class="space small"></div>
         </div>
     </div>
 </div>

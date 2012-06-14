@@ -32,7 +32,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'body'); ?>
-        <?php echo $form->textArea($model, 'body', array('cols' => 60, 'rows' => 5)); ?>
+        <?php echo $form->textArea($model, 'body', array('cols' => 44, 'rows' => 5)); ?>
         <?php echo $form->error($model, 'body'); ?>
     </div>
 

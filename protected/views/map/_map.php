@@ -66,17 +66,6 @@ $this->breadcrumbs = array(
 
             function addMarkers() {
                 for (i = 0; i < data.length; i++) {
-
-                    /*var $container = $('<div/>'),
-                        $dl = $('<dl/>').attr({class:'dots'}).appendTo($container);
-
-                    if (data[i].attributes.length != 0) {
-                        $.each(data[i].attributes, function (index, attribute) {
-                            var $dt = $('<dt/>').html(attribute.name).appendTo($dl);
-                            var $dd = $('<dd/>').html(attribute.value).appendTo($dl);
-                        });
-                    }*/
-
                     var placemark = new ymaps.Placemark(data[i].coord, {
                         imageUrl:data[i].default_image,
                         name:(data[i].name.length == 0 ? data[i].type : data[i].name),
@@ -87,10 +76,8 @@ $this->breadcrumbs = array(
                     }, {
                         preset:'twirl#houseIcon'
                     });
-
                     collection.add(placemark);
                 }
-
                 map.geoObjects.add(collection);
             }
 

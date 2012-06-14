@@ -7,7 +7,7 @@
 .galleria-container {
     position: relative;
     overflow: hidden;
-    background: #c0c0c0;
+    background: #fff;
 }
 
 .galleria-container img {
@@ -193,7 +193,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    height: 40px;
+    height: 42px;
     width: 23px;
     z-index: 3;
     opacity: .8;
@@ -217,7 +217,7 @@
 .notouch .galleria-thumb-nav-right:hover {
     opacity: 1;
     filter: alpha(opacity = 100);
-    background-color: #111;
+    background-color: #B2A782;
 }
 
 .touch .galleria-thumb-nav-left:active,
@@ -230,12 +230,13 @@
 .notouch .galleria-thumbnails-container .disabled:hover {
     opacity: .2;
     filter: alpha(opacity = 20);
-    background-color: transparent;
+    background-color: #B2A782;
 }
 
 .galleria-carousel .galleria-thumb-nav-left,
 .galleria-carousel .galleria-thumb-nav-right {
     display: block;
+    background-color: #B2A782;
 }
 
 .galleria-thumb-nav-left,
@@ -246,4 +247,10 @@
 .galleria-image-nav-right {
     background-image: url(/images/classic-map.png);
     background-repeat: no-repeat;
+}
+
+.galleria-container {
+    -moz-box-shadow: 0px 0px 4px #000000;
+    -webkit-box-shadow: 0px 0px 4px #000000;
+    box-shadow: 0px 0px 15px #000000;
 }

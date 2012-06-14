@@ -38,7 +38,7 @@ Yii::app()->clientScript->registerScriptFile($this->assetsUrl . '/javascript/gal
 <div id="detail_view" class="detail_view_wrapper prepend_top prepend_left">
     <div class="detail_view_header">
         <h1>
-            <?php echo (!empty($model->parent_id) ? $model->parentName . ', ' : '') ?><?php echo (empty($model->name) ? CHtml::encode($model->address) : CHtml::encode($model->name) . CHtml::encode(', ' . $model->address)) ?>
+            <?php echo (!empty($model->parent_id) ? CHtml::link($model->parentName, array('/apartment/view/', 'id' => $model->parent_id)) . ', ' : '') ?><?php echo (empty($model->name) ? CHtml::encode($model->address) : CHtml::encode($model->name) . CHtml::encode(', ' . $model->address)) ?>
         </h1>
     </div>
 
@@ -48,6 +48,7 @@ Yii::app()->clientScript->registerScriptFile($this->assetsUrl . '/javascript/gal
 $view = ($model->container == 1) ? '_container' : '_standalone';
 $this->renderPartial($view, array(
     'model' => $model,
+    'apartmentDataProvider' => $apartmentDataProvider,
     'apartmentAttributes' => $apartmentAttributes,
     'apartmentFiles' => $apartmentFiles,
     'contactForm' => $contactForm,

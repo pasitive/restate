@@ -26,10 +26,8 @@
 
 <div class="grid_12 alpha omega">
 
-    <div class="grid_8 alpha">
-        <h2>Фотогалерея</h2>
-
-        <div class="gallery" style="height: 400px;">
+    <div class="grid_5 alpha">
+        <div class="gallery" style="height: 300px;">
             <?php foreach ($apartmentFiles as $apartmentFile) : ?>
             <a href="<?php echo $apartmentFile->getFile(450) ?>">
                 <img src="<?php echo $apartmentFile->getFile(450) ?>">
@@ -37,12 +35,9 @@
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="grid_4 omega">
+    <div class="grid_3">
 
         <div class="prepend_left small">
-
-            <h2>Параметры объекта</h2>
-
             <div class="attributes">
 
                 <ul class="attributes_list">
@@ -58,92 +53,64 @@
             </div>
         </div>
     </div>
+
+    <div class="grid_4 omega">
+        <?php echo $model->description ?>
+    </div>
 </div>
+
+<div class="space small">&nbsp;</div>
 
 <div class="grid_12 alpha omega">
 
-    <div class="grid_6 alpha">
+    <div class="grid_7 alpha">
+
+        <?php if ($apartmentDataProvider->totalItemCount > 0): ?>
+
+        <h2 id="apartment_list">Доступные предложения</h2>
+
+        <?php
+        $this->widget('zii.widgets.CListView', array(
+            'dataProvider' => $apartmentDataProvider,
+            'itemView' => '_view',
+            'template' => "{sorter}\n{pager}<div class='clear'></div>{items}\n{pager}",
+            'pager' => array(
+                'class' => 'CLinkPager',
+                'cssFile' => false,
+                'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
+                'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
+                'header' => 'Страницы:',
+                'maxButtonCount' => 4
+            ),
+            'sorterHeader' => 'Сортировать по:',
+            'sortableAttributes' => array(
+                'created_at' => 'дате',
+                'price' => 'цене',
+                'square' => 'площади',
+            ),
+        ));
+        ?>
+
+        <?php endif; ?>
+
         <h2>Связаться с нами</h2>
 
         <?php $this->renderPartial('/site/contact', array('model' => $contactForm)) ?>
 
     </div>
 
-    <div class="grid_6 omega">
+    <div class="grid_1">&nbsp;</div>
 
-        <h2>Описание</h2>
-
+    <div class="grid_4 omega">
+        <!--        <h2>Описание</h2>-->
         <div class="description">
-
-            <?php echo $model->description ?>
-
             <br/>
 
-            <h2><?php echo (!empty($model->parent_id) ? $model->parentName . ', ' : '') ?><?php echo CHtml::encode($model->address) ?>
+            <h2><?php echo $model->name ?>
                 на карте</h2>
-
-            <div id="map" style="position:relative;margin:25px 0;width:100%;height:279px;"></div>
-
+            <div id="map"
+                 style="position:relative;margin:25px 0;width:100%;height:279px;background-color: #f0f0f0"></div>
         </div>
 
     </div>
 </div>
-
-
-<!--
-
-<div class="grid_12 alpha omega">
-
-    <div class="grid_12 alpha omega">
-
-        <div class="grid_9 alpha">
-            <div class="prepend_left">
-
-                <h5>Информация о квартире</h5>
-
-                <dl class="dots clearfix">
-
-                    <?php foreach ($apartmentAttributes as $apartmentAttribute): ?>
-                    <?php if (!empty($apartmentAttribute->value)): ?>
-                        <dt class="grid_5 alpha"><?php echo $apartmentAttribute->attribute->name ?></dt>
-                        <dd class="grid_3 omega"><?php echo $apartmentAttribute->value ?></dd>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-
-                </dl>
-
-                <h5>Описание</h5>
-
-                <?php echo $model->description ?>
-            </div>
-        </div>
-
-        <div class="grid_3 omega">
-
-            <p>Введите Ваш номер телефона и укажите удобное для Вас время звонка.</p>
-        </div>
-
-        <div class="space"></div>
-        <div class="shadow"></div>
-
-    </div>
-
-
-    <div class="grid_12 alpha omega">
-
-        <div id="special_offers">
-
-            <h2>Специальные предложения</h2>
-
-            <?php $this->widget('SpecialOffersWidget', array('options' => array(
-    'vertical' => false,
-))); ?>
-
-        </div>
-
-    </div>
-
-    <div class="shadow"></div>
-</div>
-
--->

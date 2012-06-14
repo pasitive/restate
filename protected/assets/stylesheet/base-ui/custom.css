@@ -109,7 +109,7 @@
 /* Interaction states
 ----------------------------------*/
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-    padding: 6px 9px;
+    padding: 4px 5px;
     font-weight: normal;
     color: #000;
 }
@@ -160,6 +160,4 @@
 .ui-button {
     cursor: pointer;
     line-height: 22px;
-    margin-left: 2px;
-    margin-right: 2px;
 }

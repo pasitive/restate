@@ -83,6 +83,16 @@ class Apartment extends CActiveRecord
         );
     }
 
+    public function inContainer($id)
+    {
+        $criteria = $this->getDbCriteria();
+        $criteria->addColumnCondition(array(
+            'parent_id' => $id,
+        ));
+        return $this;
+
+    }
+
     public function getAreaName()
     {
         return (empty($this->area_name) ? $this->area->name : $this->area_name);
