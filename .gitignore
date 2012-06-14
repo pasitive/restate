@@ -3,5 +3,4 @@
 public/assets
 public/upload
 protected/runtime
-protected/config
 protected/components/DbConnection.php
