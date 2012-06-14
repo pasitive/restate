@@ -26,7 +26,7 @@ return CMap::mergeArray(
                 'enableResultTrace' => 1,
             ),
             'cache' => array(
-                'class' => 'CApcCache',
+                'class' => 'CFileCache',
             ),
             'db' => array(
                 'class' => 'application.components.DbConnection'
