@@ -54,7 +54,7 @@ class RouteableBehavior extends CActiveRecordBehavior
             $this->getOwner()->routeable_keywords = $route->keywords;
             $this->getOwner()->routeable_description = $route->description;
             $this->getOwner()->routeable_title = $route->title;
-            Yii::app()->cache->set($key, $route, 86400);
+            Yii::app()->cache->set($key, $route, Yii::app()->params['cache_expire_time']);
         }
     }
 }

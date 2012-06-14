@@ -39,6 +39,7 @@
             array('label' => 'Система', 'url' => array('/admin/system'), 'items' => array(
                 array('label' => 'Роутинг', 'url' => array('/admin/route'), 'visible' => !Yii::app()->user->isGuest),
             ), 'visible' => !Yii::app()->user->isGuest),
+            array('label' => 'Параметры', 'url' => array('/admin/appParam'), 'visible' => !Yii::app()->user->isGuest),
             array('label' => 'Справочники', 'url' => '#', 'items' => array(
                 array('label' => 'Города', 'url' => array('/admin/city'), 'visible' => !Yii::app()->user->isGuest),
                 array('label' => 'Районы', 'url' => array('/admin/area'), 'visible' => !Yii::app()->user->isGuest),

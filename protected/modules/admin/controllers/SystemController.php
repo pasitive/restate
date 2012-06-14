@@ -35,7 +35,7 @@ class SystemController extends Controller
     {
         //metro
         $model = MetroStation::model()->findAll();
-        foreach($model as $metro) {
+        foreach ($model as $metro) {
 
             $count = Apartment::model()->countByAttributes(array(
                 'metro_id' => $metro->id
@@ -46,7 +46,25 @@ class SystemController extends Controller
             ));
         }
 
-        Yii::app()->user->setFlash('success', 'Кеш метро обновлен');
+        Yii::app()->user->setFlash('success', 'Счетчики для станций метро пересчитаны');
+        $this->redirect(array('/admin/system/index'));
+    }
+
+    public function actionUpdateApartmentCountCache()
+    {
+        $model = Apartment::model()->container()->findAll();
+
+        foreach ($model as $apartment) {
+            $count = Apartment::model()->countByAttributes(array(
+                'parent_id' => $apartment->id
+            ));
+
+            Apartment::model()->updateByPk($apartment->id, array(
+                'apartment_count' => $count,
+            ));
+        }
+
+        Yii::app()->user->setFlash('success', 'Счетчики для контейнеров пересчитаны');
         $this->redirect(array('/admin/system/index'));
     }
 

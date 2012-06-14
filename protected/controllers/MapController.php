@@ -41,7 +41,7 @@ class MapController extends Controller
 
         //Map data
         $data = array();
-        foreach (Apartment::model()->cache(86400, $cacheDependency)->container()->findAll() as $apartment_id => $apartment) {
+        foreach (Apartment::model()->cache(Yii::app()->params['cache_expire_time'], $cacheDependency)->container()->findAll() as $apartment_id => $apartment) {
             $key = 'apartment_map_data_' . $apartment->id;
             if (($cached = Yii::app()->cache->get($key)) && ($cached = CJSON::decode($cached))) {
                 $data[] = $cached;
@@ -52,7 +52,7 @@ class MapController extends Controller
         }
 
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
-        $apartmentTypes = ApartmentType::model()->is_filter()->cache(DAY_1, $dependency)->findAll();
+        $apartmentTypes = ApartmentType::model()->is_filter()->cache(Yii::app()->params['cache_expire_time'], $dependency)->findAll();
 
         $this->render('index', array(
             'data' => $data,

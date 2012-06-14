@@ -27,7 +27,10 @@ class Controller extends CController
     public function init()
     {
         parent::init();
+
+        $this->initAppParams();
         $this->initI18n();
+
         Yii::app()->clientScript->registerCoreScript('jquery')
             ->registerScriptFile($this->assetsUrl . '/javascript/scripts.js', CClientScript::POS_END);
     }
@@ -41,11 +44,20 @@ class Controller extends CController
             $cookie = new CHttpCookie('language', $_GET['language']);
             $cookie->expire = time() + (60 * 60 * 24 * 365); // (1 year)
             Yii::app()->request->cookies['language'] = $cookie;
-        }
-        else if (Yii::app()->user->hasState('language'))
+        } else if (Yii::app()->user->hasState('language'))
             Yii::app()->language = Yii::app()->user->getState('language');
         else if (isset(Yii::app()->request->cookies['language']))
             Yii::app()->language = Yii::app()->request->cookies['language']->value;
+    }
+
+    protected function initAppParams()
+    {
+        $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM app_param');
+        $params = AppParam::model()->cache(86400, $dependency)->findAll();
+
+        foreach ($params as $param) {
+            Yii::app()->params[$param->name] = $param->value;
+        }
     }
 
     /**

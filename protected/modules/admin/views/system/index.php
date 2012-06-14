@@ -26,6 +26,7 @@
 <?php $this->widget('zii.widgets.CMenu', array(
         'items' => array(
             array('label' => 'Очистить кеш', 'url' => array('/admin/system/flushCache')),
-            array('label' => 'Обновить кеши метро', 'url' => array('/admin/system/updateDbCache')),
+            array('label' => 'Пересчитать счетчики метро', 'url' => array('/admin/system/updateDbCache')),
+            array('label' => 'Пересчитать счетчики контейнеров', 'url' => array('/admin/system/updateApartmentCountCache')),
         )))
 ?>

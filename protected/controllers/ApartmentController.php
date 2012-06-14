@@ -35,7 +35,7 @@ class ApartmentController extends Controller
         $model->setDbCriteria($criteria);
 
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
-        $apartmentTypes = ApartmentType::model()->is_filter()->cache(DAY_1, $dependency)->findAll();
+        $apartmentTypes = ApartmentType::model()->is_filter()->cache(Yii::app()->params['cache_expire_time'], $dependency)->findAll();
 
         if (isset($_GET['Apartment'])) {
             $model->attributes = $_GET['Apartment'];
@@ -71,12 +71,12 @@ class ApartmentController extends Controller
         }
 
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_attribute WHERE apartment_id = ' . intval($model->id));
-        $apartmentAttributes = ApartmentAttribute::model()->with('attribute')->cache(DAY_1, $dependency)->findAllByAttributes(array(
+        $apartmentAttributes = ApartmentAttribute::model()->with('attribute')->cache(Yii::app()->params['cache_expire_time'], $dependency)->findAllByAttributes(array(
             'apartment_id' => $model->id
         ));
 
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_file WHERE apartment_id = ' . intval($model->id));
-        $apartmentFiles = ApartmentFile::model()->cache(DAY_1, $dependency)->findAllByAttributes(array(
+        $apartmentFiles = ApartmentFile::model()->cache(Yii::app()->params['cache_expire_time'], $dependency)->findAllByAttributes(array(
             'apartment_id' => $model->id
         ));
 
