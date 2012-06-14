@@ -35,8 +35,7 @@ class Image_GD_Driver extends Image_Driver
     public function process($image, $actions, $dir, $file, $render = FALSE)
     {
         // Set the "create" function
-        switch ($image['type'])
-        {
+        switch ($image['type']) {
             case IMAGETYPE_JPEG:
                 $create = 'imagecreatefromjpeg';
                 break;
@@ -49,8 +48,7 @@ class Image_GD_Driver extends Image_Driver
         }
 
         // Set the "save" function
-        switch (strtolower(substr(strrchr($file, '.'), 1)))
-        {
+        switch (strtolower(substr(strrchr($file, '.'), 1))) {
             case 'jpg':
             case 'jpeg':
                 $save = 'imagejpeg';
@@ -85,8 +83,7 @@ class Image_GD_Driver extends Image_Driver
             imagealphablending($this->tmp_image, TRUE);
             imagesavealpha($this->tmp_image, TRUE);
 
-            switch ($save)
-            {
+            switch ($save) {
                 case 'imagejpeg':
                     // Default the quality to 95
                     ($quality === NULL) and $quality = 95;
@@ -105,13 +102,10 @@ class Image_GD_Driver extends Image_Driver
             if ($render === FALSE) {
                 // Set the status to the save return value, saving with the quality requested
                 $status = isset($quality) ? $save($this->tmp_image, $dir . $file, $quality)
-                        : $save($this->tmp_image, $dir . $file);
-            }
-            else
-            {
+                    : $save($this->tmp_image, $dir . $file);
+            } else {
                 // Output the image directly to the browser
-                switch ($save)
-                {
+                switch ($save) {
                     case 'imagejpeg':
                         header('Content-Type: image/jpeg');
                         break;
@@ -143,20 +137,15 @@ class Image_GD_Driver extends Image_Driver
         $flipped = $this->imagecreatetransparent($width, $height);
 
         if ($direction === Image::HORIZONTAL) {
-            for ($x = 0; $x < $width; $x++)
-            {
+            for ($x = 0; $x < $width; $x++) {
                 $status = imagecopy($flipped, $this->tmp_image, $x, 0, $width - $x - 1, 0, 1, $height);
             }
-        }
-        elseif ($direction === Image::VERTICAL)
-        {
-            for ($y = 0; $y < $height; $y++)
-            {
+        } elseif ($direction === Image::VERTICAL) {
+            for ($y = 0; $y < $height; $y++) {
                 $status = imagecopy($flipped, $this->tmp_image, 0, $y, 0, $height - $y - 1, $width, 1);
             }
         }
-        else
-        {
+        else {
             // Do nothing
             return TRUE;
         }
@@ -215,7 +204,7 @@ class Image_GD_Driver extends Image_Driver
         if ($properties['master'] === Image::AUTO) {
             // Change an automatic master dim to the correct type
             $properties['master'] = (($width / $properties['width']) > ($height / $properties['height'])) ? Image::WIDTH
-                    : Image::HEIGHT;
+                : Image::HEIGHT;
         }
 
         if (empty($properties['height']) OR $properties['master'] === Image::WIDTH) {
@@ -239,8 +228,7 @@ class Image_GD_Driver extends Image_Driver
             $max_reduction_height = round($properties['height'] * 1.1);
 
             // Reduce the size using an O(2n) algorithm, until it reaches the maximum reduction
-            while ($pre_width / 2 > $max_reduction_width AND $pre_height / 2 > $max_reduction_height)
-            {
+            while ($pre_width / 2 > $max_reduction_width AND $pre_height / 2 > $max_reduction_height) {
                 $pre_width /= 2;
                 $pre_height /= 2;
             }
@@ -321,6 +309,28 @@ class Image_GD_Driver extends Image_Driver
         return imageconvolution($this->tmp_image, $matrix, $amount - 8, 0);
     }
 
+    public function watermark($stamp)
+    {
+        $img = $this->tmp_image;
+        $width = imagesx($this->tmp_image);
+        $height = imagesy($this->tmp_image);
+
+        $overlay_image = imagecreatefrompng($stamp);
+        $overlay_image_width = imagesx($overlay_image);
+        $overlay_image_height = imagesy($overlay_image);
+
+        // Set the margins for the stamp and get the height/width of the stamp image
+        $marge_right = 20;
+        $marge_bottom = 20;
+
+        // Merge the images
+        if ($status = imagecopy($this->tmp_image, $overlay_image, ($width - $overlay_image_width - $marge_right), ($height - $overlay_image_height - $marge_bottom), 0, 0, $overlay_image_width, $overlay_image_height)) {
+
+        }
+
+        return $status;
+    }
+
     protected function properties()
     {
         return array(imagesx($this->tmp_image), imagesy($this->tmp_image));
@@ -339,14 +349,14 @@ class Image_GD_Driver extends Image_Driver
         if (self::$blank_png === NULL) {
             // Decode the blank PNG if it has not been done already
             self::$blank_png = imagecreatefromstring(base64_decode
-                                                     (
-                                                         'iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29' .
-                                                         'mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAADqSURBVHjaYvz//z/DYAYAAcTEMMgBQAANegcCBN' .
-                                                         'CgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQ' .
-                                                         'AANegcCBNCgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB3IEAADXoH' .
-                                                         'AgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB' .
-                                                         '3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAgAEAMpcDTTQWJVEAAAAASUVORK5CYII='
-                                                     ));
+            (
+                'iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29' .
+                    'mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAADqSURBVHjaYvz//z/DYAYAAcTEMMgBQAANegcCBN' .
+                    'CgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQ' .
+                    'AANegcCBNCgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB3IEAADXoH' .
+                    'AgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB' .
+                    '3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAgAEAMpcDTTQWJVEAAAAASUVORK5CYII='
+            ));
 
             // Set the blank PNG width and height
             self::$blank_png_width = imagesx(self::$blank_png);

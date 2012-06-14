@@ -145,4 +145,7 @@ abstract class Image_Driver
      */
     abstract public function sharpen($amount);
 
+
+    abstract public function watermark($stamp);
+
 } // End Image Driver

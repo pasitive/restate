@@ -24,7 +24,7 @@ class Attribute extends CActiveRecord
     public function defaultScope()
     {
         return array(
-            'order' => '`attribute`.sort'
+            'order' => 'sort'
         );
     }
 

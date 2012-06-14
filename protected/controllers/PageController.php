@@ -4,6 +4,7 @@ class PageController extends Controller
 {
 
     public $layout = '//layouts/static';
+
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
@@ -30,9 +31,9 @@ class PageController extends Controller
      */
     public function loadModel($id)
     {
-        $model = Page::model()->findByPk($id);
+        $model = Page::model()->cache(Yii::app()->params['cache_expire_time'])->findByPk($id);
         if ($model === null)
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'Страница не найдена');
         return $model;
     }
 }

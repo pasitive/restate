@@ -39,7 +39,7 @@ class MapController extends Controller
             $model->attributes = $_GET['Apartment'];
         }
 
-        //Map data
+        // Load data for map render
         $data = array();
         foreach (Apartment::model()->cache(Yii::app()->params['cache_expire_time'], $cacheDependency)->container()->findAll() as $apartment_id => $apartment) {
             $key = 'apartment_map_data_' . $apartment->id;
@@ -51,6 +51,7 @@ class MapController extends Controller
             }
         }
 
+        // Load apartment types
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
         $apartmentTypes = ApartmentType::model()->is_filter()->cache(Yii::app()->params['cache_expire_time'], $dependency)->findAll();
 

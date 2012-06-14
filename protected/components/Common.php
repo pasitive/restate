@@ -50,10 +50,8 @@ class Common
         assert($model->asa('ResourcesBehavior') !== null);
 
         $image = Yii::app()->image->load($photo->getTempName());
-
-        $stamp = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'logo.png';
-
-//        $image->watermark($stamp, array());
+        $stamp = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'watermark.png';
+        $image->watermark($stamp);
 
         $uploadPath = $model->generatePath($hashString);
 

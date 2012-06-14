@@ -26,7 +26,8 @@ class NewsController extends Controller
 
     public function actionIndex()
     {
-        $dataProvider = new CActiveDataProvider('News', array(
+        $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM news');
+        $dataProvider = new CActiveDataProvider(News::model()->cache(Yii::app()->params['cache_expire_time'], $dependency), array(
             'criteria' => array(
                 'order' => 'created_at DESC'
             ),
@@ -48,7 +49,7 @@ class NewsController extends Controller
 
     public function loadModel($id)
     {
-        $model = News::model()->findByPk($id);
+        $model = News::model()->cache(Yii::app()->params['cache_expire_time'])->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'Страница не найдена');
         return $model;

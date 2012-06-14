@@ -34,6 +34,7 @@ class ApartmentController extends Controller
         $criteria->order = 'created_at DESC';
         $model->setDbCriteria($criteria);
 
+        // Load and cache apartment types
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
         $apartmentTypes = ApartmentType::model()->is_filter()->cache(Yii::app()->params['cache_expire_time'], $dependency)->findAll();
 
@@ -51,13 +52,10 @@ class ApartmentController extends Controller
     {
         $this->layout = '//layouts/column1';
 
+        // Register yandex maps JS api
         Yii::app()->clientScript->registerScriptFile('http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU');
 
-        $model = Apartment::model()->findByPk($id);
-        if (!$model) {
-            throw new CHttpException(404, 'Страница не найдена');
-        }
-
+        $model = $this->loadModel($id);
 
         $apartmentDataProvider = null;
         if ($model->container == 1) {
@@ -68,7 +66,7 @@ class ApartmentController extends Controller
             ));
 
             $dependency = new CDbCacheDependency('SELEC MAX(updated_at) FROM apartment');
-            $apartmentDataProvider = new CActiveDataProvider(Apartment::model()->cache(Yii::app()->params['cache_expire_time'], $dependency), array(
+            $apartmentDataProvider = new CActiveDataProvider(Apartment::model()->standalone()->cache(Yii::app()->params['cache_expire_time'], $dependency), array(
                 'criteria' => $criteria,
             ));
         }
@@ -82,7 +80,6 @@ class ApartmentController extends Controller
         $apartmentFiles = ApartmentFile::model()->cache(Yii::app()->params['cache_expire_time'], $dependency)->findAllByAttributes(array(
             'apartment_id' => $model->id
         ));
-
 
         $contactForm = new ContactForm;
         if (isset($_POST['ContactForm'])) {
@@ -102,5 +99,14 @@ class ApartmentController extends Controller
             'apartmentFiles' => $apartmentFiles,
             'contactForm' => $contactForm,
         ));
+    }
+
+    protected function loadModel($id)
+    {
+        $model = Apartment::model()->cache(Yii::app()->params['cache_apartment_time'])->findByPk($id);
+        if (!$model) {
+            throw new CHttpException(404, 'Страница не найдена');
+        }
+        return $model;
     }
 }

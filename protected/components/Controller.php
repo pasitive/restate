@@ -23,14 +23,17 @@ class Controller extends CController
 
     private $_assetsUrl;
 
-
     public function init()
     {
         parent::init();
 
+        // Init application params
         $this->initAppParams();
+
+        // Init i18n
         $this->initI18n();
 
+        // Register core javascripts
         Yii::app()->clientScript->registerCoreScript('jquery')
             ->registerScriptFile($this->assetsUrl . '/javascript/scripts.js', CClientScript::POS_END);
     }
