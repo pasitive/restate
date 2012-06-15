@@ -33,6 +33,7 @@
 body {
     font-family: Tahoma, "Geneva CY", sans-serif;
     font-size: @font-normal; //    background: #DBDBDB;
+    background-color: #f0f0f0;
 }
 
 #footer, h1, h2, h3, h4, h5 {
@@ -50,6 +51,7 @@ h1, h4 {
 
 h1 {
     font-size: @font-huge;
+    margin-bottom: 15px;
 }
 
 h2 {
@@ -81,9 +83,13 @@ a {
             text-decoration: underline;
         }
     }
+}
 
-    &.strong {
-        font-size: 140% !important;
+.strong {
+    font-size: 140% !important;
+
+    &.small {
+        font-size: 120% !important;
     }
 }
 
@@ -352,13 +358,14 @@ div.shadow.revert {
 .description_block {
     position: relative;
     .description { //        padding-top: 10px;
-        padding-left: 10px;
+//        padding-left: 10px;
         dl {
             font-size: @font-small;
             color: @color-light-black;
             dt {
                 float: left;
                 padding-right: 5px;
+                font-weight: bold;
             }
         }
         .price {
@@ -589,11 +596,9 @@ ul.yiiPager {
 
 .search-form {
     background: #dbdbdb;
-    select, option {
-//        font-size: 16px;
+    select, option { //        font-size: 16px;
     }
 }
-
 
 .rent_toggler, .apartment_type_select, .subway_select {
 

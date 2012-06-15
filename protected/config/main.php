@@ -32,6 +32,7 @@ return array(
         ),
         'format' => array(
             'booleanFormat' => array('Нет', 'Да'),
+
         ),
         'image' => array(
             'class' => 'application.extensions.image.CImageComponent',

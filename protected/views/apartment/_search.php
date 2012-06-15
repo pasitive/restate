@@ -40,7 +40,7 @@
         <?php echo CHtml::label('Купить', 'rent2') ?>
     </div>
 
-    <?php $this->widget('application.components.JuiButton', array(
+    <?php $this->widget('application.widgets.JuiButton', array(
     'name' => 'rent',
     'buttonType' => 'buttonset',
 ));?>
@@ -58,7 +58,7 @@
             <?php endforeach; ?>
         </div>
 
-        <?php $this->widget('application.components.JuiButton', array(
+        <?php $this->widget('application.widgets.JuiButton', array(
         'name' => 'type',
         'buttonType' => 'buttonset',
     ));?>
@@ -98,7 +98,7 @@
 
             </div>
 
-            <?php $this->widget('application.components.JuiButton', array(
+            <?php $this->widget('application.widgets.JuiButton', array(
             'name' => 'rooms',
             'buttonType' => 'buttonset',
         ));?>
@@ -140,7 +140,7 @@
             <?php echo CHtml::label('Купить', 'rent2') ?>
         </div>
 
-        <?php $this->widget('application.components.JuiButton', array(
+        <?php $this->widget('application.widgets.JuiButton', array(
     'name' => 'rent',
     'buttonType' => 'buttonset',
 ));?>
