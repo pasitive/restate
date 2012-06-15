@@ -25,18 +25,12 @@ class ApartmentController extends Controller
     {
         $this->layout = '//layouts/index';
 
-        $model = new Apartment('search');
-        $model->unsetAttributes();
-        $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array(
-            'container' => 0,
-        ));
-        $criteria->order = 'created_at DESC';
-        $model->setDbCriteria($criteria);
-
         // Load and cache apartment types
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
         $apartmentTypes = ApartmentType::model()->is_filter()->cache(Yii::app()->params['cache_expire_time'], $dependency)->findAll();
+
+        $model = new Apartment('search');
+        $model->unsetAttributes();
 
         if (isset($_GET['Apartment'])) {
             $model->attributes = $_GET['Apartment'];

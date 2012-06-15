@@ -38,7 +38,8 @@ class SystemController extends Controller
         foreach ($model as $metro) {
 
             $count = Apartment::model()->countByAttributes(array(
-                'metro_id' => $metro->id
+                'metro_id' => $metro->id,
+                'container' => 0,
             ));
 
             MetroStation::model()->updateByPk($metro->id, array(

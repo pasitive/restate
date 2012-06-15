@@ -49,7 +49,7 @@
 
                     <?php if ( !empty($data->square) || !empty($data->square_live) ): ?>
                         <dt>Площадь:</dt>
-                        <dd><?php echo (empty($data->square_live) ? '&mdash;' : $data->square_live) ?><?php echo (empty($data->square_live) ? '' : '/' . $data->square_live . ' м<sup>2</sup>') ?></dd>
+                        <dd><?php echo (empty($data->square_live) ? '' : $data->square_live . '/') ?><?php echo (empty($data->square) ? '' : $data->square . ' м<sup>2</sup>') ?></dd>
                         <?php endif; ?>
 
                     <dt>Комнат:</dt>

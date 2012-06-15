@@ -44,9 +44,9 @@ class DGSphinxSearchException extends CException
  *
  * Usage:
  * --------------
- * 
+ *
  * Search by criteria Object:
- * 	
+ *
  *     $searchCriteria = new stdClass();
  *     $pages = new CPagination();
  *     $pages->pageSize = Yii::app()->params['firmPerPage'];
@@ -164,8 +164,8 @@ class DGSphinxSearch extends CApplicationComponent
         $this->client = new SphinxClient;
         $this->client->setServer($this->server, $this->port);
         $this->client->setMaxQueryTime($this->maxQueryTime);
-         Yii::trace("weigth: " . print_r ($this->fieldWeights,true), 'CEXT.DGSphinxSearch.doSearch');
-         
+        Yii::trace("weigth: " . print_r($this->fieldWeights, true), 'CEXT.DGSphinxSearch.doSearch');
+
         $this->resetCriteria();
     }
 
@@ -178,9 +178,9 @@ class DGSphinxSearch extends CApplicationComponent
      * @param string $comment
      * @return array
      */
-    public function query($query, $index='*', $comment='')
+    public function query($query, $index = '*', $comment = '')
     {
-	return $this->doSearch($index, $query, $comment);
+        return $this->doSearch($index, $query, $comment);
     }
 
     /**
@@ -262,12 +262,16 @@ class DGSphinxSearch extends CApplicationComponent
             foreach ($filters as $fil => $vol) {
                 // geo filter
                 if ($fil == 'geo') {
-                    $min = (float) (isset($vol['min']) ? $vol['min'] : 0);
+                    $min = (float)(isset($vol['min']) ? $vol['min'] : 0);
                     $point = explode(' ', str_replace('POINT(', '', trim($vol['point'], ')')));
-                    $this->client->setGeoAnchor('latitude', 'longitude', (float) $point[1] * ( pi() / 180 ), (float) $point[0] * ( pi() / 180 ));
-                    $this->client->setFilterFloatRange('@geodist', $min, (float) $vol['buffer']);
-                    // usual filter
-                } else if ($vol) {
+                    $this->client->setGeoAnchor('latitude', 'longitude', (float)$point[1] * (pi() / 180), (float)$point[0] * (pi() / 180));
+                    $this->client->setFilterFloatRange('@geodist', $min, (float)$vol['buffer']);
+                } else if ($fil == 'range') {
+                    $min = (int)(isset($vol['min']) ? $vol['min'] : 0);
+                    $max = (int)(isset($vol['max']) ? $vol['max'] : 0);
+                    $attribute = (string)$vol['attr'];
+                    $this->client->setRangeFilter($attribute, $min, $max);
+                } else if ($vol) { // usual filter
                     $this->client->SetFilter($fil, (is_array($vol)) ? $vol : array($vol));
                 }
             }
@@ -310,7 +314,7 @@ class DGSphinxSearch extends CApplicationComponent
      * @param integer $limit
      * @return $this chain
      */
-    public function limit($offset=null, $limit=null)
+    public function limit($offset = null, $limit = null)
     {
         $this->criteria->limit = array(
             'offset' => $offset,

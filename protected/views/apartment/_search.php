@@ -30,7 +30,7 @@
 <div class="grid_2 alpha">
 
     <div id="rent">
-        <?php echo CHtml::radioButton('Apartment[is_rent]', true, array('id' => 'rent0', 'value' => '')) ?>
+        <?php echo CHtml::radioButton('Apartment[is_rent]', true, array('id' => 'rent0', 'value' => "")) ?>
         <?php echo CHtml::label('Все', 'rent0') ?>
 
         <?php echo CHtml::radioButton('Apartment[is_rent]', false, array('id' => 'rent1', 'value' => 1)) ?>
@@ -50,7 +50,7 @@
 
     <div class="apartment_type_select">
         <div id="type">
-            <?php echo CHtml::radioButton('Apartment[type_id]', true, array('id' => 'type0', 'value' => '')) ?>
+            <?php echo CHtml::radioButton('Apartment[type_id]', true, array('id' => 'type0', 'value' => "")) ?>
             <?php echo CHtml::label('Все', 'type0') ?>
             <?php foreach ($apartmentTypes as $type): ?>
             <?php echo CHtml::radioButton('Apartment[type_id]', false, array('id' => 'type' . $type->id, 'value' => $type->id)) ?>
@@ -130,7 +130,7 @@
 <div>
     <div class="rent_toggler centered delimiter right">
         <div id="rent">
-            <?php echo CHtml::radioButton('Apartment[is_rent]', true, array('id' => 'rent0', 'value' => '')) ?>
+            <?php echo CHtml::radioButton('Apartment[is_rent]', true, array('id' => 'rent0', 'value' => -1)) ?>
             <?php echo CHtml::label('Все', 'rent0') ?>
 
             <?php echo CHtml::radioButton('Apartment[is_rent]', false, array('id' => 'rent1', 'value' => 1)) ?>

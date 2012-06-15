@@ -328,7 +328,7 @@ class Apartment extends CActiveRecord
 
     protected function afterSave()
     {
-        if ($this->isNewRecord) {
+        if ($this->isNewRecord && $this->container == 0) {
             MetroStation::model()->updateCounters(array(
                 'apartment_count' => 1
             ));
@@ -379,48 +379,104 @@ class Apartment extends CActiveRecord
      */
     public function search()
     {
-        // Warning: Please modify the following code to remove attributes that
-        // should not be searched.
+        $sphinx = Yii::app()->search;
 
-        $criteria = new CDbCriteria;
+        $query = '';
+        $filters = array();
 
-        $criteria->compare('id', $this->id, true);
-        $criteria->compare('name', $this->name, true);
-        $criteria->compare('city_id', $this->city_id, true);
-        $criteria->compare('area_id', $this->area_id, true);
-        $criteria->compare('type_id', $this->type_id, true);
-        $criteria->compare('metro_id', $this->metro_id, true);
-        $criteria->compare('is_rent', $this->is_rent, true);
+        if (is_numeric($this->city_id)) {
+            $filters['city_id'] = intval($this->city_id);
+        }
 
-        if ($this->room_number != null) {
+        if (is_numeric($this->type_id)) {
+            $filters['type_id'] = intval($this->type_id);
+        }
+
+        if (is_numeric($this->metro_id)) {
+            $filters['metro_id'] = intval($this->metro_id);
+        }
+
+        if (is_numeric($this->area_id)) {
+            $filters['area_id'] = intval($this->area_id);
+        }
+
+        if (is_numeric($this->parent_id)) {
+            $filters['parent_id'] = intval($this->parent_id);
+        }
+
+        if (is_numeric($this->wc_number)) {
+            $filters['wc_number'] = intval($this->wc_number);
+        }
+
+        if (is_numeric($this->floor)) {
+            $filters['floor'] = intval($this->floor);
+        }
+
+        if (is_numeric($this->is_rent)) {
+            $filters['is_rent'] = $this->is_rent;
+        }
+
+        // Set filters
+        foreach ($filters as $attribute => $value) {
+            $sphinx->setFilter($attribute, (is_array($value) ? $value : array($value)));
+        }
+
+        $sphinx->setFilter('container', array(0));
+
+        // Range filters
+        if (!empty($this->room_number) && is_array($this->room_number)) {
+            $range = range(1, 4);
             if (in_array(5, $this->room_number)) {
-                $criteria->addCondition('room_number >= 5');
+                $sphinx->setFilter('room_number', $range, true);
             } else {
-                $criteria->addInCondition('room_number', $this->room_number);
+                $sphinx->setFilter('room_number', $this->room_number);
             }
         }
 
-        if ($this->price != null && is_array($this->price)) {
-            $criteria->addBetweenCondition('price', $this->price[0], $this->price[1]);
-        }
+        $this->setRangeFilter($sphinx, 'price', $float = true);
+        $this->setRangeFilter($sphinx, 'square');
+        $this->setRangeFilter($sphinx, 'square_live');
+        $this->setRangeFilter($sphinx, 'square_kitchen');
 
-        if ($this->square != null && is_array($this->square)) {
-            $criteria->addBetweenCondition('square', $this->square[0], $this->square[1]);
-        }
-
-        if ($this->square_live != null && is_array($this->square_live)) {
-            $criteria->addBetweenCondition('square_live', $this->square_live[0], $this->square_live[1]);
-        }
-
-        if ($this->square_kitchen != null && is_array($this->square_kitchen)) {
-            $criteria->addBetweenCondition('square_kitchen', $this->square_kitchen[0], $this->square_kitchen[1]);
-        }
-
-        $criteria->compare('created_at', $this->created_at, true);
-        $criteria->compare('updated_at', $this->updated_at, true);
-
-        return new CActiveDataProvider($this, array(
-            'criteria' => $criteria,
+        return new SphinxDataProvider($this, array(
+            'sphinx' => $sphinx,
+            'index' => 'apartment_core',
         ));
+    }
+
+    protected function setRangeFilter(&$sphinx, $attribute, $float = false)
+    {
+        if (!empty($this->{$attribute}) && is_array($this->{$attribute})) {
+            $buf = $this->{$attribute};
+
+            $min = $buf[0];
+            $max = $buf[1];
+
+            // Assume that range is empty
+            if (empty($min) && empty($max)) {
+                return;
+            }
+            // Assume that min value of range is correct
+            if ((empty($min) && !empty($max)) && $max > PHP_INT_MAX) {
+                $min = 0;
+            }
+            // Assume that max value of range is correct
+            if ((!empty($min) && empty($max))) {
+                $max = PHP_INT_MAX;
+            }
+            // Assume that min <= max
+            if ($min >= $max) {
+                $max = $min;
+            }
+
+            $min = ($float) ? floatval($min) : intval($min);
+            $max = ($float) ? floatval($max) : intval($max);
+
+            if ($float) {
+                $sphinx->setFilterFloatRange($attribute, $min, $max);
+            } else {
+                $sphinx->setFilterRange($attribute, $min, $max);
+            }
+        }
     }
 }
