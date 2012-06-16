@@ -27,35 +27,51 @@ class MapController extends Controller
     {
         Yii::app()->clientScript->registerScriptFile('http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU');
 
-        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');
-
-        $model = new Apartment('search');
-        $model->unsetAttributes();
-
-        if (isset($_GET['Apartment'])) {
-            $model->attributes = $_GET['Apartment'];
-        }
-
-        // Load data for map render
-        $data = array();
-        foreach (Apartment::model()->cache(Yii::app()->params['cache_expire_time'], $cacheDependency)->container()->findAll() as $apartment_id => $apartment) {
-            $key = 'apartment_map_data_' . $apartment->id;
-            if (($cached = Yii::app()->cache->get($key)) && ($cached = CJSON::decode($cached))) {
-                $data[] = $cached;
-            } else {
-                $data[] = $apartment->toArray();
-                Yii::app()->cache->set($key, CJSON::encode($apartment->toArray()));
-            }
-        }
-
         // Load apartment types
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
         $apartmentTypes = ApartmentType::model()->is_filter()->cache(Yii::app()->params['cache_expire_time'], $dependency)->findAll();
 
+        $model = new Apartment('search');
+
+
+        // Load containers for map
+        $model->unsetAttributes();
+        $model->attributes = array(
+            'container' => 1,
+        );
+        $containerDataProvider = $model->search();
+        $mapData = array();
+        foreach ($containerDataProvider->getData() as $apartment) {
+            $key = 'apartment_map_data_' . $apartment->id;
+            if (($cached = Yii::app()->cache->get($key)) && ($cached = CJSON::decode($cached))) {
+                $mapData[] = $cached;
+            } else {
+                $mapData[] = $apartment->toArray();
+                Yii::app()->cache->set($key, CJSON::encode($apartment->toArray()));
+            }
+        }
+
+        // Load apartments
+        $model->unsetAttributes();
+        $model->attributes = array(
+            'container' => 0,
+        );
+        $standaloneDataProvider = $model->search();
+
+
+        $model->unsetAttributes();
+        if (isset($_GET['Apartment'])) {
+            $model->attributes = $_GET['Apartment'];
+        }
+
+
         $this->render('index', array(
-            'data' => $data,
+            'mapData' => $mapData,
             'model' => $model,
             'apartmentTypes' => $apartmentTypes,
+
+            'containerDataProvider' => $containerDataProvider,
+            'standaloneDataProvider' => $standaloneDataProvider,
         ));
     }
 }

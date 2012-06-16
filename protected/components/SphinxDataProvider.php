@@ -8,16 +8,40 @@
  */
 class SphinxDataProvider extends CDataProvider
 {
-
+    /**
+     * @var string Key field
+     */
     public $keyField = 'id';
 
-    public $index;
-    public $sphinx;
-    public $model;
-    public $modelClass;
+    /**
+     * @var string Sphinx index name to search in
+     */
+    public $index = '';
 
+    /**
+     * @var SphinxClient Sphinx client object
+     */
+    public $sphinx = null;
+
+    /**
+     * @var CActiveRecord|null Model object
+     */
+    public $model = null;
+
+    /**
+     * @var string Model classname
+     */
+    public $modelClass = '';
+
+    /**
+     * @var array|null
+     */
     private $_result = null;
 
+    /**
+     * @param $modelClass
+     * @param array $config
+     */
     public function __construct($modelClass, $config = array())
     {
         if (is_string($modelClass)) {
@@ -27,6 +51,7 @@ class SphinxDataProvider extends CDataProvider
             $this->modelClass = get_class($modelClass);
             $this->model = $modelClass;
         }
+
         $this->setId($this->modelClass);
 
         foreach ($config as $key => $value) {
@@ -35,13 +60,25 @@ class SphinxDataProvider extends CDataProvider
     }
 
     /**
+     * Returns the sorting object.
+     * @return CSort the sorting object. If this is false, it means the sorting is disabled.
+     */
+    public function getSort()
+    {
+        if (($sort = parent::getSort()) !== false)
+            $sort->modelClass = $this->modelClass;
+        return $sort;
+    }
+
+    /**
      * Fetches the data from the persistent data storage.
      * @return array list of data items
      */
     protected function fetchData()
     {
+        $criteria = new CDbCriteria();
+
         // @todo MAKE THIS SHIT HAPPY
-        $s = microtime(true);
         $sphinx = unserialize(serialize(Yii::app()->search));
         $sphinx->setLimits(0, 1);
         $this->_result = $sphinx->Query('', $this->index);
@@ -53,10 +90,12 @@ class SphinxDataProvider extends CDataProvider
             $this->sphinx->setLimits($offset, $limit);
         }
 
-        $this->_result = $this->sphinx->Query('', $this->index);
-        Yii::log('Sphinx search: ' . (microtime(true) - $s), CLogger::LEVEL_TRACE);
+        if (($sort = $this->getSort()) !== false) {
+            $criteria->order = $sort->getOrderBy();
+        }
 
-        $criteria = new CDbCriteria();
+        $this->_result = $this->sphinx->Query('', $this->index);
+
         $criteria->addInCondition('id', array_keys($this->_result['matches']));
         return $this->model->findAll($criteria);
     }

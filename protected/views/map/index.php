@@ -38,7 +38,7 @@ Yii::app()->clientScript->registerScript('search', "
 
 <div class="grid_12 alpha omega">
     <div class="grid_7 alpha">
-        <?php $this->renderPartial('_map', array('data' => $data)); ?>
+        <?php $this->renderPartial('_map', array('data' => $mapData)); ?>
     </div>
     <div class="grid_5 omega">
         <div class="prepend_left">
@@ -62,7 +62,7 @@ Yii::app()->clientScript->registerScript('search', "
             <?php
             $this->widget('zii.widgets.CListView', array(
                 'id' => 'offers_list',
-                'dataProvider' => $model->standalone()->search(),
+                'dataProvider' => $standaloneDataProvider,
                 'itemView' => '/apartment/_view',
                 'template' => "{sorter}\n{pager}<div class='clear'></div>{items}\n{pager}",
                 'pager' => array(
@@ -92,7 +92,7 @@ Yii::app()->clientScript->registerScript('search', "
             <?php
             $this->widget('zii.widgets.CListView', array(
                 'id' => 'containers_list',
-                'dataProvider' => $model->resetScope()->container()->search(),
+                'dataProvider' => $containerDataProvider,
                 'itemView' => '/apartment/_list_container_item',
                 'template' => "{items}",
             ));

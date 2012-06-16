@@ -73,6 +73,13 @@ class Common
         );
     }
 
+    public static function makeJsString($string)
+    {
+        $string = preg_replace('/\r?\n/i', '', $string);
+        $string = preg_replace('/(>)(\s+)(<)/i', '$1$3', $string);
+        return $string;
+    }
+
 
 }
 

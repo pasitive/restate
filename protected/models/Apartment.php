@@ -44,10 +44,6 @@
  * @property int $floor
  * @property string $ytvideo_code
  *
- *
- *
- *
- *
  * The followings are the available model relations:
  * @property ApartmentType $type
  * @property Area $area
