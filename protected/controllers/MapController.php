@@ -31,7 +31,6 @@ class MapController extends Controller
 
         $model = new Apartment('search');
         $model->unsetAttributes();
-        $model->container = 1;
 
         if (isset($_GET['Apartment'])) {
             $model->attributes = $_GET['Apartment'];
