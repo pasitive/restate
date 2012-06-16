@@ -31,9 +31,6 @@ class MapController extends Controller
 
         $model = new Apartment('search');
         $model->unsetAttributes();
-        $criteria = new CDbCriteria();
-        $criteria->order = 'created_at DESC';
-        $model->setDbCriteria($criteria);
 
         if (isset($_GET['Apartment'])) {
             $model->attributes = $_GET['Apartment'];

@@ -41,6 +41,7 @@ class SphinxDataProvider extends CDataProvider
     protected function fetchData()
     {
         // @todo MAKE THIS SHIT HAPPY
+        $s = microtime(true);
         $sphinx = unserialize(serialize(Yii::app()->search));
         $sphinx->setLimits(0, 1);
         $this->_result = $sphinx->Query('', $this->index);
@@ -53,6 +54,7 @@ class SphinxDataProvider extends CDataProvider
         }
 
         $this->_result = $this->sphinx->Query('', $this->index);
+        Yii::log('Sphinx search: ' . (microtime(true) - $s), CLogger::LEVEL_TRACE);
 
         $criteria = new CDbCriteria();
         $criteria->addInCondition('id', array_keys($this->_result['matches']));

@@ -416,12 +416,14 @@ class Apartment extends CActiveRecord
             $filters['is_rent'] = $this->is_rent;
         }
 
+        if (is_numeric($this->container)) {
+            $filters['container'] = $this->container;
+        }
+
         // Set filters
         foreach ($filters as $attribute => $value) {
             $sphinx->setFilter($attribute, (is_array($value) ? $value : array($value)));
         }
-
-        $sphinx->setFilter('container', array(0));
 
         // Range filters
         if (!empty($this->room_number) && is_array($this->room_number)) {
