@@ -12,15 +12,6 @@ class m120616_154718_user_create extends DbMigration
             'salt' => 'VARCHAR(32) NOT NULL',
             'role' => "ENUM('partner', 'admin')"
         ));
-
-        $user = new User;
-        $user->attributes = array(
-            'name' => 'Administrator',
-            'role' => 'admin',
-            'username' => 'admin',
-            'password' => 'qqq',
-        );
-        $user->save();
     }
 
     public function safeDown()

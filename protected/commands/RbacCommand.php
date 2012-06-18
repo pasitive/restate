@@ -75,5 +75,15 @@ class RbacCommand extends CConsoleCommand
         $auth->save();
     }
 
-
+    public function actionAdminCreate()
+    {
+        $user = new User;
+        $user->attributes = array(
+            'name' => 'Administrator',
+            'role' => 'admin',
+            'username' => 'admin',
+            'password' => 'qqq',
+        );
+        $user->save();
+    }
 }
