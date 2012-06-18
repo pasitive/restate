@@ -82,7 +82,7 @@
             }
 
             function getHintLayout() {
-                var layout = ymaps.templateLayoutFactory.createClass('<?php echo Common::makeJsString($this->renderPartial('_map_hint_layout', null, true)) ?>');
+                var layout = ymaps.templateLayoutFactory.createClass('<?php echo CJavaScript::quote($this->renderPartial('_map_hint_layout', null, true)) ?>');
                 return layout;
             }
 

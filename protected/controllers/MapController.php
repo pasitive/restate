@@ -33,11 +33,11 @@ class MapController extends Controller
 
         $model = new Apartment('search');
 
-
         // Load containers for map
         $model->unsetAttributes();
         $model->attributes = array(
             'container' => 1,
+            'is_published' => Apartment::PUBLISHED,
         );
         $containerDataProvider = $model->search();
         $mapData = array();
@@ -58,12 +58,10 @@ class MapController extends Controller
         );
         $standaloneDataProvider = $model->search();
 
-
         $model->unsetAttributes();
         if (isset($_GET['Apartment'])) {
             $model->attributes = $_GET['Apartment'];
         }
-
 
         $this->render('index', array(
             'mapData' => $mapData,

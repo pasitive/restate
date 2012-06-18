@@ -11,7 +11,7 @@ class ApartmentController extends Controller
                 'roles' => array('createApartment', 'viewApartment', 'updateApartment'),
             ),
             array('allow',
-                'actions' => array('delete'),
+                'actions' => array('delete', 'publish', 'unpublish'),
                 'roles' => array('manageApartment'),
             ),
             array('deny',
@@ -136,6 +136,24 @@ class ApartmentController extends Controller
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
+    public function actionPublish($id)
+    {
+        if (Yii::app()->request->isAjaxRequest) {
+            Apartment::model()->updateByPk($id, array(
+                'is_published' => Apartment::PUBLISHED,
+            ));
+        }
+    }
+
+    public function actionUnpublish($id)
+    {
+        if (Yii::app()->request->isAjaxRequest) {
+            Apartment::model()->updateByPk($id, array(
+                'is_published' => Apartment::UNPUBLISHED,
+            ));
+        }
+    }
+
     /**
      * Manages all models.
      */
@@ -143,9 +161,9 @@ class ApartmentController extends Controller
     {
         $model = new Apartment('search');
         $model->unsetAttributes(); // clear any default values
-        if (isset($_GET['Apartment']))
+        if (isset($_GET['Apartment'])) {
             $model->attributes = $_GET['Apartment'];
-
+        }
         $this->render('index', array(
             'model' => $model,
         ));

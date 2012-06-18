@@ -28,6 +28,8 @@
  * @property string $address
  * @property int $is_rent
  * @property int $apartment_count
+ * @property int $user_id
+ * @property int $is_published
  *
  * @property string $typeName
  * @property string $cityName
@@ -54,6 +56,9 @@
 class Apartment extends CActiveRecord
 {
 
+    const PUBLISHED = 1;
+    const UNPUBLISHED = 0;
+
     public $files;
     public $fileType = array('jpg', 'jpeg', 'gif', 'png');
     public $fileSize = array(100, 150, 450);
@@ -75,6 +80,10 @@ class Apartment extends CActiveRecord
 
             'standalone' => array(
                 'condition' => 'container=0'
+            ),
+
+            'published' => array(
+                'condition' => 'id_published=1'
             ),
         );
     }
@@ -184,10 +193,10 @@ class Apartment extends CActiveRecord
             array('routeable_keywords, routeable_description, routeable_title, metro_name, city_name, area_name, type_name, default_image, container, apartment_count, ytvideo_code, parent_name', 'safe'),
             array('price', 'numerical'),
             array('room_number, square, square_live, square_kitchen, wc_number, floor', 'numerical', 'integerOnly' => true),
-            array('city_id, area_id, type_id', 'required'),
+            array('city_id, area_id, type_id, user_id', 'required'),
             array('name', 'length', 'max' => 255),
             array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
-            array('created_at, updated_at, lng, lat, rating, address, parent_id, is_special, description, is_rent', 'safe'),
+            array('created_at, updated_at, lng, lat, rating, address, parent_id, is_special, description, is_rent, is_published', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, name, city_id, area_id, type_id, created_at, updated_at', 'safe', 'on' => 'search'),
@@ -234,6 +243,7 @@ class Apartment extends CActiveRecord
             'updated_at' => 'Обновлено',
             'description' => 'Описание',
             'is_rent' => 'Сдается в аренду',
+            'is_published' => 'Опубликовано',
 
             'routeable_title' => 'SEO Заголовок',
             'routeable_keywords' => 'SEO Ключевые слова',
@@ -416,9 +426,13 @@ class Apartment extends CActiveRecord
             $filters['container'] = $this->container;
         }
 
+        if (is_numeric($this->is_published)) {
+            $filters['is_published'] = $this->is_published;
+        }
+
         // Set filters
         foreach ($filters as $attribute => $value) {
-            $sphinx->setFilter($attribute, (is_array($value) ? $value : array($value)));
+            $sphinx->SetFilter($attribute, (is_array($value) ? $value : array($value)));
         }
 
         // Range filters
@@ -435,6 +449,7 @@ class Apartment extends CActiveRecord
         $this->setRangeFilter($sphinx, 'square');
         $this->setRangeFilter($sphinx, 'square_live');
         $this->setRangeFilter($sphinx, 'square_kitchen');
+
 
         return new SphinxDataProvider($this, array(
             'sphinx' => $sphinx,

@@ -85,8 +85,6 @@
     </div>
 
 
-
-
     <?php $this->endWidget(); ?>
 
 </div>

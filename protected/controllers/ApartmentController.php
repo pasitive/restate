@@ -36,8 +36,9 @@ class ApartmentController extends Controller
             $model->attributes = $_GET['Apartment'];
         }
 
-        // Force NOT container objects
+        // Force NOT container published objects
         $model->container = 0;
+        $model->is_published = 1;
 
         $this->render('index', array(
             'model' => $model,
@@ -59,7 +60,9 @@ class ApartmentController extends Controller
             // Load all objects in container
             $criteria = new CDbCriteria();
             $criteria->addColumnCondition(array(
-                'parent_id' => $id
+                'parent_id' => $id,
+                'is_published' => Apartment::PUBLISHED,
+                'container' => 0,
             ));
 
             $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');

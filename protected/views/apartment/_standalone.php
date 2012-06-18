@@ -76,7 +76,7 @@
         </div>
 
         <br>
-        <?php echo CHtml::link("Посмотреть доступные предложения", array('/apartment/view', 'id' => $model->parent_id, '#' => 'apartment_list'), array('class' => 'strong')) ?>
+        <?php echo CHtml::link("Посмотреть все предложения в " . $model->parentName, array('/apartment/view', 'id' => $model->parent_id, '#' => 'apartment_list'), array('class' => 'strong')) ?>
     </div>
 </div>
 

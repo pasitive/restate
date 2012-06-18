@@ -22,12 +22,21 @@ class User extends CActiveRecord
     public $newPassword;
     public $confirmPassword;
 
+    /**
+     * @static
+     * @return array
+     */
     public static function getRoles()
     {
         return array(
             self::ROLE_PARTNER => 'Партнер',
             self::ROLE_ADMIN => 'Администратор',
         );
+    }
+
+    public function isAdmin()
+    {
+        return ($this->role === 'admin');
     }
 
     /**

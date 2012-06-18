@@ -43,11 +43,52 @@ $('.search-form form').submit(function(){
           */
         array(
             'class' => 'CButtonColumn',
+            'template' => '{view} {update} {delete} {publish} {unpublish}',
+            'htmlOptions' => array('width' => '80'),
             'buttons' => array(
                 'delete' => array(
                     'visible' => "Yii::app()->user->checkAccess('manageApartment')",
                 ),
+                'publish' => array(
+                    'label' => 'Publish',
+                    'imageUrl' => '/images/icon_publish.png',
+                    'visible' => 'Yii::app()->user->checkAccess("publishApartment") && $data->is_published == 0',
+                    'url' => 'Yii::app()->createAbsoluteUrl("admin/apartment/publish", array("id" => $data->id))',
+                    'click' => "
+                        function() {
+                            if(!confirm('Опубликовать?')) return false;
+                            $.fn.yiiGridView.update('apartment-grid', {
+                                type:'POST',
+                                url:$(this).attr('href'),
+                                success:function(data) {
+                                    $.fn.yiiGridView.update('apartment-grid');
+                                }
+                            });
+                            return false;
+                        }
+                    ",
+                ),
+                'unpublish' => array(
+                    'label' => 'Unpiblish',
+                    'imageUrl' => '/images/icon_unpublish.png',
+                    'visible' => 'Yii::app()->user->checkAccess("unpublishApartment") && $data->is_published == 1',
+                    'url' => 'Yii::app()->createAbsoluteUrl("admin/apartment/unpublish", array("id" => $data->id))',
+                    'click' => "
+                        function() {
+                            if(!confirm('Отменить публикацию?')) return false;
+                            $.fn.yiiGridView.update('apartment-grid', {
+                                type:'POST',
+                                url:$(this).attr('href'),
+                                success:function(data) {
+                                    $.fn.yiiGridView.update('apartment-grid');
+                                }
+                            });
+                            return false;
+                        }
+                    ",
+                ),
             ),
+
         ),
     ),
 )); ?>

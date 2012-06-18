@@ -44,7 +44,7 @@ class SystemController extends Controller
         $this->redirect(array('/admin/system/index'));
     }
 
-    public function actionUpdateDbCache()
+    public function actionUpdateMetroCache()
     {
         //metro
         $model = MetroStation::model()->findAll();
@@ -70,7 +70,8 @@ class SystemController extends Controller
 
         foreach ($model as $apartment) {
             $count = Apartment::model()->countByAttributes(array(
-                'parent_id' => $apartment->id
+                'parent_id' => $apartment->id,
+                'is_published' => Apartment::PUBLISHED,
             ));
 
             Apartment::model()->updateByPk($apartment->id, array(

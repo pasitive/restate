@@ -7,7 +7,7 @@ class CityController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('index', 'create', 'view', 'update'),
+                'actions' => array('index', 'create', 'view', 'update', 'ajaxDependsOfCity'),
                 'roles' => array('createApartment', 'viewApartment', 'updateApartment'),
             ),
             array('allow',

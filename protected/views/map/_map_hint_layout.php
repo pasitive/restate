@@ -8,7 +8,7 @@
         <div class="description clearfix">
             <h2>$[properties.name]</h2>
             <address>$[properties.address]</address>
-            <a class="more_link" href="$[properties.moreLink]">Посмотреть предложения $[properties.moreLinkSuffix]</a>
+            <a class="more_link" href="$[properties.moreLink]#apartment_list">Посмотреть предложения $[properties.moreLinkSuffix]</a>
         </div>
     </div>
 </div>

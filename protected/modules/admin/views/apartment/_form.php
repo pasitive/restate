@@ -9,6 +9,14 @@
 
 <?php echo $form->errorSummary($model); ?>
 
+<?php if (Yii::app()->user->checkAccess('publishApartment')): ?>
+<div class="row">
+    <?php echo $form->labelEx($model, 'is_published'); ?>
+    <?php echo $form->checkbox($model, 'is_published'); ?>
+    <?php echo $form->error($model, 'is_published'); ?>
+</div>
+    <?php endif; ?>
+
 <div class="row">
     <div id="map" style="height: 200px;"></div>
 </div>
@@ -195,6 +203,7 @@ $this->renderPartial('/apartmentAttribute/_form', array(
 <?php echo $form->hiddenField($model, 'area_name'); ?>
 <?php echo $form->hiddenField($model, 'container', array('value' => $model->type->container)); ?>
 <?php echo $form->hiddenField($model, 'type_name', array('value' => $model->type->name)); ?>
+<?php echo $form->hiddenField($model, 'user_id', array('value' => Yii::app()->user->id)); ?>
 
 <?php if (intval($model->type->container) === 0): ?>
     <?php echo $form->hiddenField($model, 'parent_name', array('value' => $model->parent->name)); ?>

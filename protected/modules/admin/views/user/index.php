@@ -46,6 +46,11 @@ $('.search-form form').submit(function(){
 		*/
 		array(
 			'class'=>'CButtonColumn',
+            'buttons' => array(
+                'delete' => array(
+                    'visible' => '!$data->isAdmin()'
+                ),
+            ),
 		),
 	),
 )); ?>
