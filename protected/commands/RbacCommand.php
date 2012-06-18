@@ -75,6 +75,9 @@ class RbacCommand extends CConsoleCommand
         $auth->save();
     }
 
+    /**
+     * Create admin action
+     */
     public function actionAdminCreate()
     {
         $user = new User;
