@@ -31,11 +31,13 @@ class ApartmentController extends Controller
 
         $model = new Apartment('search');
         $model->unsetAttributes();
-        $model->container = 0;
 
         if (isset($_GET['Apartment'])) {
             $model->attributes = $_GET['Apartment'];
         }
+
+        // Force NOT container objects
+        $model->container = 0;
 
         $this->render('index', array(
             'model' => $model,
@@ -60,7 +62,7 @@ class ApartmentController extends Controller
                 'parent_id' => $id
             ));
 
-            $dependency = new CDbCacheDependency('SELEC MAX(updated_at) FROM apartment');
+            $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');
             $apartmentDataProvider = new CActiveDataProvider(Apartment::model()->standalone()->cache(Yii::app()->params['cache_expire_time'], $dependency), array(
                 'criteria' => $criteria,
             ));

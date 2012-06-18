@@ -1,10 +1,21 @@
 <div class="form login">
-<?php $form=$this->beginWidget('CActiveForm'); ?>
-    <?php echo $form->labelEx($model,'password'); ?>
-	<?php echo $form->passwordField($model,'password'); ?>
-	<?php echo $form->error($model,'password'); ?>
+    <?php $form = $this->beginWidget('CActiveForm'); ?>
 
-	<?php echo CHtml::submitButton('Enter'); ?>
+    <div class="row">
+        <?php echo $form->labelEx($model, 'username'); ?>
+        <?php echo $form->textField($model, 'username'); ?>
+        <?php echo $form->error($model, 'username'); ?>
+    </div>
 
-<?php $this->endWidget(); ?>
+    <div class="row">
+        <?php echo $form->labelEx($model, 'password'); ?>
+        <?php echo $form->passwordField($model, 'password'); ?>
+        <?php echo $form->error($model, 'password'); ?>
+    </div>
+
+    <div class="row buttons">
+        <?php echo CHtml::submitButton('Вход'); ?>
+    </div>
+
+    <?php $this->endWidget(); ?>
 </div><!-- form -->

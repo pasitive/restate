@@ -23,6 +23,15 @@ class Controller extends CController
 
     private $_assetsUrl;
 
+    public function init()
+    {
+        parent::init();
+
+        // Register core javascripts
+        Yii::app()->clientScript->registerCoreScript('jquery')
+            ->registerScriptFile($this->assetsUrl . '/javascript/scripts.js', CClientScript::POS_END);
+    }
+
 
     /**
      * @return string the base URL that contains all published asset files of gii.
@@ -40,5 +49,15 @@ class Controller extends CController
     public function setAssetsUrl($value)
     {
         $this->_assetsUrl = $value;
+    }
+
+    /**
+     * @return array
+     */
+    public function filters()
+    {
+        return array(
+            'accessControl',
+        );
     }
 }

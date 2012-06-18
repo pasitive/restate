@@ -21,6 +21,19 @@
  */
 class SystemController extends Controller
 {
+
+    public function accessRules()
+    {
+        return array(
+            array('allow',
+                'roles' => array('manageSystem'),
+            ),
+            array('deny',
+                'users' => array('*'),
+            ),
+        );
+    }
+
     public function actionFlushCache()
     {
         if (Yii::app()->cache->flush()) {

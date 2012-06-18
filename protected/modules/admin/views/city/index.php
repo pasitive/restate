@@ -5,7 +5,7 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => 'Добавить', 'url' => array('create')),
+    array('label' => 'Добавить', 'url' => array('create'), 'visible' => Yii::app()->user->checkAccess('createApartment')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -42,6 +42,11 @@ $('.search-form form').submit(function(){
         'updated_at',
         array(
             'class' => 'CButtonColumn',
+            'buttons' => array(
+                'delete' => array(
+                    'visible' => "Yii::app()->user->checkAccess('manageApartment')",
+                ),
+            ),
         ),
     ),
 )); ?>

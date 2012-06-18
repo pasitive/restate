@@ -1,9 +1,8 @@
 <?php
 
-Yii::import('admin.components.UserIdentity');
-
 class LoginForm extends CFormModel
 {
+    public $username;
     public $password;
 
     private $_identity;
@@ -11,7 +10,7 @@ class LoginForm extends CFormModel
     public function rules()
     {
         return array(
-            array('password', 'required'),
+            array('username, password', 'required'),
             array('password', 'authenticate'),
         );
     }
@@ -19,6 +18,7 @@ class LoginForm extends CFormModel
     public function attributeLabels()
     {
         return array(
+            'username' => 'Имя пользователя',
             'password' => 'Пароль',
         );
     }
@@ -29,7 +29,7 @@ class LoginForm extends CFormModel
      */
     public function authenticate($attribute, $params)
     {
-        $this->_identity = new UserIdentity('admin', $this->password);
+        $this->_identity = new UserIdentity($this->username, $this->password);
         if (!$this->_identity->authenticate())
             $this->addError('password', 'Неверный пароль.');
     }
@@ -41,14 +41,13 @@ class LoginForm extends CFormModel
     public function login()
     {
         if ($this->_identity === null) {
-            $this->_identity = new UserIdentity('admin', $this->password);
+            $this->_identity = new UserIdentity($this->username, $this->password);
             $this->_identity->authenticate();
         }
         if ($this->_identity->errorCode === UserIdentity::ERROR_NONE) {
             Yii::app()->user->login($this->_identity);
             return true;
-        }
-        else
+        } else
             return false;
     }
 }

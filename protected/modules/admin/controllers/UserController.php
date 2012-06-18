@@ -1,20 +1,19 @@
 <?php
 
-class CityController extends Controller
+class UserController extends Controller
 {
-
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
     public function accessRules()
     {
         return array(
-            array('allow',
-                'actions' => array('index', 'create', 'view', 'update'),
-                'roles' => array('createApartment', 'viewApartment', 'updateApartment'),
+            array('allow', // allow all users to perform 'index' and 'view' actions
+                'roles' => array('manageSystem'),
             ),
-            array('allow',
-                'actions' => array('delete'),
-                'roles' => array('manageApartment'),
-            ),
-            array('deny',
+            array('deny', // deny all users
                 'users' => array('*'),
             ),
         );
@@ -37,13 +36,13 @@ class CityController extends Controller
      */
     public function actionCreate()
     {
-        $model = new City;
+        $model = new User;
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['City'])) {
-            $model->attributes = $_POST['City'];
+        if (isset($_POST['User'])) {
+            $model->attributes = $_POST['User'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
@@ -65,8 +64,8 @@ class CityController extends Controller
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['City'])) {
-            $model->attributes = $_POST['City'];
+        if (isset($_POST['User'])) {
+            $model->attributes = $_POST['User'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
@@ -99,10 +98,10 @@ class CityController extends Controller
      */
     public function actionIndex()
     {
-        $model = new City('search');
+        $model = new User('search');
         $model->unsetAttributes(); // clear any default values
-        if (isset($_GET['City']))
-            $model->attributes = $_GET['City'];
+        if (isset($_GET['User']))
+            $model->attributes = $_GET['User'];
 
         $this->render('index', array(
             'model' => $model,
@@ -116,7 +115,7 @@ class CityController extends Controller
      */
     public function loadModel($id)
     {
-        $model = City::model()->findByPk($id);
+        $model = User::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -128,44 +127,9 @@ class CityController extends Controller
      */
     protected function performAjaxValidation($model)
     {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'city-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'user-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
-    }
-
-    public function actionAjaxDependsOfCity()
-    {
-        $cacheDependency = new CDbCacheDependency('SELECT MAX(a.updated_at) FROM area a, metro_station');
-        $cityId = Yii::app()->request->getPost('city_id');
-        $model = City::model()->with(array('areas', 'metroStations'))->cache(3600, $cacheDependency)->findByPk($cityId);
-        if (count($model->areas)) {
-            $areaOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Нужно выбрать город'), true);
-            if ($model && ($data = CHtml::listData($model->areas, 'id', 'name')) !== null) {
-                $areaOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Выбрать'), true);
-                foreach ($data as $id => $value) {
-                    $areaOptions .= CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
-                }
-            }
-        } else {
-            $areaOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Нет данных для этого города'), true);
-        }
-
-        if (count($model->metroStations) != 0) {
-            $metroOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Нужно выбрать город'), true);
-            if ($model && ($data = CHtml::listData($model->metroStations, 'id', 'name')) !== null) {
-                $metroOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Выбрать'), true);
-                foreach ($data as $id => $value) {
-                    $metroOptions .= CHtml::tag('option', array('value' => $id), CHtml::encode($value), true);
-                }
-            }
-        } else {
-            $metroOptions = CHtml::tag('option', array('value' => 0), CHtml::encode('Нет данных для этого города'), true);
-        }
-
-        echo CJSON::encode(array(
-            'areas' => $areaOptions,
-            'metroStations' => $metroOptions,
-        ));
     }
 }

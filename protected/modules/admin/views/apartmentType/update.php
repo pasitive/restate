@@ -6,9 +6,9 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => 'Добавить', 'url' => array('create')),
-    array('label' => 'Просмотр', 'url' => array('view', 'id' => $model->id)),
-    array('label' => 'Список', 'url' => array('index')),
+    array('label' => 'Добавить', 'url' => array('create'), 'visible' => Yii::app()->user->checkAccess('createApartment')),
+    array('label' => 'Просмотр', 'url' => array('view', 'id' => $model->id), 'visible' => Yii::app()->user->checkAccess('viewApartment')),
+    array('label' => 'Список', 'url' => array('index'), 'visible' => Yii::app()->user->checkAccess('viewApartment')),
 );
 ?>
 

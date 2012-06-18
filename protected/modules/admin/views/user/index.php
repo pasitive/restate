@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Новости'=>array('index'),
+	'Пользователи'=>array('index'),
 	'Список',
 );
 
@@ -14,7 +14,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('news-grid', {
+	$.fn.yiiGridView.update('user-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -32,23 +32,20 @@ $('.search-form form').submit(function(){
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'news-grid',
+	'id'=>'user-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
-		'title',
-		'teaser',
-		'content',
+		'name',
+		'username',
+		'role',
+		/*
 		'created_at',
 		'updated_at',
+		*/
 		array(
 			'class'=>'CButtonColumn',
-            'buttons' => array(
-                'delete' => array(
-                    'visible' => "Yii::app()->user->checkAccess('manageContent')",
-                ),
-            ),
 		),
 	),
 )); ?>

@@ -270,7 +270,7 @@ class DGSphinxSearch extends CApplicationComponent
                     $min = (int)(isset($vol['min']) ? $vol['min'] : 0);
                     $max = (int)(isset($vol['max']) ? $vol['max'] : 0);
                     $attribute = (string)$vol['attr'];
-                    $this->client->setRangeFilter($attribute, $min, $max);
+                    $this->client->setFilterRange($attribute, $min, $max);
                 } else if ($vol) { // usual filter
                     $this->client->SetFilter($fil, (is_array($vol)) ? $vol : array($vol));
                 }
@@ -520,5 +520,4 @@ class DGSphinxSearch extends CApplicationComponent
         $iterator->enableResultTrace = $this->enableResultTrace;
         return $iterator;
     }
-
 }

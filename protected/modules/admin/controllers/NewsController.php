@@ -3,6 +3,20 @@
 class NewsController extends Controller
 {
 
+
+    public function accessRules()
+    {
+        return array(
+            array('allow',
+                'actions' => array('*'),
+                'roles' => array('manageContent'),
+            ),
+            array('deny',
+                'users' => array('*'),
+            ),
+        );
+    }
+
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
@@ -73,8 +87,7 @@ class NewsController extends Controller
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
-        }
-        else
+        } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 

@@ -34,7 +34,7 @@
         <div class="gallery" style="height: 350px;">
             <?php foreach ($apartmentFiles as $apartmentFile) : ?>
             <a href="<?php echo $apartmentFile->getFile(450) ?>">
-                <img data-title="<?php echo $model->name ?>" src="<?php echo $apartmentFile->getFile(450) ?>">
+                <img src="<?php echo $apartmentFile->getFile(450) ?>">
             </a>
             <?php endforeach; ?>
         </div>

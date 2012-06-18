@@ -79,10 +79,13 @@ class SphinxDataProvider extends CDataProvider
         $criteria = new CDbCriteria();
 
         // @todo MAKE THIS SHIT HAPPY
+
+        // Count all objects in index
         $sphinx = unserialize(serialize(Yii::app()->search));
         $sphinx->setLimits(0, 1);
         $this->_result = $sphinx->Query('', $this->index);
 
+        // Set limits if pagination is enabled
         if (($pagination = $this->getPagination()) !== false) {
             $pagination->setItemCount($this->getTotalItemCount());
             $limit = $pagination->getLimit();
@@ -90,12 +93,15 @@ class SphinxDataProvider extends CDataProvider
             $this->sphinx->setLimits($offset, $limit);
         }
 
+        // Set sort order
         if (($sort = $this->getSort()) !== false) {
             $criteria->order = $sort->getOrderBy();
         }
 
+        // Quering ids from sphinx index
         $this->_result = $this->sphinx->Query('', $this->index);
 
+        // Fetching actual data from database
         $criteria->addInCondition('id', array_keys($this->_result['matches']));
         return $this->model->findAll($criteria);
     }
