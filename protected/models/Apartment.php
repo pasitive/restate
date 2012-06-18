@@ -199,7 +199,7 @@ class Apartment extends CActiveRecord
             array('created_at, updated_at, lng, lat, rating, address, parent_id, is_special, description, is_rent, is_published', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, city_id, area_id, type_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, name, city_id, area_id, type_id, created_at, updated_at, is_special, container', 'safe', 'on' => 'search'),
         );
     }
 
@@ -383,9 +383,9 @@ class Apartment extends CActiveRecord
      * Retrieves a list of models based on the current search/filter conditions.
      * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
      */
-    public function search()
+    public function search($options = array())
     {
-        $sphinx = Yii::app()->search;
+        $sphinx = unserialize(serialize(Yii::app()->search));
 
         $query = '';
         $filters = array();
@@ -430,6 +430,10 @@ class Apartment extends CActiveRecord
             $filters['is_published'] = $this->is_published;
         }
 
+        if (is_numeric($this->is_special)) {
+            $filters['is_special'] = $this->is_special;
+        }
+
         // Set filters
         foreach ($filters as $attribute => $value) {
             $sphinx->SetFilter($attribute, (is_array($value) ? $value : array($value)));
@@ -449,7 +453,6 @@ class Apartment extends CActiveRecord
         $this->setRangeFilter($sphinx, 'square');
         $this->setRangeFilter($sphinx, 'square_live');
         $this->setRangeFilter($sphinx, 'square_kitchen');
-
 
         return new SphinxDataProvider($this, array(
             'sphinx' => $sphinx,

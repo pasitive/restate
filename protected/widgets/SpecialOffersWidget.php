@@ -40,25 +40,18 @@ class SpecialOffersWidget extends CWidget
     {
         $this->_options = CMap::mergeArray($this->_options, $this->options);
 
-        $criteria = new CDbCriteria();
-        $criteria->order = 't.created_at DESC';
-        $criteria->addColumnCondition(array(
-            'is_special' => 1
-        ));
+        $model = new Apartment('search');
+        $model->unsetAttributes();
+
+        $model->container = 0;
+        $model->is_special = 1;
 
         if (($apartmentId = $this->_options['apartmentId']) !== null) {
-            $criteria->addColumnCondition(array(
-                'parent_id' => $apartmentId
-            ));
+            $model->parent_id = $apartmentId;
         }
 
-        $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment');
-        $this->_dataProvider = new CActiveDataProvider(Apartment::model()->cache(DAY_1, $dependency), array(
-            'criteria' => $criteria,
-            'pagination' => array(
-                'pageSize' => $this->_options['max'],
-            ),
-        ));
+        $this->_dataProvider->pagination->pageSize = $this->_options['max'];
+        $this->_dataProvider = $model->search();
     }
 
     public function run()

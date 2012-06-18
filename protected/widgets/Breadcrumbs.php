@@ -32,8 +32,7 @@ class Breadcrumbs extends CBreadcrumbs
             $links[] = CHtml::link(Yii::t('zii', 'Home'), Yii::app()->homeUrl);
         else if ($this->homeLink !== false)
             $links[] = $this->homeLink;
-        foreach ($this->links as $label => $url)
-        {
+        foreach ($this->links as $label => $url) {
             if (is_string($label) || is_array($url))
                 $links[] = CHtml::link($this->encodeLabel ? CHtml::encode($label) : $label, $url);
             else

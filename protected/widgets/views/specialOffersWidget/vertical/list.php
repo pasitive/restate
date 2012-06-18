@@ -29,6 +29,7 @@
         'dataProvider' => $dataProvider,
         'itemView' => 'specialOffersWidget/vertical/_view',
         'template' => "{items}",
+
     ));
     ?>
 

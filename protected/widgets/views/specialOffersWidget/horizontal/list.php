@@ -27,11 +27,12 @@
 
         <div class="items">
             <ul>
-                <?php foreach($dataProvider->getData() as $data): ?>
+                <?php foreach ($dataProvider->getData() as $data): ?>
                 <li>
                     <a href="<?php echo Yii::app()->createUrl('apartment/view', array('id' => $data->id)) ?>">
                         <div class="item_wrapper">
-                            <div class="image_wrapper"><img src="<?php echo $data->default_image ?>" alt="" height="97"></div>
+                            <div class="image_wrapper"><img src="<?php echo $data->default_image ?>" alt="" height="97">
+                            </div>
                             <span><?php echo CHtml::encode($data->address) ?></span>
                             <address>м. <?php echo CHtml::encode($data->metroName) ?></address>
                         </div>
