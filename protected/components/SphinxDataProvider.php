@@ -102,8 +102,12 @@ class SphinxDataProvider extends CDataProvider
         $this->_result = $this->sphinx->Query('', $this->index);
 
         // Fetching actual data from database
-        $criteria->addInCondition('id', array_keys($this->_result['matches']));
-        return $this->model->findAll($criteria);
+        $keys = array_keys($this->_result['matches']);
+        $keysString = join(',', $keys);
+        $criteria->addInCondition('id', $keys);
+
+        $model = $this->model->findAll($criteria);
+        return $model;
     }
 
     /**

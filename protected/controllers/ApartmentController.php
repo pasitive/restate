@@ -40,13 +40,16 @@ class ApartmentController extends Controller
         $model->container = 0;
         $model->is_published = 1;
 
+        $apartmentDataProvider = $model->search();
+
         $this->render('index', array(
             'model' => $model,
+            'apartmentDataProvider' => $apartmentDataProvider,
             'apartmentTypes' => $apartmentTypes,
         ));
     }
 
-    public function actionView($id)
+    public function actionView($id = null)
     {
         $this->layout = '//layouts/column1';
 

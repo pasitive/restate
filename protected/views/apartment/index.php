@@ -60,7 +60,7 @@ Yii::app()->clientScript->registerScript('search', "
                 <?php
                 $this->widget('zii.widgets.CListView', array(
                     'id' => 'offers_list',
-                    'dataProvider' => $model->search(),
+                    'dataProvider' => $apartmentDataProvider,
                     'itemView' => '_view',
                     'template' => "{sorter}\n{pager}<div class='clear'></div>{items}\n{pager}",
                     'pager' => array(

@@ -101,10 +101,10 @@ class Page extends CActiveRecord
                 'updateAttribute' => 'updated_at',
                 'setUpdateOnCreate' => true
             ),
-            'RouteableBehavior' => array(
+            /*'RouteableBehavior' => array(
                 'class' => 'application.components.RouteableBehavior',
                 'controller' => 'page'
-            )
+            )*/
         );
     }
 

@@ -277,10 +277,10 @@ class Apartment extends CActiveRecord
                 'class' => 'ext.resourcesBehavior.ResourcesBehavior',
                 'resourcePath' => Yii::app()->params['uploadDir'],
             ),
-            'RoutableBehavior' => array(
+            /*'RoutableBehavior' => array(
                 'class' => 'application.components.RouteableBehavior',
                 'controller' => 'apartment',
-            ),
+            ),*/
         );
     }
 
@@ -340,18 +340,20 @@ class Apartment extends CActiveRecord
             ));
         }
 
-        foreach ($this->apartmentAttributes as $id => $apartmentAttribute) {
-            $apartmentAttribute->attributes = array(
-                'apartment_id' => $this->id,
-                'attribute_id' => $id
-            );
-            $apartmentAttribute->save();
+        if (is_array($this->apartmentAttributes) && count($this->apartmentAttributes) > 0) {
+            foreach ($this->apartmentAttributes as $id => $apartmentAttribute) {
+                $apartmentAttribute->attributes = array(
+                    'apartment_id' => $this->id,
+                    'attribute_id' => $id
+                );
+                $apartmentAttribute->save();
+            }
         }
 
         // Uploads
         $files = CUploadedFile::getInstances($this, 'files');
-        $hash = $this->generatePathHash();
-        if (!empty($files)) {
+        if (!empty($files) && is_array($files)) {
+            $hash = $this->generatePathHash();
             foreach ($files as $file) {
                 $attachment = new ApartmentFile();
                 $meta = Common::processImage($attachment, $file, false, $hash);

@@ -55,6 +55,7 @@ class MapController extends Controller
         $model->unsetAttributes();
         $model->attributes = array(
             'container' => 0,
+            'is_published' => Apartment::PUBLISHED,
         );
         $standaloneDataProvider = $model->search();
 

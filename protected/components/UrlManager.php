@@ -7,13 +7,16 @@ class UrlManager extends CUrlManager
 
     public function init()
     {
-        $oldRules = $this->rules;
+        $start = microtime(true);
+
+        /*$oldRules = $this->rules;
         $this->rules = array();
         $dependency = new CDbCacheDependency('SELECT MAX(created_at) FROM route');
         $routes = Route::model()->cache(Yii::app()->params['cache_expire_time'], $dependency)->findAll();
 
         Yii::app()->cache->set('routes', $routes, Yii::app()->params['cache_expire_time'], $dependency);
 
+        // @todo Bottle neck on 1000+ rows (~1.3s on 1000 rows)
         foreach ($routes as $route) {
             $rule = array($route->routeable_controller . '/' . $route->routeable_action);
             if ($route->routeable_id) {
@@ -22,7 +25,7 @@ class UrlManager extends CUrlManager
             $this->rules[$route->pattern] = $rule;
         }
 
-        $this->rules += $oldRules;
+        $this->rules += $oldRules;*/
 
         // Multilanguage
         $langPattern = implode('|', $this->languages);
@@ -39,6 +42,8 @@ class UrlManager extends CUrlManager
         $rules['<language:' . $langPattern . '>'] = Yii::app()->defaultController;
 
         $this->rules = $rules;
+
+        Yii::trace('Routes load ' . (microtime(true) - $start));
 
         parent::init();
     }

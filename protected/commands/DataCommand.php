@@ -36,6 +36,7 @@ class DataCommand extends CConsoleCommand
                 'wc_number' => mt_rand(1, 4),
                 'user_id' => 1,
                 'is_published' => 1,
+                'address' => 'address_' . $i,
             );
             $apartment->save();
             if ($i % 100 == 0) print "Generated {$i} apartments\n";

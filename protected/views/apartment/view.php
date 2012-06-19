@@ -23,7 +23,7 @@
 
 <?php
 $this->breadcrumbs = array(
-    (!empty($model->parent_id) ? $model->parentName : ''),
+    (!empty($model->parent_id) ? $model->parentName : $model->name),
     $model->address
 );
 
