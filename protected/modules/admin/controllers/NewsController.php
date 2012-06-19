@@ -8,7 +8,6 @@ class NewsController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('*'),
                 'roles' => array('manageContent'),
             ),
             array('deny',
