@@ -7,7 +7,7 @@ set :application, "zapad.vebel.ru"
 set :deploy_to, "/srv/www/#{application}"
 
 set :scm, :git
-set :repository, "git://github.com/pasitive/zapad_new.git"
+set :repository, "git@github.com:pasitive/restate.git"
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
                          
