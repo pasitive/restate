@@ -38,7 +38,10 @@ class DataCommand extends CConsoleCommand
                 'is_published' => 1,
                 'address' => 'address_' . $i,
             );
-            $apartment->save();
+            if (!$apartment->save()) {
+                print print_r($apartment->getErrors(), true);
+                break;
+            }
             if ($i % 100 == 0) print "Generated {$i} apartments\n";
             flush();
         }

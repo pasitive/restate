@@ -19,7 +19,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-$this->pageTitle = Yii::app()->name . ' - ' . 'Объекты на карте';
+$this->pageTitle = 'Объекты на карте' . ' | ' . Yii::app()->name;
 
 Yii::app()->clientScript->registerScript('search', "
     $('.advanced-search-form').bind('keyup, change', function(){
@@ -46,9 +46,9 @@ Yii::app()->clientScript->registerScript('search', "
 
             <div class="space small"></div>
             <?php $this->renderPartial('/apartment/_advanced_search', array(
-                'model' => $model,
-                'apartmentTypes' => $apartmentTypes,
-            )) ?>
+            'model' => $model,
+            'apartmentTypes' => $apartmentTypes,
+        )) ?>
         </div>
     </div>
 </div>
@@ -58,6 +58,7 @@ Yii::app()->clientScript->registerScript('search', "
 <div class="grid_12 alpha omega">
     <div class="grid_7 alpha">
         <h2>Список объектов</h2>
+
         <div class="offers">
             <?php
             $this->widget('zii.widgets.CListView', array(

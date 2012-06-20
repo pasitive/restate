@@ -27,7 +27,8 @@ $this->breadcrumbs = array(
     $model->address
 );
 
-$this->pageTitle = Yii::app()->name . ' - ' . ($model->routeable_title ? $model->routeable_title : ($model->name . ' - ' . $model->address));
+//$this->pageTitle = Yii::app()->name . ' - ' . ($model->routeable_title ? $model->routeable_title : ($model->name . ' - ' . $model->address));
+$this->pageTitle = (empty($model->name) ? $model->typeName : $model->name) . ' | ' . (!empty($model->address) ? $model->address . ' | ' : '') . Yii::app()->name;
 Yii::app()->clientScript->registerMetaTag(($model->routeable_description ? $model->routeable_description : ($model->name . ' - ' . $model->address)), 'description');
 Yii::app()->clientScript->registerMetaTag(($model->routeable_keywords ? $model->routeable_keywords : $model->name), 'keywords');
 
@@ -81,7 +82,7 @@ $this->renderPartial($view, array(
                 map = new ymaps.Map('map', mapOptions);
                 map.setCenter(c.geometry.getCoordinates());
                 map.controls.add('zoomControl');
-                    // Список типов карты
+                // Список типов карты
 
 //                map.behaviors.enable('scrollZoom');
                 var placemark = new ymaps.Placemark([<?php echo $model->lat ?>, <?php echo $model->lng ?>], {

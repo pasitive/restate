@@ -92,7 +92,8 @@ class SphinxDataProvider extends CDataProvider
 
         // Set limits if pagination is enabled
         if (($pagination = $this->getPagination()) !== false) {
-            $pagination->setItemCount($this->getTotalItemCount());
+            $totalItemCount = $this->getTotalItemCount();
+            $pagination->setItemCount($totalItemCount);
             $limit = $pagination->getLimit();
             $offset = $pagination->getOffset();
             $this->sphinx->setLimits($offset, $limit);
@@ -107,6 +108,14 @@ class SphinxDataProvider extends CDataProvider
         $criteria->addInCondition('id', $keys);
 
         $model = $this->model->findAll($criteria);
+
+        /*$command = Yii::app()->db->createCommand()
+            ->from('apartment')
+            ->where('id IN ("' . $keysString . '")')
+            ->limit($limit, $offset);
+
+        $data = $command->queryAll();*/
+
         return $model;
     }
 
@@ -132,7 +141,7 @@ class SphinxDataProvider extends CDataProvider
      */
     protected function calculateTotalItemCount()
     {
-        return (int)$this->_result['total_found'];
+        return (int)$this->_result['total'];
     }
 
 }

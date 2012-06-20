@@ -6,6 +6,9 @@
  */
 class Common
 {
+
+    private static $_uriProperties = array();
+
     public static function generateUniqueCode($length, $makeNewSeed = true)
     {
         if ($makeNewSeed) {
@@ -80,7 +83,14 @@ class Common
         return $string;
     }
 
+    public static function getUri($value, $namespace = 0)
+    {
+        if (!isset(self::$_uriProperties[$namespace][$value])) {
+            self::$_uriProperties[$namespace][$value] = TextBox::transliteUrl($value);
+        }
 
+        return self::$_uriProperties[$namespace][$value];
+    }
 }
 
 ?>

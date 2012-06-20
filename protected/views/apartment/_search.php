@@ -108,7 +108,7 @@
     <div class="grid_3">
         <div class="price_range small">
             <span class="search_label">&nbsp;Цена от</span>
-            <?php echo CHtml::textField('Apartment[price][]', '', array('size' => 5)) ?>
+                <?php echo CHtml::textField('Apartment[price][]', '', array('size' => 5)) ?>
             <span class="search_label">&mdash;</span>
             <?php echo CHtml::textField('Apartment[price][]', '', array('size' => 5)) ?>
         </div>

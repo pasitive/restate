@@ -55,7 +55,6 @@
  */
 class Apartment extends CActiveRecord
 {
-
     const PUBLISHED = 1;
     const UNPUBLISHED = 0;
 
@@ -70,6 +69,8 @@ class Apartment extends CActiveRecord
     public $routeable_keywords;
     public $routeable_description;
     public $routeable_title;
+
+    private $_uriProperties = array();
 
     public function scopes()
     {
@@ -95,7 +96,6 @@ class Apartment extends CActiveRecord
             'parent_id' => $id,
         ));
         return $this;
-
     }
 
     public function getAreaName()
@@ -189,7 +189,7 @@ class Apartment extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('routeable_pattern', 'required'),
+//            array('routeable_pattern', 'required'),
             array('routeable_keywords, routeable_description, routeable_title, metro_name, city_name, area_name, type_name, default_image, container, apartment_count, ytvideo_code, parent_name', 'safe'),
             array('price', 'numerical'),
             array('room_number, square, square_live, square_kitchen, wc_number, floor', 'numerical', 'integerOnly' => true),
@@ -300,13 +300,13 @@ class Apartment extends CActiveRecord
         if (parent::beforeValidate()) {
 
             // Routes
-            if (empty($this->routeable_pattern)) {
+            /*if (empty($this->routeable_pattern)) {
                 $this->routeable_pattern = '/apartment/' . TextBox::transliteUrl($this->type->name . '_' . $this->address);
             }
 
             if (empty($this->routeable_title)) {
                 $this->routeable_title = $this->type->name . ' - ' . $this->address;
-            }
+            }*/
 
             if (empty($this->metro_id)) {
                 $this->metro_id = NULL;

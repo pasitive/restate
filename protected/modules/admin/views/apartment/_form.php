@@ -17,6 +17,14 @@
 </div>
     <?php endif; ?>
 
+<?php if (intval($model->container) == 0): ?>
+<div class="row">
+    <?php echo $form->labelEx($model, 'is_special'); ?>
+    <?php echo $form->checkbox($model, 'is_special'); ?>
+    <?php echo $form->error($model, 'is_special'); ?>
+</div>
+    <?php endif; ?>
+
 <div class="row">
     <div id="map" style="height: 200px;"></div>
 </div>
@@ -83,7 +91,7 @@
     <?php echo $form->error($model, 'metro_id'); ?>
 </div>
 
-<?php if (intval($model->type->container) === 0): // Если тип объекта не является контейнером ?>
+<?php if (intval($model->container) === 0): // Если тип объекта не является контейнером ?>
 
 <div class="row">
     <?php echo $form->labelEx($model, 'price'); ?>
@@ -164,12 +172,6 @@
     <?php echo $form->labelEx($model, 'routeable_description'); ?>
     <?php echo $form->textField($model, 'routeable_description', array('size' => 60, 'maxlength' => 255)); ?>
     <?php echo $form->error($model, 'routeable_description'); ?>
-</div>
-
-<div class="row">
-    <?php echo $form->labelEx($model, 'is_special'); ?>
-    <?php echo $form->checkbox($model, 'is_special'); ?>
-    <?php echo $form->error($model, 'is_special'); ?>
 </div>
 
 <div class="row">

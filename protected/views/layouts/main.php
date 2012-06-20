@@ -58,7 +58,7 @@
 
                 <ul>
                     <?php foreach (Page::model()->cache(3600)->findAll() as $page) : ?>
-                    <?php echo CHtml::link($page->name, array('/page/view', 'id' => $page->id)) ?>
+                    <?php echo CHtml::link($page->name, array('/page/view', 'id' => $page->id, 'name' => Common::getUri($page->name, 'page'))) ?>
                     <?php endforeach; ?>
                 </ul>
 

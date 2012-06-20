@@ -17,16 +17,6 @@ class Page extends CActiveRecord
     public $routeable_description;
     public $routeable_title;
 
-    public function beforeValidate()
-    {
-        if (parent::beforeValidate()) {
-            $this->routeable_pattern = '/page/' . TextBox::transliteUrl($this->name);
-            return true;
-        }
-
-        return false;
-    }
-
     /**
      * Returns the static model of the specified AR class.
      * @return Page the static model class
@@ -52,7 +42,7 @@ class Page extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('routeable_pattern, name, body', 'required'),
+            array('name, body', 'required'),
             array('name', 'length', 'max' => 255),
             array('routeable_keywords, routeable_description, routeable_title, body', 'safe'),
             // The following rule is used by search().

@@ -47,7 +47,7 @@
                     <!--NOTHING-->
                     <?php else: ?>
 
-                    <?php if ( !empty($data->square) || !empty($data->square_live) ): ?>
+                    <?php if (!empty($data->square) || !empty($data->square_live)): ?>
                         <dt>Площадь:</dt>
                         <dd><?php echo (empty($data->square_live) ? '' : $data->square_live . '/') ?><?php echo (empty($data->square) ? '' : $data->square . ' м<sup>2</sup>') ?></dd>
                         <?php endif; ?>
@@ -84,7 +84,12 @@
                     class="price small strong"><?php echo (($data->is_rent == 1) ? 'Стоимость за месяц: ' : 'Цена: ') ?><?php echo (($data->price == 0 ? 'Уточняйте у менеджера' : Yii::app()->numberFormatter->formatCurrency($data->price, 'RUB'))) ?></div>
                 <?php endif; ?>
 
-                <?php echo CHtml::link('Посмотреть подробности', array('/apartment/view', 'id' => $data->id), array('class' => 'more_link')) ?>
+                <?php echo CHtml::link('Посмотреть подробности', array(
+                    '/apartment/view',
+                    'id' => $data->id,
+                    'city' => Common::getUri($data->cityName, 'apartment'),
+                    'address' => Common::getUri($data->address, 'apartment'),
+            ), array('class' => 'more_link')) ?>
             </div>
 
         </div>
