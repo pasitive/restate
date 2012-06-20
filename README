@@ -22,8 +22,4 @@ INSTALLATION:
  - make data directory writable to Sphinx indexer and sphinxd
  - cap deploy
 
-LICIENCE:
- - Free for use
- - http://www.apache.org/licenses/LICENSE-2.0.html
-
  Enjoy!
