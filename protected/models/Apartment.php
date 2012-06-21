@@ -70,7 +70,10 @@ class Apartment extends CActiveRecord
     public $routeable_description;
     public $routeable_title;
 
-    private $_uriProperties = array();
+    public function defaultScope()
+    {
+        return $this->multilingual->localizedCriteria();
+    }
 
     public function scopes()
     {
@@ -228,36 +231,36 @@ class Apartment extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
-            'name' => 'Объект',
-            'city_id' => 'Город',
-            'area_id' => 'Район',
-            'metro_id' => 'Станция метро',
-            'type_id' => 'Тип объекта',
-            'address' => 'Адрес',
-            'lng' => 'Долгота',
-            'lat' => 'Широта',
-            'is_special' => 'Специальное предложение?',
-            'parent_id' => 'Родительский объект',
-            'created_at' => 'Создано',
-            'updated_at' => 'Обновлено',
-            'description' => 'Описание',
-            'is_rent' => 'Сдается в аренду',
-            'is_published' => 'Опубликовано',
+            'id' => Yii::t('common', 'id'),
+            'name' => Yii::t('common', 'name'),
+            'city_id' => Yii::t('apartment', 'city'),
+            'area_id' => Yii::t('apartment', 'area'),
+            'metro_id' => Yii::t('apartment', 'metro'),
+            'type_id' => Yii::t('apartment', 'type'),
+            'address' => Yii::t('apartment', 'address'),
+            'lng' => Yii::t('common', 'longitude'),
+            'lat' => Yii::t('common', 'latitude'),
+            'is_special' => Yii::t('apartment', 'is_special'),
+            'parent_id' => Yii::t('apartment', 'parent_id'),
+            'created_at' => Yii::t('common', 'created_at'),
+            'updated_at' => Yii::t('common', 'updated_at'),
+            'description' => Yii::t('apartment', 'description'),
+            'is_rent' => Yii::t('apartment', 'is_rent'),
+            'is_published' => Yii::t('common', 'is_published'),
 
-            'routeable_title' => 'SEO Заголовок',
-            'routeable_keywords' => 'SEO Ключевые слова',
-            'routeable_description' => 'SEO Описание',
+            'routeable_title' => Yii::t('seo', 'title'),
+            'routeable_keywords' => Yii::t('seo', 'keywords'),
+            'routeable_description' => Yii::t('seo', 'description'),
 
-            'price' => 'Цена',
-            'room_number' => 'Кол-во комнат',
-            'square' => 'Общая площадь',
-            'square_live' => 'Жилая площадь',
-            'square_kitchen' => 'Площадь кухни',
-            'floor' => 'Этаж',
-            'wc_number' => 'Кол-во санузлов',
+            'price' => Yii::t('common', 'price'),
+            'room_number' => Yii::t('apartment', 'room_number'),
+            'square' => Yii::t('apartment', 'square'),
+            'square_live' => Yii::t('apartment', 'square_live'),
+            'square_kitchen' => Yii::t('apartment', 'square_kitchen'),
+            'floor' => Yii::t('apartment', 'floor'),
+            'wc_number' => Yii::t('apartment', 'wc_number'),
 
-            'ytvideo_code' => 'Код видео на YouTube',
+            'ytvideo_code' => Yii::t('apartment', 'ytvideo_code'),
         );
     }
 
@@ -277,10 +280,18 @@ class Apartment extends CActiveRecord
                 'class' => 'ext.resourcesBehavior.ResourcesBehavior',
                 'resourcePath' => Yii::app()->params['uploadDir'],
             ),
-            /*'RoutableBehavior' => array(
-                'class' => 'application.components.RouteableBehavior',
-                'controller' => 'apartment',
-            ),*/
+            'multilingual' => array(
+                'class' => 'application.models.behaviors.MultilingualBehavior',
+                'langClassName' => 'ApartmentI18n',
+                'langTableName' => 'apartment_i18n',
+                'langForeignKey' => 'apartment_id',
+                'langField' => 'language_code',
+                'localizedAttributes' => array('name', 'type_name', 'parent_name', 'area_name', 'city_name'), //attributes of the model to be translated
+                'localizedPrefix' => 'i18n_',
+                'languages' => Yii::app()->params['languages'], // array of your translated languages. Example : array('fr' => 'Français', 'en' => 'English')
+                'defaultLanguage' => Yii::app()->params['defaultLanguage'], //your main language. Example : 'fr'
+                'dynamicLangClass' => true, //Set to true if you don't want to create a 'PostLang.php' in your models folder
+            ),
         );
     }
 
@@ -298,15 +309,6 @@ class Apartment extends CActiveRecord
     {
         $valid = false;
         if (parent::beforeValidate()) {
-
-            // Routes
-            /*if (empty($this->routeable_pattern)) {
-                $this->routeable_pattern = '/apartment/' . TextBox::transliteUrl($this->type->name . '_' . $this->address);
-            }
-
-            if (empty($this->routeable_title)) {
-                $this->routeable_title = $this->type->name . ' - ' . $this->address;
-            }*/
 
             if (empty($this->metro_id)) {
                 $this->metro_id = NULL;
@@ -497,4 +499,6 @@ class Apartment extends CActiveRecord
             }
         }
     }
+
+
 }

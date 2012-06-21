@@ -20,12 +20,11 @@
 class Attribute extends CActiveRecord
 {
 
-
     public function defaultScope()
     {
-        return array(
-            'order' => 'sort'
-        );
+        $criteria = $this->multilingual->localizedCriteria();
+        $criteria['order'] = 'sort';
+        return $criteria;
     }
 
     /**
@@ -84,14 +83,14 @@ class Attribute extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
-            'name' => 'Параметр объекта',
-            'apartment_type_id' => 'Тип объекта',
-            'disabled' => 'НЕ активно',
-            'type' => 'Тип',
-            'sort' => 'Порядок сортировки',
-            'created_at' => 'Создано',
-            'updated_at' => 'Обновлено',
+            'id' => Yii::t('common', 'id'),
+            'name' => Yii::t('attribute', 'name'),
+            'apartment_type_id' => Yii::t('apartment', 'type'),
+            'disabled' => Yii::t('attribute', 'disabled'),
+            'type' => Yii::t('attribute', 'type'),
+            'sort' => Yii::t('attribute', 'sort'),
+            'created_at' => Yii::t('common', 'created_at'),
+            'updated_at' => Yii::t('common', 'updated_at'),
         );
     }
 
@@ -106,7 +105,19 @@ class Attribute extends CActiveRecord
                 'createAttribute' => 'created_at',
                 'updateAttribute' => 'updated_at',
                 'setUpdateOnCreate' => true
-            )
+            ),
+            'multilingual' => array(
+                'class' => 'application.models.behaviors.MultilingualBehavior',
+                'langClassName' => 'AttributeI18n',
+                'langTableName' => 'attribute_i18n',
+                'langForeignKey' => 'attribute_id',
+                'langField' => 'language_code',
+                'localizedAttributes' => array('name'), //attributes of the model to be translated
+                'localizedPrefix' => 'i18n_',
+                'languages' => Yii::app()->params['languages'], // array of your translated languages. Example : array('fr' => 'Français', 'en' => 'English')
+                'defaultLanguage' => Yii::app()->params['defaultLanguage'], //your main language. Example : 'fr'
+                'dynamicLangClass' => true, //Set to true if you don't want to create a 'PostLang.php' in your models folder
+            ),
         );
     }
 

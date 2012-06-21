@@ -1,44 +1,19 @@
 <?php
 
 /**
- * This is the model class for table "apartment_type".
+ * This is the model class for table "language".
  *
- * The followings are the available columns in table 'apartment_type':
+ * The followings are the available columns in table 'language':
  * @property string $id
- * @property string $name
+ * @property string $code
  * @property string $created_at
  * @property string $updated_at
- * @property int $container
- * @property int $is_filter
- *
- * The followings are the available model relations:
- * @property Apartment[] $apartments
- * @property Attribute[] $attributes
  */
-class ApartmentType extends CActiveRecord
+class Language extends CActiveRecord
 {
-
-    public function getIcon()
-    {
-        return $this->container ? 'key_gold' : 'key_grey';
-    }
-
-    public function scopes()
-    {
-        return array(
-            'container' => array(
-                'condition' => 't.container=1',
-            ),
-            'is_filter' => array(
-                'condition' => 't.is_filter=1',
-            ),
-
-        );
-    }
-
     /**
      * Returns the static model of the specified AR class.
-     * @return ApartmentType the static model class
+     * @return Language the static model class
      */
     public static function model($className = __CLASS__)
     {
@@ -50,7 +25,7 @@ class ApartmentType extends CActiveRecord
      */
     public function tableName()
     {
-        return 'apartment_type';
+        return 'language';
     }
 
     /**
@@ -61,13 +36,12 @@ class ApartmentType extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name', 'required'),
-            array('name', 'length', 'max' => 255),
-            array('container, is_filter', 'numerical', 'integerOnly' => true),
+            array('code', 'required'),
+            array('code', 'length', 'max' => 255),
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, code, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
 
@@ -79,8 +53,6 @@ class ApartmentType extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'apartments' => array(self::HAS_MANY, 'Apartment', 'type_id'),
-            //'attributes' => array(self::HAS_MANY, 'Attribute', 'apartment_type_id'),
         );
     }
 
@@ -90,12 +62,10 @@ class ApartmentType extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => Yii::t('common', 'id'),
-            'name' => Yii::t('apartment', 'type'),
-            'container' => Yii::t('apartment', 'container'),
-            'is_filter' => Yii::t('apartment', 'is_filter'),
-            'created_at' => Yii::t('common', 'created_at'),
-            'updated_at' => Yii::t('common', 'updated_at'),
+            'id' => 'ID',
+            'code' => 'Code',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         );
     }
 
@@ -126,32 +96,12 @@ class ApartmentType extends CActiveRecord
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id, true);
-        $criteria->compare('name', $this->name, true);
+        $criteria->compare('code', $this->code, true);
         $criteria->compare('created_at', $this->created_at, true);
         $criteria->compare('updated_at', $this->updated_at, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
-    }
-
-
-    public static function getAdminCMenuItems()
-    {
-        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
-        $model = self::model()->cache(3600, $cacheDependency)->findAll();
-
-        $items = array();
-        foreach ($model as $index => $type) {
-            $items[] = array('label' => $type->name, 'url' => array('/admin/apartment/create', 'type' => $type->id));
-        }
-        return $items;
-    }
-
-    public function loadAll()
-    {
-        $cacheDependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
-        $model = ApartmentType::model()->cache(3600, $cacheDependency)->findAll();
-        return $model;
     }
 }

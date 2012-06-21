@@ -17,7 +17,7 @@
 </div>
     <?php endif; ?>
 
-<?php if (intval($model->container) == 0): ?>
+<?php if (intval($model->type->container) == 0): ?>
 <div class="row">
     <?php echo $form->labelEx($model, 'is_special'); ?>
     <?php echo $form->checkbox($model, 'is_special'); ?>
@@ -91,7 +91,7 @@
     <?php echo $form->error($model, 'metro_id'); ?>
 </div>
 
-<?php if (intval($model->container) === 0): // Если тип объекта не является контейнером ?>
+<?php if (intval($model->type->container) === 0): // Если тип объекта не является контейнером ?>
 
 <div class="row">
     <?php echo $form->labelEx($model, 'price'); ?>

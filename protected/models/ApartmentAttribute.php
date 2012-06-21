@@ -72,12 +72,12 @@ class ApartmentAttribute extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
-            'apartment_id' => 'Apartment',
-            'attribute_id' => 'Attribute',
-            'value' => 'Value',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'id' => Yii::t('common', 'id'),
+            'apartment_id' => Yii::t('apartment', 'apartment'),
+            'attribute_id' => Yii::t('attribute', 'attribute'),
+            'value' => Yii::t('attribute', 'value'),
+            'created_at' => Yii::t('common', 'created_at'),
+            'updated_at' => Yii::t('common', 'updated_at'),
         );
     }
 

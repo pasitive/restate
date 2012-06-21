@@ -40,19 +40,21 @@
 
             <div class="grid_2 alpha">
                 <dl>
-                    <dt>Метро:</dt>
+                    <?php if (!empty($data->metroName) || !empty($data->metroName)): ?>
+                    <dt><?php echo Yii::t('apartment', 'metro') ?></dt>
                     <dd><?php echo (empty($data->metroName) ? '&mdash;' : $data->metroName) ?></dd>
+                    <?php endif; ?>
 
                     <?php if ($data->container == 1): ?>
                     <!--NOTHING-->
                     <?php else: ?>
 
                     <?php if (!empty($data->square) || !empty($data->square_live)): ?>
-                        <dt>Площадь:</dt>
+                        <dt><?php echo Yii::t('apartment', 'square') ?></dt>
                         <dd><?php echo (empty($data->square_live) ? '' : $data->square_live . '/') ?><?php echo (empty($data->square) ? '' : $data->square . ' м<sup>2</sup>') ?></dd>
                         <?php endif; ?>
 
-                    <dt>Комнат:</dt>
+                    <dt><?php echo Yii::t('apartment', 'room_number') ?></dt>
                     <dd><?php echo (empty($data->room_number) ? '&mdash;' : $data->room_number) ?></dd>
                     <?php endif; ?>
                 </dl>
@@ -65,12 +67,12 @@
                     <?php else: ?>
 
                     <?php if (!empty($data->square_kitchen)): ?>
-                        <dt>Кухня:</dt>
+                        <dt><?php echo Yii::t('apartment', 'square_kitchen') ?></dt>
                         <dd><?php echo $data->square_kitchen . ' м<sup>2</sup>' ?></dd>
                         <?php endif; ?>
 
                     <?php if (!empty($data->square_kitchen)): ?>
-                        <dt>Санузлов:</dt>
+                        <dt><?php echo Yii::t('apartment', 'wc_number') ?></dt>
                         <dd><?php echo $data->wc_number ?></dd>
                         <?php endif; ?>
 
@@ -81,14 +83,14 @@
             <div class="grid_5 alpha omega">
                 <?php if ($data->container != 1): ?>
                 <div
-                    class="price small strong"><?php echo (($data->is_rent == 1) ? 'Стоимость за месяц: ' : 'Цена: ') ?><?php echo (($data->price == 0 ? 'Уточняйте у менеджера' : Yii::app()->numberFormatter->formatCurrency($data->price, 'RUB'))) ?></div>
+                    class="price small strong"><?php echo (($data->is_rent == 1) ? Yii::t('common', 'Rent price') : Yii::t('common', 'Price')) ?> <?php echo (($data->price == 0 ? 'Уточняйте у менеджера' : Yii::app()->numberFormatter->formatCurrency($data->price, 'RUB'))) ?></div>
                 <?php endif; ?>
 
-                <?php echo CHtml::link('Посмотреть подробности', array(
-                    '/apartment/view',
-                    'id' => $data->id,
-                    'city' => Common::getUri($data->cityName, 'apartment'),
-                    'address' => Common::getUri($data->address, 'apartment'),
+                <?php echo CHtml::link(Yii::t('common', 'View more'), array(
+                '/apartment/view',
+                'id' => $data->id,
+                'city' => Common::getUri($data->cityName, 'apartment'),
+                'address' => Common::getUri($data->address, 'apartment'),
             ), array('class' => 'more_link')) ?>
             </div>
 

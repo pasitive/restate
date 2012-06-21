@@ -29,8 +29,8 @@ class User extends CActiveRecord
     public static function getRoles()
     {
         return array(
-            self::ROLE_PARTNER => 'Партнер',
-            self::ROLE_ADMIN => 'Администратор',
+            self::ROLE_PARTNER => Yii::t('user', 'partner'),
+            self::ROLE_ADMIN => Yii::t('user', 'administrator'),
         );
     }
 
@@ -93,16 +93,16 @@ class User extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
-            'name' => 'Имя',
-            'username' => 'Имя пользователя',
-            'password' => 'Пароль',
-            'newPassword' => 'Новый пароль',
-            'confirmPassword' => 'Подтверждение пароля',
-            'salt' => 'Солька',
-            'role' => 'Роль',
-            'created_at' => 'Время создания',
-            'updated_at' => 'Время обновления',
+            'id' => Yii::t('common', 'id'),
+            'name' => Yii::t('user', 'name'),
+            'username' => Yii::t('user', 'username'),
+            'password' => Yii::t('user', 'password'),
+            'newPassword' => Yii::t('user', 'newPassword'),
+            'confirmPassword' => Yii::t('user', 'confirmPassword'),
+            'salt' => Yii::t('user', 'salt'),
+            'role' => Yii::t('user', 'role'),
+            'created_at' => Yii::t('common', 'created_at'),
+            'updated_at' => Yii::t('common', 'updated_at'),
         );
     }
 

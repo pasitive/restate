@@ -56,7 +56,7 @@ class ApartmentController extends Controller
         // Register yandex maps JS api
         Yii::app()->clientScript->registerScriptFile('http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU');
 
-        $model = $this->loadModel($id);
+        $model = $this->loadModel($id, true);
 
         $apartmentDataProvider = null;
         if ($model->container == 1) {
@@ -106,10 +106,13 @@ class ApartmentController extends Controller
 
     protected function loadModel($id)
     {
-        $model = Apartment::model()->cache(Yii::app()->params['cache_apartment_time'])->findByPk($id);
-        if (!$model) {
+        $model = Apartment::model()->cache(Yii::app()->params['cache_apartment_time']);
+
+        $apartment = $model->findByPk($id);
+
+        if (!$apartment) {
             throw new CHttpException(404, 'Страница не найдена');
         }
-        return $model;
+        return $apartment;
     }
 }

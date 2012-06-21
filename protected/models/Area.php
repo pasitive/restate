@@ -71,10 +71,10 @@ class Area extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'name' => 'Район',
-            'city_id' => 'Город',
-            'created_at' => 'Создано',
-            'updated_at' => 'Обновлено',
+            'name' => Yii::t('apartment', 'area'),
+            'city_id' => Yii::t('apartment', 'city'),
+            'created_at' => Yii::t('common', 'created_at'),
+            'updated_at' => Yii::t('common', 'updated_at'),
         );
     }
 

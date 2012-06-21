@@ -70,10 +70,10 @@ class City extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
-            'name' => 'Город',
-            'created_at' => 'Создано',
-            'updated_at' => 'Обновлено',
+            'id' => Yii::t('common', 'id'),
+            'name' => Yii::t('apartment', 'city'),
+            'created_at' => Yii::t('common', 'created_at'),
+            'updated_at' => Yii::t('common', 'updated_at'),
         );
     }
 

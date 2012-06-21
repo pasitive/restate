@@ -68,14 +68,14 @@ class Page extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
-            'created_at' => 'Создано',
-            'updated_at' => 'Обновлено',
-            'name' => 'Название',
-            'body' => 'Содержание',
+            'id' => Yii::t('common', 'id'),
+            'name' => Yii::t('page', 'name'),
+            'body' => Yii::t('page', 'body'),
             'routeable_title' => 'SEO Заголовок',
             'routeable_keywords' => 'SEO Ключевые слова',
             'routeable_description' => 'SEO Описание',
+            'created_at' => Yii::t('common', 'created_at'),
+            'updated_at' => Yii::t('common', 'updated_at'),
         );
     }
 

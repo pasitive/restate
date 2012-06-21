@@ -74,16 +74,16 @@ class Route extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
-            'created_at' => 'Время создания',
-            'updated_at' => 'Время обновления',
-            'routeable_controller' => 'Контроллер',
-            'routeable_action' => 'Действие',
-            'routeable_id' => 'Код',
-            'pattern' => 'Шаблон',
-            'keywords' => 'META-keywords',
-            'description' => 'META-description',
-            'title' => 'Название',
+            'id' => Yii::t('common', 'id'),
+            'routeable_controller' => Yii::t('route', 'routeable_controller'),
+            'routeable_action' => Yii::t('route', 'routeable_action'),
+            'routeable_id' => Yii::t('route', 'routeable_id'),
+            'pattern' => Yii::t('route', 'pattern'),
+            'title' => Yii::t('seo', 'title'),
+            'keywords' => Yii::t('seo', 'keywords'),
+            'description' => Yii::t('seo', 'description'),
+            'created_at' => Yii::t('common', 'created_at'),
+            'updated_at' => Yii::t('common', 'updated_at'),
         );
     }
 

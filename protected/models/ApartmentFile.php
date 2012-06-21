@@ -74,11 +74,11 @@ class ApartmentFile extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
-            'apartment_id' => 'Apartment',
-            'file' => 'File',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'id' => Yii::t('common', 'id'),
+            'apartment_id' => Yii::t('apartment', 'apartment'),
+            'file' => Yii::t('apartment', 'file'),
+            'created_at' => Yii::t('common', 'created_at'),
+            'updated_at' => Yii::t('common', 'updated_at'),
         );
     }
 

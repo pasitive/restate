@@ -19,7 +19,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-$this->pageTitle = 'Список объектов' . ' | ' . Yii::app()->name;
+$this->pageTitle = Yii::t('app', 'Object list') . ' | ' . Yii::t('app', 'Application name');
 $this->breadcrumbs = array(
 );
 
@@ -54,7 +54,7 @@ Yii::app()->clientScript->registerScript('search', "
 
         <div id="main_content" class="prepend_left v_splitter">
 
-            <h1><?php echo CHtml::encode(Yii::app()->name) ?></h1>
+            <h1><?php echo CHtml::encode(Yii::t('app', 'Application name')) ?></h1>
 
             <div class="offers">
                 <?php
@@ -68,22 +68,19 @@ Yii::app()->clientScript->registerScript('search', "
                         'cssFile' => false,
                         'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
                         'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
-                        'header' => 'Страницы:',
+                        'header' => Yii::t('app', 'Pager header') . ':',
                         'maxButtonCount' => 4
                     ),
-                    'sorterHeader' => 'Сортировать по:',
+                    'sorterHeader' => Yii::t('app', 'Sort by') . ':',
                     'sortableAttributes' => array(
-                        'created_at' => 'дате',
-                        'price' => 'цене',
-                        'square' => 'площади',
+                        'created_at' => Yii::t('app', 'date'),
+                        'price' => Yii::t('app', 'price'),
+                        'square' => Yii::t('app', 'square'),
                     ),
                 ));
                 ?>
-
             </div>
-
         </div>
-
     </div>
 
     <div class="grid_4 omega">

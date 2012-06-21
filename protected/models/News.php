@@ -83,12 +83,12 @@ class News extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
-            'title' => 'Заголовок',
-            'teaser' => 'Краткое описание',
-            'content' => 'Содержание',
-            'created_at' => 'Время создания',
-            'updated_at' => 'Время обновления',
+            'id' => Yii::t('common', 'id'),
+            'title' => Yii::t('news', 'title'),
+            'teaser' => Yii::t('news', 'teaser'),
+            'content' => Yii::t('news', 'content'),
+            'created_at' => Yii::t('common', 'created_at'),
+            'updated_at' => Yii::t('common', 'updated_at'),
         );
     }
 

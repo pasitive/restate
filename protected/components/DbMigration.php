@@ -12,6 +12,8 @@ class DbMigration extends CDbMigration
 
     protected $options = 'engine=InnoDB;';
 
+    protected $keyField = 'id';
+
     public function createTable($table, $columns, $options = null)
     {
         if ($options != null) {
@@ -19,7 +21,7 @@ class DbMigration extends CDbMigration
         }
 
         $columns = CMap::mergeArray(array(
-            'id' => 'int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
+            $this->keyField => 'int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
         ), $columns);
 
         parent::createTable($table, $columns, $this->options);
