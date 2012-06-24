@@ -40,7 +40,7 @@ class ApartmentController extends Controller
         $model = new Apartment();
         $model->type_id = $type;
 
-        $attributes = Attribute::model()->findAllByAttributes(array(
+        $attributes = Attribute::model()->multilang()->findAllByAttributes(array(
             'apartment_type_id' => $type,
         ), array('index' => 'id'));
 
@@ -78,15 +78,15 @@ class ApartmentController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->loadModel($id);
+        $model = $this->loadModel($id, true);
 
-        $attributes = Attribute::model()->findAllByAttributes(array(
+        $attributes = Attribute::model()->multilang()->findAllByAttributes(array(
             'apartment_type_id' => $model->type_id
         ), array('index' => 'id'));
 
-        $apartmentAttributes = $model->getRelated('apartmentAttributes', false, array(
-            'index' => 'attribute_id',
-        ));
+        $apartmentAttributes = ApartmentAttribute::model()->multilang()->findAllByAttributes(array(
+            'apartment_id' => $model->id,
+        ), array('index' => 'attribute_id'));
 
         $attributesDiff = array_diff_key($attributes, $apartmentAttributes);
 
@@ -175,9 +175,13 @@ class ApartmentController extends Controller
      * @param integer the ID of the model to be loaded
      * @return Apartment
      */
-    public function loadModel($id)
+    public function loadModel($id, $ml = false)
     {
-        $model = Apartment::model()->findByPk($id);
+        if ($ml) {
+            $model = Apartment::model()->multilang()->findByPk($id);
+        } else {
+            $model = Apartment::model()->findByPk($id);
+        }
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;

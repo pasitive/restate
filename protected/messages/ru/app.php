@@ -19,11 +19,11 @@
  * @version $Id: $
  */
 return array (
+  'Pages' => 'Страницы',
+  'Sort by' => 'Сортировать по',
+  'date' => 'дате',
+  'price' => 'цене',
+  'square' => 'площади',
   'Application name' => 'Агенство элитной недвижимости "Запад"',
   'Object list' => 'Список объектов',
-  'Pager header' => 'Страницы',
-  'Sort by date' => 'дате',
-  'Sort by price' => 'цене',
-  'Sort by square' => 'площади',
-  'Sorter header' => 'Сортировать по',
 );

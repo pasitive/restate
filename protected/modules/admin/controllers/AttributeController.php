@@ -3,6 +3,7 @@
 class AttributeController extends Controller
 {
 
+
     public function accessRules()
     {
         return array(
@@ -60,7 +61,7 @@ class AttributeController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->loadModel($id);
+        $model = $this->loadModel($id, true);
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
@@ -125,9 +126,13 @@ class AttributeController extends Controller
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer the ID of the model to be loaded
      */
-    public function loadModel($id)
+    public function loadModel($id, $ml = false)
     {
-        $model = Attribute::model()->findByPk($id);
+        if ($ml) {
+            $model = Attribute::model()->multilang()->findByPk($id);
+        } else {
+            $model = Attribute::model()->findByPk($id);
+        }
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;

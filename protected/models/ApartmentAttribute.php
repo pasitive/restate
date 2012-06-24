@@ -11,12 +11,24 @@
  * @property string $created_at
  * @property string $updated_at
  *
+ * @property string $attribute_name
+ *
  * The followings are the available model relations:
  * @property Attribute $attribute
  * @property Apartment $apartment
  */
 class ApartmentAttribute extends CActiveRecord
 {
+
+    public function defaultScope()
+    {
+        return $this->multilingual->localizedCriteria();
+    }
+
+    public function getAttributeName()
+    {
+        return (empty($this->attribute_name) ? $this->attribute->name : $this->attribute_name);
+    }
 
     /**
      * Returns the static model of the specified AR class.
@@ -45,7 +57,7 @@ class ApartmentAttribute extends CActiveRecord
         return array(
             array('apartment_id, attribute_id', 'required'),
             array('apartment_id, attribute_id', 'length', 'max' => 10),
-            array('value', 'length', 'max' => 255),
+            array('value, attribute_name', 'length', 'max' => 255),
             array('created_at, updated_at', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
@@ -78,6 +90,7 @@ class ApartmentAttribute extends CActiveRecord
             'value' => Yii::t('attribute', 'value'),
             'created_at' => Yii::t('common', 'created_at'),
             'updated_at' => Yii::t('common', 'updated_at'),
+            'attribute_name' => Yii::t('attribute', 'name'),
         );
     }
 
@@ -92,7 +105,19 @@ class ApartmentAttribute extends CActiveRecord
                 'createAttribute' => 'created_at',
                 'updateAttribute' => 'updated_at',
                 'setUpdateOnCreate' => true
-            )
+            ),
+            'multilingual' => array(
+                'class' => 'application.models.behaviors.MultilingualBehavior',
+                'langClassName' => 'ApartmentAttributeI18n',
+                'langTableName' => 'apartment_attribute_i18n',
+                'langForeignKey' => 'apartment_attribute_id',
+                'langField' => 'language_code',
+                'localizedAttributes' => array('value', 'attribute_name'), //attributes of the model to be translated
+                'localizedPrefix' => 'i18n_',
+                'languages' => Yii::app()->params['languages'], // array of your translated languages. Example : array('fr' => 'Français', 'en' => 'English')
+                'defaultLanguage' => Yii::app()->params['defaultLanguage'], //your main language. Example : 'fr'
+                'dynamicLangClass' => true, //Set to true if you don't want to create a 'PostLang.php' in your models folder
+            ),
         );
     }
 

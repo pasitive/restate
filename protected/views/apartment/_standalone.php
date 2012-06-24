@@ -47,13 +47,14 @@
             <div class="attributes">
 
                 <ul class="attributes_list">
-                    <li class="icon-metro"><span>Метро: </span><?php echo $model->metroName ?></li>
-                    <li><span>Кол-во комнат: </span><?php echo $model->room_number ?></li>
-                    <li><span>Этаж: </span><?php echo $model->floor ?></li>
-                    <li><span>Общая площадь: </span><?php echo $model->square ?> м<sup>2</sup></li>
-                    <li><span>Жилая площадь: </span><?php echo $model->square_live ?> м<sup>2</sup></li>
-                    <li><span>Площадь кухни: </span><?php echo $model->square_kitchen ?> м<sup>2</sup></li>
-                    <li><span>Кол-во санузлов: </span><?php echo $model->wc_number ?></li>
+                    <li class="icon-metro"><span><?php echo Yii::t('apartment', 'Metro') ?>: </span><?php echo $model->metroName ?></li>
+                    <li><span><?php echo Yii::t('apartment', 'Rooms') ?></span>: <?php echo $model->room_number ?></li>
+                    <li><span><?php echo Yii::t('apartment', 'Floor') ?></span>: <?php echo $model->floor ?></li>
+                    <li><span><?php echo Yii::t('apartment', 'Square') ?></span>: <?php echo $model->square ?> м<sup>2</sup></li>
+                    <li><span><?php echo Yii::t('apartment', 'Live square') ?></span>: <?php echo $model->square_live ?> м<sup>2</sup></li>
+                    <li><span><?php echo Yii::t('apartment', 'Kitchen square') ?></span>: <?php echo $model->square_kitchen ?> м<sup>2</sup></li>
+                    <li><span><?php echo Yii::t('apartment', 'WC') ?></span>: <?php echo $model->wc_number ?></li>
+
                     <li>
                         <span>Цена: </span><?php echo Yii::app()->numberFormatter->formatCurrency($model->price, 'RUB') ?>
                     </li>
@@ -61,7 +62,7 @@
                     <?php foreach ($apartmentAttributes as $apartmentAttribute): ?>
                     <?php if (!empty($apartmentAttribute->value)): ?>
                         <li>
-                            <span><?php echo $apartmentAttribute->attribute->name ?></span>: <?php echo $apartmentAttribute->value ?>
+                            <span><?php echo $apartmentAttribute->attributeName ?></span>: <?php echo $apartmentAttribute->value ?>
                         </li>
                         <?php endif; ?>
                     <?php endforeach; ?>

@@ -68,7 +68,7 @@ Yii::app()->clientScript->registerScript('search', "
                         'cssFile' => false,
                         'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
                         'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
-                        'header' => Yii::t('app', 'Pager header') . ':',
+                        'header' => Yii::t('app', 'Pages') . ':',
                         'maxButtonCount' => 4
                     ),
                     'sorterHeader' => Yii::t('app', 'Sort by') . ':',

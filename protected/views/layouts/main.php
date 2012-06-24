@@ -24,6 +24,11 @@
 
     <div id="header" class="grid_12">
         <div class="slogan">Агентство элитной недвижимости &laquo;Запад&raquo;</div>
+        <div id="language-selector" style="float:right; margin:5px;">
+            <?php
+            $this->widget('application.widgets.LanguageSelector');
+            ?>
+        </div>
     </div>
 
     <div id="menu_block" class="grid_12">

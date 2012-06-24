@@ -80,4 +80,14 @@ class Controller extends CController
     {
         $this->_assetsUrl = $value;
     }
+
+    public function createMultilanguageReturnUrl($lang = 'en')
+    {
+        if (count($_GET) > 0) {
+            $arr = $_GET;
+            $arr['language'] = $lang;
+        } else
+            $arr = array('language' => $lang);
+        return $this->createUrl('', $arr);
+    }
 }

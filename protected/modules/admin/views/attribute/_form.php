@@ -15,11 +15,20 @@
         <?php echo $form->error($model, 'apartment_type_id'); ?>
     </div>
 
-    <div class="row">
-        <?php echo $form->labelEx($model, 'name'); ?>
-        <?php echo $form->textField($model, 'name', array('size' => 60, 'maxlength' => 255)); ?>
-        <?php echo $form->error($model, 'name'); ?>
-    </div>
+    <?php foreach (Yii::app()->params['languages'] as $l => $lang) :
+    if ($l === Yii::app()->params['defaultLanguage']) $suffix = '';
+    else $suffix = '_' . $l;
+    ?>
+    <fieldset>
+        <legend><?php echo $lang; ?></legend>
+        <div class="row">
+            <?php echo $form->labelEx($model, 'name' . $suffix); ?>
+            <?php echo $form->textField($model, 'name' . $suffix, array('size' => 60, 'maxlength' => 255)); ?>
+            <?php echo $form->error($model, 'name' . $suffix); ?>
+        </div>
+    </fieldset>
+
+    <?php endforeach; ?>
 
     <div class="row">
         <?php echo $form->labelEx($model, 'sort'); ?>

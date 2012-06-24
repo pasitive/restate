@@ -19,11 +19,16 @@
  * @version $Id: $
  */
 return array (
+  'Pages' => '',
+  'Sort by' => '',
+  'date' => '',
+  'price' => '',
+  'square' => '',
+  'Pager header' => '@@Page #@@',
+  'Sort by date' => '@@@@date@@@@',
+  'Sort by price' => '@@@@price@@@@',
+  'Sort by square' => '@@@@square@@@@',
+  'Sorter header' => '@@@@Sort by@@@@',
   'Application name' => '"West" real estate agency',
   'Object list' => 'List',
-  'Pager header' => 'Page #',
-  'Sort by date' => 'date',
-  'Sort by price' => 'price',
-  'Sort by square' => 'square',
-  'Sorter header' => 'Sort by',
 );

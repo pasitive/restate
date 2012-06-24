@@ -1,5 +1,6 @@
+<h2>Дополнительные поля</h2>
 <?php
-foreach ($model->apartmentAttributes as $id => $attribute) {
+/*foreach ($model->apartmentAttributes as $id => $attribute) {
     if ($attributes[$id]->disabled == 0) {
         $this->renderPartial('/apartmentAttribute/types/_type1', array(
             'id' => $id,
@@ -8,4 +9,22 @@ foreach ($model->apartmentAttributes as $id => $attribute) {
         ));
     }
 }
+*/
 ?>
+<?php foreach (Yii::app()->params['languages'] as $l => $lang) :
+    if ($l === Yii::app()->params['defaultLanguage']) $suffix = '';
+    else $suffix = '_' . $l;
+    ?>
+<fieldset>
+    <legend><?php echo $lang; ?></legend>
+    <?php foreach ($model->apartmentAttributes as $id => $attribute) { ?>
+    <div class="row">
+        <?php echo CHtml::label($attributes[$id]->{'name' . $suffix}, "Apartment_attribute_{$id}_value"); ?>
+        <?php echo CHtml::activeTextField($attribute, "[{$id}]value" . $suffix, array('maxlength' => 255)); ?>
+        <?php echo CHtml::activeHiddenField($attribute, "[{$id}]attribute_name" . $suffix, array('maxlength' => 255, 'value' => $attributes[$id]->{'name' . $suffix})); ?>
+        <?php echo CHtml::error($attribute, 'value' . $suffix); ?>
+    </div>
+    <?php } ?>
+</fieldset>
+
+<?php endforeach; ?>

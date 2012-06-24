@@ -11,7 +11,7 @@ class m120621_142238_i18n_attribute_create extends DbMigration
         $this->createTable('attribute_i18n', array(
             'attribute_id' => self::MYSQL_TYPE_INT,
             'language_code' => 'varchar(6) NOT NULL',
-            'name' => 'string NOT NULL',
+            'i18n_name' => 'string NOT NULL',
         ));
         $this->addForeignKey('attribute_i18n_attribute_id', 'attribute_i18n', 'attribute_id', 'attribute', 'id', 'CASCADE', 'RESTRICT');
 

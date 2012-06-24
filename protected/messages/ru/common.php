@@ -19,9 +19,9 @@
  * @version $Id: $
  */
 return array (
-  'Price' => '',
-  'Rent price' => '',
-  'View more' => '',
+  'Price' => 'Цена',
+  'Rent price' => 'Стоимость в месяц',
+  'View more' => 'Посмотреть подробности',
   'created_at' => 'Время создания',
   'id' => 'Код',
   'is_published' => 'Опубликовано',
