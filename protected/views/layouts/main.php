@@ -30,7 +30,7 @@
             ?>
         </div>
     </div>
-
+    <!--
     <div id="menu_block" class="grid_12">
         <?php $this->widget('zii.widgets.CMenu', array(
         'id' => 'main_navigation',
@@ -42,6 +42,7 @@
         ),
     )); ?>
     </div>
+    -->
 
     <?php echo $content; ?>
 
