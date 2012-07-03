@@ -10,6 +10,7 @@ set :scm, :git
 set :repository, "git@github.com:pasitive/zapad.git"
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
+
                          
 set :domain, "deployer@vebel.ru"
 set :user, "deployer"
