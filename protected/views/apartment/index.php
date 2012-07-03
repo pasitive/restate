@@ -33,60 +33,28 @@ Yii::app()->clientScript->registerScript('search', "
 ");
 ?>
 
-<div class="search-form grid_12 alpha omega">
-
-    <div class="grid_2 alpha">
-        <a href="<?php echo Yii::app()->homeUrl ?>" id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></a>
-    </div>
-
-    <div class="grid_10 omega">
-        <div>
-            <?php $this->renderPartial('_search', array('model' => $model, 'apartmentTypes' => $apartmentTypes)) ?>
-        </div>
-    </div>
-</div>
-
-<div class="grid_12 alpha omega prepend_top">
-
-    <div class="shadow revert"></div>
-
-    <div class="grid_8 alpha colborder">
-
-        <div id="main_content" class="prepend_left v_splitter">
-
-            <h1><?php echo CHtml::encode(Yii::t('app', 'Application name')) ?></h1>
-
-            <div class="offers">
-                <?php
-                $this->widget('zii.widgets.CListView', array(
-                    'id' => 'offers_list',
-                    'dataProvider' => $apartmentDataProvider,
-                    'itemView' => '_view',
-                    'template' => "{sorter}\n{pager}<div class='clear'></div>{items}\n{pager}",
-                    'pager' => array(
-                        'class' => 'CLinkPager',
-                        'cssFile' => false,
-                        'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
-                        'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
-                        'header' => Yii::t('app', 'Pages') . ':',
-                        'maxButtonCount' => 4
-                    ),
-                    'sorterHeader' => Yii::t('app', 'Sort by') . ':',
-                    'sortableAttributes' => array(
-                        'created_at' => Yii::t('app', 'date'),
-                        'price' => Yii::t('app', 'price'),
-                        'square' => Yii::t('app', 'square'),
-                    ),
-                ));
-                ?>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid_4 omega">
-        <div id="sidebar">
-            <?php $this->widget('SpecialOffersWidget'); ?>
-        </div>
-    </div>
+<div class="offers">
+    <?php
+    $this->widget('zii.widgets.CListView', array(
+        'id' => 'offers_list',
+        'dataProvider' => $apartmentDataProvider,
+        'itemView' => '_view',
+        'template' => "{sorter}\n{pager}<div class='clear'></div>{items}\n{pager}",
+        'pager' => array(
+            'class' => 'CLinkPager',
+            'cssFile' => false,
+            'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
+            'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
+            'header' => Yii::t('app', 'Pages') . ':',
+            'maxButtonCount' => 4
+        ),
+        'sorterHeader' => Yii::t('app', 'Sort by') . ':',
+        'sortableAttributes' => array(
+            'created_at' => Yii::t('app', 'date'),
+            'price' => Yii::t('app', 'price'),
+            'square' => Yii::t('app', 'square'),
+        ),
+    ));
+    ?>
 </div>
 

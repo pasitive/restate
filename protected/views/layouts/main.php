@@ -17,34 +17,94 @@
           media="screen, projection">
 
     <script type="text/javascript" src="<?php echo $this->assetsUrl; ?>/javascript/less-1.3.0.min.js"></script>
+
+    <!--
+    Skype 'My status' button
+    http://www.skype.com/go/skypebuttons
+    -->
+    <script type="text/javascript" src="http://download.skype.com/share/skypebuttons/js/skypeCheck.js"></script>
+
 </head>
 <body>
 
 <div id="container" class="container_12">
 
-    <div id="header" class="grid_12">
-        <div class="slogan">Агентство элитной недвижимости &laquo;Запад&raquo;</div>
-        <div id="language-selector" style="float:right; margin:5px;">
-            <?php
-            $this->widget('application.widgets.LanguageSelector');
-            ?>
+    <div class="header_wrapper">
+
+        <div id="header" class="grid_12"></div>
+
+        <div id="header_delimiter" class="grid_12"></div>
+
+        <div id="header_menu" class="grid_12">
+
+            <div class="grid_2 alpha omega">
+                <a href="<?php echo Yii::app()->homeUrl ?>" id="logo"></a>
+            </div>
+
+            <div class="grid_8 alpha omega">
+                <div class="centered">
+                    <h1><?php echo CHtml::encode(Yii::app()->name); ?></h1>
+                </div>
+
+                <?php $this->widget('zii.widgets.CMenu', array(
+                'id' => 'main_navigation',
+                'items' => array(
+                    array('label' => 'О компании', 'url' => Yii::app()->homeUrl, 'active' => Yii::app()->controller->id == 'apartment'),
+                    array('label' => 'Продать', 'url' => array('/map/index')),
+                    array('label' => 'Сдать', 'url' => array('/news/index'), 'active' => Yii::app()->controller->id == 'news'),
+                    array('label' => 'Оценка', 'url' => array('/page/view', 'id' => 2)),
+                    array('label' => 'Вакансии', 'url' => array('/page/view', 'id' => 2)),
+                ),
+                'htmlOptions' => array('class' => 'centered'),
+            )); ?>
+
+                <div class="clearfix"></div>
+
+            </div>
+
+            <div class="grid_2 alpha omega">
+                <ul id="contacts">
+                    <li>тел.: 8 999 999 99 99</li>
+                    <li>тел.: 8 999 999 99 99</li>
+                    <li>email: <a href="mailto:mail@mail.ru">mail@mail.ru</a></li>
+                    <li><a href="skype:boldinovd?call"><img src="http://mystatus.skype.com/smallclassic/boldinovd"
+                                                            style="border: none;" width="114" height="20"
+                                                            alt="My status"/></a></a>
+                    </li>
+                    <li></li>
+                </ul>
+            </div>
         </div>
     </div>
-    <!--
-    <div id="menu_block" class="grid_12">
-        <?php $this->widget('zii.widgets.CMenu', array(
-        'id' => 'main_navigation',
-        'items' => array(
-            array('label' => 'Наши объекты', 'url' => Yii::app()->homeUrl, 'active' => Yii::app()->controller->id == 'apartment'),
-            array('label' => 'Объекты на карте', 'url' => array('/map/index')),
-            array('label' => 'Новости компании', 'url' => array('/news/index'), 'active' => Yii::app()->controller->id == 'news'),
-            array('label' => 'Полезная информация', 'url' => array('/page/view', 'id' => 2)),
-        ),
-    )); ?>
-    </div>
-    -->
 
-    <?php echo $content; ?>
+
+    <div class="grid_12 alpha omega">
+
+        <div class="space tiny"></div>
+        <div class="grid_2 alpha">
+            <?php $this->widget('zii.widgets.CMenu', array(
+            'id' => 'side_navigation',
+            'items' => array(
+                array('label' => 'О компании', 'url' => Yii::app()->homeUrl, 'active' => Yii::app()->controller->id == 'apartment'),
+                array('label' => 'Продажа', 'url' => array('/map/index')),
+                array('label' => 'Аренда', 'url' => array('/news/index'), 'active' => Yii::app()->controller->id == 'news'),
+                array('label' => 'ЖК на Западе', 'url' => array('/page/view', 'id' => 2)),
+                array('label' => 'Подобрать', 'url' => array('/page/view', 'id' => 2)),
+                array('label' => 'Оценка', 'url' => array('/page/view', 'id' => 2)),
+                array('label' => 'Собственникам', 'url' => array('/page/view', 'id' => 2)),
+            ),
+            'htmlOptions' => array('class' => 'centered'),
+        )); ?>
+        </div>
+
+        <div class="grid_8">
+            <?php echo $content; ?>
+        </div>
+
+        <div class="grid_2 omega">
+            col2
+        </div>
+    </div>
 
     <div class="grid_12">
         <div id="footer" class="clearfix">
