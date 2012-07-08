@@ -21,26 +21,14 @@
  */
 ?>
 
-<div class="offer clearfix">
+<li class="span3">
+    <div class="thumbnail">
+        <?php echo CHtml::image($data->default_image, $data->name, array('width' => 260)) ?>
+        <div class="caption">
+            <h5><?php echo CHtml::encode(empty($data->parent_name) ? $data->typeName : $data->parent_name) ?>
+                , <?php echo CHtml::encode($data->address) ?></h5>
 
-    <a href="<?php echo Yii::app()->createUrl('apartment/view', array('id' => $data->id)) ?>">
-        <div class="image_block">
-            <div class="box_shadow">
-                <?php echo CHtml::image($data->default_image, $data->name, array('width' => 146)) ?>
-            </div>
+            <?php echo CHtml::link('Подробнее', array('/apartment/view', 'id' => $data->id)) ?>
         </div>
-
-        <div class="description_block">
-            <div class="description clearfix">
-                <h3>
-                    <strong><?php echo CHtml::encode(empty($data->name) ? $data->typeName : $data->name) ?></strong>, <?php echo CHtml::encode($data->address) ?>
-                </h3>
-                <?php if (!empty($data->metroName)): ?>
-                <address class="label">м. <?php echo CHtml::encode($data->metroName) ?></address>
-                <?php else : ?>
-                <address>&nbsp;</address>
-                <?php endif; ?>
-            </div>
-        </div>
-    </a>
-</div>
+    </div>
+</li>

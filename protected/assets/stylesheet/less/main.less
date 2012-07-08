@@ -1,0 +1,118 @@
+@import "../../bootstrap/less/bootstrap.less";
+
+@linkColor:             #666633;
+
+#top {
+    background: url(/images/header_bg.png);
+    height: 100px;
+}
+
+#logo {
+    display: block;
+    position: relative;
+    background: url(/images/logo.png) 1px center no-repeat;
+    background-size: 90%;
+    height: 67px;
+    text-indent: -1999px;
+    margin-left: 15px;
+}
+
+#header {
+    h3 {
+        font-size: 22px;
+    }
+}
+
+.navigation {
+
+    li {
+    }
+
+    &.main {
+
+        position: relative;
+        bottom: -10px;
+        text-align: center;
+        font-size: 14px;
+
+        li {
+            display: inline-block; //            padding-left: 10px;
+            padding-right: 20px;
+        }
+
+    }
+
+    &.left {
+
+        background-color: #b2a782;
+        font-size: 16px;
+        margin: 0;
+
+        li {
+            list-style: none;
+            padding: 5px 5px;
+
+            a {
+                color: @white;
+            }
+        }
+    }
+
+}
+
+#content-container {
+
+    #content {
+
+    }
+}
+
+.dropdown-menu {
+    li {
+        div {
+            padding: 3px 10px;
+        }
+    }
+}
+
+#content {
+    position: relative;
+    top: -15px;
+}
+
+#apartment-list {
+    address {
+        margin-bottom: 0px;
+    }
+}
+
+.thumbnails {
+    li {
+        margin-bottom: 10px;
+    }
+}
+
+.list-view-loading {
+
+}
+
+legend {
+    margin-bottom: 10px;
+}
+
+.gallery {
+    .carousel {
+        margin-bottom: 0;
+    }
+    .thumbnail {
+        cursor: pointer;
+    }
+}
+
+#apartment-on-map, #apartment-video {
+    padding-bottom: 10px;
+}
+
+.well {
+    margin-bottom: 5px;
+}

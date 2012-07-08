@@ -21,6 +21,80 @@
  */
 
 ?>
+<div class="span6">
+    <?php $this->renderPartial('_shared', array(
+    'model' => $model,
+    'apartmentFiles' => $apartmentFiles,
+)) ?>
+
+    <div class="row">
+        <div class="span3">
+            <ul class="unstyled">
+                <li class="span3"><strong>Метро: </strong> <i
+                    class="icon-map-marker"></i> <?php echo $model->metroName ?> </li>
+                <li class="span3"><strong>Кол-во квартир: </strong> <?php echo $model->flat_number ?> </li>
+                <li class="span3"><strong>Этажность: </strong> <?php echo $model->number_of_storeys ?> </li>
+                <li class="span3"><strong>Высота потолков: </strong> <?php echo $model->ceiling_height ?> м</li>
+            </ul>
+        </div>
+        <div class="span3">
+            <ul class="unstyled">
+                <?php foreach ($apartmentAttributes as $apartmentAttribute): ?>
+                <?php if (!empty($apartmentAttribute->value)): ?>
+                    <li>
+                        <strong><?php echo $apartmentAttribute->attributeName ?>
+                            :</strong> <?php echo $apartmentAttribute->value ?>
+                    </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+
+    <br>
+
+    <legend id="apartment-list">Список квартир в <?php echo $model->name ?></legend>
+
+    <div class="row">
+
+        <div class="span6">
+            <?php
+            $this->widget('zii.widgets.CListView', array(
+                'id' => 'apartment-list',
+                'dataProvider' => $apartmentDataProvider,
+                'itemView' => '_view',
+                'template' => "{items}\n{pager}",
+                'pagerCssClass' => 'bootstrap-pager',
+                'pager' => array(
+                    'class' => 'LinkPager',
+                    'cssFile' => false,
+                    'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
+                    'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
+                    'header' => '',
+                    'maxButtonCount' => 4,
+                    'htmlOptions' => array(
+                        'class' => 'pagination'
+                    ),
+                ),
+            ));
+            ?>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="span3">
+    <legend>Описание</legend>
+    <?php echo $model->description ?>
+
+    <div class="well">
+        <p>Текстовый блок с описанием еще чего нибудь</p>
+    </div>
+
+</div>
+
+<?php /*
 
 <div class="space small"></div>
 
@@ -28,11 +102,7 @@
 
     <div class="grid_5 alpha">
         <div class="gallery" style="height: 300px;">
-            <?php foreach ($apartmentFiles as $apartmentFile) : ?>
-            <a href="<?php echo $apartmentFile->getFile(450) ?>">
-                <img src="<?php echo $apartmentFile->getFile(450) ?>">
-            </a>
-            <?php endforeach; ?>
+
         </div>
     </div>
     <div class="grid_3">
@@ -114,3 +184,6 @@
 
     </div>
 </div>
+
+ */
+?>

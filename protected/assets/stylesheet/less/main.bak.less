@@ -127,7 +127,6 @@ p {
 }
 
 #header {
-
     background: url(/images/header_bg.png);
     height: 100px;
 }
@@ -152,9 +151,19 @@ p {
 }
 
 #side_navigation {
-    font-size: 18px;
-//    text-align: left;
-//    background-color: #b2a782;
+    font-size: 16px;
+    text-align: left;
+    background-color: #b2a782;
+    padding: 15px;
+    li {
+        padding-bottom: 5px;
+
+        a {
+            &:hover {
+                color: @color-main;
+            }
+        }
+    }
 }
 
 #main_navigation {
@@ -162,8 +171,8 @@ p {
     position: relative;
     bottom: -10px;
     height: 30px;
-    background-color: #F0F0F0;
-    line-height: 30px;
+//    background-color: #F0F0F0;
+//    line-height: 30px;
 
     li {
         display: inline-block;

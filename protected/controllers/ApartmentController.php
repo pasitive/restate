@@ -21,9 +21,10 @@
  */
 class ApartmentController extends Controller
 {
+    public $layout = '//layouts/index';
+
     public function actionIndex()
     {
-        $this->layout = '//layouts/index';
 
         // Load and cache apartment types
         $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
@@ -39,19 +40,23 @@ class ApartmentController extends Controller
         // Force NOT container published objects
         $model->container = 0;
         $model->is_published = 1;
-
         $apartmentDataProvider = $model->search();
+
+        $model->unsetAttributes();
+        $model->container = 1;
+        $model->is_published = 1;
+        $containerDataProvider = $model->search();
 
         $this->render('index', array(
             'model' => $model,
             'apartmentDataProvider' => $apartmentDataProvider,
+            'containerDataProvider' => $containerDataProvider,
             'apartmentTypes' => $apartmentTypes,
         ));
     }
 
     public function actionView($id = null)
     {
-        $this->layout = '//layouts/column1';
 
         // Register yandex maps JS api
         Yii::app()->clientScript->registerScriptFile('http://api-maps.yandex.ru/2.0/?load=package.full&mode=release&lang=ru-RU');

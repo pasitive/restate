@@ -23,9 +23,12 @@ $this->pageTitle = Yii::t('app', 'Object list') . ' | ' . Yii::t('app', 'Applica
 $this->breadcrumbs = array(
 );
 
+?>
+
+<?php
 Yii::app()->clientScript->registerScript('search', "
-    $('.search-form form').bind('keyup, change', function(){
-        $.fn.yiiListView.update('offers_list', {
+    $('form#search').bind('keyup, change', function(){
+        $.fn.yiiListView.update('apartment-list', {
             data: $(this).serialize()
         });
         return false;
@@ -33,28 +36,36 @@ Yii::app()->clientScript->registerScript('search', "
 ");
 ?>
 
-<div class="offers">
+<div class="span6" id="content">
+
+
     <?php
     $this->widget('zii.widgets.CListView', array(
-        'id' => 'offers_list',
+        'id' => 'apartment-list',
         'dataProvider' => $apartmentDataProvider,
         'itemView' => '_view',
-        'template' => "{sorter}\n{pager}<div class='clear'></div>{items}\n{pager}",
+        'template' => "{items}\n{pager}",
+        'pagerCssClass' => 'bootstrap-pager',
         'pager' => array(
             'class' => 'CLinkPager',
             'cssFile' => false,
             'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
             'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
-            'header' => Yii::t('app', 'Pages') . ':',
-            'maxButtonCount' => 4
-        ),
-        'sorterHeader' => Yii::t('app', 'Sort by') . ':',
-        'sortableAttributes' => array(
-            'created_at' => Yii::t('app', 'date'),
-            'price' => Yii::t('app', 'price'),
-            'square' => Yii::t('app', 'square'),
+            'header' => '',
+            'maxButtonCount' => 4,
+            'htmlOptions' => array(
+                'class' => 'pagination'
+            ),
         ),
     ));
     ?>
+
+</div>
+
+<div class="span3">
+    <?php $this->renderPartial('_search', array('model' => $model, 'apartmentTypes' => $apartmentTypes, 'containerDataProvider' => $containerDataProvider)) ?>
+
+    <legend>Спецпредложения</legend>
+    <?php $this->widget('SpecialOffersWidget'); ?>
 </div>
 

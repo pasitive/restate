@@ -1,0 +1,1 @@
+<li><?php echo CHtml::link($data->name, array('/apartment/view', 'id' => $data->id)) ?></li>

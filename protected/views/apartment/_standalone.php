@@ -22,6 +22,77 @@
 
 ?>
 
+<div class="span6">
+
+    <?php $this->renderPartial('_shared', array(
+        'model' => $model,
+        'apartmentFiles' => $apartmentFiles,
+    )) ?>
+
+    <div class="row">
+        <div class="span3">
+
+            <ul class="unstyled">
+                <li><strong>Метро: </strong> <i class="icon-map-marker"></i> <?php echo $model->metroName ?> </li>
+                <li><strong>Комнат: </strong><?php echo $model->room_number ?></li>
+                <li><strong>Площадь: </strong><?php echo $model->square ?></li>
+                <li><strong>Этаж: </strong><?php echo $model->floor ?></li>
+                <li><strong>Цена: </strong><?php echo Yii::app()->numberFormatter->formatCurrency($model->price, 'RUB') ?>
+                </li>
+            </ul>
+
+        </div>
+        <div class="span3">
+            <ul class="unstyled">
+                <?php foreach ($apartmentAttributes as $apartmentAttribute): ?>
+                <?php if (!empty($apartmentAttribute->value)): ?>
+                    <li>
+                        <strong><?php echo $apartmentAttribute->attributeName ?>
+                            :</strong> <?php echo $apartmentAttribute->value ?>
+                    </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span6">
+            <div class="well">
+                <legend>Описание</legend>
+                <?php echo $model->description ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="well" style="padding: 8px 0">
+    <ul class="nav nav-list">
+        <li>
+            <?php echo CHtml::link('<i class="icon-home"></i> Посмотреть все предложения в ' . $model->parent_name, array('/apartment/view/', 'id' => $model->parent_id, '#' => 'apartment-list')) ?>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <?php echo CHtml::link('Назад', 'javascript:history.back()') ?>
+        </li>
+    </ul>
+    </div>
+
+</div>
+
+<div class="span3">
+    <div class="well">На этом месте будут текстовые блоки</div>
+    <div class="well">На этом месте будут текстовые блоки</div>
+    <div class="well">
+
+        <p>Мы предлагаем аренду и продажу квартир в элитных жилых комплексах Москвы на отличных условиях! И всегда готовы помочь собственникам сдать или продать квартиру. Звоните!</p>
+        <p>Мы предлагаем аренду и продажу квартир в элитных жилых комплексах Москвы на отличных условиях! И всегда готовы помочь собственникам сдать или продать квартиру. Звоните!</p>
+        <p>Мы предлагаем аренду и продажу квартир в элитных жилых комплексах Москвы на отличных условиях! И всегда готовы помочь собственникам сдать или продать квартиру. Звоните!</p>
+
+    </div>
+</div>
+
+<?php /*
+
 <div class="space small"></div>
 
 <div class="space small"></div>
@@ -160,3 +231,6 @@
 </div>
 
 -->
+
+ */
+?>

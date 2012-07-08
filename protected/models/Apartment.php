@@ -46,6 +46,10 @@
  * @property int $floor
  * @property string $ytvideo_code
  *
+ * @property string $flat_number
+ * @property string $number_of_storeys
+ * @property string $ceiling_height
+ *
  * The followings are the available model relations:
  * @property ApartmentType $type
  * @property Area $area
@@ -60,7 +64,7 @@ class Apartment extends CActiveRecord
 
     public $files;
     public $fileType = array('jpg', 'jpeg', 'gif', 'png');
-    public $fileSize = array(100, 150, 450);
+    public $fileSize = array(100, 150, 250, 450);
 
     public $docs;
     public $docTypes = array('pdf', 'doc', 'docx', 'rtf');
@@ -195,11 +199,11 @@ class Apartment extends CActiveRecord
 //            array('routeable_pattern', 'required'),
             array('routeable_keywords, routeable_description, routeable_title, metro_name, city_name, area_name, type_name, default_image, container, apartment_count, ytvideo_code, parent_name', 'safe'),
             array('price', 'numerical'),
-            array('room_number, square, square_live, square_kitchen, wc_number, floor', 'numerical', 'integerOnly' => true),
+            array('room_number, square, square_live, square_kitchen, wc_number, floor, ceiling_height, flat_number', 'numerical', 'integerOnly' => true),
             array('city_id, area_id, type_id, user_id', 'required'),
             array('name', 'length', 'max' => 255),
             array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
-            array('created_at, updated_at, lng, lat, rating, address, parent_id, is_special, description, is_rent, is_published', 'safe'),
+            array('created_at, updated_at, lng, lat, rating, address, parent_id, is_special, description, is_rent, is_published, number_of_storeys, ', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, name, city_id, area_id, type_id, created_at, updated_at, is_special, container', 'safe', 'on' => 'search'),
@@ -259,6 +263,10 @@ class Apartment extends CActiveRecord
             'square_kitchen' => Yii::t('apartment', 'square_kitchen'),
             'floor' => Yii::t('apartment', 'floor'),
             'wc_number' => Yii::t('apartment', 'wc_number'),
+
+            'ceiling_height' => 'Высота потолков',
+            'number_of_storeys' => 'Этажность',
+            'flat_number' => 'Кол-во квартир',
 
             'ytvideo_code' => Yii::t('apartment', 'ytvideo_code'),
         );
@@ -375,7 +383,7 @@ class Apartment extends CActiveRecord
 
             if ($meta) {
                 Apartment::model()->updateByPk($this->id, array(
-                    'default_image' => $attachment->getFile(150),
+                    'default_image' => $attachment->getFile(450),
                 ));
             }
         }
@@ -408,10 +416,6 @@ class Apartment extends CActiveRecord
 
         if (is_numeric($this->area_id)) {
             $filters['area_id'] = intval($this->area_id);
-        }
-
-        if (is_numeric($this->parent_id)) {
-            $filters['parent_id'] = intval($this->parent_id);
         }
 
         if (is_numeric($this->wc_number)) {
@@ -447,10 +451,14 @@ class Apartment extends CActiveRecord
         if (!empty($this->room_number) && is_array($this->room_number)) {
             $range = range(1, 4);
             if (in_array(5, $this->room_number)) {
-                $sphinx->setFilter('room_number', $range, true);
+                $sphinx->SetFilter('room_number', $range, true);
             } else {
-                $sphinx->setFilter('room_number', $this->room_number);
+                $sphinx->SetFilter('room_number', $this->room_number);
             }
+        }
+
+        if (!empty($this->parent_id) && is_array($this->parent_id)) {
+            $sphinx->SetFilter('parent_id', $this->parent_id);
         }
 
         $this->setRangeFilter($sphinx, 'price', $float = true);

@@ -21,16 +21,23 @@
  */
 ?>
 
-<h2>Специальные предложения</h2>
+<?php /*
+<div class="well">
+    <legend>Специальные предложения</legend>
+    <div class="offers">
 
-<div class="offers">
+    </div>
+</div>
+ */
+?>
+
+
+<ul class="thumbnails">
     <?php
     $this->widget('zii.widgets.CListView', array(
         'dataProvider' => $dataProvider,
         'itemView' => 'specialOffersWidget/vertical/_view',
         'template' => "{items}",
-
     ));
     ?>
-
-</div>
+</ul>

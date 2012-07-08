@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
-    <link rel="stylesheet" href="<?php echo $this->assetsUrl; ?>/stylesheet/reset.css" type="text/css"
-          media="screen, projection">
-    <link rel="stylesheet" href="<?php echo $this->assetsUrl; ?>/stylesheet/960.css" type="text/css"
-          media="screen, projection">
-
-    <link rel="stylesheet" href="<?php echo $this->assetsUrl; ?>/stylesheet/form.css" type="text/css"
-          media="screen, projection">
-
-    <link rel="stylesheet/less" href="<?php echo $this->assetsUrl; ?>/stylesheet/main.less" type="text/css"
-          media="screen, projection">
+    <link rel="stylesheet/less" href="<?php echo $this->assetsUrl; ?>/stylesheet/less/main.less">
 
     <script type="text/javascript" src="<?php echo $this->assetsUrl; ?>/javascript/less-1.3.0.min.js"></script>
 
@@ -27,27 +18,23 @@
 </head>
 <body>
 
-<div id="container" class="container_12">
+<div class="container">
 
-    <div class="header_wrapper">
+    <div id="top" class="span12">&nbsp;</div>
 
-        <div id="header" class="grid_12"></div>
+    <div class="span12" id="header">
 
-        <div id="header_delimiter" class="grid_12"></div>
+        <div class="row">
+            <div class="span12" style="background-color: #f0f0f0; height: 20px;"></div>
+        </div>
 
-        <div id="header_menu" class="grid_12">
-
-            <div class="grid_2 alpha omega">
+        <div class="row">
+            <div class="span3" style="background-color: #f0f0f0; height: 83px;">
                 <a href="<?php echo Yii::app()->homeUrl ?>" id="logo"></a>
             </div>
-
-            <div class="grid_8 alpha omega">
-                <div class="centered">
-                    <h1><?php echo CHtml::encode(Yii::app()->name); ?></h1>
-                </div>
-
+            <div class="span6" style="background-color: #fff;">
+                <h3><?php echo CHtml::decode(Yii::app()->name) ?></h3>
                 <?php $this->widget('zii.widgets.CMenu', array(
-                'id' => 'main_navigation',
                 'items' => array(
                     array('label' => 'О компании', 'url' => Yii::app()->homeUrl, 'active' => Yii::app()->controller->id == 'apartment'),
                     array('label' => 'Продать', 'url' => array('/map/index')),
@@ -55,15 +42,13 @@
                     array('label' => 'Оценка', 'url' => array('/page/view', 'id' => 2)),
                     array('label' => 'Вакансии', 'url' => array('/page/view', 'id' => 2)),
                 ),
-                'htmlOptions' => array('class' => 'centered'),
+                'htmlOptions' => array('class' => 'navigation main')
             )); ?>
 
-                <div class="clearfix"></div>
-
+                <hr>
             </div>
-
-            <div class="grid_2 alpha omega">
-                <ul id="contacts">
+            <div class="span3" style="background-color: #f0f0f0;">
+                <ul class="unstyled" style="padding-left: 10px;">
                     <li>тел.: 8 999 999 99 99</li>
                     <li>тел.: 8 999 999 99 99</li>
                     <li>email: <a href="mailto:mail@mail.ru">mail@mail.ru</a></li>
@@ -71,100 +56,46 @@
                                                             style="border: none;" width="114" height="20"
                                                             alt="My status"/></a></a>
                     </li>
-                    <li></li>
                 </ul>
             </div>
         </div>
     </div>
 
+    <div class="span12" style="height:5px;"></div>
 
-    <div class="grid_12 alpha omega">
+    <div class="span12" id="content-container">
+        <div class="row">
+            <div class="span3">
 
-        <div class="space tiny"></div>
-        <div class="grid_2 alpha">
-            <?php $this->widget('zii.widgets.CMenu', array(
-            'id' => 'side_navigation',
-            'items' => array(
-                array('label' => 'О компании', 'url' => Yii::app()->homeUrl, 'active' => Yii::app()->controller->id == 'apartment'),
-                array('label' => 'Продажа', 'url' => array('/map/index')),
-                array('label' => 'Аренда', 'url' => array('/news/index'), 'active' => Yii::app()->controller->id == 'news'),
-                array('label' => 'ЖК на Западе', 'url' => array('/page/view', 'id' => 2)),
-                array('label' => 'Подобрать', 'url' => array('/page/view', 'id' => 2)),
-                array('label' => 'Оценка', 'url' => array('/page/view', 'id' => 2)),
-                array('label' => 'Собственникам', 'url' => array('/page/view', 'id' => 2)),
-            ),
-            'htmlOptions' => array('class' => 'centered'),
-        )); ?>
-        </div>
+                <?php $this->widget('zii.widgets.CMenu', array(
+                'items' => array(
+                    array('label' => 'О компании', 'url' => Yii::app()->homeUrl, 'active' => Yii::app()->controller->id == 'apartment'),
+                    array('label' => 'Продать', 'url' => array('/map/index')),
+                    array('label' => 'Сдать', 'url' => array('/news/index'), 'active' => Yii::app()->controller->id == 'news'),
+                    array('label' => 'Оценка', 'url' => array('/page/view', 'id' => 2)),
+                    array('label' => 'Вакансии', 'url' => array('/page/view', 'id' => 2)),
+                ),
+                'htmlOptions' => array('class' => 'well navigation left')
+            )); ?>
 
-        <div class="grid_8">
+
+                <legend>Жилые комплексы</legend>
+                <?php $this->widget('ContainerListWidget') ?>
+
+            </div>
+
             <?php echo $content; ?>
-        </div>
 
-        <div class="grid_2 omega">
-            col2
+
         </div>
     </div>
 
-    <div class="grid_12">
-        <div id="footer" class="clearfix">
-
-            <div class="footer_wrapper prepend_left">
-
-                <div class="space small"></div>
-
-                <?php if (isset($this->breadcrumbs)): ?>
-                    <?php $this->widget('Breadcrumbs', array(
-                    'links' => $this->breadcrumbs,
-                    'separator' => CHtml::image('/images/breadcrumb_delimeter.png'),
-                )); ?><!-- breadcrumbs -->
-                <?php endif?>
-
-                <hr class="splitter">
-
-                <ul>
-                    <?php foreach (Page::model()->cache(3600)->findAll() as $page) : ?>
-                    <?php echo CHtml::link($page->name, array('/page/view', 'id' => $page->id, 'name' => Common::getUri($page->name, 'page'))) ?>
-                    <?php endforeach; ?>
-                </ul>
-
-
-                <div class="clear"></div>
-
-                <hr class="splitter">
-
-                <div class="prefix_3 grid_4 alpha">
-                    <p class="copyright">
-                        &copy; Агенство недвижимости &laquo;Запад&raquo;, ул. Шаболовка 34
-                    </p>
-
-                    <?php //Еmail: suhih@zapadrealty.ru, ttoropina@zapadrealty.ru ?>
-                </div>
-
-                <div class="grid_4 omega">
-                    <div class="footer_logo">
-                        <img src="/images/logo_white_small.png">
-                    </div>
-                </div>
-
-            </div>
-
-            <?php if (YII_DEBUG) : ?>
-            <?php
-            list($queryCount, $queryTime) = Yii::app()->db->getStats();
-            echo "Query count: $queryCount, Total query time: " . sprintf('%0.5f', $queryTime) . "s";
-            ?>
-
-            <div>
-                Execution Time: <?php echo round(CLogger::getExecutionTime(), 3);?> sec<br/>
-                Memory Usage: <?php echo round(CLogger::getMemoryUsage() / 1048576, 2);?> mb
-            </div>
-            <?php endif; ?>
-        </div>
-
-    </div>
 </div>
 
-</div>
+<script type="text/javascript" src="<?php echo $this->assetsUrl; ?>/bootstrap/js/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="<?php echo $this->assetsUrl; ?>/bootstrap/js/bootstrap-button.js"></script>
+<script type="text/javascript" src="<?php echo $this->assetsUrl; ?>/bootstrap/js/bootstrap-tab.js"></script>
+<script type="text/javascript" src="<?php echo $this->assetsUrl; ?>/bootstrap/js/bootstrap-carousel.js"></script>
+<script type="text/javascript" src="<?php echo $this->assetsUrl; ?>/bootstrap/js/bootstrap-transition.js"></script>
 </body>
 </html>

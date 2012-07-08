@@ -27,19 +27,29 @@ $this->breadcrumbs = array(
     $model->address
 );
 
-//$this->pageTitle = Yii::app()->name . ' - ' . ($model->routeable_title ? $model->routeable_title : ($model->name . ' - ' . $model->address));
 $this->pageTitle = (empty($model->name) ? $model->typeName : $model->name) . ' | ' . (!empty($model->address) ? $model->address . ' | ' : '') . Yii::app()->name;
 Yii::app()->clientScript->registerMetaTag(($model->routeable_description ? $model->routeable_description : ($model->name . ' - ' . $model->address)), 'description');
 Yii::app()->clientScript->registerMetaTag(($model->routeable_keywords ? $model->routeable_keywords : $model->name), 'keywords');
 
-Yii::app()->clientScript->registerCssFile($this->assetsUrl . '/stylesheet/galleria.classic.css');
-Yii::app()->clientScript->registerScriptFile($this->assetsUrl . '/javascript/galleria-1.2.7.min.js');
 ?>
+
+
+<?php
+$view = ($model->container == 1) ? '_container' : '_standalone';
+$this->renderPartial($view, array(
+    'model' => $model,
+    'apartmentDataProvider' => $apartmentDataProvider,
+    'apartmentAttributes' => $apartmentAttributes,
+    'apartmentFiles' => $apartmentFiles,
+    'contactForm' => $contactForm,
+)) ?>
+
+<?php /*
 
 <div id="detail_view" class="detail_view_wrapper prepend_top prepend_left">
     <div class="detail_view_header">
         <h1>
-            <?php echo (!empty($model->parent_id) ? CHtml::link($model->parentName, array('/apartment/view/', 'id' => $model->parent_id)) . ', ' : '') ?><?php echo (empty($model->name) ? CHtml::encode($model->address) : CHtml::encode($model->name) . CHtml::encode(', ' . $model->address)) ?>
+
         </h1>
     </div>
 
@@ -58,14 +68,12 @@ $this->renderPartial($view, array(
 <div class="space"></div>
 <div class="shadow"></div>
 
+ */
+?>
+
 <script type="text/javascript">
 
     $(function () {
-
-        // Load the classic theme
-        Galleria.loadTheme('<?php echo $this->assetsUrl . '/javascript' ?>/galleria.classic.min.js');
-        // Initialize Galleria
-        Galleria.run('.gallery');
 
         var map = null;
 
@@ -79,7 +87,7 @@ $this->renderPartial($view, array(
 
             ymaps.geocode(city, {results:1}).then(function (result) {
                 var c = result.geoObjects.get(0);
-                map = new ymaps.Map('map', mapOptions);
+                map = new ymaps.Map('apartment-on-map', mapOptions);
                 map.setCenter(c.geometry.getCoordinates());
                 map.controls.add('zoomControl');
                 // Список типов карты
@@ -93,6 +101,22 @@ $this->renderPartial($view, array(
                 map.geoObjects.add(placemark);
                 map.setCenter(placemark.geometry.getCoordinates());
                 map.setZoom(16);
+            });
+
+            $('.tabbable a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+//                $('body').scrollTop(0);
+                map.container.fitToViewport();
+            });
+
+            $('.gallery').each(function (index, gallery) {
+                carousel = $(gallery).find('.carousel.slide').carousel();
+                $('.thumbnail', gallery).each(function (index, thumb) {
+                    $(this).bind('click', function () {
+                        $(carousel).carousel(index - 1);
+                    });
+                });
             });
         }
     });

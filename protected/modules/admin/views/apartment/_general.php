@@ -137,6 +137,31 @@
     <?php echo $form->error($model, 'is_rent'); ?>
 </div>
 
+<?php else: ?>
+
+<div class="row">
+    <?php echo $form->labelEx($model, 'flat_number'); ?>
+    <?php echo $form->textField($model, 'flat_number', array('size' => 60, 'maxlength' => 20)); ?>
+    <?php echo $form->error($model, 'flat_number'); ?>
+</div>
+
+<div class="row">
+    <?php echo $form->labelEx($model, 'number_of_storeys'); ?>
+    <?php echo $form->textField($model, 'number_of_storeys', array('size' => 60, 'maxlength' => 20)); ?>
+    <?php echo $form->error($model, 'number_of_storeys'); ?>
+</div>
+
+<div class="row">
+    <?php echo $form->labelEx($model, 'ceiling_height'); ?>
+    <?php echo $form->textField($model, 'ceiling_height', array('size' => 60, 'maxlength' => 20)); ?>
+    <?php echo $form->error($model, 'ceiling_height'); ?>
+</div>
+
+
+
+
+
+
 <?php endif; ?>
 
 <div class="row">
