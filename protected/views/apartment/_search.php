@@ -26,7 +26,7 @@
 <?php $form = $this->beginWidget('CActiveForm', array(
     'id' => 'search',
     'method' => 'get',
-    'htmlOptions' => array('class' => 'well', 'style' => 'padding-top: 8px; padding-bottom: 8px;'),
+    'htmlOptions' => array('class' => 'well', 'style' => 'padding: 8px 15px'),
 )); ?>
 
 <fieldset>
