@@ -21,17 +21,11 @@
  *
  */
 ?>
-<div id="content" class="grid_12">
-    <div class="shadow revert"></div>
 
-    <div class="prepend_top prepend_left">
+<div id="static-content" class="span9">
 
-        <?php echo $content; ?>
-
-    </div>
-
-    <div class="space"></div>
-    <div class="shadow"></div>
+<?php echo $content; ?>
 
 </div>
+
 <?php $this->endContent(); ?>

@@ -32,29 +32,29 @@
 <fieldset>
     <div class="control-group">
         <div class="controls">
-            <label class="radio inline"><input type="radio" name="Apartment[is_rent]" value="">Все</label>
-            <label class="radio inline"><input type="radio" name="Apartment[is_rent]" value="1">Снять</label>
-            <label class="radio inline"><input type="radio" name="Apartment[is_rent]" value="0">Купить</label>
+            <label class="radio inline"><?php echo $form->radioButton($model, 'is_rent', array('value' => '', 'uncheckValue' => null)) ?>Все</label>
+            <label class="radio inline"><?php echo $form->radioButton($model, 'is_rent', array('value' => '1', 'uncheckValue' => null)) ?>Снять</label>
+            <label class="radio inline"><?php echo $form->radioButton($model, 'is_rent', array('value' => '0', 'uncheckValue' => null)) ?>Купить</label>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label">Количество комнат</label>
 
         <div class="controls">
-            <label class="checkbox inline"><input type="checkbox" name="Apartment[room_number][]" value="1"> 1</label>
-            <label class="checkbox inline"><input type="checkbox" name="Apartment[room_number][]" value="2"> 2</label>
-            <label class="checkbox inline"><input type="checkbox" name="Apartment[room_number][]" value="3"> 3</label>
-            <label class="checkbox inline"><input type="checkbox" name="Apartment[room_number][]" value="4"> 4</label>
-            <label class="checkbox inline"><input type="checkbox" name="Apartment[room_number][]" value="5"> 5+</label>
+            <label class="checkbox inline"><?php echo $form->checkbox($model, 'room_number[]', array('value' => 1, 'uncheckValue' => null)) ?> 1</label>
+            <label class="checkbox inline"><?php echo $form->checkbox($model, 'room_number[]', array('value' => 2, 'uncheckValue' => null)) ?> 2</label>
+            <label class="checkbox inline"><?php echo $form->checkbox($model, 'room_number[]', array('value' => 3, 'uncheckValue' => null)) ?> 3</label>
+            <label class="checkbox inline"><?php echo $form->checkbox($model, 'room_number[]', array('value' => 4, 'uncheckValue' => null)) ?> 4</label>
+            <label class="checkbox inline"><?php echo $form->checkbox($model, 'room_number[]', array('value' => 5, 'uncheckValue' => null)) ?> 5+</label>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label">Общая площадь</label>
 
         <div class="controls">
-            <input class="span1" type="text" name="Apartment[square][]" placeholder="мин">
+            <?php echo $form->textField($model, 'square[]', array('class' => 'span1', 'placeholder' => 'мин')) ?>
             &mdash;
-            <input class="span1" type="text" name="Apartment[square][]" placeholder="макс">
+            <?php echo $form->textField($model, 'square[]', array('class' => 'span1', 'placeholder' => 'макс')) ?>
         </div>
     </div>
 

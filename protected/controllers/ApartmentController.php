@@ -25,11 +25,6 @@ class ApartmentController extends Controller
 
     public function actionIndex()
     {
-
-        // Load and cache apartment types
-        $dependency = new CDbCacheDependency('SELECT MAX(updated_at) FROM apartment_type');
-        $apartmentTypes = ApartmentType::model()->is_filter()->cache(Yii::app()->params['cache_expire_time'], $dependency)->findAll();
-
         $model = new Apartment('search');
         $model->unsetAttributes();
 
@@ -42,16 +37,51 @@ class ApartmentController extends Controller
         $model->is_published = 1;
         $apartmentDataProvider = $model->search();
 
+        $this->render('index', array(
+            'model' => $model,
+            'apartmentDataProvider' => $apartmentDataProvider,
+        ));
+    }
+
+    public function actionRent()
+    {
+        $model = new Apartment('search');
         $model->unsetAttributes();
-        $model->container = 1;
+
+        if (isset($_GET['Apartment'])) {
+            $model->attributes = $_GET['Apartment'];
+        }
+
+        // Force NOT container published objects
+        $model->container = 0;
         $model->is_published = 1;
-        $containerDataProvider = $model->search();
+        $model->is_rent = 1;
+        $apartmentDataProvider = $model->search();
 
         $this->render('index', array(
             'model' => $model,
             'apartmentDataProvider' => $apartmentDataProvider,
-            'containerDataProvider' => $containerDataProvider,
-            'apartmentTypes' => $apartmentTypes,
+        ));
+    }
+
+    public function actionSale()
+    {
+        $model = new Apartment('search');
+        $model->unsetAttributes();
+
+        if (isset($_GET['Apartment'])) {
+            $model->attributes = $_GET['Apartment'];
+        }
+
+        // Force NOT container published objects
+        $model->container = 0;
+        $model->is_published = 1;
+        $model->is_rent = 0;
+        $apartmentDataProvider = $model->search();
+
+        $this->render('index', array(
+            'model' => $model,
+            'apartmentDataProvider' => $apartmentDataProvider,
         ));
     }
 

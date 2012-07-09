@@ -65,15 +65,12 @@
 
     <div class="span12" id="content-container">
         <div class="row">
-            <div class="span3">
 
+            <div class="span3">
                 <?php $this->widget('zii.widgets.CMenu', array(
                 'items' => array(
-                    array('label' => 'О компании', 'url' => Yii::app()->homeUrl, 'active' => Yii::app()->controller->id == 'apartment'),
-                    array('label' => 'Продать', 'url' => array('/map/index')),
-                    array('label' => 'Сдать', 'url' => array('/news/index'), 'active' => Yii::app()->controller->id == 'news'),
-                    array('label' => 'Оценка', 'url' => array('/page/view', 'id' => 2)),
-                    array('label' => 'Вакансии', 'url' => array('/page/view', 'id' => 2)),
+                    array('label' => 'Аренда', 'url' => array('/apartment/rent')),
+                    array('label' => 'Продажа', 'url' => array('/apartment/sale')),
                 ),
                 'htmlOptions' => array('class' => 'well navigation left')
             )); ?>
