@@ -21,7 +21,7 @@
  */
 
 ?>
-<div class="span6">
+<div class="span7">
     <?php $this->renderPartial('_shared', array(
     'model' => $model,
     'apartmentFiles' => $apartmentFiles,

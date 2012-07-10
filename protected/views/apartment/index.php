@@ -36,7 +36,7 @@ Yii::app()->clientScript->registerScript('search', "
 ");
 ?>
 
-<div class="span6" id="content">
+<div class="span7" id="content">
 
 
     <?php
@@ -66,6 +66,6 @@ Yii::app()->clientScript->registerScript('search', "
     <?php $this->renderPartial('_search', array('model' => $model, 'apartmentTypes' => $apartmentTypes, 'containerDataProvider' => $containerDataProvider)) ?>
 
     <legend>Спецпредложения</legend>
-    <?php $this->widget('SpecialOffersWidget'); ?>
+    <?php $this->widget('SpecialOffersWidget', array('pageSize' => 5)); ?>
 </div>
 

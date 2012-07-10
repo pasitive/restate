@@ -36,6 +36,13 @@ class Controller extends CController
         // Register core javascripts
         Yii::app()->clientScript->registerCoreScript('jquery')
             ->registerScriptFile($this->assetsUrl . '/javascript/scripts.js', CClientScript::POS_END);
+
+        if(IN_DEVELOPMENT_MODE) {
+            Yii::app()->clientScript->registerLinkTag('stylesheet/less', null, $this->assetsUrl . '/stylesheet/less/main.less');
+            Yii::app()->clientScript->registerScriptFile($this->assetsUrl . '/javascript/less-1.3.0.min.js', CClientScript::POS_HEAD);
+        } else {
+            Yii::app()->clientScript->registerCssFile($this->assetsUrl . '/stylesheet/main.css');
+        }
     }
 
     protected function initI18n()

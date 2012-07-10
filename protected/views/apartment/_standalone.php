@@ -22,12 +22,12 @@
 
 ?>
 
-<div class="span6">
+<div class="span7">
 
     <?php $this->renderPartial('_shared', array(
-        'model' => $model,
-        'apartmentFiles' => $apartmentFiles,
-    )) ?>
+    'model' => $model,
+    'apartmentFiles' => $apartmentFiles,
+)) ?>
 
     <div class="row">
         <div class="span3">
@@ -37,7 +37,8 @@
                 <li><strong>Комнат: </strong><?php echo $model->room_number ?></li>
                 <li><strong>Площадь: </strong><?php echo $model->square ?></li>
                 <li><strong>Этаж: </strong><?php echo $model->floor ?></li>
-                <li><strong>Цена: </strong><?php echo Yii::app()->numberFormatter->formatCurrency($model->price, 'RUB') ?>
+                <li>
+                    <strong>Цена: </strong><?php echo Yii::app()->numberFormatter->formatCurrency($model->price, 'RUB') ?>
                 </li>
             </ul>
 
@@ -66,15 +67,15 @@
     </div>
 
     <div class="well" style="padding: 8px 0">
-    <ul class="nav nav-list">
-        <li>
-            <?php echo CHtml::link('<i class="icon-home"></i> Посмотреть все предложения в ' . $model->parent_name, array('/apartment/view/', 'id' => $model->parent_id, '#' => 'apartment-list')) ?>
-        </li>
-        <li class="divider"></li>
-        <li>
-            <?php echo CHtml::link('Назад', 'javascript:history.back()') ?>
-        </li>
-    </ul>
+        <ul class="nav nav-list">
+            <li>
+                <?php echo CHtml::link('<i class="icon-home"></i> Посмотреть все предложения в ' . $model->parent_name, array('/apartment/view/', 'id' => $model->parent_id, '#' => 'apartment-list')) ?>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <?php echo CHtml::link('Назад', 'javascript:history.back()') ?>
+            </li>
+        </ul>
     </div>
 
 </div>
@@ -84,11 +85,22 @@
     <div class="well">На этом месте будут текстовые блоки</div>
     <div class="well">
 
-        <p>Мы предлагаем аренду и продажу квартир в элитных жилых комплексах Москвы на отличных условиях! И всегда готовы помочь собственникам сдать или продать квартиру. Звоните!</p>
-        <p>Мы предлагаем аренду и продажу квартир в элитных жилых комплексах Москвы на отличных условиях! И всегда готовы помочь собственникам сдать или продать квартиру. Звоните!</p>
-        <p>Мы предлагаем аренду и продажу квартир в элитных жилых комплексах Москвы на отличных условиях! И всегда готовы помочь собственникам сдать или продать квартиру. Звоните!</p>
+        <p>Мы предлагаем аренду и продажу квартир в элитных жилых комплексах Москвы на отличных условиях! И всегда
+            готовы помочь собственникам сдать или продать квартиру. Звоните!</p>
+
+        <p>Мы предлагаем аренду и продажу квартир в элитных жилых комплексах Москвы на отличных условиях! И всегда
+            готовы помочь собственникам сдать или продать квартиру. Звоните!</p>
+
+        <p>Мы предлагаем аренду и продажу квартир в элитных жилых комплексах Москвы на отличных условиях! И всегда
+            готовы помочь собственникам сдать или продать квартиру. Звоните!</p>
 
     </div>
+
+    <legend>Спецпредложения</legend>
+
+    <?php $this->widget('SpecialOffersWidget', array(
+    'pageSize' => 3,
+)) ?>
 </div>
 
 <?php /*

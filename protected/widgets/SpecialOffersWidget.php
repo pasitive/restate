@@ -21,6 +21,9 @@
  */
 class SpecialOffersWidget extends CWidget
 {
+
+    public $pageSize = 5;
+
     public $options = array();
 
     private $_dataProvider = null;
@@ -28,7 +31,6 @@ class SpecialOffersWidget extends CWidget
     private $_options = array(
         'vertical' => true,
         'apartmentId' => null,
-        'max' => 5,
     );
 
     public function getDataProvider()
@@ -50,12 +52,14 @@ class SpecialOffersWidget extends CWidget
             $model->parent_id = $apartmentId;
         }
 
-        $this->_dataProvider->pagination->pageSize = $this->_options['max'];
         $this->_dataProvider = $model->search();
     }
 
     public function run()
     {
+
+        $this->dataProvider->pagination->pageSize = $this->pageSize;
+
         $viewData = array(
             'dataProvider' => $this->dataProvider,
         );

@@ -1,69 +1,91 @@
 @import "../../bootstrap/less/bootstrap.less";
 
-@linkColor:             #666633;
+@linkColor: #666633;
+
+legend {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
 
 #top {
     background: url(/images/header_bg.png);
     height: 100px;
 }
 
+#overtop {
+    text-align: right;
+    color: #663;
+
+    span {
+        display: block;
+        padding-right: 20px;
+    }
+}
+
 #logo {
     display: block;
     position: relative;
     background: url(/images/logo.png) 1px center no-repeat;
-    background-size: 90%;
+    background-size: 95%;
     height: 67px;
     text-indent: -1999px;
-    margin-left: 15px;
+    margin-left: -15px;
 }
 
 #header {
     h3 {
         font-size: 21px;
+        color: #663;
+        text-align: center;
     }
 }
 
-.navigation {
+#content-container {
+    #content {
+        position: relative;
+        top: -15px;
+    }
+}
 
-    li {
+#apartment-list {
+    address {
+        margin-bottom: 0px;
+    }
+}
+
+#search {
+    background-color: #b2a782;
+    padding: 8px 15px;
+    color: @white;
+
+    a {
+        font-size: 14px;
+        color: @white;
     }
 
-    &.main {
+    .dropdown {
+        label {
+            color: #b2a782;
+        }
+    }
+}
 
+#apartment-on-map, #apartment-video {
+    padding-bottom: 10px;
+}
+
+.navigation {
+    li {
+    }
+    &.main {
         position: relative;
         bottom: -10px;
         text-align: center;
         font-size: 14px;
-
         li {
             display: inline-block; //            padding-left: 10px;
             padding-right: 20px;
         }
-
-    }
-
-    &.left {
-
-        background-color: #b2a782;
-        font-size: 16px;
-        margin: 0;
-
-        li {
-            list-style: none;
-            padding: 5px 5px;
-
-            a {
-                color: @white;
-            }
-        }
-    }
-
-}
-
-#content-container {
-
-    #content {
-
     }
 }
 
@@ -72,17 +94,6 @@
         div {
             padding: 3px 10px;
         }
-    }
-}
-
-#content {
-    position: relative;
-    top: -15px;
-}
-
-#apartment-list {
-    address {
-        margin-bottom: 0px;
     }
 }
 
@@ -96,10 +107,6 @@
 
 }
 
-legend {
-    margin-bottom: 10px;
-}
-
 .gallery {
     .carousel {
         margin-bottom: 0;
@@ -109,10 +116,7 @@ legend {
     }
 }
 
-#apartment-on-map, #apartment-video {
-    padding-bottom: 10px;
-}
-
 .well {
     margin-bottom: 5px;
 }
+

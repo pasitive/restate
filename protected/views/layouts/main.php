@@ -5,10 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
-    <link rel="stylesheet/less" href="<?php echo $this->assetsUrl; ?>/stylesheet/less/main.less">
-
-    <script type="text/javascript" src="<?php echo $this->assetsUrl; ?>/javascript/less-1.3.0.min.js"></script>
-
     <!--
     Skype 'My status' button
     http://www.skype.com/go/skypebuttons
@@ -20,6 +16,8 @@
 
 <div class="container">
 
+    <div class="span12" id="overtop"><span>Элитная недвижимость на западе Москвы</span></div>
+
     <div id="top" class="span12">&nbsp;</div>
 
     <div class="span12" id="header">
@@ -29,10 +27,10 @@
         </div>
 
         <div class="row">
-            <div class="span3" style="background-color: #f0f0f0; height: 83px;">
+            <div class="span2" style="background-color: #f0f0f0; height: 83px;">
                 <a href="<?php echo Yii::app()->homeUrl ?>" id="logo"></a>
             </div>
-            <div class="span6" style="background-color: #fff;">
+            <div class="span7" style="background-color: #fff;">
                 <h3><?php echo CHtml::decode(Yii::app()->name) ?></h3>
                 <?php $this->widget('zii.widgets.CMenu', array(
                 'items' => array(
@@ -65,18 +63,19 @@
 
     <div class="span12" id="content-container">
         <div class="row">
+            <div class="span2">
 
-            <div class="span3">
                 <?php $this->widget('zii.widgets.CMenu', array(
                 'items' => array(
-                    array('label' => 'Аренда', 'url' => array('/apartment/rent')),
-                    array('label' => 'Продажа', 'url' => array('/apartment/sale')),
+                    array('label' => 'Главная страница', 'url' => array('/apartment/index')),
+                    array('label' => 'Аренда квартир', 'url' => array('/apartment/rent')),
+                    array('label' => 'Продажа квартир', 'url' => array('/apartment/sale')),
                 ),
-                'htmlOptions' => array('class' => 'well navigation left')
+                'htmlOptions' => array('class' => 'nav nav-main nav-pills nav-stacked')
             )); ?>
 
 
-                <legend>Жилые комплексы</legend>
+                <legend>ЖК на Западе</legend>
                 <?php $this->widget('ContainerListWidget') ?>
 
             </div>
