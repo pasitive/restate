@@ -44,12 +44,13 @@ $this->pageTitle = 'Объекты на карте' . ' | ' . Yii::app()->name;
     <h2>Жилые комплексы на западе Москвы</h2>
     <br>
 
+    <div class="row">
     <?php
     $this->widget('zii.widgets.CListView', array(
         'id' => 'apartment-list',
         'dataProvider' => $containerDataProvider,
         'itemView' => '/apartment/_view_map',
-        'template' => "{items}\n{pager}",
+        'template' => "{items}<br><br>{pager}",
         'pagerCssClass' => 'bootstrap-pager',
         'pager' => array(
             'class' => 'LinkPager',
@@ -64,5 +65,6 @@ $this->pageTitle = 'Объекты на карте' . ' | ' . Yii::app()->name;
         ),
     ));
     ?>
+    </div>
 </div>
 
