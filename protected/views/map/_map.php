@@ -31,7 +31,7 @@
 
         var map = null;
 
-        var data = <?php echo CJSON::encode($data); ?> ;
+        var data = <?php echo CJSON::encode($mapData); ?> ;
 
         ymaps.ready(init);
 

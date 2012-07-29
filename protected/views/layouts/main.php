@@ -70,6 +70,7 @@
                     array('label' => 'Главная страница', 'url' => array('/apartment/index')),
                     array('label' => 'Аренда квартир', 'url' => array('/apartment/rent')),
                     array('label' => 'Продажа квартир', 'url' => array('/apartment/sale')),
+                    array('label' => 'ЖК на западе', 'url' => array('/map/index')),
                 ),
                 'htmlOptions' => array('class' => 'nav nav-main nav-pills nav-stacked')
             )); ?>
