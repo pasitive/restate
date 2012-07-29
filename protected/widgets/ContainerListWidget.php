@@ -32,6 +32,7 @@ class ContainerListWidget extends CWidget
         $model->container = 1;
 
         $this->_dataProvider = $model->search();
+        $this->_dataProvider->pagination->pageSize = 999;
     }
 
     public function run()

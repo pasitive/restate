@@ -6,7 +6,7 @@
  * Time: 5:25 PM
  * To change this template use File | Settings | File Templates.
  */
-class SphinxDataProvider extends CDataProvider
+class SphinxDataProvider extends CActiveDataProvider
 {
     /**
      * @var string Key field
@@ -104,17 +104,9 @@ class SphinxDataProvider extends CDataProvider
 
         // Fetching actual data from database
         $keys = array_keys($this->_result['matches']);
-        $keysString = join(',', $keys);
         $criteria->addInCondition('id', $keys);
 
         $model = $this->model->findAll($criteria);
-
-        /*$command = Yii::app()->db->createCommand()
-            ->from('apartment')
-            ->where('id IN ("' . $keysString . '")')
-            ->limit($limit, $offset);
-
-        $data = $command->queryAll();*/
 
         return $model;
     }
