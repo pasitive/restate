@@ -49,31 +49,13 @@
                 <div class="tab-pane active" id="apartment-main-params_<?php echo $data->id ?>">
 
                     <ul class="unstyled">
-                        <?php if (!empty($data->metroName) || !empty($data->metroName)): ?>
-                        <li>
-                            <strong><?php echo Yii::t('apartment', 'metro') ?></strong>: <?php echo (empty($data->metroName) ? '&mdash;' : $data->metroName) ?>
-                        </li>
-                        <?php endif; ?>
-
-                        <?php if (!empty($data->square) || !empty($data->square_live)): ?>
-                        <li>
-                            <strong>Площадь: </strong><?php echo (empty($data->square) ? '' : $data->square . '/') ?><?php echo (empty($data->square_live) ? '' : $data->square_live . ' м<sup>2</sup>') ?>
-                        </li>
-                        <?php endif; ?>
-
-                        <?php if (!empty($data->room_number)): ?>
-                        <li><strong>Кол-во
-                            комнат: </strong> <?php echo (empty($data->room_number) ? '&mdash;' : $data->room_number) ?>
-                        </li>
-                        <?php endif; ?>
-
-                        <?php if ($data->container != 1): ?>
-                        <li>
-                            <strong><?php echo (($data->is_rent == 1) ? Yii::t('common', 'Rent price') : Yii::t('common', 'Price')) ?></strong>: <?php echo (($data->price == 0 ? 'Уточняйте у менеджера' : Yii::app()->numberFormatter->formatCurrency($data->price, 'RUB'))) ?>
-                        </li>
-                        <?php endif; ?>
-
+                        <li><strong>Метро: </strong> <i class="icon-map-marker"></i> <?php echo $data->metroName ?> </li>
+                        <li><strong>Комнат: </strong><?php echo $data->room_number ?></li>
+                        <li><strong>Этаж: </strong><?php echo $data->floor ?>/<?php echo $data->parent->number_of_storeys ?></li>
+                        <li><strong>Площадь: </strong><?php echo $data->square ?> м<sup>2</sup> </li>
                     </ul>
+
+
 
                 </div>
                 <div class="tab-pane" id="apartment-sub-params_<?php echo $data->id ?>">
@@ -83,15 +65,26 @@
                         <!--NOTHING-->
                         <?php else: ?>
 
-                        <?php if (!empty($data->square_kitchen)): ?>
-                            <li><strong>Площадь
-                                кухни</strong>: <?php echo $data->square_kitchen . ' м<sup>2</sup>' ?></li>
-                            <?php endif; ?>
-
-                        <?php if (!empty($data->wc_number)): ?>
-                            <li><strong>Санузлов</strong>: <?php echo $data->wc_number . ' м<sup>2</sup>' ?>
+                        <ul class="unstyled">
+                            <li>
+                                <strong>Кухня: </strong><?php echo $data->square_kitchen ?>м<sup>2</sup>
                             </li>
-                            <?php endif; ?>
+                            <li>
+                                <strong>С/узлы: </strong><?php echo $data->wc_number ?>
+                            </li>
+                            <?php foreach ($data->apartmentAttributes as $apartmentAttribute): ?>
+                            <?php if (!empty($apartmentAttribute->value)): ?>
+                                <li>
+                                    <strong><?php echo $apartmentAttribute->attributeName ?>
+                                        :</strong> <?php echo $apartmentAttribute->value ?>
+                                </li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            <li>
+                                <strong>Цена: </strong><?php echo Yii::app()->numberFormatter->formatCurrency($data->price, 'RUB') ?>
+                            </li>
+                        </ul>
+
                         <?php endif; ?>
 
                     </ul>

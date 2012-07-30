@@ -22,49 +22,55 @@
 $this->pageTitle = 'Объекты на карте' . ' | ' . Yii::app()->name;
 ?>
 
-<div class="span7">
-    <?php $this->renderPartial('_map', array(
-    'mapData' => $mapData,
-    'model' => $model,
-    'apartmentTypes' => $apartmentTypes,
-    'containerDataProvider' => $containerDataProvider,
-    'standaloneDataProvider' => $standaloneDataProvider,
-)); ?>
-</div>
+<div class="row">
 
-<div class="span3">
-    <div class="well">
-        qwe
+    <div class="span7">
+        <?php $this->renderPartial('_map', array(
+        'mapData' => $mapData,
+        'model' => $model,
+        'apartmentTypes' => $apartmentTypes,
+        'containerDataProvider' => $containerDataProvider,
+        'standaloneDataProvider' => $standaloneDataProvider,
+    )); ?>
     </div>
-</div>
 
-<div class="offset2 span10">
+    <div class="span3">
+        <br>
 
-    <br>
-    <h2>Жилые комплексы на западе Москвы</h2>
-    <br>
-
-    <div class="row">
-    <?php
-    $this->widget('zii.widgets.CListView', array(
-        'id' => 'apartment-list',
-        'dataProvider' => $containerDataProvider,
-        'itemView' => '/apartment/_view_map',
-        'template' => "{items}<br><br>{pager}",
-        'pagerCssClass' => 'bootstrap-pager',
-        'pager' => array(
-            'class' => 'LinkPager',
-            'cssFile' => false,
-            'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
-            'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
-            'header' => '',
-            'maxButtonCount' => 4,
-            'htmlOptions' => array(
-                'class' => 'pagination'
-            ),
-        ),
-    ));
-    ?>
+        <div class="well">
+            qwe
+        </div>
     </div>
-</div>
 
+
+    <div class="span10">
+
+        <br>
+        <h2>Жилые комплексы на западе Москвы</h2>
+        <br>
+
+        <div class="row">
+            <?php
+            $this->widget('zii.widgets.CListView', array(
+                'id' => 'apartment-list',
+                'dataProvider' => $containerDataProvider,
+                'itemView' => '/apartment/_view_map',
+                'template' => "{items}<br><br>{pager}",
+                'pagerCssClass' => 'bootstrap-pager',
+                'pager' => array(
+                    'class' => 'LinkPager',
+                    'cssFile' => false,
+                    'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
+                    'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
+                    'header' => '',
+                    'maxButtonCount' => 4,
+                    'htmlOptions' => array(
+                        'class' => 'pagination'
+                    ),
+                ),
+            ));
+            ?>
+        </div>
+    </div>
+
+</div>

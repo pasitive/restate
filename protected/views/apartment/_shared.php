@@ -31,6 +31,7 @@
         <div class="tab-pane" id="apartment-on-map" style="height:300px;">
         </div>
 
+        <?php if($model->container == 0): ?>
         <div class="tab-pane" id="apartment-video">
             <div class="row">
                 <iframe title="YouTube video player" class="span6" height="300"
@@ -38,11 +39,14 @@
                         allowfullscreen></iframe>
             </div>
         </div>
+        <?php endif; ?>
 
     </div>
     <ul class="nav nav-tabs">
         <li class="active"><a href="#apartment-gallery" data-toggle="tab">Фотогалерея</a></li>
         <li><a href="#apartment-on-map" data-toggle="tab">Показать на карте</a></li>
+        <?php if($model->container == 0): ?>
         <li><a href="#apartment-video" data-toggle="tab">Видео</a></li>
+            <?php endif; ?>
     </ul>
 </div>
