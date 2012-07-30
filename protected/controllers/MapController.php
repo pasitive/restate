@@ -40,6 +40,7 @@ class MapController extends Controller
             'is_published' => Apartment::PUBLISHED,
         );
         $containerDataProvider = $model->search();
+        $containerDataProvider->pagination->pageSize = 999;
         $mapData = array();
         foreach ($containerDataProvider->getData() as $apartment) {
             $key = 'apartment_map_data_' . $apartment->id;
