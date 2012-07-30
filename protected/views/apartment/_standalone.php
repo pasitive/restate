@@ -35,16 +35,19 @@
             <ul class="unstyled">
                 <li><strong>Метро: </strong> <i class="icon-map-marker"></i> <?php echo $model->metroName ?> </li>
                 <li><strong>Комнат: </strong><?php echo $model->room_number ?></li>
-                <li><strong>Площадь: </strong><?php echo $model->square ?></li>
-                <li><strong>Этаж: </strong><?php echo $model->floor ?></li>
-                <li>
-                    <strong>Цена: </strong><?php echo Yii::app()->numberFormatter->formatCurrency($model->price, 'RUB') ?>
-                </li>
+                <li><strong>Этаж: </strong><?php echo $model->floor ?>/<?php echo $model->parent->number_of_storeys ?></li>
+                <li><strong>Площадь: </strong><?php echo $model->square ?> м<sup>2</sup> </li>
             </ul>
 
         </div>
         <div class="span3">
             <ul class="unstyled">
+                <li>
+                    <strong>Кухня: </strong><?php echo $model->square_kitchen ?>м<sup>2</sup>
+                </li>
+                <li>
+                    <strong>С/узлы: </strong><?php echo $model->wc_number ?>
+                </li>
                 <?php foreach ($apartmentAttributes as $apartmentAttribute): ?>
                 <?php if (!empty($apartmentAttribute->value)): ?>
                     <li>
@@ -53,6 +56,9 @@
                     </li>
                     <?php endif; ?>
                 <?php endforeach; ?>
+                <li>
+                    <strong>Цена: </strong><?php echo Yii::app()->numberFormatter->formatCurrency($model->price, 'RUB') ?>
+                </li>
             </ul>
         </div>
     </div>

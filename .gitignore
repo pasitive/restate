@@ -4,3 +4,5 @@ public/assets
 public/upload
 protected/runtime
 protected/components/DbConnection.php
+access.log
+error.log
