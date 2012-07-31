@@ -711,6 +711,7 @@ a.label:hover,a.badge:hover{color:#ffffff;text-decoration:none;cursor:pointer;}
 .hide{display:none;}
 .show{display:block;}
 .invisible{visibility:hidden;}
+h3{font-size:14px;}
 legend{margin-bottom:10px;font-size:18px;}
 #top{background:url(/images/header_bg.png);height:100px;}
 #overtop{text-align:right;color:#663;}#overtop span{display:block;padding-right:20px;}
