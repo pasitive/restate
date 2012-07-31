@@ -47,8 +47,8 @@
             </div>
             <div class="span3" style="background-color: #f0f0f0;">
                 <ul class="unstyled" style="padding-left: 10px;">
-                    <li>тел.: 8 999 999 99 99</li>
-                    <li>тел.: 8 999 999 99 99</li>
+                    <li>тел.: 8 917 555 0217</li>
+                    <li>тел.: 8 917 555 7561</li>
                     <li>email: <a href="mailto:mail@mail.ru">mail@mail.ru</a></li>
                     <li><a href="skype:boldinovd?call"><img src="http://mystatus.skype.com/smallclassic/boldinovd"
                                                             style="border: none;" width="114" height="20"
@@ -70,7 +70,7 @@
                     array('label' => 'Главная страница', 'url' => array('/apartment/index')),
                     array('label' => 'Аренда квартир', 'url' => array('/apartment/rent')),
                     array('label' => 'Продажа квартир', 'url' => array('/apartment/sale')),
-                    array('label' => 'ЖК на западе', 'url' => array('/map/index')),
+                    array('label' => 'ЖК на карте', 'url' => array('/map/index')),
                 ),
                 'htmlOptions' => array('class' => 'nav nav-main nav-pills nav-stacked')
             )); ?>

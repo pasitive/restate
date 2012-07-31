@@ -199,9 +199,9 @@ class Apartment extends CActiveRecord
 //            array('routeable_pattern', 'required'),
             array('routeable_keywords, routeable_description, routeable_title, metro_name, city_name, area_name, type_name, default_image, container, apartment_count, ytvideo_code, parent_name', 'safe'),
             array('price', 'numerical'),
-            array('room_number, square, square_live, square_kitchen, wc_number, floor, ceiling_height, flat_number', 'numerical', 'integerOnly' => true),
+            array('room_number, square, square_live, square_kitchen, wc_number, ceiling_height, flat_number', 'numerical', 'integerOnly' => true),
             array('city_id, area_id, type_id, user_id', 'required'),
-            array('name', 'length', 'max' => 255),
+            array('name, floor', 'length', 'max' => 255),
             array('city_id, area_id, type_id, metro_id', 'length', 'max' => 10),
             array('created_at, updated_at, lng, lat, rating, address, parent_id, is_special, description, is_rent, is_published, number_of_storeys, ', 'safe'),
             // The following rule is used by search().

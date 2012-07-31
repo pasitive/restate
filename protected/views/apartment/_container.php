@@ -86,7 +86,9 @@
 
 <div class="span3">
     <legend>Описание</legend>
-    <?php echo $model->description ?>
+    <div style="height: 315px; overflow: hidden;">
+        <?php echo $model->description ?>
+    </div>
 
     <div class="well">
         <p>Текстовый блок с описанием еще чего нибудь</p>

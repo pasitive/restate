@@ -51,7 +51,7 @@
                     <ul class="unstyled">
                         <li><strong>Метро: </strong> <i class="icon-map-marker"></i> <?php echo $data->metroName ?> </li>
                         <li><strong>Комнат: </strong><?php echo $data->room_number ?></li>
-                        <li><strong>Этаж: </strong><?php echo $data->floor ?>/<?php echo $data->parent->number_of_storeys ?></li>
+                        <li><strong>Этаж: </strong><?php echo $data->floor ?></li>
                         <li><strong>Площадь: </strong><?php echo $data->square ?> м<sup>2</sup> </li>
                     </ul>
 

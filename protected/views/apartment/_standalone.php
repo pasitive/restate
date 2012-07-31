@@ -64,10 +64,10 @@
     </div>
 
     <div class="row">
-        <div class="span6">
+        <div class="span7">
             <div class="well">
                 <legend>Описание</legend>
-                <?php echo $model->description ?>
+                    <?php echo $model->description ?>
             </div>
         </div>
     </div>
