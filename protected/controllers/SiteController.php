@@ -3,7 +3,7 @@
 class SiteController extends Controller
 {
 
-    public $layout = '//layouts/static';
+    public $layout = '//layouts/index';
 
     /**
      * Declares class-based actions.
@@ -25,22 +25,6 @@ class SiteController extends Controller
     }
 
     /**
-     * This is the default 'index' action that is invoked
-     * when an action is not explicitly requested by users.
-     */
-    public function actionIndex($q = '')
-    {
-        /*$search = Yii::App()->search;
-        $search->setSelect('id');
-        $search->setArrayResult(false);
-        $search->setMatchMode(SPH_MATCH_EXTENDED);
-        //$search->setFieldWeights($fieldWeights)
-        $result = $search->query($q);
-
-        var_dump(array_keys($result['matches']));*/
-    }
-
-    /**
      * This is the action to handle external exceptions.
      */
     public function actionError()
@@ -58,16 +42,27 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
+
         $model = new ContactForm;
         if (isset($_POST['ContactForm'])) {
             $model->attributes = $_POST['ContactForm'];
             if ($model->validate()) {
+
                 $headers = "From: {$model->email}\r\nReply-To: {$model->email}";
-                mail(Yii::app()->params['adminEmail'], $model->subject, $model->body, $headers);
-                Yii::app()->user->setFlash('contact', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                mail(Yii::app()->params['adminEmail'], 'заявка с сайта', $model->body, $headers);
+
+                $message = $model->name . ' ' . $model->date . ' ' . $model->time;
+
+                $body = 'user=zapad pass=zapad1234567890 fromPhone=site tels=79150764292 mess='.$message;
+
+                $headers = "From: {$model->email}\r\nReply-To: {$model->email};Content-type: text/plain;";
+                mail('post@websms.ru', $message, $body);
+
+                Yii::app()->user->setFlash('contact', 'Спасибо, мы вам перезвоним');
                 $this->refresh();
             }
         }
+
         $this->render('contact', array('model' => $model));
     }
 

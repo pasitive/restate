@@ -87,6 +87,7 @@
 </div>
 
 <div class="span3">
+    <div class="well"><a class="btn btn-large" href="/site/contact"><i class="icon-signal"></i> Мы вам перезвоним</a></div>
     <div class="well">На этом месте будут текстовые блоки</div>
     <div class="well">На этом месте будут текстовые блоки</div>
     <div class="well">

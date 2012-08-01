@@ -47,7 +47,7 @@ Yii::app()->clientScript->registerScript('search', "
         'template' => "{items}\n{pager}",
         'pagerCssClass' => 'bootstrap-pager',
         'pager' => array(
-            'class' => 'CLinkPager',
+            'class' => 'LinkPager',
             'cssFile' => false,
             'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
             'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),

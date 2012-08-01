@@ -9,9 +9,10 @@ class ContactForm extends CFormModel
 {
 	public $name;
 	public $email;
-	public $subject;
+	public $date;
 	public $body;
     public $phone;
+    public $time;
 	public $verifyCode;
 
 	/**
@@ -24,7 +25,7 @@ class ContactForm extends CFormModel
 			array('name, email, body', 'required'),
 			// email has to be a valid email address
 			array('email', 'email'),
-            array('phone', 'safe'),
+            array('phone, time, date', 'safe'),
 			// verifyCode needs to be entered correctly
 //			array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 		);
@@ -38,10 +39,13 @@ class ContactForm extends CFormModel
 	public function attributeLabels()
 	{
 		return array(
-			'name'=>'Представьтесь, пожалуйста',
+			'name'=>'Имя',
 			'email'=>'Email',
 			'phone'=>'Телефон для связи',
-			'body'=>'Сообщение',
+			'body'=>'Ваш комментарий/вопрос',
+            'time' => 'Удобное время звонка',
+            'date' => 'Дата звонка',
+
 		);
 	}
 }
