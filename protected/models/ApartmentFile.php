@@ -9,6 +9,7 @@
  * @property string $file
  * @property string $created_at
  * @property string $updated_at
+ * @property int $is_default
  *
  * The followings are the available model relations:
  * @property Apartment $apartment
@@ -49,7 +50,7 @@ class ApartmentFile extends CActiveRecord
             array('apartment_id, file', 'required'),
             array('apartment_id', 'length', 'max' => 10),
             array('file', 'length', 'max' => 255),
-            array('created_at, updated_at', 'safe'),
+            array('created_at, updated_at, is_default', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, apartment_id, file, created_at, updated_at', 'safe', 'on' => 'search'),
@@ -79,6 +80,7 @@ class ApartmentFile extends CActiveRecord
             'file' => Yii::t('apartment', 'file'),
             'created_at' => Yii::t('common', 'created_at'),
             'updated_at' => Yii::t('common', 'updated_at'),
+            'is_default' => 'Основное фото',
         );
     }
 

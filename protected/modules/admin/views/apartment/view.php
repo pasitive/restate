@@ -45,10 +45,29 @@ $this->menu = array(
           */
         array(
             'class' => 'CButtonColumn',
-            'template' => '{delete}',
+            'template' => '{delete} {make_default}',
             'buttons' => array(
                 'delete' => array(
                     'url' => 'Yii::app()->createUrl("admin/apartmentFile/delete", array("id" => $data->id))'
+                ),
+                'make_default' => array(
+                    'label' => 'Сделать основным',
+                    'imageUrl' => '/images/icon_publish.png',
+                    'visible' => '$data->is_default == 0',
+                    'url' => 'Yii::app()->createAbsoluteUrl("admin/apartmentFile/default", array("id" => $data->id))',
+                    'click' => "
+                        function() {
+                            if(!confirm('Сделать это фото основным?')) return false;
+                            $.fn.yiiGridView.update('apartment-files-grid', {
+                                type:'POST',
+                                url:$(this).attr('href'),
+                                success:function(data) {
+                                    $.fn.yiiGridView.update('apartment-files-grid');
+                                }
+                            });
+                            return false;
+                        }
+                    ",
                 ),
             ),
         ),

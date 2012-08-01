@@ -20,6 +20,24 @@ class ApartmentFileController extends Controller
         $this->loadModel($id)->delete();
     }
 
+    public function actionDefault($id)
+    {
+        $model = $this->loadModel($id);
+
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array(
+            'apartment_id' => $model->apartment_id,
+        ));
+        ApartmentFile::model()->updateAll(array('is_default' => 0), $criteria);
+
+        Apartment::model()->updateByPk($model->apartment_id, array(
+            'default_image' => $model->getFile(),
+        ));
+
+        $model->is_default = 1;
+        $model->save();
+    }
+
     public function loadModel($id)
     {
         $model = ApartmentFile::model()->findByPk($id);
