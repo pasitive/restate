@@ -86,7 +86,7 @@
 
 <div class="span3">
     <legend>Описание</legend>
-    <div style="height: 315px; overflow: hidden;">
+    <div id="container_description" style="overflow: hidden;">
         <?php echo $model->description ?>
     </div>
 
@@ -96,96 +96,10 @@
 
 </div>
 
-<?php /*
-
-<div class="space small"></div>
-
-<div class="grid_12 alpha omega">
-
-    <div class="grid_5 alpha">
-        <div class="gallery" style="height: 300px;">
-
-        </div>
-    </div>
-    <div class="grid_3">
-
-        <div class="prepend_left small">
-            <div class="attributes">
-
-                <ul class="attributes_list">
-                    <li class="icon-metro"><span>Метро: </span><?php echo $model->metroName ?></li>
-                    <?php foreach ($apartmentAttributes as $apartmentAttribute): ?>
-                    <?php if (!empty($apartmentAttribute->value)): ?>
-                        <li>
-                            <span><?php echo $apartmentAttribute->attribute->name ?></span>: <?php echo $apartmentAttribute->value ?>
-                        </li>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid_4 omega">
-        <?php echo $model->description ?>
-    </div>
-</div>
-
-<div class="space small">&nbsp;</div>
-
-<div class="grid_12 alpha omega">
-
-    <div class="grid_7 alpha">
-
-        <?php if ($apartmentDataProvider->totalItemCount > 0): ?>
-
-        <h2 id="apartment_list">Доступные предложения</h2>
-
-        <?php
-        $this->widget('zii.widgets.CListView', array(
-            'dataProvider' => $apartmentDataProvider,
-            'itemView' => '_view',
-            'template' => "{sorter}\n{pager}<div class='clear'></div>{items}\n{pager}",
-            'pager' => array(
-                'class' => 'CLinkPager',
-                'cssFile' => false,
-                'nextPageLabel' => CHtml::image('/images/pager_arrow_next.png'),
-                'prevPageLabel' => CHtml::image('/images/pager_arrow_prev.png'),
-                'header' => 'Страницы:',
-                'maxButtonCount' => 4
-            ),
-            'sorterHeader' => 'Сортировать по:',
-            'sortableAttributes' => array(
-                'created_at' => 'дате',
-                'price' => 'цене',
-                'square' => 'площади',
-            ),
-        ));
-        ?>
-
-        <?php endif; ?>
-
-        <h2>Связаться с нами</h2>
-
-        <?php $this->renderPartial('/site/contact', array('model' => $contactForm)) ?>
-
-    </div>
-
-    <div class="grid_1">&nbsp;</div>
-
-    <div class="grid_4 omega">
-        <!--        <h2>Описание</h2>-->
-        <div class="description">
-            <br/>
-
-            <h2><?php echo $model->name ?>
-                на карте</h2>
-            <div id="map"
-                 style="position:relative;margin:25px 0;width:100%;height:279px;background-color: #f0f0f0"></div>
-        </div>
-
-    </div>
-</div>
-
- */
-?>
+<script type="text/javascript">
+    $(function(){
+        $('#container_description').css({
+            height: $('#')
+        });
+    });
+</script>

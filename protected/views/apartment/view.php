@@ -75,6 +75,13 @@ $this->renderPartial($view, array(
 
     $(function () {
 
+        $('#container_description').ready(function(){
+            var height = $('#apartment-gallery').height();
+            $(this).css({
+                height: height
+            });
+        });
+
         var map = null;
 
         ymaps.ready(init);
