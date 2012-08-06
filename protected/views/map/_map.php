@@ -38,9 +38,9 @@
         function init() {
             var map_options = {
                     // Центр карты
-                    center:[55.76, 37.64],
+                    center:[55.72846,37.546603],
                     // Коэффициент масштабирования
-                    zoom:10,
+                    zoom:12,
                     // Тип карты
                     type:"yandex#map"
                 },
