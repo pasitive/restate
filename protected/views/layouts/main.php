@@ -34,15 +34,14 @@
                 <h3><?php echo CHtml::decode(Yii::app()->name) ?></h3>
                 <?php $this->widget('zii.widgets.CMenu', array(
                 'items' => array(
-                    array('label' => 'О компании', 'url' => Yii::app()->homeUrl, 'active' => Yii::app()->controller->id == 'apartment'),
-                    array('label' => 'Продать', 'url' => array('/map/index')),
-                    array('label' => 'Сдать', 'url' => array('/news/index'), 'active' => Yii::app()->controller->id == 'news'),
-                    array('label' => 'Оценка', 'url' => array('/page/view', 'id' => 2)),
-                    array('label' => 'Вакансии', 'url' => array('/page/view', 'id' => 2)),
+                    array('label' => 'О компании', 'url' => array('/page/view', 'name' => 'about')),
+                    array('label' => 'Услуги', 'url' => array('/page/view', 'name' => 'services')),
+                    array('label' => 'Оценка', 'url' => array('/page/view', 'name' => 'assessment')),
+                    array('label' => 'Вакансии', 'url' => array('/page/view', 'name' => 'vacancies')),
+                    array('label' => 'Контакты', 'url' => array('/page/view', 'name' => 'contacts')),
                 ),
                 'htmlOptions' => array('class' => 'navigation main')
             )); ?>
-
                 <hr>
             </div>
             <div class="span3" style="background-color: #f0f0f0;">
@@ -84,6 +83,23 @@
             <?php echo $content; ?>
 
 
+        </div>
+    </div>
+
+    <div class="span12" id="footer">
+        <div style="text-align: center;">
+        <hr>
+        <?php $this->widget('zii.widgets.CMenu', array(
+        'items' => array(
+            array('label' => 'О компании', 'url' => array('/page/view', 'name' => 'about')),
+            array('label' => 'Услуги', 'url' => array('/page/view', 'name' => 'services')),
+            array('label' => 'Оценка', 'url' => array('/page/view', 'name' => 'assessment')),
+            array('label' => 'Вакансии', 'url' => array('/page/view', 'name' => 'vacancies')),
+            array('label' => 'Контакты', 'url' => array('/page/view', 'name' => 'contacts')),
+        ),
+    )); ?>
+
+        &copy; Агентство элитной недвижимости &laquo;Запад&raquo;
         </div>
     </div>
 

@@ -9,11 +9,17 @@ class PageController extends Controller
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
      */
-    public function actionView($id)
+    public function actionView($name)
     {
-        $this->render('view', array(
-            'model' => $this->loadModel($id),
+        $model = Page::model()->findByAttributes(array(
+            'name' => $name,
         ));
+
+        if (!$model) {
+            throw new CHttpException(404, 'Страница не найдена');
+        }
+
+        $this->render('view', array('model' => $model));
     }
 
     /**

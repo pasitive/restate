@@ -1,6 +1,6 @@
 <?php
-$this->pageTitle = (empty($model->routeable_title) ? $model->name : $model->routeable_title) . ' | ' . Yii::app()->name;
+$this->pageTitle = (empty($model->routeable_title) ? $model->title : $model->routeable_title) . ' | ' . Yii::app()->name;
 ?>
 
-<h1><?php echo $model->name ?></h1>
+<h1><?php echo $model->title ?></h1>
 <?php echo $model->body ?>

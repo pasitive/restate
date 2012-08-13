@@ -9,6 +9,7 @@
  * @property string $updated_at
  * @property string $name
  * @property string $body
+ * @property string $title
  */
 class Page extends CActiveRecord
 {
@@ -43,7 +44,8 @@ class Page extends CActiveRecord
         // will receive user inputs.
         return array(
             array('name, body', 'required'),
-            array('name', 'length', 'max' => 255),
+            array('name, title', 'length', 'max' => 255),
+            array('name', 'unique'),
             array('routeable_keywords, routeable_description, routeable_title, body', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
@@ -69,7 +71,8 @@ class Page extends CActiveRecord
     {
         return array(
             'id' => Yii::t('common', 'id'),
-            'name' => Yii::t('page', 'name'),
+            'title' => 'Название страницы',
+            'name' => 'Идентификатор',
             'body' => Yii::t('page', 'body'),
             'routeable_title' => 'SEO Заголовок',
             'routeable_keywords' => 'SEO Ключевые слова',
