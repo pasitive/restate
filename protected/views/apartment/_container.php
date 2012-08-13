@@ -98,8 +98,10 @@
 
 <script type="text/javascript">
     $(function(){
-        $('#container_description').css({
-            height: $('#')
-        });
+        $('#container_description').ready(function(){
+            $(this).css({
+                height: $('#apartment-gallery').height()
+            });
+        })
     });
 </script>
