@@ -95,13 +95,3 @@
     </div>
 
 </div>
-
-<script type="text/javascript">
-    $(function(){
-        $('#container_description').ready(function(){
-            $(this).css({
-                height: $('#apartment-gallery').height()
-            });
-        })
-    });
-</script>

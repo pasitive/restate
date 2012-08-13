@@ -75,10 +75,10 @@ $this->renderPartial($view, array(
 
     $(function () {
 
-        $('#container_description').ready(function(){
+        $('#container_description').ready(function () {
             var height = $('#apartment-gallery').height();
             $(this).css({
-                height: height
+                height:height
             });
         });
 
@@ -125,6 +125,12 @@ $this->renderPartial($view, array(
                     });
                 });
             });
+
+            $('#container_description').ready(function () {
+                $(this).css({
+                    height:$('#apartment-gallery').height()
+                });
+            })
         }
     });
 </script>

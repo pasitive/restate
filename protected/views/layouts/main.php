@@ -38,7 +38,7 @@
                     array('label' => 'Услуги', 'url' => array('/page/view', 'name' => 'services')),
                     array('label' => 'Оценка', 'url' => array('/page/view', 'name' => 'assessment')),
                     array('label' => 'Вакансии', 'url' => array('/page/view', 'name' => 'vacancies')),
-                    array('label' => 'Контакты', 'url' => array('/page/view', 'name' => 'contacts')),
+                    array('label' => 'Контакты', 'url' => array('/site/contact')),
                 ),
                 'htmlOptions' => array('class' => 'navigation main')
             )); ?>
@@ -95,7 +95,7 @@
             array('label' => 'Услуги', 'url' => array('/page/view', 'name' => 'services')),
             array('label' => 'Оценка', 'url' => array('/page/view', 'name' => 'assessment')),
             array('label' => 'Вакансии', 'url' => array('/page/view', 'name' => 'vacancies')),
-            array('label' => 'Контакты', 'url' => array('/page/view', 'name' => 'contacts')),
+            array('label' => 'Контакты', 'url' => array('/site/contact')),
         ),
     )); ?>
 
