@@ -28,7 +28,7 @@
             <ul class="thumbnails">
                 <li class="span2">
                     <div class="thumbnail">
-                        <?php echo CHtml::image($data->default_image, $data->name) ?>
+                        <?php echo CHtml::image($data->default_image, $data->name, array('style' => 'max-height:93px;')) ?>
                     </div>
                 </li>
             </ul>
