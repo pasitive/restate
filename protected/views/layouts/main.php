@@ -45,7 +45,7 @@
                 <hr>
             </div>
             <div class="span3" style="background-color: #f0f0f0;">
-                <ul class="unstyled" style="padding-left: 10px;">
+                <ul class="unstyled" style="padding-left: 30px;font-size: 115%;">
                     <li>тел.: 8 917 555 0217</li>
                     <li>тел.: 8 917 555 7561</li>
                     <li>email: <a href="mailto:info@zapad-elit.ru">info@zapad-elit.ru</a></li>
