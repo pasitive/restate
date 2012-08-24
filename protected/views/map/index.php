@@ -46,7 +46,7 @@ $this->pageTitle = 'Объекты на карте' . ' | ' . Yii::app()->name;
     <div class="span10">
 
         <br>
-        <h2>Жилые комплексы на западе Москвы</h2>
+        <legend>Жилые комплексы на западе Москвы</legend>
         <br>
 
         <div class="row">

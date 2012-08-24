@@ -2,5 +2,5 @@
 $this->pageTitle = (empty($model->routeable_title) ? $model->title : $model->routeable_title) . ' | ' . Yii::app()->name;
 ?>
 
-<h1><?php echo $model->title ?></h1>
+<legend><?php echo $model->title ?></legend>
 <?php echo $model->body ?>
