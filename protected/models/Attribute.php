@@ -12,6 +12,7 @@
  * @property string $updated_at
  * @property string $type
  * @property int $sort
+ * @property string $pattern
  *
  * The followings are the available model relations:
  * @property ApartmentAttribute[] $apartmentAttributes
@@ -57,7 +58,7 @@ class Attribute extends CActiveRecord
             array('disabled, sort', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 255),
             array('apartment_type_id', 'length', 'max' => 10),
-            array('created_at, updated_at', 'safe'),
+            array('created_at, updated_at, pattern', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, name, apartment_type_id, disabled, created_at, updated_at', 'safe', 'on' => 'search'),

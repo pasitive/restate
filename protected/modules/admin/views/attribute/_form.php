@@ -16,8 +16,8 @@
     </div>
 
     <?php foreach (Yii::app()->params['languages'] as $l => $lang) :
-    if ($l === Yii::app()->params['defaultLanguage']) $suffix = '';
-    else $suffix = '_' . $l;
+        if ($l === Yii::app()->params['defaultLanguage']) $suffix = '';
+        else $suffix = '_' . $l;
     ?>
     <fieldset>
         <legend><?php echo $lang; ?></legend>
@@ -29,6 +29,12 @@
     </fieldset>
 
     <?php endforeach; ?>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'pattern'); ?>
+        <?php echo $form->textField($model, 'pattern', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->error($model, 'pattern'); ?>
+    </div>
 
     <div class="row">
         <?php echo $form->labelEx($model, 'sort'); ?>

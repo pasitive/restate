@@ -20,7 +20,17 @@
     <?php foreach ($model->apartmentAttributes as $id => $attribute) { ?>
     <div class="row">
         <?php echo CHtml::label($attributes[$id]->{'name' . $suffix}, "Apartment_attribute_{$id}_value"); ?>
-        <?php echo CHtml::activeTextField($attribute, "[{$id}]value" . $suffix, array('maxlength' => 255)); ?>
+
+        <?php
+        if (!empty($attributes[$id]->pattern) && $pattern = explode('|', $attributes[$id]->pattern)) {
+
+            foreach($pattern as $index => $value) {
+                unset($pattern[$index]);
+                $pattern[$value] = $value;
+            }
+            echo CHtml::activeDropDownList($attribute, "[{$id}]value" . $suffix, $pattern);
+        }
+        ?>
         <?php echo CHtml::activeHiddenField($attribute, "[{$id}]attribute_name" . $suffix, array('maxlength' => 255, 'value' => $attributes[$id]->{'name' . $suffix})); ?>
         <?php echo CHtml::error($attribute, 'value' . $suffix); ?>
     </div>
