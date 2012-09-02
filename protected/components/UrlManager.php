@@ -5,11 +5,9 @@ class UrlManager extends CUrlManager
 
     public function init()
     {
-        $start = microtime(true);
-
         if (count(Yii::app()->params['languages']) > 1) {
             // Multilanguage
-            $langPattern = implode('|', Yii::app()->params['languages']);
+            $langPattern = implode('|', array_keys(Yii::app()->params['languages']));
             $rules = array();
             foreach ($this->rules as $pattern => $rule) {
 
@@ -24,9 +22,6 @@ class UrlManager extends CUrlManager
 
             $this->rules = $rules;
         }
-
-        Yii::trace('Routes load ' . (microtime(true) - $start));
-
         parent::init();
     }
 

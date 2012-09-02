@@ -11,6 +11,7 @@ class m120423_175704_metro_update extends CDbMigration
         $this->execute('SET FOREIGN_KEY_CHECKS=1;');
 
         $sql = <<<EOL
+INSERT INTO `city` (`id`, `name`) VALUES ('Москва', 2);
 INSERT INTO `metro_station` (`name`, `city_id`) VALUES ('Авиамоторная', 2);
 INSERT INTO `metro_station` (`name`, `city_id`) VALUES ('Автозаводская', 2);
 INSERT INTO `metro_station` (`name`, `city_id`) VALUES ('Академическая', 2);
